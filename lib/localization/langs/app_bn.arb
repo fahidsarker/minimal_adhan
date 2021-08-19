@@ -1,0 +1,160 @@
+{
+  "locale": "bn",
+  "direction": "ltr",
+  "adhan_heading": "আজান",
+  "adhan_fajr": "ফজর",
+  "adhan_sunrise": "সূর্যোদয়",
+  "adhan_dhuhr": "যোহর",
+  "adhan_asr": "আসর",
+  "adhan_magrib": "মাগরিব",
+  "adhan_isha": "ইশা",
+  "adhan_midnight": "মধ্যরাত",
+  "adhan_third_night": "রাতের শেষ তৃতীয় অংশ",
+
+  "hour": "ঘন্টা",
+  "minute": "মিনিট",
+
+
+  "hanafi_madhab": "হানাফি",
+  "shafi_madhab": "শাফি",
+  "hanafi_asr_desc": "আসরের সময় - দেরী",
+  "shafi_asr_desc": "আসরের সময় - আগে",
+
+  "until_adhan": "সময় বাকি",
+  "notification": "নোটিফিকেশন",
+
+  "notify_me_during_ahdan": "আজানের সময় আমাকে অবহিত করুন",
+  "you_will_be_notified": "{adhan} চলাকালীন আপনাকে অবহিত করা হবে",
+  "@you_will_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+  "you_will_not_be_notified": "{adhan} চলাকালীন আপনাকে অবহিত করা হবে না",
+  "@you_will_not_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+
+  "click_to_change": "পরিবর্তন করতে ক্লিক করুন",
+  "inexact_notify": "প্রাথমিক / বিলম্বিত বিজ্ঞপ্তি",
+  "notify_me_before": "আজানের সময়ের {min} মিনিট আগে আমাকে অবহিত করুন",
+  "@notify_me_before": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+  "notify_me_after": "আজান সময়ের {min} মিনিট পরে আমাকে অবহিত করুন",
+  "@notify_me_after": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+  "adhan_info": "আজানের তথ্য",
+  "using_location": "আপনার ঠিকানা: ",
+  "location_privacy_short": "মিনিমাল আজান গোপনীয়তা নিবদ্ধ। আপনার অবস্থান স্থানীয়ভাবে আপনার ডিভাইসে সংরক্ষিত হয়।",
+  "update_location": "ঠিকানা আপডেট করুন",
+  "location_required": "অবস্থান প্রয়োজন",
+  "location_found": "অবস্থান পাওয়া গেছে",
+  "permission_denied": "অনুমতি ব্যবহারকারীর দ্বারা অস্বীকৃত",
+  "close":"পেছনে যান",
+  "show_today":"আজকের আজান দেখুন",
+  "persistant_notify": "পারসিসটেন্ট নোটিফিকেশন",
+  "persistant_notify_desc": "সর্বদা নোটিফিকেশনে আজান প্রদর্শন করুন",
+
+
+  "adhan": "আজান",
+  "qibla": "কিবলা",
+  "qibla_current_direction_notMatched": "আপনি উত্তর থেকে {angle}° এ আছেন",
+  "qibla_current_direction_matched": "আপনি এখন কিবলা মুখোমুখি ({angle}°)",
+  "dua": "দুআ",
+  "settings": "সেটিংস",
+
+  "allDuas": "সব দুয়াগুলি",
+  "favs": "পছন্দের দুয়াগুলি",
+
+  "search": "অনুসন্ধান",
+
+  "language": "প্রাথমিক ভাষা",
+  "current_lang": "বাংলা",
+  "global": "পুরো অ্যাপ্লিকেশন",
+
+  "theme": "থিম",
+  "always_dark": "সব সময় ডার্ক মোড",
+  "always_light": "সব সময় লাইট মোড",
+  "follow_system": "সিস্টেম অনুসরণ করুন",
+
+  "calc_method": "হিসেবের পদ্ধতি",
+  "madhab": "মাযহাব (আসর এর জন্য)",
+  "high_lat_rule": "উচ্চ অক্ষাংশ জন্য নিয়ম",
+  "adhan_visibility": "আদানের দৃশ্যমানতা",
+  "adhan_manual_correction": "নিজেই সঠিক করুন",
+  "edit_notifications": "নোটিফিকেশন এডিট করুন",
+
+  "minimal_adhan": "মিনিমাল আজান",
+
+  "support_dev": "ডেভেলপমেন্টে সহযোগিতা করুন",
+  "rate_on_play_store": "প্লে স্টোরে ৫ ষ্টার দিন",
+  "rate_on_play_store_desc": "যা আমাদের অনেক অনুপ্রাণিত করবে।",
+  "help_us_translate": "অনুবাদ করতে সহায়তা করুন",
+  "help_us_translate_desc": "নির্দিষ্ট ভাষার জন্য অ্যাপ্লিকেশন বৈশিষ্ট্য এবং দুআ অনুবাদ করতে আমাদের সহায়তা করুন।",
+  "github_ripo": "গিটহাব রিপোসিটোরি",
+  "github_ripo_desc": "আপনি যদি flutter ল্যাংগুয়েজটি জানেন, ফি -সাবিলিল্লাহর এই যাত্রায় আমাদের সাথে যোগ দিন।",
+  "report_bug": "বাগ রিপোর্ট করুন",
+  "report_bug_desc": "আমরা দুঃখিত যে আপনাকে এটির মুখোমুখি হতে হয়েছিল। আপনি গিটহাব বা ইমেলের মাধ্যমে আপনার  সমস্যার প্রতিবেদন করতে পারেন। আপনার তথ্যের জন্য জাজাকাল্লাহ।",
+  "make_dua": "আমাদের জন্য দুআ করুন",
+  "make_dua_desc": "যখন কোনো মুসলিম তার ভাইয়ের জন্য দুআ করেন, তখন ফেরেস্তারা তার জন্য দুআ করেন",
+  "request_a_feature_desc": "অতিরিক্ত বৈশিষ্ট্য বা দুআ দরকার? এটি আমাদের পরামর্শ দিতে এখানে ক্লিক করুন।",
+  "request_a_feature": "ফীচার রিকোয়েস্ট করুন",
+  "add_to_fav": "পছন্দের লিস্ট এ যোগ করুন",
+  "remove_from_fav": "পছন্দের লিস্ট থেকে সরান",
+  "report_an_error": "একটি ত্রুটি রিপোর্ট করুন।",
+
+  "show_translation": "অনুবাদ দেখান",
+  "show_transliteration": "লিপ্যন্তর দেখান",
+  "translation_lang": "অনুবাদ এর ভাষা",
+
+  "arabic_font_size": "আরবি ফন্টের আকার",
+  "other_font_size": "অনুবাদ / ট্রান্সলিটেশন ফন্টের আকার",
+
+  "refresh": "রিফ্রেশ",
+  "silent_all": "শব্দহীন",
+  "add_duas_to_favourite": "আপনার দুআ এখানে দেখতে, তাদের প্রিয়তে যুক্ত করুন",
+  "location_permison_request_short": "আজানের সময় গণনা করার জন্য আপনার অবস্থানের প্রয়োজন",
+
+  "configure_adhan": "আজান কনফিগার করুন",
+  "location": "অবস্থান",
+
+  "dashboard": "ড্যাশবোর্ড",
+  "next": "পরবর্তী",
+  "from": "শুরু",
+
+  "categories": "বিভাগ",
+
+  "copy": "কপি",
+  "delete": "মুছে দিন",
+  "type": "প্রকার",
+  "timing": "সময়",
+  "silent": "নীরব",
+  "notification_only": "শুধুমাত্র বিজ্ঞপ্তি",
+  "ringtone": "রিংটোন",
+  "adhan_mecca": "আজান - মক্কা",
+  "adhan_medina": "আজান - মদিনা"
+
+
+}

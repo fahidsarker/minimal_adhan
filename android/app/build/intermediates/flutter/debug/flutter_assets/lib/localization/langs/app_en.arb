@@ -1,0 +1,176 @@
+{
+  "locale": "en",
+  "direction": "ltr",
+  "adhan_heading": "Adhan",
+  "adhan_fajr": "Fajr",
+  "adhan_sunrise": "Sunrise",
+  "adhan_dhuhr": "Dhuhr",
+  "adhan_asr": "Asr",
+  "adhan_magrib": "Magrib",
+  "adhan_isha": "Isha",
+  "adhan_midnight": "Midnight",
+  "adhan_third_night": "Last third of night",
+  "hour": "Hr",
+  "minute": "Min",
+
+  "hanafi_madhab": "Hanafi",
+  "shafi_madhab": "Shafi",
+  "hanafi_asr_desc": "Later Asr Time",
+  "shafi_asr_desc": "Early Asr Time",
+
+  "until_adhan": "Until",
+  "notification": "Notification",
+  "you_will_be_notified": "You Will be notified during {adhan}",
+
+  "notify_me_during_ahdan": "Notify me during adhan",
+  "@you_will_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+  "you_will_not_be_notified": "You will NOT be notified during {adhan}",
+  "@you_will_not_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+
+  "inexact_notify": "Early/Delayed Notification",
+
+  "notify_me_before": "Notify me {min} minutes before adhan time",
+  "@notify_me_before": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+  "click_to_change": "Click to change",
+  "notify_me_after": "Notify me {min} minutes after adhan time",
+  "@notify_me_after": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+  "adhan_info": "Adhan Info.",
+  "using_location": "Using Location: ",
+  "location_privacy_short": "Minimal Ahdan is privacy focused. Your location is stored on your device locally.",
+  "update_location": "Update Location",
+  "location_required": "Location Required",
+  "location_found": "Location Found",
+  "permission_denied": "Permission Denied",
+  "close":"Close",
+  "show_today":"Show Today",
+  "persistant_notify": "Persistent Notification",
+  "persistant_notify_desc": "Always show adhan in notification",
+
+  "adhan": "Adhan",
+  "qibla": "Qibla",
+  "qibla_current_direction_notMatched": "You are {angle}° from north",
+  "@qibla_current_direction_notMatched": {
+    "placeholders": {
+      "angle": {
+        "type": "String",
+        "example": "54"
+      }
+    }
+  },
+  "qibla_current_direction_matched": "You are facing the qibla ({angle}°)",
+  "@qibla_current_direction_matched": {
+    "placeholders": {
+      "angle": {
+        "type": "String",
+        "example": "54"
+      }
+    }
+  },
+  "dua": "Dua",
+  "settings": "Settings",
+
+  "allDuas": "All Duas",
+  "favs": "Favourites",
+
+  "search": "Search",
+
+  "language": "Primary Language",
+  "current_lang": "English",
+  "global": "Global",
+
+  "theme": "Theme",
+  "always_dark": "Always Dark",
+  "always_light": "Always Light",
+  "follow_system": "Follow System",
+
+  "calc_method": "Calculation Method",
+  "madhab": "Madhab (For Asr)",
+  "high_lat_rule": "High Latitude Rule",
+  "adhan_visibility": "Adhan Visibility",
+  "adhan_manual_correction": "Manual Corrections",
+  "edit_notifications": "Edit Notifications",
+
+
+  "minimal_adhan": "Minimal Adhan",
+
+  "support_dev": "Support Development",
+  "rate_on_play_store": "Give us 5 stars",
+  "rate_on_play_store_desc": "That would motivate us a lot.",
+  "help_us_translate": "Help us translate",
+  "help_us_translate_desc": "Help us translate the app features and dua for a particular language.",
+  "github_ripo": "Github Repository",
+  "github_ripo_desc": "If you know flutter development, join us in this journey of Fi-Sabilillah.",
+  "report_bug": "Report a bug",
+  "report_bug_desc": "Sorry, you had to face it. You can either report a problem in github or through email. Zajakallah for the information.",
+  "make_dua": "Make dua for us",
+  "make_dua_desc": "Abu Darda reported: The Messenger of Allah, peace and blessings be upon him, said, “No Muslim servant supplicates for his brother behind his back but that the angel says: And for you the same.”",
+  "request_a_feature_desc": "Need additional feature or dua? Suggest it to us",
+  "request_a_feature": "Request a feature",
+  "add_to_fav": "Add to favourite",
+  "remove_from_fav": "Remove from favourite",
+  "report_an_error": "Report an error!",
+
+  "show_translation": "Show Translation",
+  "show_transliteration": "Show Transliteration",
+  "translation_lang": "Language of translation",
+
+
+  "arabic_font_size": "Arabic Text Font Size",
+  "other_font_size": "Translation/Transliteration Font Size",
+  "refresh": "Refresh",
+  "silent_all": "Silent All Adhan",
+  "add_duas_to_favourite": "Add Duas to favourite to see here!",
+
+  "location_permison_request_short": "Your location is needed to calculate the time of adhan",
+
+  "configure_adhan": "Configure Adhan",
+  "location": "Location",
+
+  "dashboard": "Dashboard",
+  "next": "Next",
+  "from": "From",
+
+  "categories": "Categories",
+  "copy": "Copy Dua",
+  "delete": "Delete",
+  "type": "Type",
+  "timing": "Timing",
+  "silent": "Silent",
+  "notification_only": "Notification Only",
+  "ringtone": "Ringtone",
+  "adhan_mecca": "Adhan - Mecca",
+  "adhan_medina": "Adhan - Medina"
+
+
+
+}

@@ -1,0 +1,165 @@
+{
+  "locale": "ar",
+  "direction": "rtl",
+  "adhan_heading": "أذان",
+  "adhan_fajr": "الفجر",
+  "adhan_sunrise": "شروق الشمس",
+  "adhan_dhuhr": "الظهر",
+  "adhan_asr": "العصر",
+  "adhan_magrib": "المغرب",
+  "adhan_isha": "العشاء",
+  "adhan_midnight": "منتصف الليل",
+  "adhan_third_night": "الجزء الثالث الأخير من الليل",
+
+  "hour": "ساعة",
+  "minute": "دقيقة",
+
+  "hanafi_madhab": "حنفي",
+  "shafi_madhab": "شافي",
+  "hanafi_asr_desc": "وقت العصر - متأخر",
+  "shafi_asr_desc": "وقت العصر - قبل ذلك",
+
+
+  "until_adhan": "حتى",
+  "notification": "تنبيه",
+
+  "click_to_change": "انقر للتغيير",
+  "inexact_notify": "الإخطار المبكر / المتأخر",
+  "notify_me_before": "إعلامي قبل موعد الأذان بـ {min} دقيقة",
+  "@notify_me_before": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+  "notify_me_after": "إعلامي قبل موعد الأذان بـ {min} دقيقة",
+  "@notify_me_after": {
+    "placeholders": {
+      "min": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+
+
+  "notify_me_during_ahdan": "أبلغني أثناء الاذان",
+  "you_will_be_notified": "{adhan} لن يتم إخطارك خلال",
+  "@you_will_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+  "you_will_not_be_notified": "{adhan} لن يتم إخطارك خلال",
+  "@you_will_not_be_notified": {
+    "placeholders": {
+      "adhan": {
+        "type": "String",
+        "example": "Fazr"
+      }
+    }
+  },
+
+
+  "adhan_info": "معلومات الأذان",
+  "using_location": "الموقع قيد الاستخدام:",
+  "location_privacy_short": "منعمل أذان يركز على الخصوصية. يتم تخزين موقعك على جهازك محليًا.",
+  "update_location": "تحديث الموقع",
+  "location_required": "الموقع مطلوب",
+  "location_found": "تم العثور على الموقع",
+  "permission_denied": "تم رفض الإذن",
+  "close":"عودة",
+  "show_today": "عرض أذان اليوم",
+  "persistant_notify": "الإخطار المستمر",
+  "persistant_notify_desc": "اظهار الاذان دائما في الاشعار",
+
+
+  "adhan": "أذان",
+  "qibla": "قبل",
+  "qibla_current_direction_notMatched": "أنت على بعد {angle}° درجات من الشمال",
+  "qibla_current_direction_matched": "أنت الآن تواجه القبلة({angle}°)",
+  "dua": "دعا",
+  "settings": "الإعدادات",
+
+  "allDuas": "كل الدعاء",
+  "favs": "المفضلة",
+
+  "search": "بحث",
+
+  "language": "اللغة الأساسية",
+  "current_lang": "عربى",
+  "global": "التطبيق بأكمله",
+
+  "theme": "ثيم",
+  "always_dark": "دائما الوضع المظلم",
+  "always_light": "دائما الوضع الخفيف",
+  "follow_system": "اتبع النظام",
+
+  "calc_method": "طريقة الحساب",
+  "madhab": "مذهب (للعصر)",
+  "high_lat_rule": "حكم لخط العرض العالي",
+  "adhan_visibility": "رؤية الأذان",
+  "adhan_manual_correction": "تصحيح يدويًا",
+  "edit_notifications": "تحرير الإخطار",
+
+
+  "minimal_adhan": "منعمل أذان",
+
+  "support_dev": "دعم تطوير التطبيقات",
+  "rate_on_play_store": "اعطنا خمس نجوم",
+  "rate_on_play_store_desc": "هذا من شأنه أن يحفزنا كثيرا",
+  "help_us_translate": "ساعدنا في الترجمة",
+  "help_us_translate_desc": "ساعدنا في ترجمة ميزات التطبيق والدعاء للغة معينة",
+  "github_ripo": "Github Repository",
+  "github_ripo_desc": "إذا كنت تعرف تطور \"flutter\" ، انضم إلينا في رحلة في سبيل الله هذه",
+  "report_bug": "الإبلاغ عن خطأ",
+  "report_bug_desc": "آسف ، كان عليك مواجهتها. يمكنك إما الإبلاغ عن مشكلة في github أو عبر البريد الإلكتروني. زجاك الله للعل.",
+  "make_dua": "ادعوا لنا",
+  "make_dua_desc": "عن أبي الدرداء: قال رسول الله صلى الله عليه وسلم: ما من عبد مسلم يدعو أخيه من وراء ظهره إلا أن الملاك يقول: ولكم كذلك.",
+  "request_a_feature_desc": "هل تحتاج إلى ميزة إضافية أو دعاء؟ انقر هنا لاقتراحه لنا",
+  "request_a_feature": "ميزة الطلب",
+  "add_to_fav": "أضف إلى المفضلة",
+  "remove_from_fav": "إزالة من المفضلة",
+  "report_an_error": "الإبلاغ عن خطأ!",
+
+  "show_translation": "إظهار الترجمة",
+  "show_transliteration": "إظهار الترجمة الصوتية",
+  "translation_lang": "لغة الترجمة",
+
+  "arabic_font_size": "حجم خط النص العربي",
+  "other_font_size": "حجم خط الترجمة / التحويل الصوتي",
+
+  "refresh": "تحديث",
+  "silent_all": "صامتة",
+  "add_duas_to_favourite": "لرؤية دعائك هنا ، أضفهم إلى المفضلة",
+  "location_permison_request_short": "موقعك مطلوب لحساب وقت الاذان",
+
+  "configure_adhan": "تكوين الأذان",
+  "location": "موقع",
+
+  "dashboard": "لوحة القيادة",
+  "next": "التالي",
+  "from": "بداية",
+
+  "categories": "التصنيفات",
+
+
+  "copy": "ينسخ",
+  "delete": "احذفه الآن",
+  "type": "اكتب",
+  "timing": "توقيت",
+  "silent": "صامتة",
+  "notification_only": "الإعلام فقط",
+  "ringtone": "نغمة الرنين",
+  "adhan_mecca": "الأذان - مكة",
+  "adhan_medina": "الأذان - المدينة المنورة"
+
+
+
+}

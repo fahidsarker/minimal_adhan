@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
@@ -36,13 +35,12 @@ class DuaRow extends StatelessWidget {
             ),
           );
         },
-        //onLongPress: ()=>testFullScreenNotify(),
-        // onLongPress: () => showDialog(
-        //     context: context,
-        //     builder: (_) => ChangeNotifierProvider.value(
-        //           value: duaProvider,
-        //           child: DuaLongPressOptions(dua.id),
-        //         )),
+        onLongPress: () => showDialog(
+            context: context,
+            builder: (_) => ChangeNotifierProvider.value(
+                  value: duaProvider,
+                  child: DuaLongPressOptions(dua.id),
+                )),
         borderRadius: BorderRadius.circular(8.0),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:minimal_adhan/helpers/notification/android_notify.dart';
+import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
@@ -17,8 +18,8 @@ final onLightCardColor = Colors.blueGrey.withOpacity(0.15);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // await AndroidNotify.rescheduleAdhan();
-
+  await initializeNotifiers();
+  await scheduleNotification();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

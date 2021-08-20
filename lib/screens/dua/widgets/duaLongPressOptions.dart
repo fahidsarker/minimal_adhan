@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:minimal_adhan/helpers/duaHelper.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
+import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/widgets/iconedTextButton.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +13,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuaLongPressOptions extends StatelessWidget {
   final int duaID;
-
   DuaLongPressOptions(this.duaID);
 
   void action(BuildContext context, String message, void Function() act) {
@@ -63,7 +64,9 @@ class DuaLongPressOptions extends StatelessWidget {
               iconData: Icons.report,
               text: appLocale.report_an_error,
               color: Colors.red,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>FeedbackTaker(getDuaErrorReportForm(data.title))));
+              },
             ),
           ],
         );

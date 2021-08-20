@@ -1,6 +1,7 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
+import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
 import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
 import 'package:minimal_adhan/helpers/adhan_dependencies.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
@@ -90,7 +91,7 @@ class AdhanDependencyProvider with ChangeNotifier {
   void notifyListeners() async {
     final locationState = _locationState;
     if (locationState is LocationAvailable) {
-
+      scheduleNotification(showNowIfPersistent: true);
     }
     super.notifyListeners();
   }
@@ -101,12 +102,10 @@ class AdhanDependencyProvider with ChangeNotifier {
     print(success);
     if(success){
       showPersistant = newVal;
-      if(newVal){
-        //AndroidNotify.notify(silent: true);
+      if(!newVal){
+         cancelAllNotifications();
       }else{
-        //final nt = NotificationManager();
-        //await nt.initialize();
-       // nt.flutterLocalNotificationsPlugin.cancelAll();
+        createNotification(forcedSilent: true, reschedule: false);
       }
       notifyListeners();
     }

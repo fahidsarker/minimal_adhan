@@ -16,7 +16,10 @@ class AdhanNotificationProvider extends AdhanProvider {
       });
 
     return list.firstWhere(
-        (element) => element.isCurrent && (adhanDependencyProvider.showPersistant || element.notifyID != 0),
+        (element) =>
+            element.isCurrent &&
+            (adhanDependencyProvider.showPersistant ||
+                adhanDependencyProvider.notifyID(element.type) != 0),
         orElse: () => null as Adhan);
   }
 
@@ -34,7 +37,7 @@ class AdhanNotificationProvider extends AdhanProvider {
     final filteredList = fullList
         .where((element) =>
             element.startTime.isAfter(currentTime) &&
-            (adhanDependencyProvider.showPersistant || element.notifyID != 0))
+            (adhanDependencyProvider.showPersistant || adhanDependencyProvider.notifyID(element.type) != 0))
         .toList();
 
     if (filteredList.length > 0) {

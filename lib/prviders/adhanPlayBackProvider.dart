@@ -21,6 +21,13 @@ class AdhanPlayBackProvider with ChangeNotifier {
     }
   }
 
+
+  @override
+  void dispose() {
+    stop();
+    super.dispose();
+  }
+
   Future<int> stop() async {
     if (Platform.isAndroid) {
       return await platform.invokeMethod('stop');

@@ -86,7 +86,6 @@ class AdhanProvider with ChangeNotifier {
         endTime: endTime,
         notifyBefore: adhanDependencyProvider.getNotifyBefore(type),
         manualCorrection: adhanDependencyProvider.getManualCorrection(type),
-        notifyID: adhanDependencyProvider.notifyID(type),
         localCode: appLocalization.locale,
         startingPrayerTime: startingPrayerTime,
         shouldCorrect: shouldCorrect);

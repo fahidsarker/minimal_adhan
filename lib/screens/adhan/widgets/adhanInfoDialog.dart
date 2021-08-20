@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
+import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/widgets/iconedTextButton.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -59,7 +61,12 @@ class AdhanInfoDialog extends StatelessWidget {
           iconData: Icons.edit_location,
         ),
         IconedTextButton(
-          onPressed: (){},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => FeedbackTaker(getAdhanReportForm())));
+          },
           iconData: Icons.error,
           text: appLocale.report_an_error,
           color: Colors.red,

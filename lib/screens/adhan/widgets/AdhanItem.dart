@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
+import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/screens/notificationChooser/notifySelectBottomSheet.dart';
 import 'package:minimal_adhan/widgets/timer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,7 +25,8 @@ class AdhanItem extends StatelessWidget {
     final adhanTitleStyle = context.textTheme.headline5
         ?.copyWith(color: context.textTheme.headline6?.color);
     final iconSize = 40.0;
-
+    final adhanDependency = context.watch<AdhanDependencyProvider>();
+    final notifyID = adhanDependency.notifyID(_adhan.type);
     return Container(
       margin: const EdgeInsets.all(_margin),
       decoration: BoxDecoration(
@@ -55,9 +57,9 @@ class AdhanItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                _adhan.notifyID == 0
+                notifyID == 0
                     ? Icons.notifications_off
-                    : _adhan.notifyID == 1
+                    : notifyID == 1
                         ? Icons.notifications_on_rounded
                         : Icons.volume_up,
                 color: context.textTheme.headline6?.color,

@@ -1,6 +1,7 @@
 package com.fsapps.minimal_adhan
 
 import android.media.MediaPlayer
+import android.media.Ringtone
 import android.media.RingtoneManager
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
@@ -11,27 +12,23 @@ val adhans = listOf("adhan_mecca.mp3", "adhan_medina.mp3");
 
 class MainActivity : FlutterActivity() {
 
-    val notification by lazy {
-        RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-    }
-    val ringtone by lazy {
-        RingtoneManager.getRingtone(applicationContext, notification)
-    }
 
+    var ringtone: Ringtone? = null;
     var mediaPlayer: MediaPlayer? = null;
 
 
     fun play(notifyID: Int) {
-        if (notifyID == 2) {
-            ringtone.play();
+        stop()
+        if (notifyID == 2 || notifyID == 3) {
+            val notification =
+                RingtoneManager.getDefaultUri(if (notifyID == 2) RingtoneManager.TYPE_ALARM else RingtoneManager.TYPE_RINGTONE)
+            ringtone = RingtoneManager.getRingtone(applicationContext, notification)
+            ringtone?.play()
         } else {
             val adhan = when (notifyID) {
-                3 -> R.raw.adhan_mecca;
-
-                4 -> R.raw.adhan_medina;
-
+                4 -> R.raw.adhan_mecca;
+                5 -> R.raw.adhan_medina;
                 else -> throw IllegalAccessError("No Adhan added")
-
             }
             mediaPlayer = MediaPlayer.create(this, adhan)
             mediaPlayer?.start()
@@ -39,7 +36,7 @@ class MainActivity : FlutterActivity() {
     }
 
     fun stop() {
-        ringtone.stop();
+        ringtone?.stop();
         mediaPlayer?.stop();
     }
 
@@ -58,7 +55,6 @@ class MainActivity : FlutterActivity() {
                 result.success(-1)
             } else if (call.method == "getAdhanName") {
                 val notifyID = call.arguments as Int
-
             }
         }
     }

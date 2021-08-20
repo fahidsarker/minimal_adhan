@@ -4,6 +4,8 @@ import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
+import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/AppLanguagePicker.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/CalcMehtodChooser.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/DuaTranslationLangPicker.dart';
@@ -122,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                 leading: Icon(Icons.timer_outlined),
               ),
               SettingsToggle(
-                  onToggle: (val) async{
+                  onToggle: (val) async {
                     adhanDependency.changePersistantNotifyStatus(val);
                   },
                   subtitle: appLocale.persistant_notify_desc,
@@ -206,13 +208,25 @@ class SettingsScreen extends StatelessWidget {
                 leading: Icon(Icons.code),
               ),
               SettingsClickable(
-                onClick: () {},
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              FeedbackTaker(getBugReportForm())));
+                },
                 title: appLocale.report_bug,
                 subtitle: appLocale.report_bug_desc,
                 leading: Icon(Icons.bug_report),
               ),
               SettingsClickable(
-                onClick: () {},
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              FeedbackTaker(getFeatureRequestForm())));
+                },
                 title: appLocale.request_a_feature,
                 subtitle: appLocale.request_a_feature_desc,
                 leading: Icon(Icons.apps),

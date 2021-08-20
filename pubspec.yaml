@@ -27,7 +27,7 @@ dependencies:
   geolocator: ^7.0.3
   intl: ^0.17.0
   auto_size_text: ^3.0.0-nullsafety.0
-  flutter_local_notifications: ^6.0.0
+  webview_flutter: ^2.0.12
   provider: ^5.0.0
   hijri: ^2.0.3
   geocoding: ^2.0.0
@@ -39,6 +39,7 @@ dependencies:
   scrollable_positioned_list: ^0.2.0-nullsafety.0
   package_info_plus: ^1.0.3
   android_alarm_manager: ^2.0.2
+  awesome_notifications: ^0.0.6+10
   flutter_localizations:
     sdk: flutter
 

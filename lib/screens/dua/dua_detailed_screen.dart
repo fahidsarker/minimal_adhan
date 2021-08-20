@@ -6,7 +6,10 @@ import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
+import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/screens/settings/widgets/fontsizeSelectorDialog.dart';
+import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,22 +46,32 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                   ),
                   PopupMenuButton<String>(
                     onSelected: (val) {
-                      if(val == appLocale.copy){
+                      if (val == appLocale.copy) {
                         copyDuaToClipBoard(data);
-                        return;
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text('Copied!')));
+                      } else if (val == appLocale.report_an_error) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => FeedbackTaker(
+                                    getDuaErrorReportForm(data.title))));
+                      } else if (val == appLocale.arabic_font_size ||
+                          val == appLocale.other_font_size) {
+                        showDialog(
+                          context: context,
+                          builder: (_) => FontSizeSelector(
+                            arabic: val == appLocale.arabic_font_size,
+                          ),
+                        );
                       }
-                      showDialog(
-                        context: context,
-                        builder: (_) => FontSizeSelector(
-                          arabic: val == appLocale.arabic_font_size,
-                        ),
-                      );
                     },
                     itemBuilder: (BuildContext context) {
                       return {
                         appLocale.arabic_font_size,
                         appLocale.other_font_size,
-                        appLocale.copy
+                        appLocale.copy,
+                        appLocale.report_an_error
                       }.map((String choice) {
                         return PopupMenuItem<String>(
                           value: choice,
@@ -88,10 +101,14 @@ class _DuaDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final divider = Divider(
-      thickness: 3,
-      height: 32.0,
-    );
+    Widget _duaContainer(Widget child) {
+      return ColoredContainer(
+        child,
+        getColoredContainerColor(context),
+        width: MediaQuery.of(context).size.width,
+      );
+    }
+
     final duaDependency = context.watch<DuaDependencyProvider>();
     final headStyle = context.textTheme.headline1?.copyWith(
         fontSize: duaDependency.otherFontSize,
@@ -106,44 +123,41 @@ class _DuaDetailView extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            SelectableText(
+            _duaContainer(SelectableText(
               _details.arabic,
               style: DefaultTextStyle.of(context).style.copyWith(
-                fontFamily:  'Lateef',
-                fontSize: duaDependency.arabicFontSize,),
+                    fontFamily: 'Lateef',
+                    fontSize: duaDependency.arabicFontSize,
+                  ),
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
-            ),
-            divider,
+            )),
             if (_details.transliteration != null) ...[
-              SelectableText(
+              _duaContainer(SelectableText(
                 _details.transliteration!,
                 style: headStyle,
                 textAlign: TextAlign.center,
-              ),
-              divider
+              )),
             ],
             if (_details.translation != null) ...[
-              SelectableText(
+              _duaContainer(SelectableText(
                 _details.translation!,
                 style: headStyle,
                 textAlign: TextAlign.center,
-              ),
-              divider
+              ))
             ],
             if (_details.notes.isNotEmpty) ...[
-              SelectableText(
+              _duaContainer(SelectableText(
                 _details.notes,
                 textAlign: TextAlign.center,
                 style: noteAndRefStyle,
-              ),
-              divider
+              )),
             ],
-            SelectableText(
+            _duaContainer(SelectableText(
               _details.reference,
               textAlign: TextAlign.center,
               style: noteAndRefStyle,
-            ),
+            ))
           ],
         ),
       ),

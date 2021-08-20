@@ -6,7 +6,6 @@ class Adhan {
   final String title;
   DateTime startTime;
   DateTime endTime;
-  final int notifyID;
   final int notifyBefore;
   bool isCurrent = false;
   final int manualCorrection;
@@ -19,7 +18,6 @@ class Adhan {
       required this.startTime,
       required this.endTime,
       required this.manualCorrection,
-      required this.notifyID,
       required this.notifyBefore,
       required this.localCode,
       required this.startingPrayerTime,

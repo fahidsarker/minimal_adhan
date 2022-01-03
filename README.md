@@ -76,23 +76,23 @@ An Open-Sourced Adhan app for the ummah.<br/>
   <li>
     Dependencies:
     <ul>
-      <li> <a href="https://pub.dev/packages/adhan/versions/" > adhan: ^2.0.0-nullsafety.1 </a> </li>
-      <li> <a href = "https://pub.dev/packages/geolocator/versions/" > geolocator: ^7.0.3  </a></li>
-      <li> <a href = "https://pub.dev/packages/intl/versions/" > intl: ^0.17.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/auto_size_text/versions/" > auto_size_text: ^3.0.0-nullsafety.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/webview_flutter" > webview_flutter: ^2.0.12 </a></li>
-      <li> <a href = "https://pub.dev/packages/provider/versions/" > provider: ^5.0.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/hijri/versions" > hijri: ^2.0.3 </a></li>
-      <li> <a href = "https://pub.dev/packages/geocoding" > geocoding: ^2.0.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/shared_preferences" > shared_preferences: ^2.0.6 </a></li>
-      <li> <a href = "https://pub.dev/packages/flutter_compass/versions/" > flutter_compass: ^0.6.1 </a></li>
-      <li> <a href = "https://pub.dev/packages/flutter_svg" > flutter_svg: ^0.22.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/lottie" > lottie: ^1.0.1 </a></li>
-      <li> <a href = "https://pub.dev/packages/sqflite/versions" > sqflite: ^2.0.0+3 </a></li>
-      <li> <a href = "https://pub.dev/packages/scrollable_positioned_list/versions/" > scrollable_positioned_list: ^0.2.0-nullsafety.0 </a></li>
-      <li> <a href = "https://pub.dev/packages/package_info_plus/versions/" > package_info_plus: ^1.0.3 </a></li>
-      <li> <a href = "https://pub.dev/packages/android_alarm_manager_plus" > android_alarm_manager_plus: ^2.0.3 </a></li>
-      <li> <a href = "https://pub.dev/packages/flutter_local_notifications" > flutter_local_notifications: ^9.2.0 </a></li>
+      <li> <a href="https://pub.dev/packages/adhan/versions/" > adhan </a> </li>
+      <li> <a href = "https://pub.dev/packages/geolocator/versions/" > geolocator </a></li>
+      <li> <a href = "https://pub.dev/packages/intl/versions/" > intl </a></li>
+      <li> <a href = "https://pub.dev/packages/auto_size_text/versions/" > auto_size_text </a></li>
+      <li> <a href = "https://pub.dev/packages/webview_flutter" > webview_flutter </a></li>
+      <li> <a href = "https://pub.dev/packages/provider/versions/" > provider </a></li>
+      <li> <a href = "https://pub.dev/packages/hijri/versions" > hijri </a></li>
+      <li> <a href = "https://pub.dev/packages/geocoding" > geocoding </a></li>
+      <li> <a href = "https://pub.dev/packages/shared_preferences" > shared_preferences </a></li>
+      <li> <a href = "https://pub.dev/packages/flutter_compass/versions/" > flutter_compass </a></li>
+      <li> <a href = "https://pub.dev/packages/flutter_svg" > flutter_svg </a></li>
+      <li> <a href = "https://pub.dev/packages/lottie" > lottie </a></li>
+      <li> <a href = "https://pub.dev/packages/sqflite/versions" > sqflite </a></li>
+      <li> <a href = "https://pub.dev/packages/scrollable_positioned_list/versions/" > scrollable_positioned_list </a></li>
+      <li> <a href = "https://pub.dev/packages/package_info_plus/versions/" > package_info_plus </a></li>
+      <li> <a href = "https://pub.dev/packages/android_alarm_manager_plus" > android_alarm_manager_plus </a></li>
+      <li> <a href = "https://pub.dev/packages/flutter_local_notifications" > flutter_local_notifications </a></li>
       </ul>
   </li>
 </u>

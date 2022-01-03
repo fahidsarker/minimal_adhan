@@ -91,8 +91,8 @@ An Open-Sourced Adhan app for the ummah.<br/>
       <li> <a href = "https://pub.dev/packages/sqflite/versions" > sqflite: ^2.0.0+3 </a></li>
       <li> <a href = "https://pub.dev/packages/scrollable_positioned_list/versions/" > scrollable_positioned_list: ^0.2.0-nullsafety.0 </a></li>
       <li> <a href = "https://pub.dev/packages/package_info_plus/versions/" > package_info_plus: ^1.0.3 </a></li>
-      <li> <a href = "https://pub.dev/packages/android_alarm_manager" > android_alarm_manager: ^2.0.2 </a></li>
-      <li> <a href = "https://pub.dev/packages/awesome_notifications" > awesome_notifications: ^0.0.6+10 </a></li>
+      <li> <a href = "https://pub.dev/packages/android_alarm_manager_plus" > android_alarm_manager_plus: ^2.0.3 </a></li>
+      <li> <a href = "https://pub.dev/packages/flutter_local_notifications" > flutter_local_notifications: ^9.2.0 </a></li>
       </ul>
   </li>
 </u>

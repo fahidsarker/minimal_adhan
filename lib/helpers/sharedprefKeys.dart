@@ -55,3 +55,6 @@ const ADHAN_THEME_MODE_LIGHT = 1;
 const ADHAN_THEME_MODE_DARK = 2;
 
 const KEY_WELCOME_SCREEN_SHOWN = 'welcome_shown';
+
+const KEY_ALARM_URI ='alarm_uri';
+const KEY_RINGTONE_URI ='ringtone_uri';

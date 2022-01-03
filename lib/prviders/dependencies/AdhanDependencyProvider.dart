@@ -2,6 +2,8 @@ import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
 import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
+import 'package:minimal_adhan/helpers/notification/notifiers.dart';
+import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
 import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
 import 'package:minimal_adhan/helpers/adhan_dependencies.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
@@ -30,58 +32,61 @@ class AdhanDependencyProvider with ChangeNotifier {
 
   ///initialize every dependency
   Future<void> init() async {
-    final preference = await SharedPreferences.getInstance();
-    madhabIndex =
-        preference.getInt(KEY_ADHAN_MADHAB_INDEX) ?? DEFAULT_ADHAN_MADHAB_INDEX;
-    calMethodIndex =
-        preference.getInt(KEY_ADHAN_CALC_INDEX) ?? DEFAULT_ADHAN_CALC_INDEX;
-    highLatRuleIndex = preference.getInt(KEY_ADHAN_HIGH_LAT_INDEX) ??
-        DEFAULT_ADHAN_HIGH_LAT_INDEX;
+    await sharedPref((preference) async{
+      madhabIndex =
+          preference.getInt(KEY_ADHAN_MADHAB_INDEX) ?? DEFAULT_ADHAN_MADHAB_INDEX;
+      calMethodIndex =
+          preference.getInt(KEY_ADHAN_CALC_INDEX) ?? DEFAULT_ADHAN_CALC_INDEX;
+      highLatRuleIndex = preference.getInt(KEY_ADHAN_HIGH_LAT_INDEX) ??
+          DEFAULT_ADHAN_HIGH_LAT_INDEX;
 
-    final vis = preference.getStringList(KEY_ADHAN_VISIBILITY);
-    if (vis != null) {
-      _visibility = vis.map((e) => e.toBool()).toList();
-    }
-
-    final manualCor = preference.getStringList(KEY_ADHAN_MANUAL_CORRECT);
-    if (manualCor != null) {
-      _manualCorrections = manualCor.map((e) => int.parse(e)).toList();
-    }
-
-    final shouldNotifies = preference.getStringList(KEY_ADHAN_NOTIFY_ID);
-    if (shouldNotifies != null) {
-      _notifyIDs = shouldNotifies.map((e) => int.parse(e)).toList();
-    }
-
-    final notifyBefores = preference.getStringList(KEY_ADHAN_NOTIFY_BEFORE);
-    if(notifyBefores != null){
-      __notifyBefore = notifyBefores.map((e) => int.parse(e)).toList();
-    }
-
-    final notifyBefore = preference.getStringList(KEY_ADHAN_NOTIFY_BEFORE);
-    if (notifyBefore != null) {
-      __notifyBefore = notifyBefore.map((e) => int.parse(e)).toList();
-    }
-
-    showPersistant = preference.getBool(KEY_ADHAN_SHOW_PERSISTANT_NOTIFY) ?? DEFAULT_ADHAN_SHOW_PERSISTANT_NOTIFY;
-
-    ///check if previous location is present
-    final loc = getPersistantLocation(preference);
-    if (loc != null) {
-      _locationState = LocationAvailable(loc);
-    } else {
-      final welcomeShown =
-          preference.getBool(KEY_WELCOME_SCREEN_SHOWN) ?? false;
-      if (welcomeShown) {
-        _locationState = await _locationHelper.getLocationFromGPS(background: false);
-      } else {
-        _locationState =
-            LocationNotAvailable(LOCATION_NA_CAUSE_PERMISSION_DENIED);
+      final vis = preference.getStringList(KEY_ADHAN_VISIBILITY);
+      if (vis != null) {
+        _visibility = vis.map((e) => e.toBool()).toList();
       }
-    }
+
+      final manualCor = preference.getStringList(KEY_ADHAN_MANUAL_CORRECT);
+      if (manualCor != null) {
+        _manualCorrections = manualCor.map((e) => int.parse(e)).toList();
+      }
+
+      final shouldNotifies = preference.getStringList(KEY_ADHAN_NOTIFY_ID);
+      if (shouldNotifies != null) {
+        _notifyIDs = shouldNotifies.map((e) => int.parse(e)).toList();
+      }
+
+      final notifyBefores = preference.getStringList(KEY_ADHAN_NOTIFY_BEFORE);
+      if(notifyBefores != null){
+        __notifyBefore = notifyBefores.map((e) => int.parse(e)).toList();
+      }
+
+      final notifyBefore = preference.getStringList(KEY_ADHAN_NOTIFY_BEFORE);
+      if (notifyBefore != null) {
+        __notifyBefore = notifyBefore.map((e) => int.parse(e)).toList();
+      }
+
+      showPersistant = preference.getBool(KEY_ADHAN_SHOW_PERSISTANT_NOTIFY) ?? DEFAULT_ADHAN_SHOW_PERSISTANT_NOTIFY;
+
+      ///check if previous location is present
+      final loc = getPersistantLocation(preference);
+      if (loc != null) {
+        _locationState = LocationAvailable(loc);
+      } else {
+        final welcomeShown =
+            preference.getBool(KEY_WELCOME_SCREEN_SHOWN) ?? false;
+        if (welcomeShown) {
+          _locationState = await _locationHelper.getLocationFromGPS(background: false);
+        } else {
+          _locationState =
+              LocationNotAvailable(LOCATION_NA_CAUSE_PERMISSION_DENIED);
+        }
+      }
+    });
 
     //await _notificationManager.initialize();
   }
+
+
 
   LocationState get locationState {
     return _locationState;
@@ -97,13 +102,11 @@ class AdhanDependencyProvider with ChangeNotifier {
   }
 
   void changePersistantNotifyStatus(bool newVal)async{
-    final pref = await SharedPreferences.getInstance();
-    final success = await pref.setBool(KEY_ADHAN_SHOW_PERSISTANT_NOTIFY, newVal);
-    print(success);
+    final success = await setBoolToSharedPref(KEY_ADHAN_SHOW_PERSISTANT_NOTIFY, newVal);
     if(success){
       showPersistant = newVal;
       if(!newVal){
-         cancelAllNotifications();
+         await cancelAllNotifications();
       }else{
         createNotification(forcedSilent: true, reschedule: false);
       }
@@ -114,7 +117,7 @@ class AdhanDependencyProvider with ChangeNotifier {
   void updateLocationWithGPS({required bool background}) async {
     _locationState = LocationFinding();
     notifyListeners();
-    final pref = await SharedPreferences.getInstance();
+    final pref = await getSharedPref();
 
     LocationState state = await _locationHelper.getLocationFromGPS(background:background);
     //State is either location available or not available

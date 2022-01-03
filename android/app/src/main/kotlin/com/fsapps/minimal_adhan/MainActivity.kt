@@ -7,6 +7,7 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import android.net.Uri
 
 val adhans = listOf("adhan_mecca.mp3", "adhan_medina.mp3");
 
@@ -16,12 +17,15 @@ class MainActivity : FlutterActivity() {
     var ringtone: Ringtone? = null;
     var mediaPlayer: MediaPlayer? = null;
 
+    fun getToneURI(notifyID:Int):Uri{
+        return RingtoneManager.getDefaultUri(if (notifyID == 2) RingtoneManager.TYPE_ALARM else RingtoneManager.TYPE_RINGTONE)
+    }
 
     fun play(notifyID: Int) {
         stop()
         if (notifyID == 2 || notifyID == 3) {
-            val notification =
-                RingtoneManager.getDefaultUri(if (notifyID == 2) RingtoneManager.TYPE_ALARM else RingtoneManager.TYPE_RINGTONE)
+            val notification = getToneURI(notifyID)
+
             ringtone = RingtoneManager.getRingtone(applicationContext, notification)
             ringtone?.play()
         } else {
@@ -55,6 +59,8 @@ class MainActivity : FlutterActivity() {
                 result.success(-1)
             } else if (call.method == "getAdhanName") {
                 val notifyID = call.arguments as Int
+            }else if (call.method == "getToneURI"){
+                result.success(getToneURI(call.arguments as Int).toString())
             }
         }
     }

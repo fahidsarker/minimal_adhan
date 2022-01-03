@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:minimal_adhan/helpers/notification/notifiers.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
@@ -242,6 +243,9 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: 'About',
             tiles: [
+              SettingsClickable(onClick: (){
+                scheduleNotification(preDefined: DateTime.now());
+              }, title: "TEST_NOTIFICATION"),
               SettingsClickable(
                 onClick: () => showAboutDialog(
                   context: context,

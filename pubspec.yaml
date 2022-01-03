@@ -28,18 +28,18 @@ dependencies:
   intl: ^0.17.0
   auto_size_text: ^3.0.0-nullsafety.0
   webview_flutter: ^2.0.12
-  provider: ^5.0.0
-  hijri: ^2.0.3
+  provider: ^6.0.2
+  hijri: ^3.0.0
   geocoding: ^2.0.0
   shared_preferences: ^2.0.6
-  flutter_compass: ^0.6.1
-  flutter_svg: ^0.22.0
+  flutter_compass: ^0.7.0
+  flutter_svg: ^1.0.0
   lottie: ^1.0.1
   sqflite: ^2.0.0+3
   scrollable_positioned_list: ^0.2.0-nullsafety.0
   package_info_plus: ^1.0.3
-  android_alarm_manager: ^2.0.2
-  awesome_notifications: ^0.0.6+10
+  android_alarm_manager_plus: ^2.0.3
+  flutter_local_notifications: ^9.2.0
   flutter_localizations:
     sdk: flutter
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:minimal_adhan/helpers/notification/android_notify.dart';
-import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
@@ -12,14 +10,15 @@ import 'package:minimal_adhan/screens/adhan/widgets/onNotificaionScreen.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'helpers/notification/notifiers.dart';
 
 final onDarkCardColor = Colors.white.withOpacity(0.15);
 final onLightCardColor = Colors.blueGrey.withOpacity(0.15);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeNotifiers();
   await scheduleNotification();
+  print("done........");
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -50,13 +49,13 @@ class MinimalAdhan extends StatelessWidget {
 
   final bool fromNotification;
 
-
   MinimalAdhan(this.fromNotification);
 
   @override
   Widget build(BuildContext context) {
     final globalDependency = context.watch<GlobalDependencyProvider>();
     final darkBack = Color.fromRGBO(29, 51, 64, 1);
+    backupURIs();
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizations.delegate,

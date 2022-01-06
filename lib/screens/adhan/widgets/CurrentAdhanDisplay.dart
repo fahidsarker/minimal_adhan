@@ -23,7 +23,6 @@ class CurrentAdhanDisplay extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       height: context.height * 0.20,
-
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () => showDialog(
@@ -48,15 +47,7 @@ class CurrentAdhanDisplay extends StatelessWidget {
                     style: context.textTheme.bodyText1,
                     rtl: context.appLocale.direction == 'rtl',
                   ),
-                  Icon(Icons.my_location),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  AutoSizeText(
-                    _userAddress,
-                    style: context.textTheme.bodyText1,
-                    maxLines: 1,
-                  )
+                  ..._createLocationRow(context)
                 ],
               ),
             ] else ...[
@@ -67,22 +58,26 @@ class CurrentAdhanDisplay extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.my_location),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  AutoSizeText(
-                    _userAddress,
-                    style: context.textTheme.bodyText1,
-                    maxLines: 1,
-                  )
-                ],
-              ),
+                children: _createLocationRow(context),
+              )
             ],
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> _createLocationRow(BuildContext context) {
+    return [
+      Icon(Icons.my_location),
+      SizedBox(
+        width: 8,
+      ),
+      AutoSizeText(
+        _userAddress.length > 15 ? _userAddress.substring(0,15)+"..." : _userAddress,
+        style: context.textTheme.bodyText1,
+        maxLines: 1,
+      )
+    ];
   }
 }

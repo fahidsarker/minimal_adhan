@@ -6,6 +6,7 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 import 'package:provider/provider.dart';
 import 'package:minimal_adhan/extensions.dart';
 
+import '../../../metadata.dart';
 import 'Chooser.dart';
 
 class AppLanguagePicker extends StatelessWidget {

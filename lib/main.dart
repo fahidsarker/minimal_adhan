@@ -18,7 +18,6 @@ final onLightCardColor = Colors.blueGrey.withOpacity(0.15);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await scheduleNotification();
-  print("done........");
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -31,8 +30,8 @@ void main() async {
   await _duaDependencyProvider.init();
   await _adhanDependencyProvider.init();
 
-  if(_adhanDependencyProvider.showPersistant){
-   // AndroidNotify.notify(silent: true);
+  if (_adhanDependencyProvider.showPersistant) {
+    // AndroidNotify.notify(silent: true);
   }
 
   runApp(MultiProvider(
@@ -46,7 +45,6 @@ void main() async {
 }
 
 class MinimalAdhan extends StatelessWidget {
-
   final bool fromNotification;
 
   MinimalAdhan(this.fromNotification);
@@ -55,7 +53,6 @@ class MinimalAdhan extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalDependency = context.watch<GlobalDependencyProvider>();
     final darkBack = Color.fromRGBO(29, 51, 64, 1);
-    backupURIs();
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -114,7 +111,11 @@ class MinimalAdhan extends StatelessWidget {
           brightness: Brightness.dark,
           backgroundColor: darkBack,
           accentColor: Colors.white),
-      home: fromNotification ? OnNotificationScreen() : globalDependency.welcomeScreenShown ? HomePage() : WelcomeScreen(),
+      home: fromNotification
+          ? OnNotificationScreen()
+          : globalDependency.welcomeScreenShown
+              ? HomePage()
+              : WelcomeScreen(true, 'Beta'),
     );
   }
 }

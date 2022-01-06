@@ -30,7 +30,7 @@ void _validateNotifyPlatform() {
 Future<FlutterLocalNotificationsPlugin> _initializeNotifiers() async {
   //todo change progaurd rules for release builds (local_notifications)
   const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
+      AndroidInitializationSettings('ic_notify');
 
   final InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
@@ -41,8 +41,13 @@ Future<FlutterLocalNotificationsPlugin> _initializeNotifiers() async {
   return notifier;
 }
 
-Future<void> backupURIs()async{
-  try{
+/// We can not get the uri for alarm and ringtone during
+/// notification call back yet due to a bug in flutter
+///
+/// Hence, we make a backup whenever we get a chance
+/// so that we can use that later
+Future<void> backupURIs() async {
+  try {
     print('Backing up uris');
     final alarmURI = await getToneURI(NOTIFY_ID_ADHAN_ALARM);
     final ringtoneURI = await getToneURI(NOTIFY_ID_ADHAN_RINGTONE);
@@ -52,14 +57,11 @@ Future<void> backupURIs()async{
     await setStringToSharedPref(KEY_ALARM_URI, ringtoneURI);
 
     print('URI backed up : $alarmURI, $ringtoneURI');
-  }catch(e){
-    print(e);
-  }
+  } catch (e) {}
 }
 
 Future<void> scheduleNotification(
     {DateTime? preDefined, bool showNowIfPersistent = false}) async {
-
   backupURIs();
 
   if (preDefined != null) {
@@ -113,7 +115,7 @@ void createNotification(
 
     if (currentAdhan != null) {
       await _notify(currentAdhan.title,
-          '${currentAdhan.formattedStartTime} -  ${currentAdhan.formattedEndTime} with notify ${adhanDependency.notifyID(currentAdhan.type)}',
+          '${currentAdhan.formattedStartTime} -  ${currentAdhan.formattedEndTime}',
           isPersistent: adhanDependency.showPersistant,
           notifyID:
               forcedSilent ? 0 : adhanDependency.notifyID(currentAdhan.type));
@@ -132,7 +134,11 @@ void createNotification(
 }
 
 NotificationDetails _createNotifyDetails(
-    {required int id, required String name, String? soundSource, String? uri}) {
+    {required int id,
+    required String name,
+    String? soundSource,
+    String? uri,
+    required bool isPersistant}) {
   assert(!(soundSource != null && uri != null));
 
   print('$soundSource, $uri, $id');
@@ -149,6 +155,7 @@ NotificationDetails _createNotifyDetails(
     playSound: soundSource != null || uri != null,
     onlyAlertOnce: id == 0,
     priority: Priority.max,
+    ongoing: isPersistant,
   ));
 }
 
@@ -160,30 +167,41 @@ Future<String> getToneURI(int notifyID) async {
   }
 }
 
-Future<NotificationDetails> _getNotifyDetails(int id) async {
+Future<NotificationDetails> _getNotifyDetails(int id, bool isPersistant) async {
   switch (id) {
     case NOTIFY_ID_ADHAN_NORMAL:
-      return _createNotifyDetails(id: id, name: 'Normal');
+      return _createNotifyDetails(id: id, name: 'Normal', isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_ALARM:
       return _createNotifyDetails(
-          id: id, name: 'Alarm', uri: await getStringFromSharedPref(KEY_ALARM_URI));
+          id: id,
+          name: 'Alarm',
+
+          uri: await getStringFromSharedPref(KEY_ALARM_URI), isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_RINGTONE:
       return _createNotifyDetails(
-          id: id, name: 'Ringtone', uri: await getStringFromSharedPref(KEY_RINGTONE_URI));
+          id: id,
+          name: 'Ringtone',
+          uri: await getStringFromSharedPref(KEY_RINGTONE_URI), isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_MECCA:
       return _createNotifyDetails(
-          id: id, name: 'Mecca', soundSource: 'adhan_mecca');
+          id: id, name: 'Mecca', soundSource: 'adhan_mecca', isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_MEDINA:
       return _createNotifyDetails(
-          id: id, name: 'Medina', soundSource: 'adhan_medina');
+          id: id, name: 'Medina', soundSource: 'adhan_medina', isPersistant: isPersistant);
     default:
-      return _createNotifyDetails(id: id, name: 'Silent');
+      return _createNotifyDetails(id: id, name: 'Silent', isPersistant: isPersistant);
   }
+}
+
+Future testNotification() async {
+  final notifier = await _initializeNotifiers();
+  await notifier.show(
+      1, "Test Notification", "Testing", await _getNotifyDetails(1, false));
 }
 
 Future _notify(String title, String body,
     {required bool isPersistent, required int notifyID}) async {
   _validateNotifyPlatform();
   await (await _initializeNotifiers())
-      .show(0, title, body, await _getNotifyDetails(notifyID));
+      .show(0, title, body, await _getNotifyDetails(notifyID, isPersistent));
 }

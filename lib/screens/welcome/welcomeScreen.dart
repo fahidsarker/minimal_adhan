@@ -9,7 +9,6 @@ import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/AppLanguagePicker.dart';
-import 'package:minimal_adhan/screens/settings/bottomsheets/madhabChooser.dart';
 import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
 import 'package:minimal_adhan/screens/welcome/widgets/pageViewModel.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
@@ -20,6 +19,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 const pageAnimateDUration = const Duration(milliseconds: 400);
 
 class WelcomeScreen extends StatefulWidget {
+  final bool showWarning;
+  final String build;
+
+  WelcomeScreen(this.showWarning, this.build);
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -32,7 +36,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final globalProvider = context.watch<GlobalDependencyProvider>();
     final adhanDependency = context.watch<AdhanDependencyProvider>();
-    final duaDependency = context.read<DuaDependencyProvider>();
     final appLocale = AppLocalizations.of(context)!;
     final locationState = adhanDependency.locationState;
     final defaultBodyTextStyle = const TextStyle(
@@ -42,6 +45,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     final pages = [
       PageViewModel(
+        title: "Warning - ${widget.build} build",
+        bodyWidget: Text(
+          "Thank you for trying out the ${widget.build} build. There might be bugs and the app might be un-stable. We appreciate any feedback you provide.",
+          style: defaultBodyTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        image: Center(
+          child: Icon(Icons.warning, size: 175, color: Colors.yellow,),
+        ),
+      ),
+      PageViewModel(
         title: "As-salamu alaykum",
         bodyWidget: Text(
           "Minimal Adhan\nOpen Source | Free | Privacy Focused",
@@ -50,7 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         image: Center(
           child: Image.asset(
-            'assets/logo.png',
+            'assets/logo_256.png',
             height: 175,
             fit: BoxFit.fitHeight,
           ),
@@ -89,7 +103,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
       PageViewModel(
-        title: "Location",
+        title: appLocale.location,
         image: const Center(
             child: Icon(
           Icons.my_location,
@@ -130,27 +144,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 )
             else if (locationState is LocationFinding)
               Loading()
-            else if(locationState is LocationAvailable)
-              ...[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.check,
-                      color: Colors.greenAccent,
-                    ),
-                    SizedBox(
-                      width: 4.0,
-                    ),
-                    Text(
-                      appLocale.location_found,
-                      style: context.textTheme.headline6
-                          ?.copyWith(color: Colors.greenAccent),
-                    ),
-                  ],
-                ),
-                Text(locationState.locationInfo.address),
-              ],
+            else if (locationState is LocationAvailable) ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.check,
+                    color: Colors.greenAccent,
+                  ),
+                  SizedBox(
+                    width: 4.0,
+                  ),
+                  Text(
+                    appLocale.location_found,
+                    style: context.textTheme.headline6
+                        ?.copyWith(color: Colors.greenAccent),
+                  ),
+                ],
+              ),
+              Text(locationState.locationInfo.address),
+            ],
           ],
         ),
       ),
@@ -196,6 +209,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: AutoSizeText(
                 appLocale.adhan_asr,
                 style: context.textTheme.headline1,
+                maxLines: 1,
               ),
             ),
           ),

@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-</shape>
+    <item
+        android:drawable="@mipmap/ic_launcher"
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp" />
+
+    <item>
+        <shape
+            android:padding="10dp"
+            android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <stroke
+                android:width="5dp"
+                android:color="#113447" />
+        </shape>
+
+    </item>
+</layer-list>

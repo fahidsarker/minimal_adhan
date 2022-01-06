@@ -51,11 +51,8 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text('Copied!')));
                       } else if (val == appLocale.report_an_error) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => FeedbackTaker(
-                                    getDuaErrorReportForm(data.title))));
+                        context.push(FeedbackTaker(
+                            "Report a dua", getDuaErrorReportForm(data.title)));
                       } else if (val == appLocale.arabic_font_size ||
                           val == appLocale.other_font_size) {
                         showDialog(

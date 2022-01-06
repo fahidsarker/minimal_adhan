@@ -21,6 +21,9 @@ import 'package:minimal_adhan/screens/settings/widgets/fontsizeSelectorDialog.da
 import 'package:minimal_adhan/screens/settings/widgets/settingsSection.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../metadata.dart';
 
 const bottomSheetShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
@@ -190,7 +193,7 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.support_dev,
             tiles: [
-              SettingsClickable(
+              /*SettingsClickable(
                 onClick: () {},
                 title: appLocale.rate_on_play_store,
                 subtitle: appLocale.rate_on_play_store_desc,
@@ -201,39 +204,28 @@ class SettingsScreen extends StatelessWidget {
                 title: appLocale.help_us_translate,
                 subtitle: appLocale.help_us_translate_desc,
                 leading: Icon(Icons.translate),
-              ),
+              ),*/
               SettingsClickable(
-                onClick: () {},
+                onClick: () => launch(githubRepoLink),
                 title: appLocale.github_ripo,
                 subtitle: appLocale.github_ripo_desc,
                 leading: Icon(Icons.code),
               ),
               SettingsClickable(
-                onClick: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              FeedbackTaker(getBugReportForm())));
-                },
+                onClick: () => launch(getBugReportForm()),
                 title: appLocale.report_bug,
                 subtitle: appLocale.report_bug_desc,
                 leading: Icon(Icons.bug_report),
               ),
               SettingsClickable(
-                onClick: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              FeedbackTaker(getFeatureRequestForm())));
-                },
+                onClick: () => launch(getFeatureRequestForm()),
                 title: appLocale.request_a_feature,
                 subtitle: appLocale.request_a_feature_desc,
                 leading: Icon(Icons.apps),
               ),
               SettingsClickable(
-                onClick: () {},
+                onClick: () => context.showSnackBar(
+                    "May Allah reward you with something good :-)"),
                 title: appLocale.make_dua,
                 subtitle: appLocale.make_dua_desc,
                 leading: Icon(Icons.favorite_outlined),
@@ -243,17 +235,18 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: 'About',
             tiles: [
-              SettingsClickable(onClick: (){
-                scheduleNotification(preDefined: DateTime.now());
-              }, title: "TEST_NOTIFICATION"),
+              /*SettingsClickable(
+                  onClick: () async {
+                    await testNotification();
+                  },
+                  title: "TEST_NOTIFICATION"),*/
               SettingsClickable(
                 onClick: () => showAboutDialog(
                   context: context,
                   applicationName: appLocale.minimal_adhan,
-                  applicationIcon: SvgPicture.asset(
-                    'assets/logo.svg',
+                  applicationIcon: Image.asset(
+                    'assets/logo_256.png',
                     width: 55,
-                    height: 55,
                   ),
                   applicationVersion: globalProvider.version,
                   applicationLegalese: 'Open-Source under GPL-V3 License',
@@ -265,10 +258,9 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Minimal Adhan',
                 subtitle:
                     'Version: ${globalProvider.version}, build: ${globalProvider.buildNumber}',
-                leading: SvgPicture.asset(
-                  'assets/logo.svg',
+                leading: Image.asset(
+                  'assets/logo_256.png',
                   width: 55,
-                  height: 55,
                 ),
               ),
             ],

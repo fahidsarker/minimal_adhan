@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:minimal_adhan/helpers/duaHelper.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
@@ -10,6 +9,7 @@ import 'package:minimal_adhan/widgets/iconedTextButton.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:minimal_adhan/extensions.dart';
 
 class DuaLongPressOptions extends StatelessWidget {
   final int duaID;
@@ -65,7 +65,7 @@ class DuaLongPressOptions extends StatelessWidget {
               text: appLocale.report_an_error,
               color: Colors.red,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>FeedbackTaker(getDuaErrorReportForm(data.title))));
+                context.push(FeedbackTaker("Report a dua",getDuaErrorReportForm(data.title)));
               },
             ),
           ],

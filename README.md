@@ -1,9 +1,10 @@
 # Minimal Adhan
-
+<img src="logos/logo_1024.png" width="248">
+<br/>
 An Open-Sourced Adhan app for the ummah.<br/>
-**Built with Flutter.**
+<b> Built With FLutter </b>
 
-![90%](https://progress-bar.dev/90/?title=Completed:&width=120&color=babaca&suffix=%)
+![95%](https://progress-bar.dev/95/?title=Completed:&width=120&color=babaca&suffix=%)
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 

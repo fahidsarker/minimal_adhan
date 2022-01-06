@@ -15,3 +15,7 @@ String getFeatureRequestForm(){
 String getAdhanReportForm(){
   return 'https://docs.google.com/forms/d/e/1FAIpQLSfG9U9jUeuHNwIEM4xNxWsLE66wnxnAu8kDYIvPEfL9L5vPvA/viewform?usp=sf_link';
 }
+
+String get githubRepoLink {
+  return 'https://github.com/MuhammadFahidSarker/minimal_adhan';
+}

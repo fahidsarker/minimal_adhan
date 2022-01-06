@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../metadata.dart';
 import 'Chooser.dart';
 
 class DuaTranslationLangPicker extends StatelessWidget {

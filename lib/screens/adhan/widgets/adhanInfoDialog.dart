@@ -33,7 +33,7 @@ class AdhanInfoDialog extends StatelessWidget {
       content: RichText(
         text: TextSpan(
             text:
-                '${appLocale.using_location} ${(_adhanProvider.locationState as LocationAvailable).locationInfo.address}',
+                '${appLocale.using_location} ${(_adhanProvider.locationState as LocationAvailable).locationInfo.address}\n',
             style: DefaultTextStyle.of(context).style,
             children: [
               TextSpan(
@@ -62,10 +62,7 @@ class AdhanInfoDialog extends StatelessWidget {
         ),
         IconedTextButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => FeedbackTaker(getAdhanReportForm())));
+            context.push(FeedbackTaker("Report Adhan Error", getAdhanReportForm()));
           },
           iconData: Icons.error,
           text: appLocale.report_an_error,

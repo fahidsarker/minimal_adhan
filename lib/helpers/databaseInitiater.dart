@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:path/path.dart';
-import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 

@@ -14,6 +14,9 @@ Future<String?> getStringFromSharedPref(String key)async{
   return (await getSharedPref()).getString(key);
 }
 
+Future<int?> getIntFromSharedPref(String key) async{
+  return (await getSharedPref()).getInt(key);
+}
 
 Future<bool> setBoolToSharedPref(String key, bool value) async{
   return await (await getSharedPref()).setBool(key, value);

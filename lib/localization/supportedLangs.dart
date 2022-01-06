@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 
-const supportedAppLangs = const [
-  const {
-    'code': 'en',
-    'lang': 'English',
-  },
-  const {
-    'code': 'ar',
-    'lang': 'عربى',
-  },
-  const {
-    'code': 'bn',
-    'lang': 'বাংলা',
-  },
-];
+import '../metadata.dart';
 
 String? getFont(String locale) {
   if (locale == 'en')

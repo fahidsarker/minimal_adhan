@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:minimal_adhan/models/Inspiration.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
@@ -116,6 +117,7 @@ class DuaProvider with ChangeNotifier {
         reference: map['reference_$transLang'] as String,
         notes: map['notes_$transLang'] as String);
   }
+
 
 
 

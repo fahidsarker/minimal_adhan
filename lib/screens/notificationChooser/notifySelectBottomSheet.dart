@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:minimal_adhan/dragger.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';

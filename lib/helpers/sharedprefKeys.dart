@@ -40,7 +40,7 @@ const KEY_DUA_SHOW_TRANSLITERATION = 'dua_show_transliterate';
 const DEFAULT_DUA_SHOW_TRANSLITERATION = true;
 
 const KEY_ADHAN_SHOW_PERSISTANT_NOTIFY = 'show_persistant_notify';
-const DEFAULT_ADHAN_SHOW_PERSISTANT_NOTIFY = true;
+const DEFAULT_ADHAN_SHOW_PERSISTANT_NOTIFY = false;
 
 const KEY_DUA_ARABIC_FONT_SIZE = 'dua_arabic_size';
 const DEFAULT_DUA_ARABIC_FONT_SIZE = 35.0;
@@ -58,3 +58,5 @@ const KEY_WELCOME_SCREEN_SHOWN = 'welcome_shown';
 
 const KEY_ALARM_URI ='alarm_uri';
 const KEY_RINGTONE_URI ='ringtone_uri';
+
+const KEY_DATABASE_VERSION = "db_ver";

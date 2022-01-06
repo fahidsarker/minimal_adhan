@@ -1,7 +1,6 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
-import 'package:minimal_adhan/helpers/notification/notification_manager.dart';
 import 'package:minimal_adhan/helpers/notification/notifiers.dart';
 import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
 import 'package:minimal_adhan/helpers/sharedprefKeys.dart';

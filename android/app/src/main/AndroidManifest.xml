@@ -12,7 +12,7 @@
 
    <application
        android:name = "io.flutter.app.FlutterApplication"
-       android:label="Minimal Adhan"
+        android:label="Minimal Adhan"
         android:icon="@mipmap/ic_launcher">
 
        <service

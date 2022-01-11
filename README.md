@@ -1,4 +1,8 @@
 # Minimal Adhan
+
+<a href='https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan'> <img src="screenshots/get_play.svg" width="248"> </a>
+
+</br>
 <img src="logos/logo_1024.png" width="248">
 <br/>
 An Open-Sourced Adhan app for the ummah.<br/>
@@ -8,9 +12,6 @@ An Open-Sourced Adhan app for the ummah.<br/>
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-
-<img src="still_working.png" width="248">
-<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 
 <table>

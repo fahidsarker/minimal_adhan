@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
+import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
@@ -10,6 +13,7 @@ import 'package:minimal_adhan/screens/adhan/widgets/onNotificaionScreen.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upgrader/upgrader.dart';
 import 'helpers/notification/notifiers.dart';
 
 final onDarkCardColor = Colors.white.withOpacity(0.15);
@@ -111,11 +115,23 @@ class MinimalAdhan extends StatelessWidget {
           brightness: Brightness.dark,
           backgroundColor: darkBack,
           accentColor: Colors.white),
-      home: fromNotification
-          ? OnNotificationScreen()
-          : globalDependency.welcomeScreenShown
-              ? HomePage()
-              : WelcomeScreen(true, 'Beta'),
+      home: UpgradeAlert(
+        child: fromNotification
+            ? OnNotificationScreen()
+            : globalDependency.welcomeScreenShown
+            ? HomePage()
+            : WelcomeScreen(true, 'Beta'),
+        onUpdate: updateApp,
+      ),
     );
+  }
+
+  bool updateApp() {
+    if (Platform.isAndroid) {
+      methodChannel.invokeMethod('openPlayStore');
+      return true;
+    } else {
+      throw Exception("Invalid OS!");
+    }
   }
 }

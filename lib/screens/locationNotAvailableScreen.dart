@@ -14,6 +14,7 @@ class LocationNotAvailableScreen extends StatelessWidget {
     final adhanProvider = context.read<AdhanDependencyProvider>();
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text('Location Not available!'),
           Text('Reason: ${_locationNotAvailable.cause}'),

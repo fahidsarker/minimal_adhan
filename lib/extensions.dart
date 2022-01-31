@@ -6,6 +6,10 @@ extension contextHelper on BuildContext {
     Navigator.push(this, MaterialPageRoute(builder: (_) => child));
   }
 
+  void pop<T extends Object>([T? res]){
+    Navigator.pop(this, res);
+  }
+
   void showSnackBar(String txt) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
       content: Text(txt),
@@ -14,11 +18,11 @@ extension contextHelper on BuildContext {
 }
 
 extension LocalizeHelper on AppLocalizations {
-  String getAdhanName(int i) {
+  String getAdhanName(int i, [bool isJummah = false]) {
     return [
       this.adhan_fajr,
       this.adhan_sunrise,
-      this.adhan_dhuhr,
+      if (isJummah) '${this.adhan_jummah} - $adhan_dhuhr' else this.adhan_dhuhr,
       this.adhan_asr,
       this.adhan_magrib,
       this.adhan_isha,
@@ -36,6 +40,7 @@ extension Helper on BuildContext {
   Color get primaryColor {
     return Theme.of(this).primaryColor;
   }
+
 
   Color get accentColor {
     return Theme.of(this).accentColor;
@@ -83,5 +88,9 @@ extension DateHelper on DateTime {
     return (this.year == today.year &&
         this.month == today.month &&
         this.day == today.day);
+  }
+
+  bool get isJummahToday {
+    return weekday == 5;
   }
 }

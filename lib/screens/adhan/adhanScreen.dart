@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/AdhanAvailableScreen.dart';
@@ -12,15 +13,19 @@ class AdhanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locationState = context.watch<AdhanDependencyProvider>().locationState;
+    final appLocale = context.appLocale;
 
-    return SafeArea(
-      child: (locationState is LocationAvailable)
-          ? AdhanAvailableScreen(locationState.locationInfo)
-          : (locationState is LocationFinding)
-          ? LocationFindingScreen()
-          : (locationState is LocationNotAvailable)
-          ? LocationNotAvailableScreen(locationState)
-          : UnknownErrorScreen(),
+    return Scaffold(
+      appBar: AppBar(title: Text(appLocale.adhan), elevation: 0,),
+      body: SafeArea(
+        child: (locationState is LocationAvailable)
+            ? AdhanAvailableScreen(locationState.locationInfo)
+            : (locationState is LocationFinding)
+            ? LocationFindingScreen()
+            : (locationState is LocationNotAvailable)
+            ? LocationNotAvailableScreen(locationState)
+            : UnknownErrorScreen(),
+      ),
     );
   }
 

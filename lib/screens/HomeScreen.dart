@@ -1,10 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
+import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/screens/adhan/adhanScreen.dart';
 import 'package:minimal_adhan/screens/dua/duaScreen.dart';
 import 'package:minimal_adhan/screens/qibla/qiblaScreen.dart';
 import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
+import 'package:optimize_battery/optimize_battery.dart';
+import 'package:provider/src/provider.dart';
 
 import 'dashboard/dashboardScreen.dart';
 
@@ -25,9 +34,51 @@ class _HomePageState extends State<HomePage> {
     SettingsScreen()
   ];
 
+  void _disableBatteryOptimization() async {
+    if (Platform.isAndroid) {
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        final appLocale = AppLocalizations.of(context) ?? AppLocalizationsEn();
+        final globalDep = context.read<GlobalDependencyProvider>();
+
+        if (globalDep.showDiableBatteryOptimizeDialog) {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text(appLocale.disable_battery_optimization),
+              content: Text(appLocale.disable_battery_optimization_desc),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      context.pop();
+                      globalDep.disableBatteryOptimization();
+                    },
+                    child: Text(appLocale.bttn_okay)),
+                TextButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: Text(appLocale.bttn_remind_me_later)),
+                TextButton(
+                    onPressed: () {
+                      context.pop();
+                      globalDep.setNeverAskDisableBatteryOptimize();
+                    },
+                    child: Text(
+                      appLocale.bttn_never_ask_again,
+                      style: TextStyle(color: Colors.redAccent),
+                    )),
+              ],
+            ),
+          );
+        }
+      });
+    }
+  }
+
   @override
   void initState() {
     _controller = PageController();
+    _disableBatteryOptimization();
     super.initState();
   }
 
@@ -70,7 +121,9 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.settings), label: appLocale.settings),
           ],
           currentIndex: _currentPageIndex,
-          onTap: (val) => _controller.jumpToPage(val,),
+          onTap: (val) => _controller.jumpToPage(
+            val,
+          ),
         ),
       ),
     );

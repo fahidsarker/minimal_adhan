@@ -5,6 +5,7 @@
   "adhan_fajr": "ফজর",
   "adhan_sunrise": "সূর্যোদয়",
   "adhan_dhuhr": "যোহর",
+  "adhan_jummah": "Jummah",
   "adhan_asr": "আসর",
   "adhan_magrib": "মাগরিব",
   "adhan_isha": "ইশা",
@@ -155,7 +156,16 @@
   "ringtone": "রিংটোন",
   "adhan_mecca": "আজান - মক্কা",
   "adhan_medina": "আজান - মদিনা",
-  "alarm": "এলার্ম"
+  "alarm": "এলার্ম",
+
+
+  "disable_battery_optimization": "Disable Battery Optimization",
+  "disable_battery_optimization_desc": "Please disable the battery optimization feature so that you don't miss any notifications!",
+
+  "bttn_open_settings": "Open Settings",
+  "bttn_okay": "Okay",
+  "bttn_remind_me_later": "Remind me later",
+  "bttn_never_ask_again": "Never ask again"
 
 
 

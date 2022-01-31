@@ -37,14 +37,19 @@ dependencies:
     git:
       url: https://github.com/hemanthrajv/flutter_compass.git
       ref: 48e155bc647593e588fdeb5b22ed066afc1275ef
+  animated_drawer: ^0.0.4
   flutter_svg: ^1.0.0
   lottie: ^1.0.1
   sqflite: ^2.0.0+3
+  percent_indicator: ^4.0.0
+  carousel_slider: ^4.0.0
   scrollable_positioned_list: ^0.2.0-nullsafety.0
   package_info_plus: ^1.0.3
   android_alarm_manager_plus: ^2.0.3
   flutter_local_notifications: ^9.2.0
   upgrader: ^3.11.1
+  optimize_battery: ^0.0.2
+  share_plus: ^3.0.4
   flutter_localizations:
     sdk: flutter
 
@@ -72,6 +77,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/screen_icons/
     - lib/localization/langs/
 
 

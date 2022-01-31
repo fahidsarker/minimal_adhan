@@ -8,9 +8,11 @@ import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/screens/Home/Home.dart';
 import 'package:minimal_adhan/screens/HomeScreen.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/onNotificaionScreen.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
+import 'package:minimal_adhan/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:upgrader/upgrader.dart';
@@ -81,7 +83,8 @@ class MinimalAdhan extends StatelessWidget {
       },
       themeMode: globalDependency.themeMode,
       locale: Locale(globalDependency.locale),
-      theme: ThemeData(
+      theme: getLightTheme(context, globalDependency),
+      /*ThemeData(
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
             brightness: Brightness.light,
@@ -93,8 +96,9 @@ class MinimalAdhan extends StatelessWidget {
         accentColor: Colors.blueGrey,
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
-      ),
-      darkTheme: ThemeData(
+      ),*/
+      darkTheme: getDarkTheme(context, globalDependency),
+      /*ThemeData(
           bottomNavigationBarTheme:
               BottomNavigationBarThemeData(backgroundColor: darkBack),
           bottomSheetTheme: BottomSheetThemeData(backgroundColor: darkBack),
@@ -114,12 +118,12 @@ class MinimalAdhan extends StatelessWidget {
           scaffoldBackgroundColor: darkBack,
           brightness: Brightness.dark,
           backgroundColor: darkBack,
-          accentColor: Colors.white),
+          accentColor: Colors.white),*/
       home: UpgradeAlert(
         child: fromNotification
             ? OnNotificationScreen()
             : globalDependency.welcomeScreenShown
-            ? HomePage()
+            ? Home()
             : WelcomeScreen(true, 'Beta'),
         onUpdate: updateApp,
       ),

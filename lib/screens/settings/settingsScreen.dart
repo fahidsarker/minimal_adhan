@@ -64,6 +64,15 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.global,
             tiles: [
+              if (globalProvider.showDiableBatteryOptimizeDialog)
+                SettingsClickable(
+                  onClick: () {
+                    globalProvider.disableBatteryOptimization();
+                  },
+                  title: appLocale.disable_battery_optimization,
+                  subtitle: appLocale.disable_battery_optimization_desc,
+                  leading: Icon(Icons.warning),
+                ),
               SettingsClickable(
                   onClick: () => buildBottomSheet(AppLanguagePicker(), context),
                   title: appLocale.language,
@@ -128,13 +137,15 @@ class SettingsScreen extends StatelessWidget {
                 leading: Icon(Icons.timer_outlined),
               ),
               SettingsToggle(
-                  onToggle: (val) async {
-                    adhanDependency.changePersistantNotifyStatus(val);
-                  },
-                  subtitle: appLocale.persistant_notify_desc,
-                  title: appLocale.persistant_notify,
-                  value: adhanDependency.showPersistant,
-                  leading: Icon(Icons.notifications_rounded)),
+                onToggle: (val) async {
+                  adhanDependency.changePersistantNotifyStatus(val);
+                },
+                subtitle: appLocale.persistant_notify_desc,
+                title: appLocale.persistant_notify,
+                value: adhanDependency.showPersistant,
+                leading: Icon(Icons.notifications_rounded),
+              ),
+              // SettingsToggle(onToggle: (){}, title: 'View Jummah', value: )
             ],
           ),
           SettingsSection(
@@ -193,13 +204,13 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.support_dev,
             tiles: [
-              /*SettingsClickable(
+              SettingsClickable(
                 onClick: () {},
                 title: appLocale.rate_on_play_store,
                 subtitle: appLocale.rate_on_play_store_desc,
-                leading: Icon(Icons.star_outlined),
+                leading: Icon(Icons.star_rate_sharp),
               ),
-              SettingsClickable(
+/*              SettingsClickable(
                 onClick: () {},
                 title: appLocale.help_us_translate,
                 subtitle: appLocale.help_us_translate_desc,

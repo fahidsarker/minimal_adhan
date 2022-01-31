@@ -60,3 +60,9 @@ const KEY_ALARM_URI ='alarm_uri';
 const KEY_RINGTONE_URI ='ringtone_uri';
 
 const KEY_DATABASE_VERSION = "db_ver";
+
+const KEY_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION = 'nev_ask_bat_opt';
+const DEFAULT_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION = false;
+
+const KEY_TASBIH_LIST = 'tasbih_list';
+

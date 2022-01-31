@@ -11,8 +11,9 @@ class IconedTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Spacer(),
+
         TextButton(
           onPressed: onPressed,
           child: Row(

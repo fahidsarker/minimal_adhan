@@ -1,0 +1,78 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/screens/feedback/form_links.dart';
+import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class Menu extends StatelessWidget {
+  final menuButtonTextStyle = const TextStyle(color: Colors.white);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildMenuButton(
+              name: 'GitHub', //todo app locale
+              icon: Icons.code,
+              action: () => launch(githubRepoLink)),
+          const Divider(color: Colors.white54),
+          buildMenuButton(
+              name: 'Share this app',
+              icon: Icons.share,
+              action: () {
+                Share.share(
+                    'Minimal Adhan: Get Prayer times, Dua, Qibla and Tasbih in a single app',
+                    subject: 'Minimal Adhan app'); //todo app locale
+              }),
+          buildMenuButton(
+            name: 'Rate this app', //todo app locale
+            icon: Icons.rate_review,
+            action: () {
+              launch(
+                  'https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan');
+            },
+          ),
+          const Divider(color: Colors.white54),
+          buildMenuButton(
+            name: 'Settings',
+            icon: Icons.settings,
+            action: () => context.push(
+              SettingsScreen(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextButton buildMenuButton(
+      {required String name,
+      required IconData icon,
+      required void Function() action}) {
+    return TextButton.icon(
+      onPressed: action,
+      icon: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      label: Text(
+        name,
+        style: menuButtonTextStyle,
+      ),
+    );
+  }
+}
+
+void _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}

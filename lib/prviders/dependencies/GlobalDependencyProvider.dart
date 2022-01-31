@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
 import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
+import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,6 +17,8 @@ class GlobalDependencyProvider with ChangeNotifier {
   late String version;
   late String buildNumber;
   late bool _welcomeScreenShown;
+  late bool neverAskToDisableBatteryOptimizer;
+  late bool batteryOptimizeDisabled;
 
   GlobalDependencyProvider();
 
@@ -32,10 +36,31 @@ class GlobalDependencyProvider with ChangeNotifier {
     appName = packageInfo.appName;
     version = packageInfo.version;
     buildNumber = packageInfo.buildNumber;
+
+    batteryOptimizeDisabled = await OptimizeBattery.isIgnoringBatteryOptimizations();
+    neverAskToDisableBatteryOptimizer = (await getBoolFromSharedPref(
+        KEY_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION)) ??
+        DEFAULT_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION;
+  }
+
+  bool get showDiableBatteryOptimizeDialog{
+    return !neverAskToDisableBatteryOptimizer || !batteryOptimizeDisabled;
   }
 
   bool get welcomeScreenShown {
     return _welcomeScreenShown;
+  }
+
+  void disableBatteryOptimization() async{
+    await OptimizeBattery.stopOptimizingBatteryUsage();
+    batteryOptimizeDisabled = await OptimizeBattery.isIgnoringBatteryOptimizations();
+    notifyListeners();
+  }
+
+  void setNeverAskDisableBatteryOptimize() {
+    setBoolToSharedPref(KEY_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION, true);
+    neverAskToDisableBatteryOptimizer = true;
+    notifyListeners();
   }
 
   void welcomeComplete() async {

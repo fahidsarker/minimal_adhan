@@ -64,6 +64,7 @@ Future<void> scheduleNotification(
     {DateTime? preDefined, bool showNowIfPersistent = false}) async {
   backupURIs();
 
+
   if (preDefined != null) {
     await _setAlarm(preDefined);
     return;
@@ -71,6 +72,8 @@ Future<void> scheduleNotification(
 
   final adhanDependency = AdhanDependencyProvider();
   await adhanDependency.init();
+
+
   final locationState = adhanDependency.locationState;
   if (locationState is LocationAvailable) {
     final notificationProvider = AdhanNotificationProvider(
@@ -80,9 +83,13 @@ Future<void> scheduleNotification(
       await _setAlarm(nextAdhan.startTime);
       print('schedule at ${nextAdhan.startTime}');
     }
+
+
     if (showNowIfPersistent && adhanDependency.showPersistant) {
       createNotification(forcedSilent: true, reschedule: false);
     }
+
+
   }
 }
 
@@ -143,20 +150,18 @@ NotificationDetails _createNotifyDetails(
 
   print('$soundSource, $uri, $id');
   return NotificationDetails(
-      android: AndroidNotificationDetails(
-    id.toString(),
-    name,
-    channelDescription: 'Simple Adhan notifications - $name',
-    sound: uri != null
-        ? UriAndroidNotificationSound(uri)
-        : soundSource != null
-            ? RawResourceAndroidNotificationSound(soundSource)
-            : null,
-    playSound: soundSource != null || uri != null,
-    onlyAlertOnce: id == 0,
-    priority: Priority.max,
-    ongoing: isPersistant,
-  ));
+      android: AndroidNotificationDetails(id.toString(), name,
+          channelDescription: 'Simple Adhan notifications - $name',
+          sound: uri != null
+              ? UriAndroidNotificationSound(uri)
+              : soundSource != null
+                  ? RawResourceAndroidNotificationSound(soundSource)
+                  : null,
+          playSound: soundSource != null || uri != null,
+          onlyAlertOnce: id == 0,
+          priority: Priority.max,
+          ongoing: isPersistant,
+          autoCancel: !isPersistant));
 }
 
 Future<String> getToneURI(int notifyID) async {
@@ -170,26 +175,35 @@ Future<String> getToneURI(int notifyID) async {
 Future<NotificationDetails> _getNotifyDetails(int id, bool isPersistant) async {
   switch (id) {
     case NOTIFY_ID_ADHAN_NORMAL:
-      return _createNotifyDetails(id: id, name: 'Normal', isPersistant: isPersistant);
+      return _createNotifyDetails(
+          id: id, name: 'Normal', isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_ALARM:
       return _createNotifyDetails(
           id: id,
           name: 'Alarm',
-
-          uri: await getStringFromSharedPref(KEY_ALARM_URI), isPersistant: isPersistant);
+          uri: await getStringFromSharedPref(KEY_ALARM_URI),
+          isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_RINGTONE:
       return _createNotifyDetails(
           id: id,
           name: 'Ringtone',
-          uri: await getStringFromSharedPref(KEY_RINGTONE_URI), isPersistant: isPersistant);
+          uri: await getStringFromSharedPref(KEY_RINGTONE_URI),
+          isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_MECCA:
       return _createNotifyDetails(
-          id: id, name: 'Mecca', soundSource: 'adhan_mecca', isPersistant: isPersistant);
+          id: id,
+          name: 'Mecca',
+          soundSource: 'adhan_mecca',
+          isPersistant: isPersistant);
     case NOTIFY_ID_ADHAN_MEDINA:
       return _createNotifyDetails(
-          id: id, name: 'Medina', soundSource: 'adhan_medina', isPersistant: isPersistant);
+          id: id,
+          name: 'Medina',
+          soundSource: 'adhan_medina',
+          isPersistant: isPersistant);
     default:
-      return _createNotifyDetails(id: id, name: 'Silent', isPersistant: isPersistant);
+      return _createNotifyDetails(
+          id: id, name: 'Silent', isPersistant: isPersistant);
   }
 }
 

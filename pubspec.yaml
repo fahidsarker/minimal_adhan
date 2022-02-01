@@ -37,7 +37,6 @@ dependencies:
     git:
       url: https://github.com/hemanthrajv/flutter_compass.git
       ref: 48e155bc647593e588fdeb5b22ed066afc1275ef
-  animated_drawer: ^0.0.4
   flutter_svg: ^1.0.0
   lottie: ^1.0.1
   sqflite: ^2.0.0+3
@@ -50,6 +49,7 @@ dependencies:
   upgrader: ^3.11.1
   optimize_battery: ^0.0.2
   share_plus: ^3.0.4
+  matrix4_transform: ^2.0.1
   flutter_localizations:
     sdk: flutter
 

@@ -22,7 +22,7 @@ class AdhanInfoDialog extends StatelessWidget {
         children: [
           Icon(
             Icons.info,
-            color: context.accentColor,
+            color: context.secondaryColor,
           ),
           SizedBox(
             width: 8,

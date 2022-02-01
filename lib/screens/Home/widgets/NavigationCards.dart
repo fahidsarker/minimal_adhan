@@ -9,12 +9,11 @@ class NavigationCard extends StatelessWidget {
 
   final String label;
   final Widget child;
-  final Color backgroundColor;
-  final Widget navTo;
+  final void Function() onPressed;
   final double size;
 
 
-  NavigationCard({required this.label, required this.size, required this.child, required this.backgroundColor, required this.navTo});
+  NavigationCard({required this.label, required this.size, required this.child,  required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class NavigationCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         borderRadius: radius,
-        onTap: ()=>context.push(navTo),
+        onTap: onPressed,
         child: Container(
           width: size,
           height: size,

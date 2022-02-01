@@ -16,7 +16,6 @@ class AdhanScreen extends StatelessWidget {
     final appLocale = context.appLocale;
 
     return Scaffold(
-      appBar: AppBar(title: Text(appLocale.adhan), elevation: 0,),
       body: SafeArea(
         child: (locationState is LocationAvailable)
             ? AdhanAvailableScreen(locationState.locationInfo)

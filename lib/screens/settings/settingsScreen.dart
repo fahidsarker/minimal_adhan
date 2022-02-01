@@ -44,6 +44,11 @@ void buildBottomSheet(Widget content, BuildContext context) {
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
+  factory SettingsScreen.test (){
+    print('Initiating');
+    return SettingsScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     final globalProvider = context.watch<GlobalDependencyProvider>();

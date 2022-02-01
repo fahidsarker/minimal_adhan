@@ -4,33 +4,56 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 import 'extensions.dart';
 import 'localization/supportedLangs.dart';
 
-ThemeData getLightTheme(BuildContext context, GlobalDependencyProvider globalDependency) =>
-    ThemeData(
-      scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          systemOverlayStyle: SystemUiOverlayStyle.light),
-      cardColor: Colors.white,
-      brightness: Brightness.light,
-      fontFamily: getFont(globalDependency.locale),
-      textTheme: getTextTheme(context, globalDependency.locale),
-      colorScheme: Theme.of(context).colorScheme.copyWith(
-        secondary: Colors.blueGrey,
-      )
-    );
+LinearGradient getDrawerBGGradient(BuildContext context) {
+  return LinearGradient(
+    colors: context.theme.brightness == Brightness.light
+        ? [
+            Color(0xFF134E5E),
+            Color(0xFF71B280),
+          ]
+        : [
+            Color(0xFF0A232A),
+            Color(0xFF33503A),
+          ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+}
 
-ThemeData getDarkTheme(BuildContext context, GlobalDependencyProvider globalDependency) {
+Color getDrawerShadowColor(BuildContext context) {
+  return context.theme.brightness == Brightness.light
+      ? Colors.teal
+      : Color(0xFF145742);
+}
+
+ThemeData getLightTheme(
+        BuildContext context, GlobalDependencyProvider globalDependency) =>
+    ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            iconTheme: context.theme.iconTheme.copyWith(color: Colors.black),
+            systemOverlayStyle: SystemUiOverlayStyle.dark),
+        cardColor: Colors.white,
+        brightness: Brightness.light,
+        fontFamily: getFont(globalDependency.locale),
+        textTheme: getTextTheme(context, globalDependency.locale),
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              secondary: Colors.blueGrey,
+            ));
+
+ThemeData getDarkTheme(
+    BuildContext context, GlobalDependencyProvider globalDependency) {
   final darkBack = Color.fromRGBO(29, 51, 64, 1);
 
   return ThemeData(
-      bottomNavigationBarTheme:
-      BottomNavigationBarThemeData(backgroundColor: darkBack),
-      bottomSheetTheme: BottomSheetThemeData(backgroundColor: darkBack),
+      bottomSheetTheme:
+          context.theme.bottomSheetTheme.copyWith(backgroundColor: darkBack),
       appBarTheme: AppBarTheme(
-        brightness: Brightness.dark,
+        foregroundColor: Colors.white,
         backgroundColor: darkBack,
-        iconTheme: IconThemeData(color: Colors.white),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       fontFamily: getFont(globalDependency.locale),
       textTheme: getTextTheme(context, globalDependency.locale).apply(
@@ -41,8 +64,10 @@ ThemeData getDarkTheme(BuildContext context, GlobalDependencyProvider globalDepe
       cardColor: darkBack,
       dialogTheme: DialogTheme(backgroundColor: darkBack),
       scaffoldBackgroundColor: darkBack,
-      brightness: Brightness.dark,
       backgroundColor: darkBack,
-      accentColor: Colors.white
-  );
+      snackBarTheme: context.theme.snackBarTheme
+          .copyWith(backgroundColor: Colors.white.withOpacity(0.8)),
+      colorScheme: Theme.of(context)
+          .colorScheme
+          .copyWith(secondary: Colors.white, brightness: Brightness.dark));
 }

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'AdhanList.dart';
 import 'package:minimal_adhan/extensions.dart';
 
+const ADHAN_DATE_CHANGER_HEIGHT = 128.0;
 class AdhanDateChanger extends StatelessWidget {
   final PageController _adhanListPageController;
 
@@ -33,67 +34,70 @@ class AdhanDateChanger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final adhanProvider = context.watch<AdhanProvider>();
-    return Column(
-      children: [
-        Opacity(
-          opacity: adhanProvider.currentDate.isToday ? 0 : 1,
-          child: TextButton(
-            onPressed: () => adhanProvider.currentDate.isToday
-                ? null
-                : _adhanListPageController.jumpToPage(centerPage),
-            child: Text(adhanProvider.appLocalization.show_today),
+    return Container(
+      height: ADHAN_DATE_CHANGER_HEIGHT,
+      child: Column(
+        children: [
+          Opacity(
+            opacity: adhanProvider.currentDate.isToday ? 0 : 1,
+            child: TextButton(
+              onPressed: () => adhanProvider.currentDate.isToday
+                  ? null
+                  : _adhanListPageController.jumpToPage(centerPage),
+              child: Text(adhanProvider.appLocalization.show_today),
+            ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-                icon: Icon(
-                  Directionality.of(context)
-                          .toString()
-                          .contains(TextDirection.LTR.value.toLowerCase())
-                      ? Icons.keyboard_arrow_left
-                      : Icons.keyboard_arrow_right,
-                ),
-                onPressed: () {
-                  _adhanListPageController.previousPage(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
-                }),
-            InkWell(
-              borderRadius: BorderRadius.circular(10),
-              onTap: () => moveToDate(context, adhanProvider.currentDate),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(DateFormat(
-                            "EEEE, dd MMM yyyy",
-                            adhanProvider.appLocalization.locale)
-                        .format(adhanProvider.currentDate)),
-                    _CustomDivider(),
-                    Text(DateFormat(getArabicDate(adhanProvider.currentDate))
-                        .format(adhanProvider.currentDate))
-                  ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  icon: Icon(
+                    Directionality.of(context)
+                            .toString()
+                            .contains(TextDirection.LTR.value.toLowerCase())
+                        ? Icons.keyboard_arrow_left
+                        : Icons.keyboard_arrow_right,
+                  ),
+                  onPressed: () {
+                    _adhanListPageController.previousPage(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeIn);
+                  }),
+              InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () => moveToDate(context, adhanProvider.currentDate),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(DateFormat(
+                              "EEEE, dd MMM yyyy",
+                              adhanProvider.appLocalization.locale)
+                          .format(adhanProvider.currentDate)),
+                      _CustomDivider(),
+                      Text(DateFormat(getArabicDate(adhanProvider.currentDate))
+                          .format(adhanProvider.currentDate))
+                    ],
+                  ),
                 ),
               ),
-            ),
-            IconButton(
-                icon: Icon(
-                  Directionality.of(context)
-                          .toString()
-                          .contains(TextDirection.LTR.value.toLowerCase())
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
-                ),
-                onPressed: () {
-                  _adhanListPageController.nextPage(
-                      duration: const Duration(milliseconds: 150),
-                      curve: Curves.easeIn);
-                })
-          ],
-        ),
-      ],
+              IconButton(
+                  icon: Icon(
+                    Directionality.of(context)
+                            .toString()
+                            .contains(TextDirection.LTR.value.toLowerCase())
+                        ? Icons.keyboard_arrow_right
+                        : Icons.keyboard_arrow_left,
+                  ),
+                  onPressed: () {
+                    _adhanListPageController.nextPage(
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.easeIn);
+                  })
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -115,7 +119,7 @@ class _CustomDivider extends StatelessWidget {
           width: context.width * 0.4,
           height: 2,
           decoration: BoxDecoration(
-            color: context.accentColor,
+            color: context.secondaryColor,
             border: Border.all(width: 2.0),
             borderRadius: BorderRadius.circular(4.0),
           )),

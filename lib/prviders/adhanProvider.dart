@@ -30,14 +30,15 @@ class AdhanProvider with ChangeNotifier {
       : _viewingDate = DateTime.now();
 
   int? get currentAdhanIndex {
+    int? current;
     if(_viewingDate.isToday){
       final adhans = getAdhanData(_viewingDate);
       for(int i=0; i<adhans.length; i++){
         if(adhans[i].isCurrent)
-          return i;
+          current = i;
       }
     }
-    return null;
+    return current;
   }
 
   Adhan? get currentAdhan {

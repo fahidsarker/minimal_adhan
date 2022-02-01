@@ -31,13 +31,14 @@ class QiblaAvailableScreen extends StatelessWidget {
       child: StreamBuilder<CompassEvent>(
         stream: FlutterCompass.events,
         builder: (context, snapshot) {
-
-
-          if (snapshot.data != null) {
-            double? direction = snapshot.data!.heading;
+          final data = snapshot.data;
+          if (data != null) {
+            double? direction = data.heading;
             if (direction != null) {
               var heading = direction;
-
+              if (heading < 0) {
+                heading += 365;
+              }
               if ((heading - _lastAngle).abs() > 0.5) {
                 _lastAngle = heading;
               } else {
@@ -65,7 +66,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                               ? (Theme.of(context).brightness == Brightness.dark
                                   ? Colors.greenAccent
                                   : Color.fromRGBO(123, 171, 135, 1))
-                              : context.accentColor,
+                              : context.secondaryColor,
                         ),
                         Transform.rotate(
                           angle: -2 * pi * (heading / 360),
@@ -114,6 +115,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                             : context.textTheme.headline6?.color,
                         fontWeight: FontWeight.normal),
                   ),
+                  Text("Accuracy: ${data.accuracy}")
                 ],
               );
             } else {

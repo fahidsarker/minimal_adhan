@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -6,7 +8,7 @@ extension contextHelper on BuildContext {
     Navigator.push(this, MaterialPageRoute(builder: (_) => child));
   }
 
-  void pop<T extends Object>([T? res]){
+  void pop<T extends Object>([T? res]) {
     Navigator.pop(this, res);
   }
 
@@ -41,9 +43,8 @@ extension Helper on BuildContext {
     return Theme.of(this).primaryColor;
   }
 
-
-  Color get accentColor {
-    return Theme.of(this).accentColor;
+  Color get secondaryColor {
+    return theme.colorScheme.secondary;
   }
 
   Color get darkPrimary {
@@ -62,12 +63,12 @@ extension Helper on BuildContext {
     return Theme.of(this).textTheme;
   }
 
+  ThemeData get theme {
+    return Theme.of(this);
+  }
+
   double get smallerBetweenHeightAndWidth {
-    if (this.width < this.height) {
-      return this.width;
-    } else {
-      return this.height;
-    }
+    return min(this.width, this.height);
   }
 
   AppLocalizations get appLocale {

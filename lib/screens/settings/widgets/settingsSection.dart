@@ -20,7 +20,7 @@ class SettingsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(title: Text(title, style: TextStyle(color: context.accentColor),),),
+          ListTile(title: Text(title, style: TextStyle(color: context.secondaryColor),),),
           ...tiles,
         ],
       ),

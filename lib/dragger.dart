@@ -10,7 +10,7 @@ class Dragger extends StatelessWidget {
         width: context.width * 0.15,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: context.accentColor,
+          color: context.secondaryColor,
         ));
   }
 }

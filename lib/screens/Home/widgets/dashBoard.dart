@@ -9,6 +9,7 @@ import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/timer.dart';
 import 'package:provider/src/provider.dart';
 
+const DASHBOARD_TOP_HEIGHT = 236.0;
 class DashBoard extends StatelessWidget {
   final LocationInfo _locationInfo;
 
@@ -19,20 +20,61 @@ class DashBoard extends StatelessWidget {
     final adhanDependency = context.watch<AdhanDependencyProvider>();
     final appLocale = context.appLocale;
     final adhanProvider =
-    AdhanProvider(adhanDependency, _locationInfo, appLocale);
+        AdhanProvider(adhanDependency, _locationInfo, appLocale);
 
     final currentAdhan = adhanProvider.currentAdhan;
     final nextAdhan = adhanProvider.nextAdhan;
 
     final headingStyle = context.textTheme.headline1
-        ?.copyWith(color: context.textTheme.headline6?.color, height: 1.5);
+        ?.copyWith(color: context.textTheme.headline6?.color);
 
     final lowerTextStyle =
-    context.textTheme.headline6?.copyWith(color: context.accentColor);
+        context.textTheme.headline6?.copyWith(color: context.secondaryColor);
     const padding = const EdgeInsets.all(16.0);
     final radius = BorderRadius.circular(15);
 
-    return Padding(
+    return Container(
+      height: DASHBOARD_TOP_HEIGHT,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 32, bottom: 32, right: 32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (currentAdhan != null) ...[
+              AutoSizeText(
+                currentAdhan.title,
+                style: headingStyle,
+                maxLines: 1,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: AutoSizeText(
+                  '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime})',
+                  style: context.textTheme.headline6,
+                  maxLines: 1,
+                ),
+              )
+            ] else ...[
+              Text(
+                '${appLocale.next}',
+                style: context.textTheme.headline6,
+              ),
+              Text(
+                nextAdhan.title,
+                style: context.textTheme.headline3,
+              ),
+              Text(
+                '${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime}',
+                style: context.textTheme.bodyText1,
+              ),
+            ]
+          ],
+        ),
+      ),
+    );
+
+    /*Padding(
       padding: padding,
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
@@ -87,6 +129,6 @@ class DashBoard extends StatelessWidget {
           ),
         ),
       ),
-    );
+    );*/
   }
 }

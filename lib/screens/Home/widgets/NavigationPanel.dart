@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
 
 const DASHBOARD_NAVIGATION_ELEMENT_PER_ROW = 2;
 class NavigationPanel extends StatelessWidget {
 
   final List<Widget> _children;
   final int totalRows;
+  final ScrollController controller;
 
-  NavigationPanel._(this._children, this.totalRows);
+  NavigationPanel._(this._children, this.totalRows, this.controller);
 
-  factory NavigationPanel.build ({required List<Widget> children}){
+  factory NavigationPanel.build ({required ScrollController controller, required List<Widget> children}){
     if(children.length % DASHBOARD_NAVIGATION_ELEMENT_PER_ROW != 0){
-      throw Exception('Invalid Child');
+      throw Exception('Invalid Children length - The length must be divisible by 2');
     }
-    return NavigationPanel._(children, children.length~/DASHBOARD_NAVIGATION_ELEMENT_PER_ROW);
+    return NavigationPanel._(children, children.length~/DASHBOARD_NAVIGATION_ELEMENT_PER_ROW, controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      controller: controller,
+      physics: BouncingScrollPhysics(),
       children: [
+        Container(
+          height: DASHBOARD_TOP_HEIGHT,
+        ),
         for(int i=0; i<totalRows; i++)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

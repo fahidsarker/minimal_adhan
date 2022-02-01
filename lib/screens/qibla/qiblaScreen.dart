@@ -11,7 +11,6 @@ import '../locationFindingScreen.dart';
 import '../locationNotAvailableScreen.dart';
 import '../unknownErrorScreen.dart';
 
-
 class QiblaScreen extends StatelessWidget {
   const QiblaScreen({Key? key}) : super(key: key);
 
@@ -19,18 +18,24 @@ class QiblaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = context.appLocale;
 
-    final locationState = context.watch<AdhanDependencyProvider>().locationState;
+    final locationState =
+        context.watch<AdhanDependencyProvider>().locationState;
     return Scaffold(
-      appBar: AppBar(title: Text(appLocale.qibla), elevation: 0,),
-
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: Icon(Icons.home),
+        ),
+      ),
       body: SafeArea(
         child: (locationState is LocationAvailable)
             ? QiblaAvailableScreen(locationState.locationInfo)
             : (locationState is LocationFinding)
-            ? LocationFindingScreen()
-            : (locationState is LocationNotAvailable)
-            ? LocationNotAvailableScreen(locationState)
-            : UnknownErrorScreen(),
+                ? LocationFindingScreen()
+                : (locationState is LocationNotAvailable)
+                    ? LocationNotAvailableScreen(locationState)
+                    : UnknownErrorScreen(),
       ),
     );
   }

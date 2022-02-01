@@ -33,7 +33,7 @@ class DashBoardAvailable extends StatelessWidget {
         ?.copyWith(color: context.textTheme.headline6?.color, height: 1.5);
 
     final lowerTextStyle =
-        context.textTheme.headline6?.copyWith(color: context.accentColor);
+        context.textTheme.headline6?.copyWith(color: context.secondaryColor);
 
     return Center(
       child: Padding(

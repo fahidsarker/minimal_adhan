@@ -31,7 +31,7 @@ class AdhanItem extends StatelessWidget {
       margin: const EdgeInsets.all(_margin),
       decoration: BoxDecoration(
           border:
-              _adhan.isCurrent ? Border.all(color: context.accentColor) : null,
+              _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
           borderRadius: BorderRadius.circular(_radius)),
       child: InkWell(
         borderRadius: BorderRadius.circular(_radius),

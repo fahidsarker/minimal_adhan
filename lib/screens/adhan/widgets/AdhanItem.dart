@@ -5,6 +5,7 @@ import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/screens/notificationChooser/notifySelectBottomSheet.dart';
+import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/timer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +29,13 @@ class AdhanItem extends StatelessWidget {
     final adhanDependency = context.watch<AdhanDependencyProvider>();
     final notifyID = adhanDependency.notifyID(_adhan.type);
     return Container(
-      margin: const EdgeInsets.all(_margin),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
-          border:
-              _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
-          borderRadius: BorderRadius.circular(_radius)),
+        border:
+            _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
+        borderRadius: BorderRadius.circular(_radius),
+        color: getColoredContainerColor(context),
+      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(_radius),
         onTap: () {

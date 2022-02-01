@@ -39,7 +39,8 @@ ThemeData getLightTheme(
         brightness: Brightness.light,
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
-        colorScheme: Theme.of(context).colorScheme.copyWith(
+        colorScheme: ColorScheme.light(
+          primary: Colors.blue,
               secondary: Colors.blueGrey,
             ));
 
@@ -62,12 +63,14 @@ ThemeData getDarkTheme(
       ),
       canvasColor: darkBack,
       cardColor: darkBack,
-      dialogTheme: DialogTheme(backgroundColor: darkBack),
+      dialogBackgroundColor: darkBack,
       scaffoldBackgroundColor: darkBack,
       backgroundColor: darkBack,
       snackBarTheme: context.theme.snackBarTheme
           .copyWith(backgroundColor: Colors.white.withOpacity(0.8)),
-      colorScheme: Theme.of(context)
-          .colorScheme
-          .copyWith(secondary: Colors.white, brightness: Brightness.dark));
+      colorScheme: ColorScheme.dark(
+        secondary: Colors.white,
+        primary: Colors.blueAccent,
+        brightness: Brightness.dark,
+      ));
 }

@@ -43,8 +43,8 @@ class GlobalDependencyProvider with ChangeNotifier {
         DEFAULT_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION;
   }
 
-  bool get showDiableBatteryOptimizeDialog{
-    return !neverAskToDisableBatteryOptimizer || !batteryOptimizeDisabled;
+  bool get needToShowDiableBatteryOptimizeDialog{
+    return !neverAskToDisableBatteryOptimizer && !batteryOptimizeDisabled;
   }
 
   bool get welcomeScreenShown {

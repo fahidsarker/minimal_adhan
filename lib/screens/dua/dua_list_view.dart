@@ -36,13 +36,13 @@ class DuaListScreen extends StatelessWidget {
             } else{
               return Center(
                 child: Container(
-                  width: context.width-32,
-                  height: context.width-32,
+                  width: 128,
+                  height: 128,
                   decoration: BoxDecoration(
                     color: getColoredContainerColor(context),
                     borderRadius: BorderRadius.circular(context.width-32)
                   ),
-                  child: SvgPicture.asset('assets/box.svg', width: context.width - 48, fit: BoxFit.fitWidth,),
+                  child: SvgPicture.asset('assets/box.svg', width: 128, fit: BoxFit.fitWidth,),
                 ),
               );
             }

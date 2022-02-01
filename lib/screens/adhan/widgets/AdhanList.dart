@@ -4,7 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:minimal_adhan/main.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
+import 'package:minimal_adhan/screens/adhan/widgets/AdhanDateChanger.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/AdhanItem.dart';
+import 'package:minimal_adhan/screens/adhan/widgets/CurrentAdhanDisplay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -13,16 +15,15 @@ const centerPage = 20000;
 
 class AdhanList extends StatelessWidget {
   final PageController _pageController;
+  final ScrollController _controller;
 
-  AdhanList(this._pageController);
+  AdhanList(this._pageController, this._controller);
 
   @override
   Widget build(BuildContext context) {
     final adhanProvider = context.read<AdhanProvider>();
 
-    return Flexible(
-      fit: FlexFit.loose,
-      child: PageView.builder(
+    return PageView.builder(
         itemCount: centerPage * 2 + 1,
         pageSnapping: true,
         controller: _pageController,
@@ -33,17 +34,17 @@ class AdhanList extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Theme.of(context).brightness == Brightness.light
+              /*color: Theme.of(context).brightness == Brightness.light
                   ? onLightCardColor
-                  : onDarkCardColor,
+                  : onDarkCardColor,*/
             ),
             margin: const EdgeInsets.all(8.0),
             child: _AdhanListView(
                 DateTime.now().add(Duration(days: (index - centerPage))),
-                index == centerPage),
+                index == centerPage, _controller),
           );
         },
-      ),
+
     );
   }
 }
@@ -51,8 +52,9 @@ class AdhanList extends StatelessWidget {
 class _AdhanListView extends StatelessWidget {
   final DateTime _dateTime;
   final bool _scroll;
+  final ScrollController _controller;
 
-  _AdhanListView(this._dateTime, this._scroll);
+  _AdhanListView(this._dateTime, this._scroll, this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +64,20 @@ class _AdhanListView extends StatelessWidget {
     final List<Adhan> _adhans = adhanProvider.getAdhanData(_dateTime);
     final index = adhanProvider.currentAdhanIndex;
 
-
-    return ScrollablePositionedList.builder(
+    return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: _adhans.length,
-      itemBuilder: (_, i) => AdhanItem(_adhans[i], timeFormat),
-      initialScrollIndex: _scroll ? index != null ? (index < 2 ? 0 : index - 2) : 0 :0,
-
+      itemCount: _adhans.length+1,
+      controller: _controller,
+      itemBuilder: (_, i) {
+        if(i == 0){
+          return Container(
+            height: CURRENT_ADHAN_DISPLAY_HEIGHT + ADHAN_DATE_CHANGER_HEIGHT + 20,
+          );
+        }else{
+          return AdhanItem(_adhans[i-1], timeFormat);
+        }
+      },
+      //initialScrollIndex: _scroll ? index != null ? (index < 2 ? 0 : index - 2) : 0 :0,
     );
   }
 }

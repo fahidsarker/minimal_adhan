@@ -15,9 +15,8 @@ import 'package:minimal_adhan/screens/tasbih/tasbihScreen.dart';
 import 'package:provider/provider.dart';
 
 class HomeContent extends StatefulWidget {
-  final LocationInfo _locationInfo;
   final void Function(bool) toggleDrawer;
-  HomeContent(this._locationInfo, this.toggleDrawer);
+  HomeContent(this.toggleDrawer);
 
   @override
   State<HomeContent> createState() => _HomeContentState();
@@ -82,7 +81,7 @@ class _HomeContentState extends State<HomeContent>
           AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: closeTopContainer ? 0 : 1,
-              child: DashBoard(widget._locationInfo),
+              child: DashBoard(),
             ),
           NavigationPanel.build(
             controller: controller,

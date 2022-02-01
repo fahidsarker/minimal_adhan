@@ -63,9 +63,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                           fit: BoxFit.fitWidth,
                           width: context.width,
                           color: match
-                              ? (Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.greenAccent
-                                  : Color.fromRGBO(123, 171, 135, 1))
+                              ? context.primaryColor
                               : context.secondaryColor,
                         ),
                         Transform.rotate(
@@ -77,10 +75,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                                 fit: BoxFit.fitWidth,
                                 width: context.width,
                                 color: match
-                                    ? (Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.greenAccent
-                                        : Color.fromRGBO(123, 171, 135, 1))
+                                    ? context.primaryColor
                                     : context.textTheme.headline6!.color,
                               ),
                               Transform.rotate(
@@ -109,13 +104,11 @@ class QiblaAvailableScreen extends StatelessWidget {
                     style: context.textTheme.headline1?.copyWith(
                         fontSize: context.textTheme.headline6?.fontSize,
                         color: match
-                            ? (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.greenAccent
-                                : Color.fromRGBO(123, 171, 135, 1))
+                            ? context.primaryColor
                             : context.textTheme.headline6?.color,
                         fontWeight: FontWeight.normal),
                   ),
-                  Text("Accuracy: ${data.accuracy}")
+                  Text("DEBUG: Accuracy: ${data.accuracy}")
                 ],
               );
             } else {

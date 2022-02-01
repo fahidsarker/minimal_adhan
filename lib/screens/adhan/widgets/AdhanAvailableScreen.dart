@@ -22,27 +22,52 @@ class AdhanAvailableScreen extends StatefulWidget {
 }
 
 class _AdhanAvailableScreenState extends State<AdhanAvailableScreen> {
+
+  bool closeTopContainer = false;
+  ScrollController controller = ScrollController();
+
+
+  @override
+  void initState() {
+
+    controller.addListener(() {
+      setState(() {
+        closeTopContainer = controller.offset > 20;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final adhanDependencyProvider = context.watch<AdhanDependencyProvider>();
 
     return ChangeNotifierProvider(
-      create: (_) => AdhanProvider(adhanDependencyProvider, widget._locationInfo,
-          AppLocalizations.of(context)!),
-      child: Column(
+      create: (_) => AdhanProvider(adhanDependencyProvider,
+          widget._locationInfo, AppLocalizations.of(context)!),
+      child: Stack(
         children: [
-          Stack(
-            children: [
-              CurrentAdhanDisplay(widget._locationInfo.address),
-              if (Navigator.canPop(context))
-                IconButton(onPressed: () => context.pop(), icon: Icon(Icons.home)),
-            ],
-          ),
-          AdhanDateChanger(widget._adhanListPageController),
-          SizedBox(
-            height: 8.0,
-          ),
-          AdhanList(widget._adhanListPageController),
+          AdhanList(widget._adhanListPageController, controller),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: closeTopContainer ? 0 : 1,
+            child: Column(
+              children: [
+                Stack(
+                  children: closeTopContainer ? [] : [
+                    CurrentAdhanDisplay(widget._locationInfo.address),
+                    if (Navigator.canPop(context))
+                      IconButton(
+                          onPressed: () => context.pop(), icon: Icon(Icons.home)),
+                  ],
+                ),
+                AdhanDateChanger(widget._adhanListPageController),
+                SizedBox(
+                  height: 8.0,
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

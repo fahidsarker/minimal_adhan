@@ -3,12 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
 import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/screens/Home/Home.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/onNotificaionScreen.dart';
+import 'package:minimal_adhan/screens/locationFindingScreen.dart';
+import 'package:minimal_adhan/screens/locationNotAvailableScreen.dart';
+import 'package:minimal_adhan/screens/unknownErrorScreen.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +25,7 @@ final onLightCardColor = Colors.blueGrey.withOpacity(0.15);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await scheduleNotification();
+  await scheduleNotification(showNowIfPersistent: true);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

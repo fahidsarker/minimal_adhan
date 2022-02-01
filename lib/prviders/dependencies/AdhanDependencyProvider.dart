@@ -114,15 +114,16 @@ class AdhanDependencyProvider with ChangeNotifier {
   }
 
   void updateLocationWithGPS({required bool background}) async {
-    _locationState = LocationFinding();
-    notifyListeners();
+    if(!background){
+      _locationState = LocationFinding();
+      notifyListeners();
+    }
     final pref = await getSharedPref();
 
     LocationState state = await _locationHelper.getLocationFromGPS(background:background);
     //State is either location available or not available
 
     if (state is LocationNotAvailable) {
-      print(state.cause);
       final loc = getPersistantLocation(pref);
       if (loc != null) {
         state = LocationAvailable(loc);

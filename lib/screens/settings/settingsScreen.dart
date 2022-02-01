@@ -69,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.global,
             tiles: [
-              if (globalProvider.showDiableBatteryOptimizeDialog)
+              if (globalProvider.needToShowDiableBatteryOptimizeDialog)
                 SettingsClickable(
                   onClick: () {
                     globalProvider.disableBatteryOptimization();

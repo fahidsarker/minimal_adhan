@@ -40,7 +40,7 @@ extension LocalizeHelper on AppLocalizations {
 
 extension Helper on BuildContext {
   Color get primaryColor {
-    return Theme.of(this).primaryColor;
+    return theme.colorScheme.primary;
   }
 
   Color get secondaryColor {

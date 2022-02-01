@@ -17,6 +17,7 @@ import 'package:provider/src/provider.dart';
 
 import 'dashboard/dashboardScreen.dart';
 
+@Deprecated('Use Home now')
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         final appLocale = AppLocalizations.of(context) ?? AppLocalizationsEn();
         final globalDep = context.read<GlobalDependencyProvider>();
 
-        if (globalDep.showDiableBatteryOptimizeDialog) {
+        if (globalDep.needToShowDiableBatteryOptimizeDialog) {
           showDialog(
             context: context,
             builder: (_) => AlertDialog(

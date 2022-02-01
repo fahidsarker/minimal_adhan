@@ -7,6 +7,7 @@ import 'package:minimal_adhan/prviders/TasbihProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationCards.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationPanel.dart';
 import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
+import 'package:minimal_adhan/screens/Recommandations/recommandations_screen.dart';
 import 'package:minimal_adhan/screens/adhan/adhanScreen.dart';
 import 'package:minimal_adhan/screens/dua/duaScreen.dart';
 import 'package:minimal_adhan/screens/qibla/qiblaScreen.dart';
@@ -101,7 +102,7 @@ class _HomeContentState extends State<HomeContent>
               NavigationCard(
                 size: iconSize,
                 label: appLocale.dua,
-                child: _getNavImage('ic_dua', iconSize*0.6),
+                child: _getNavImage('ic_hadith', iconSize*0.6),
                 onPressed: () => context.push(DuaScreen()),
               ),
               NavigationCard(
@@ -114,17 +115,17 @@ class _HomeContentState extends State<HomeContent>
                 )),
               ),
               NavigationCard(
-                  label: 'Hisnul Muslim',
+                  label: 'More',
                   size: iconSize,
-                  child: _getNavImage('ic_hadith', iconSize*0.6),
-                  onPressed: ()=>context.showSnackBar('Working on it'),
+                  child: _getNavImage('application', iconSize*0.6),
+                  onPressed: ()=>context.push(RecommendationScreen()),
                   ),
               NavigationCard(
                 label: appLocale.settings,
                 size: iconSize,
                 child: _getNavImage('ic_settings', iconSize*0.6),
                 onPressed: () => context.push(
-                  SettingsScreen.test(),
+                  SettingsScreen(),
                 ),
               ),
             ],

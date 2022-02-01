@@ -34,7 +34,7 @@ class AdhanItem extends StatelessWidget {
         border:
             _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
         borderRadius: BorderRadius.circular(_radius),
-        color: getColoredContainerColor(context),
+        color: _adhan.isCurrent ? context.primaryColor.withOpacity(0.3) : getColoredContainerColor(context),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(_radius),

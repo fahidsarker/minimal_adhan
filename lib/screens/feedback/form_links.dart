@@ -19,3 +19,7 @@ String getAdhanReportForm(){
 String get githubRepoLink {
   return 'https://github.com/MuhammadFahidSarker/minimal_adhan';
 }
+
+String get playStoreLink {
+  return 'https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan';
+}

@@ -27,15 +27,16 @@ class Menu extends StatelessWidget {
               icon: Icons.share,
               action: () {
                 Share.share(
-                    'Minimal Adhan: Get Prayer times, Dua, Qibla and Tasbih in a single app',
+                    'Azan: Free and No-Ads. Get Prayer times, Dua, Qibla and Tasbih in a single app. Click the following links to download to download it\n'
+                        'Android - $playStoreLink\n'
+                        'IOS - Coming Soon InshaAllah',
                     subject: 'Minimal Adhan app'); //todo app locale
               }),
           buildMenuButton(
             name: 'Rate this app', //todo app locale
             icon: Icons.rate_review,
             action: () {
-              launch(
-                  'https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan');
+              launch('');
             },
           ),
           const Divider(color: Colors.white54),

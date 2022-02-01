@@ -60,6 +60,7 @@ class MinimalAdhan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final globalDependency = context.watch<GlobalDependencyProvider>();
+    final adhanDependency = context.watch<AdhanDependencyProvider>();
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -91,7 +92,7 @@ class MinimalAdhan extends StatelessWidget {
         child: fromNotification
             ? OnNotificationScreen()
             : globalDependency.welcomeScreenShown
-            ? Home()
+            ? Home(adhanDependency)
             : WelcomeScreen(true, 'Beta'),
         onUpdate: updateApp,
       ),

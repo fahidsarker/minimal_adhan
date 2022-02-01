@@ -34,15 +34,15 @@ ThemeData getLightTheme(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             iconTheme: context.theme.iconTheme.copyWith(color: Colors.black),
-            systemOverlayStyle: SystemUiOverlayStyle.dark),
+            systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent)),
         cardColor: Colors.white,
         brightness: Brightness.light,
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
         colorScheme: ColorScheme.light(
           primary: Colors.blue,
-              secondary: Colors.blueGrey,
-            ));
+          secondary: Colors.blueGrey,
+        ));
 
 ThemeData getDarkTheme(
     BuildContext context, GlobalDependencyProvider globalDependency) {
@@ -54,7 +54,8 @@ ThemeData getDarkTheme(
       appBarTheme: AppBarTheme(
         foregroundColor: Colors.white,
         backgroundColor: darkBack,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: SystemUiOverlayStyle.light
+            .copyWith(statusBarColor: Colors.transparent),
       ),
       fontFamily: getFont(globalDependency.locale),
       textTheme: getTextTheme(context, globalDependency.locale).apply(

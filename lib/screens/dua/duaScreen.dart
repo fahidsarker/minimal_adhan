@@ -27,7 +27,6 @@ class DuaScreen extends StatelessWidget {
               title: Text(
                 appLocale.dua,
               ),
-              elevation: 0,
               actions: [
                 IconButton(
                     onPressed: () {

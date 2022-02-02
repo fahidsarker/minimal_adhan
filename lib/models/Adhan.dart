@@ -63,4 +63,6 @@ class Adhan {
     isCurrent = (DateTime.now().isAfter(startTime) && DateTime.now().isBefore(endTime));
   }
 
+  String get imageLocation => 'assets/adhan_times/${type <= 0 ? 0 : type >= 5 ? 5 : type}.png' ;
+
 }

@@ -40,6 +40,7 @@ class DashBoard extends StatelessWidget {
 
     return Container(
       height: DASHBOARD_TOP_HEIGHT,
+
       child: Padding(
         padding: const EdgeInsets.only(left: 32, bottom: 32, right: 32),
         child: Column(
@@ -65,63 +66,43 @@ class DashBoard extends StatelessWidget {
       required Adhan? nextAdhan,
       TextStyle? headingStyle}) {
     final appLocale = context.appLocale;
-    if ((locationState is LocationNotAvailable))
-      return [
-        AutoSizeText(
-          appLocale.location_required,
-          style: context.textTheme.headline6?.copyWith(color: Colors.red),
-          maxLines: 1,
-        ),
-        Text(locationState.cause),
-        if (locationState.cause !=
-                LOCATION_NA_CAUSE_PERMISSION_DENIED_FOREVER &&
-            locationState.cause != LOCATION_NA_CAUSE_FINDING)
-          ElevatedButton(
-              onPressed: () => adhanDependencyProvider.updateLocationWithGPS(
-                  background: false),
-              child: Text(appLocale.update_location)),
-      ];
-    else if (locationState is LocationFinding)
-      return [
-        AutoSizeText(
-          appLocale.adhan,
-          style: headingStyle,
-          maxLines: 1,
-        ),
-        LinearProgressIndicator(),
-      ];
-    else if (currentAdhan != null && nextAdhan != null)
-      return [
-        AutoSizeText(
-          currentAdhan.title,
-          style: headingStyle,
-          maxLines: 1,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: AutoSizeText(
-            '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime})',
-            style: context.textTheme.headline6,
-            maxLines: 1,
-          ),
+    return [
+      if (currentAdhan != null)
+        Row(
+            children: [
+              Image.asset(currentAdhan.imageLocation, width: 72,),
+              const SizedBox(width: 8,),
+              AutoSizeText(
+                currentAdhan.title,
+                style: context.textTheme.headline2?.copyWith(color: context.theme.colorScheme.onBackground),
+                maxLines: 1,
+              )
+            ],
         )
-      ];
-    else if (nextAdhan != null)
-      return [
+      else
         Text(
-          '${appLocale.next}',
-          style: context.textTheme.headline6,
+          appLocale.adhan,
+          style: context.textTheme.headline2,
         ),
-        Text(
-          nextAdhan.title,
-          style: context.textTheme.headline3,
-        ),
+      if (nextAdhan != null)
         Text(
           '${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime}',
           style: context.textTheme.bodyText1,
         ),
-      ];
 
-    return [];
+      if(locationState is LocationAvailable)
+        _buildLocationRow(context, Icons.my_location, locationState.locationAddressOfLength(25))
+
+    ];
+  }
+
+  Widget _buildLocationRow(BuildContext context, IconData iconData, String text){
+    return Row(
+      children: [
+        Icon(iconData, color: context.primaryColor,),
+        const SizedBox(width: 8,),
+        Text(text, style: TextStyle(color: context.primaryColor),)
+      ],
+    );
   }
 }

@@ -16,15 +16,16 @@ import 'package:minimal_adhan/screens/tasbih/tasbihScreen.dart';
 import 'package:provider/provider.dart';
 
 class HomeContent extends StatefulWidget {
-  final void Function(bool) toggleDrawer;
-  HomeContent(this.toggleDrawer);
+  final void Function([bool?]) toggleDrawer;
+  final AnimationController drawerController;
+  HomeContent(this.toggleDrawer, this.drawerController);
 
   @override
   State<HomeContent> createState() => _HomeContentState();
 }
 
 class _HomeContentState extends State<HomeContent>
-    with SingleTickerProviderStateMixin {
+    {
 
   Widget _getNavImage(String name, double size) => Image.asset(
         'assets/screen_icons/$name.png',
@@ -32,11 +33,9 @@ class _HomeContentState extends State<HomeContent>
         fit: BoxFit.fitWidth,
       );
 
-  late final AnimationController _animationController;
 
   ScrollController controller = ScrollController();
 
-  bool _drawerOpen = false;
 
   @override
   void dispose() {
@@ -46,8 +45,7 @@ class _HomeContentState extends State<HomeContent>
 
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+
     controller.addListener(() {
       setState(() {
         closeTopContainer = controller.offset > 20;
@@ -69,12 +67,12 @@ class _HomeContentState extends State<HomeContent>
       onPanUpdate: (details) {
         // Swiping in right direction.
         if (details.delta.dx > 0) {
-          _toggleDrawer(true);
+          widget.toggleDrawer(true);
         }
 
         // Swiping in left direction.
         if (details.delta.dx < 0) {
-          _toggleDrawer(false);
+          widget.toggleDrawer(false);
         }
       },
       child: Stack(
@@ -134,10 +132,10 @@ class _HomeContentState extends State<HomeContent>
             opacity: closeTopContainer? 0: 1,
             duration: const Duration(milliseconds: 200),
             child: closeTopContainer ? null : IconButton(
-              onPressed: () => _toggleDrawer(!_drawerOpen),
+              onPressed: () => widget.toggleDrawer(),
               icon: AnimatedIcon(
                 icon: AnimatedIcons.menu_arrow,
-                progress: _animationController,
+                progress: widget.drawerController,
               ),
             ),
           ),
@@ -146,15 +144,5 @@ class _HomeContentState extends State<HomeContent>
     );
   }
 
-  void _toggleDrawer(bool open){
-    if(open != _drawerOpen){
-      _drawerOpen = open;
-      widget.toggleDrawer(_drawerOpen);
-      if (_drawerOpen) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-      }
-    }
-  }
+
 }

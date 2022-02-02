@@ -23,10 +23,7 @@ class QiblaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(Icons.home),
-        ),
+        title: Text(appLocale.qibla),
       ),
       body: SafeArea(
         child: (locationState is LocationAvailable)

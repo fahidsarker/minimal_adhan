@@ -82,12 +82,12 @@ class SettingsScreen extends StatelessWidget {
                   onClick: () => buildBottomSheet(AppLanguagePicker(), context),
                   title: appLocale.language,
                   subtitle: appLocale.current_lang,
-                  leading: Icon(Icons.language)),
+                  leading: Icon(Icons.language, color: context.primaryColor,)),
               SettingsClickable(
                 onClick: () => buildBottomSheet(ThemePicker(), context),
                 title: appLocale.theme,
                 subtitle: globalProvider.getThemeModeText(appLocale),
-                leading: Icon(Icons.style),
+                leading: Icon(Icons.style, color: context.primaryColor,),
               ),
             ],
           ),
@@ -98,7 +98,7 @@ class SettingsScreen extends StatelessWidget {
                 onClick: () => buildBottomSheet(CalcMethodChooser(), context),
                 title: appLocale.calc_method,
                 subtitle: adhanDependency.paranName,
-                leading: Icon(Icons.calculate),
+                leading: Icon(Icons.calculate, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => buildBottomSheet(MadhabChooser(), context),
@@ -107,13 +107,13 @@ class SettingsScreen extends StatelessWidget {
                   appLocale.hanafi_madhab,
                   appLocale.shafi_madhab
                 ][adhanDependency.madhabIndex],
-                leading: Icon(Icons.school),
+                leading: Icon(Icons.school, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => buildBottomSheet(HighLatRuleChooser(), context),
                 title: appLocale.high_lat_rule,
                 subtitle: adhanDependency.highLatRuleName,
-                leading: Icon(Icons.height),
+                leading: Icon(Icons.height, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () {
@@ -126,7 +126,7 @@ class SettingsScreen extends StatelessWidget {
                 },
                 title: appLocale.adhan_visibility,
                 subtitle: null,
-                leading: Icon(Icons.visibility),
+                leading: Icon(Icons.visibility, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () {
@@ -139,7 +139,7 @@ class SettingsScreen extends StatelessWidget {
                 },
                 title: appLocale.adhan_manual_correction,
                 subtitle: adhanDependency.manualCorrectionAll,
-                leading: Icon(Icons.timer_outlined),
+                leading: Icon(Icons.timer_outlined, color: context.primaryColor,),
               ),
               SettingsToggle(
                 onToggle: (val) async {
@@ -148,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
                 subtitle: appLocale.persistant_notify_desc,
                 title: appLocale.persistant_notify,
                 value: adhanDependency.showPersistant,
-                leading: Icon(Icons.notifications_rounded),
+                leading: Icon(Icons.notifications_rounded, color: context.primaryColor,),
               ),
               // SettingsToggle(onToggle: (){}, title: 'View Jummah', value: )
             ],
@@ -160,13 +160,13 @@ class SettingsScreen extends StatelessWidget {
                 onToggle: duaDependency.changeShowTransliteration,
                 title: appLocale.show_transliteration,
                 value: duaDependency.showTransliteration,
-                leading: Icon(Icons.text_snippet),
+                leading: Icon(Icons.text_snippet, color: context.primaryColor,),
               ),
               SettingsToggle(
                 onToggle: duaDependency.changeShowTranslation,
                 title: appLocale.show_translation,
                 value: duaDependency.showTranslation,
-                leading: Icon(Icons.translate),
+                leading: Icon(Icons.translate, color: context.primaryColor,),
               ),
               if (duaDependency.showTranslation)
                 SettingsClickable(
@@ -178,7 +178,7 @@ class SettingsScreen extends StatelessWidget {
                       : supportedAppLangs.firstWhere((element) =>
                           element['code'] as String ==
                           duaDependency.translationLang)['lang'] as String,
-                  leading: Icon(Icons.language),
+                  leading: Icon(Icons.language, color: context.primaryColor,),
                 ),
               SettingsClickable(
                 onClick: () => showDialog(
@@ -190,7 +190,7 @@ class SettingsScreen extends StatelessWidget {
                 title: appLocale.arabic_font_size,
                 subtitle:
                     '${duaDependency.arabicFontSize.toStringAsFixed(2)} px',
-                leading: Icon(Icons.format_size),
+                leading: Icon(Icons.format_size, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => showDialog(
@@ -202,7 +202,7 @@ class SettingsScreen extends StatelessWidget {
                 title: appLocale.other_font_size,
                 subtitle:
                     '${duaDependency.otherFontSize.toStringAsFixed(2)} px',
-                leading: Icon(Icons.format_size),
+                leading: Icon(Icons.format_size, color: context.primaryColor,),
               ),
             ],
           ),
@@ -213,7 +213,7 @@ class SettingsScreen extends StatelessWidget {
                 onClick: () {},
                 title: appLocale.rate_on_play_store,
                 subtitle: appLocale.rate_on_play_store_desc,
-                leading: Icon(Icons.star_rate_sharp),
+                leading: Icon(Icons.star_rate_sharp, color: context.primaryColor,),
               ),
 /*              SettingsClickable(
                 onClick: () {},
@@ -225,26 +225,26 @@ class SettingsScreen extends StatelessWidget {
                 onClick: () => launch(githubRepoLink),
                 title: appLocale.github_ripo,
                 subtitle: appLocale.github_ripo_desc,
-                leading: Icon(Icons.code),
+                leading: Icon(Icons.code, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => launch(getBugReportForm()),
                 title: appLocale.report_bug,
                 subtitle: appLocale.report_bug_desc,
-                leading: Icon(Icons.bug_report),
+                leading: Icon(Icons.bug_report, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => launch(getFeatureRequestForm()),
                 title: appLocale.request_a_feature,
                 subtitle: appLocale.request_a_feature_desc,
-                leading: Icon(Icons.apps),
+                leading: Icon(Icons.apps, color: context.primaryColor,),
               ),
               SettingsClickable(
                 onClick: () => context.showSnackBar(
                     "May Allah reward you with something good :-)"),
                 title: appLocale.make_dua,
                 subtitle: appLocale.make_dua_desc,
-                leading: Icon(Icons.favorite_outlined),
+                leading: Icon(Icons.favorite_outlined, color: context.primaryColor,),
               ),
             ],
           ),

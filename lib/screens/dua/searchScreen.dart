@@ -3,11 +3,11 @@ import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
 import 'package:minimal_adhan/screens/dua/widgets/DuaRow.dart';
 import 'package:minimal_adhan/screens/dua/widgets/SearchArea.dart';
+import 'package:minimal_adhan/widgets/CheckedFutureBuilder.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
-
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -30,21 +30,17 @@ class _SearchScreenState extends State<SearchScreen> {
           },
         ),
       ),
-      body: FutureBuilder<List<Dua>>(
+      body: CheckedFutureBuilder<List<Dua>>(
         future: duaProvider.searchDuas(search),
-        builder: (_, snap) {
-          final data = snap.data;
-          if (data != null) {
-            return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemBuilder: (_, i) => ChangeNotifierProvider.value(
-                  value: duaProvider, child: DuaRow(data[i])),
-              itemCount: data.length,
-            );
-          } else {
-            return Loading();
-          }
-        },
+        builder: (data) => ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (_, i) => ChangeNotifierProvider.value(
+              value: duaProvider, child: Padding(
+                padding:  EdgeInsets.only(top: i == 0 ? 16 : 0, bottom: i == data.length -1 ? 32 : 0),
+                child: DuaRow(data[i]),
+              )),
+          itemCount: data.length,
+        ),
       ),
     );
   }

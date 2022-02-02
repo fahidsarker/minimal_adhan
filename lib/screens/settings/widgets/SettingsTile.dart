@@ -11,6 +11,7 @@ abstract class SettingsTile extends StatelessWidget {
     this.subtitle,
     this.leading,
   );
+
 }
 
 class SettingsClickable extends SettingsTile {

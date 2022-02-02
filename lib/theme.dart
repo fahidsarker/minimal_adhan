@@ -40,13 +40,12 @@ ThemeData getLightTheme(
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
         colorScheme: ColorScheme.light(
-          primary: Colors.blue,
           secondary: Colors.blueGrey,
         ));
 
 ThemeData getDarkTheme(
     BuildContext context, GlobalDependencyProvider globalDependency) {
-  final darkBack = Color.fromRGBO(29, 51, 64, 1);
+  final darkBack = Color.fromRGBO(0, 18, 64, 1);
 
   return ThemeData(
       bottomSheetTheme:
@@ -71,7 +70,6 @@ ThemeData getDarkTheme(
           .copyWith(backgroundColor: Colors.white.withOpacity(0.8)),
       colorScheme: ColorScheme.dark(
         secondary: Colors.white,
-        primary: Colors.blueAccent,
         brightness: Brightness.dark,
       ));
 }

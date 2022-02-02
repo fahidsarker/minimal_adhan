@@ -14,10 +14,9 @@ const centerPage = 20000;
 
 class AdhanList extends StatelessWidget {
   final PageController _pageController;
-  final bool disablePageScroll;
-  final void Function(bool) showHideTop;
 
-  AdhanList(this._pageController, this.showHideTop, this.disablePageScroll);
+
+  AdhanList(this._pageController);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,6 @@ class AdhanList extends StatelessWidget {
     return PageView.builder(
       itemCount: centerPage * 2 + 1,
       pageSnapping: true,
-      physics: disablePageScroll ? NeverScrollableScrollPhysics() : null,
       controller: _pageController,
       onPageChanged: (newPage) {
         adhanProvider.changeDayOfDate(newPage - centerPage);
@@ -39,64 +37,40 @@ class AdhanList extends StatelessWidget {
                   ? onLightCardColor
                   : onDarkCardColor,*/
           ),
-          margin: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           child: _AdhanListView(
-             dateTime: DateTime.now().add(Duration(days: (index - centerPage))),
-            showHideTop: showHideTop,
+            dateTime: DateTime.now().add(Duration(days: (index - centerPage))),
             key: Key(index.toString()),
-              ),
+          ),
         );
       },
     );
   }
 }
 
-class _AdhanListView extends StatefulWidget {
+class _AdhanListView extends StatelessWidget {
   final DateTime dateTime;
-  final void Function(bool) showHideTop;
-  _AdhanListView({required this.dateTime,  Key? key, required this.showHideTop}):super(key: key);
 
-  @override
-  State<_AdhanListView> createState() => _AdhanListViewState();
-}
+  _AdhanListView({required this.dateTime, Key? key,})
+      : super(key: key);
 
-class _AdhanListViewState extends State<_AdhanListView> {
 
-  ScrollController controller = ScrollController();
-
-  @override
-  void initState() {
-    controller.addListener(() {
-      widget.showHideTop(controller.offset > 60);
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final appLocale = context.appLocale;
     final NumberFormat timeFormat = NumberFormat('00', appLocale.locale);
     final adhanProvider = context.read<AdhanProvider>();
-    final List<Adhan> _adhans = adhanProvider.getAdhanData(widget.dateTime);
+    final List<Adhan> _adhans = adhanProvider.getAdhanData(dateTime);
 
     return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: _adhans.length+1,
-      controller: controller,
+      itemCount: _adhans.length,
       itemBuilder: (_, i) {
-        if(i == 0){
-          return Container(
-            height: CURRENT_ADHAN_DISPLAY_HEIGHT + ADHAN_DATE_CHANGER_HEIGHT,
-          );
-        }else{
-          return AdhanItem(_adhans[i-1], timeFormat);
-        }
+        return Padding(
+          padding:  EdgeInsets.only(top: i == 0 ? 16 : 0, bottom: i == _adhans.length -1 ? 32 : 0),
+          child: AdhanItem(_adhans[i], timeFormat),
+        );
       },
     );
   }

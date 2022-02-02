@@ -16,7 +16,6 @@ const ADHAN_TYPE_MAGRIB = 4;
 const ADHAN_TYPE_ISHA = 5;
 const ADHAN_TYPE_MIDNIGHT = 6;
 const ADHAN_TYPE_THIRD_NIGHT = 7;
-const ADHAN_TYPE_JUMMAH = 9;
 
 class AdhanProvider with ChangeNotifier {
   DateTime _viewingDate;

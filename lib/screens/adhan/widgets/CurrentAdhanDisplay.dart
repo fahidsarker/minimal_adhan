@@ -8,7 +8,6 @@ import 'package:minimal_adhan/widgets/timer.dart';
 import 'package:provider/provider.dart';
 import 'package:minimal_adhan/extensions.dart';
 
-const CURRENT_ADHAN_DISPLAY_HEIGHT = 170.0;
 class CurrentAdhanDisplay extends StatelessWidget {
   final String _userAddress;
 
@@ -22,8 +21,6 @@ class CurrentAdhanDisplay extends StatelessWidget {
     final currentAdhan = adhanProvider.currentAdhan;
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      height: CURRENT_ADHAN_DISPLAY_HEIGHT,
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () => showDialog(

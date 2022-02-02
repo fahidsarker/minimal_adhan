@@ -34,7 +34,7 @@ class AdhanItem extends StatelessWidget {
         border:
             _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
         borderRadius: BorderRadius.circular(_radius),
-        color: _adhan.isCurrent ? context.primaryColor.withOpacity(0.3) : getColoredContainerColor(context),
+        color: getColoredContainerColor(context),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(_radius),
@@ -59,15 +59,8 @@ class AdhanItem extends StatelessWidget {
           padding: const EdgeInsets.all(_padding),
           child: Row(
             children: [
-              Icon(
-                notifyID == 0
-                    ? Icons.notifications_off
-                    : notifyID == 1
-                        ? Icons.notifications_on_rounded
-                        : Icons.volume_up,
-                color: context.textTheme.headline6?.color,
-                size: iconSize,
-              ),
+              _adhanIcon,
+              /*,*/
               SizedBox(
                 width: 8.0,
               ),
@@ -75,24 +68,39 @@ class AdhanItem extends StatelessWidget {
               SizedBox(
                 width: 8.0,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _adhan.title.toUpperCase(),
-                    style: adhanTitleStyle,
-                  ),
-                  Text(
-                    '${_adhan.formattedStartTime} - ${_adhan.formattedEndTime}\n${getformatDuration(_adhan.timeOfWaqt, formatter, showSeconds: false, hour: ' ${appLocale.hour} ', minute: ' ${appLocale.minute}')}',
-                    style: context.textTheme.bodyText1,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _adhan.title,
+                      style: adhanTitleStyle,
+                      maxLines: 3,
+                    ),
+                    Text(
+                      '${_adhan.formattedStartTime} - ${_adhan.formattedEndTime}\n${getformatDuration(_adhan.timeOfWaqt, formatter, showSeconds: false, hour: ' ${appLocale.hour} ', minute: ' ${appLocale.minute}')}',
+                      style: context.textTheme.bodyText1,
+                    ),
+                  ],
+                ),
               ),
+              Icon(
+                notifyID == 0
+                    ? Icons.notifications_off
+                    : notifyID == 1
+                    ? Icons.notifications_on_rounded
+                    : Icons.volume_up,
+                size: iconSize,
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget get _adhanIcon{
+    return Image.asset(_adhan.imageLocation, width: 56,);
   }
 }
 

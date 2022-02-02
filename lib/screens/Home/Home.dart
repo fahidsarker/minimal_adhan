@@ -24,8 +24,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool _isOpen = false;
 
   void _disableBatteryOptimization() async {
@@ -69,11 +68,29 @@ class _HomeState extends State<Home> {
     }
   }
 
+  late final AnimationController _animationController;
+
+
   @override
   void initState() {
     _disableBatteryOptimization();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
     widget.adhanDependencyProvider.updateLocationWithGPS(background: true);
     super.initState();
+  }
+
+  void _toggleDrawer([bool? open]){
+    if(open != null || open != _isOpen){
+      setState(() {
+        _isOpen = open ?? !_isOpen;
+      });
+      if (_isOpen) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    }
   }
 
   @override
@@ -91,7 +108,14 @@ class _HomeState extends State<Home> {
             height: context.height,
             width: context.width,
             color: Theme.of(context).scaffoldBackgroundColor,
-            child: HomeContent((open)=> setState(() => _isOpen = open)),
+            child: Stack(
+              children: [
+                HomeContent(_toggleDrawer, _animationController),
+                if (_isOpen) GestureDetector(
+                  onTap: ()=> _toggleDrawer(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

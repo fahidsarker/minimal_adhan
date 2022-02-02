@@ -50,7 +50,9 @@ class LocationHelper {
     try {
       List<Geocoding.Placemark> placemarks =
           await Geocoding.placemarkFromCoordinates(lat, long,
-              localeIdentifier: pref.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ?? DEFAULT_ADHAN_CURRENT_LOCALIZATION);
+              localeIdentifier:
+                  pref.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ??
+                      DEFAULT_ADHAN_CURRENT_LOCALIZATION);
       if (placemarks.length > 0) {
         var name = placemarks[0].name;
         if (name != null) {
@@ -74,6 +76,12 @@ class LocationAvailable extends LocationState {
   final LocationInfo locationInfo;
 
   LocationAvailable(this.locationInfo);
+
+  String locationAddressOfLength(int length) {
+    return locationInfo.address.length < length
+        ? locationInfo.address
+        : '${locationInfo.address.substring(0, length)}...';
+  }
 }
 
 class LocationFinding extends LocationState {}

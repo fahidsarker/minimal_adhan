@@ -13,8 +13,8 @@
 
    <application
        android:name = "io.flutter.app.FlutterApplication"
-        android:label="Minimal Adhan"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Azan"
+        android:icon="@mipmap/launcher_icon">
 
        <service
            android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"

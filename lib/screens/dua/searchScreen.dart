@@ -20,6 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final duaProvider = context.read<DuaProvider>();
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: SearchArea(
           (val) {
             setState(

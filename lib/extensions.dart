@@ -19,6 +19,29 @@ extension contextHelper on BuildContext {
   }
 }
 
+extension intHelper<T extends num> on double{
+  T closestTo (List<T> values){
+    T lastMin = values[0];
+    double lastDif = (lastMin - this).abs();
+
+    if(values.length == 1){
+      return lastMin;
+    }
+
+    for(int i= 1; i<values.length; i++){
+      final tempDiff = (values[i] - this).abs();
+      if(tempDiff < lastDif){
+        lastDif = tempDiff;
+        lastMin = values[1];
+      }
+    }
+
+    print("Closest to $lastMin");
+    return lastMin;
+
+  }
+}
+
 extension LocalizeHelper on AppLocalizations {
   String getAdhanName(int i, [bool isJummah = false]) {
     return [
@@ -83,6 +106,13 @@ extension BoolParsing on String {
 }
 
 extension DateHelper on DateTime {
+
+  int daysFrom(DateTime to) {
+    final from = DateTime(year, month, day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
+  }
+
   bool get isToday {
     var today = DateTime.now();
 
@@ -94,4 +124,6 @@ extension DateHelper on DateTime {
   bool get isJummahToday {
     return weekday == 5;
   }
+
+
 }

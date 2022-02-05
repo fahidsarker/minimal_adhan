@@ -24,6 +24,7 @@ class DuaScreen extends StatelessWidget {
           final duaProvider = DuaProvider(data, appLocale, duaDependency);
           return Scaffold(
             appBar: AppBar(
+              elevation: 0,
               title: Text(
                 appLocale.dua,
               ),

@@ -4,26 +4,24 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 import 'extensions.dart';
 import 'localization/supportedLangs.dart';
 
-LinearGradient getDrawerBGGradient(BuildContext context) {
-  return LinearGradient(
-    colors: context.theme.brightness == Brightness.light
-        ? [
-            Color(0xFF134E5E),
-            Color(0xFF71B280),
-          ]
-        : [
-            Color(0xFF0A232A),
-            Color(0xFF33503A),
-          ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+
+
+LinearGradient getOnBackgroundGradient(BuildContext context) {
+  return context.theme.brightness == Brightness.dark
+      ? const LinearGradient(colors: [
+    Color.fromRGBO(99, 33, 189, 1),
+    Color.fromRGBO(152, 86, 234, 1.0)
+  ])
+      : const LinearGradient(colors: [
+    Color(0xFF134E5E),
+    Color(0xFF71B280),
+  ]);
 }
 
 Color getDrawerShadowColor(BuildContext context) {
   return context.theme.brightness == Brightness.light
       ? Colors.teal
-      : Color(0xFF145742);
+      : Color.fromRGBO(90, 15, 186, 1.0);
 }
 
 ThemeData getLightTheme(
@@ -40,6 +38,7 @@ ThemeData getLightTheme(
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
         colorScheme: ColorScheme.light(
+          primary: Colors.teal,
           secondary: Colors.blueGrey,
         ));
 

@@ -1,21 +1,20 @@
-import 'package:geocoding/geocoding.dart' as Geocoding;
+import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:geolocator/geolocator.dart';
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-const LOCATION_NA_CAUSE_PERMISSION_DENIED =
+const locationNACausePermissionDenied =
     'Permission Denied. Please check settings.';
-const LOCATION_NA_CAUSE_PERMISSION_DENIED_FOREVER =
+const locationNACausePermissionDeniedForever =
     'Permission Denied Forever. Please check settings.';
-const LOCATION_NA_CAUSE_LAT_LONG_NULL = 'Your location seems to be corrupted.';
-const LOCATION_NA_CAUSE_GPS_NOT_ENABLED =
+const locationNACauseLatLongNull = 'Your location seems to be corrupted.';
+const locationNACauseGPSNotEnabled =
     'Your Location Provider is disabled. Please enable it and try again!';
-const LOCATION_NA_CAUSE_FINDING = 'Finding Your Location! Please wait.';
+const locationNACauseFinding = 'Finding Your Location! Please wait.';
 
 class LocationHelper {
   Future<LocationState> getLocationFromGPS({required bool background}) async {
-    final pref = await SharedPreferences.getInstance();
+
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -27,19 +26,19 @@ class LocationHelper {
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
     }
     if (!serviceEnabled) {
-      return LocationNotAvailable(LOCATION_NA_CAUSE_GPS_NOT_ENABLED);
+      return LocationNotAvailable(locationNACauseGPSNotEnabled);
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied && !background) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return LocationNotAvailable(LOCATION_NA_CAUSE_PERMISSION_DENIED);
+        return LocationNotAvailable(locationNACausePermissionDenied);
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return LocationNotAvailable(LOCATION_NA_CAUSE_PERMISSION_DENIED_FOREVER);
+      return LocationNotAvailable(locationNACausePermissionDeniedForever);
     }
 
     final position = await Geolocator.getCurrentPosition();
@@ -48,25 +47,26 @@ class LocationHelper {
     String address = '($lat, $long)';
 
     try {
-      List<Geocoding.Placemark> placemarks =
-          await Geocoding.placemarkFromCoordinates(lat, long,
-              localeIdentifier:
-                  pref.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ??
-                      DEFAULT_ADHAN_CURRENT_LOCALIZATION);
-      if (placemarks.length > 0) {
-        var name = placemarks[0].name;
+      final placeMarks = await geocoding.placemarkFromCoordinates(
+        lat,
+        long,
+        localeIdentifier: sharedPrefAdhanCurrentLocalization.value,
+      );
+      if (placeMarks.isNotEmpty) {
+        final name = placeMarks[0].name;
         if (name != null) {
           address = name;
         }
       }
-    } catch (e) {}
+    } catch (_) {}
 
-    await pref.setDouble(KEY_LOCATION_LATITUDE, lat);
-    await pref.setDouble(KEY_LOCATION_LONGITUDE, long);
-    await pref.setString(KEY_LOCATION_ADDRESS, address);
+    sharedPrefLocationLatitude.value = lat;
+    sharedPrefLocationLongitude.value = long;
+    sharedPrefLocationAddress.value = address;
+
 
     return LocationAvailable(
-        LocationInfo(lat, long, address, LocationMode.LIVE));
+        LocationInfo(lat, long, address, LocationMode.LIVE),);
   }
 }
 

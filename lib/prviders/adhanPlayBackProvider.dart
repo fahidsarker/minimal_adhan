@@ -1,25 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-const methodChannel = MethodChannel("com.fsapps.minimaladhan");
+import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 
 class AdhanPlayBackProvider with ChangeNotifier {
   int playing = -1;
 
-  void playBack(int notifyID) async {
+  Future playBack(int notifyID) async {
     final res = playing == notifyID ? await stop() : await play(notifyID);
-    playing = res;
+    playing = res ?? -1;
     notifyListeners();
   }
 
-  Future<int> play(int notifyID) async {
-    if (Platform.isAndroid) {
-      return await methodChannel.invokeMethod('play', notifyID);
-    } else {
-      throw UnimplementedError('Not implemented');
-    }
-  }
+  Future<int?> play(int notifyID) => PlatformCall.startNotificationPlayback(notifyID);
 
 
   @override
@@ -28,11 +19,6 @@ class AdhanPlayBackProvider with ChangeNotifier {
     super.dispose();
   }
 
-  Future<int> stop() async {
-    if (Platform.isAndroid) {
-      return await methodChannel.invokeMethod('stop');
-    } else {
-      throw UnimplementedError('Not implemented');
-    }
-  }
+  Future<int?> stop() => PlatformCall.stopNotificationPlayback();
+
 }

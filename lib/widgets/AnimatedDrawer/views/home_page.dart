@@ -30,14 +30,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AnimatedContainer(
         transform: widget.dependency.changeValues(
-            widget.dependency.homeXOffSet, widget.dependency.homeYOffSet, widget.dependency.homeAngle),
+            widget.dependency.homeXOffSet, widget.dependency.homeYOffSet, widget.dependency.homeAngle,),
         duration: widget.dependency.setDuration(
             RuntimeVariables.homePageSpeedUserInput ??
-                Constants.HOME_SCREEN_DURATION),
+                Constants.HOME_SCREEN_DURATION,),
         child: ClipRRect(
           borderRadius: widget.dependency.getBorderRadius(),
           child: widget.body ?? const SizedBox(),
-        ));
+        ),);
   }
 
 }

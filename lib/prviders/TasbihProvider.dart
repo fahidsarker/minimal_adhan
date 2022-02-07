@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
 import 'package:minimal_adhan/models/Tasbih.dart';
 
 class TasbihProvider with ChangeNotifier {
@@ -14,8 +12,8 @@ class TasbihProvider with ChangeNotifier {
   }
 
   Future<List<Tasbih>> get _fromDatabase async {
-    final res = (await getSharedPref()).getStringList('tasbih_list') ?? [];
-    _tasbis = res.map((e) => Tasbih.fromString(e)).toList();
+   /* final res = (await getSharedPref()).getStringList('tasbih_list') ?? [];
+    _tasbis = res.map((e) => Tasbih.fromString(e)).toList();*/
     return _tasbis;
   }
 
@@ -34,8 +32,8 @@ class TasbihProvider with ChangeNotifier {
   }
 
   Future get writeToStorage async{
-    final strList = _tasbis.map((e) => e.toString()).toList();
-    (await getSharedPref()).setStringList(KEY_TASBIH_LIST, strList);
+    /*final strList = _tasbis.map((e) => e.toString()).toList();
+    (await getSharedPref()).setStringList(KEY_TASBIH_LIST, strList);*/
   }
 
 }

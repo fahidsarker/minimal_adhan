@@ -1,8 +1,8 @@
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
+/*
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<SharedPreferences> getSharedPref() async {
-  return await SharedPreferences.getInstance();
+  return  SharedPreferences.getInstance();
 }
 
 Future<void> sharedPref(Future<void> Function(SharedPreferences) smth) async {
@@ -23,15 +23,14 @@ Future<bool?> getBoolFromSharedPref(String key) async {
 }
 
 Future<bool> setBoolToSharedPref(String key, bool value) async {
-  return await (await getSharedPref()).setBool(key, value);
+  return (await getSharedPref()).setBool(key, value);
 }
 
 Future<bool> setIntToSharedPref(String key, int value) async {
-  return await (await getSharedPref()).setInt(key, value);
+  return (await getSharedPref()).setInt(key, value);
 }
 
 Future<bool> setStringToSharedPref(String key, String value) async {
-  return await (await getSharedPref()).setString(key, value);
+  return (await getSharedPref()).setString(key, value);
 }
-
-
+*/

@@ -1,17 +1,18 @@
+import 'dart:ui';
+
 const DB_VERSION = 3;
 const TOTAL_INSPIRATIONS = 3;
 
-const supportedAppLangs = const [
-  const {
-    'code': 'en',
-    'lang': 'English',
-  },
-  const {
-    'code': 'ar',
-    'lang': '(Beta) عربى',
-  },
-  const {
-    'code': 'bn',
-    'lang': 'বাংলা (Beta)',
-  },
+class AppLocale extends Locale {
+  final String lang;
+
+  const AppLocale(String code, this.lang) : super(code);
+
+}
+
+const supportedAppLangs =  [
+  AppLocale('en', 'English'),
+  AppLocale('ar', '(Beta) عربى'),
+  AppLocale('bn', 'বাংলা (Beta)')
 ];
+

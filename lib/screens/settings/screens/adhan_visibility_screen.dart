@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/screens/settings/widgets/SettingsTile.dart';
 import 'package:provider/provider.dart';
-import 'package:minimal_adhan/extensions.dart';
 
 class AdhanVisibilityScreen extends StatelessWidget {
   const AdhanVisibilityScreen({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +15,37 @@ class AdhanVisibilityScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          iconTheme: IconThemeData(color: context.textTheme.headline6?.color),
-          title: Text(
-            appLocale.adhan_visibility,
-            style: TextStyle(color: context.textTheme.headline6?.color),
-          )),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: IconThemeData(color: context.textTheme.headline6?.color),
+        title: Text(
+          appLocale.adhan_visibility,
+          style: TextStyle(color: context.textTheme.headline6?.color),
+        ),
+      ),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           SettingsToggle(
-              onToggle: (newVal) {
-                adhanDependency.changeVisibility(ADHAN_TYPE_SUNRISE, newVal);
-              },
-              title: appLocale.getAdhanName(ADHAN_TYPE_SUNRISE),
-              value: adhanDependency.getVisibility(ADHAN_TYPE_SUNRISE),
-              leading: null),
+            onToggle: (newVal) {
+              adhanDependency.changeVisibility(adhanTypeSunrise, visible: newVal);
+            },
+            title: appLocale.getAdhanName(adhanTypeSunrise),
+            value: adhanDependency.getVisibility(adhanTypeSunrise),
+          ),
           SettingsToggle(
-              onToggle: (newVal) {
-                adhanDependency.changeVisibility(ADHAN_TYPE_MIDNIGHT, newVal);
-              },
-              title: appLocale.getAdhanName(ADHAN_TYPE_MIDNIGHT),
-              value: adhanDependency.getVisibility(ADHAN_TYPE_MIDNIGHT),
-              leading: null),
+            onToggle: (newVal) {
+              adhanDependency.changeVisibility(adhanTypeMidnight, visible: newVal);
+            },
+            title: appLocale.getAdhanName(adhanTypeMidnight),
+            value: adhanDependency.getVisibility(adhanTypeMidnight),
+          ),
           SettingsToggle(
-              onToggle: (newVal) {
-                adhanDependency.changeVisibility(ADHAN_TYPE_THIRD_NIGHT, newVal);
-              },
-              title: appLocale.getAdhanName(ADHAN_TYPE_THIRD_NIGHT),
-              value: adhanDependency.getVisibility(ADHAN_TYPE_THIRD_NIGHT),
-              leading: null),
+            onToggle: (newVal) {
+              adhanDependency.changeVisibility(adhanTypeThirdNight, visible: newVal);
+            },
+            title: appLocale.getAdhanName(adhanTypeThirdNight),
+            value: adhanDependency.getVisibility(adhanTypeThirdNight),
+          ),
         ],
       ),
     );

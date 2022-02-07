@@ -21,7 +21,7 @@ class ColoredContainer extends StatelessWidget {
         padding: EdgeInsets.all(radius),
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(radius)),
-        child: child);
+            borderRadius: BorderRadius.circular(radius),),
+        child: child,);
   }
 }

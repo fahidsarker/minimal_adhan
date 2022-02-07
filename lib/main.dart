@@ -1,81 +1,37 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
-import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
-import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/initDependency.dart';
+import 'package:minimal_adhan/metadata.dart';
+import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/Home.dart';
-import 'package:minimal_adhan/screens/adhan/widgets/onNotificaionScreen.dart';
-import 'package:minimal_adhan/screens/locationFindingScreen.dart';
-import 'package:minimal_adhan/screens/locationNotAvailableScreen.dart';
-import 'package:minimal_adhan/screens/unknownErrorScreen.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:upgrader/upgrader.dart';
-import 'helpers/notification/notifiers.dart';
 
 final onDarkCardColor = Colors.white.withOpacity(0.15);
 final onLightCardColor = Colors.blueGrey.withOpacity(0.15);
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await scheduleNotification(showNowIfPersistent: true);
-
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  final _globalDependency = GlobalDependencyProvider();
-  final _adhanDependencyProvider = AdhanDependencyProvider();
-  final _duaDependencyProvider = DuaDependencyProvider();
-  await _globalDependency.init();
-  await _duaDependencyProvider.init();
-  await _adhanDependencyProvider.init();
-
-  if (_adhanDependencyProvider.showPersistant) {
-    // AndroidNotify.notify(silent: true);
-  }
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider.value(value: _globalDependency),
-      ChangeNotifierProvider.value(value: _adhanDependencyProvider),
-      ChangeNotifierProvider.value(value: _duaDependencyProvider)
-    ],
-    child: MinimalAdhan(false),
-  ));
+void main() {
+  initializeAppWith(child: const Azan()).then((value) => runApp(value));
 }
 
-class MinimalAdhan extends StatelessWidget {
-  final bool fromNotification;
-
-  MinimalAdhan(this.fromNotification);
+class Azan extends StatelessWidget {
+  const Azan();
 
   @override
   Widget build(BuildContext context) {
     final globalDependency = context.watch<GlobalDependencyProvider>();
-    final adhanDependency = context.watch<AdhanDependencyProvider>();
+    final locationProvider = context.read<LocationProvider>();
+
     return MaterialApp(
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('ar', ''),
-        const Locale('bn', ''),
-      ],
+      localizationsDelegates: appLocaleDelegates,
+      supportedLocales: supportedAppLangs,
       localeResolutionCallback: (locale, supportedLocales) {
         if (locale != null) {
-          for (var supportedLocale in supportedLocales) {
+          for (final supportedLocale in supportedLocales) {
             if (supportedLocale.languageCode == locale.languageCode) {
               return supportedLocale;
             }
@@ -86,25 +42,16 @@ class MinimalAdhan extends StatelessWidget {
       themeMode: globalDependency.themeMode,
       locale: Locale(globalDependency.locale),
       theme: getLightTheme(context, globalDependency),
-
       darkTheme: getDarkTheme(context, globalDependency),
       home: UpgradeAlert(
-        child: fromNotification
-            ? OnNotificationScreen()
-            : globalDependency.welcomeScreenShown
-            ? Home(adhanDependency)
-            : WelcomeScreen(true, 'Beta'),
-        onUpdate: updateApp,
+        child: globalDependency.welcomeScreenShown
+            ? Home(locationProvider)
+            : const WelcomeScreen(showWarning: true, build: 'Beta'),
+        onUpdate: () {
+          PlatformCall.openAppStore();
+          return true;
+        },
       ),
     );
-  }
-
-  bool updateApp() {
-    if (Platform.isAndroid) {
-      methodChannel.invokeMethod('openPlayStore');
-      return true;
-    } else {
-      throw Exception("Invalid OS!");
-    }
   }
 }

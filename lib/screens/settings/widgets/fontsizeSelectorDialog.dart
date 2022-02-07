@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
-import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
-import 'package:provider/provider.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
+import 'package:provider/provider.dart';
 
 class FontSizeSelector extends StatelessWidget {
   final bool arabic;
 
-  FontSizeSelector({required this.arabic});
+  const FontSizeSelector({required this.arabic});
 
   @override
   Widget build(BuildContext context) {
-    final globalProvider = context.watch<GlobalDependencyProvider>();
     final appLocale = context.appLocale;
     final duaDependency = context.watch<DuaDependencyProvider>();
     return AlertDialog(
@@ -19,34 +17,37 @@ class FontSizeSelector extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            duaDependency.changeFontToDefault(arabic);
+            duaDependency.changeFontToDefault(isArabic: arabic);
             Navigator.pop(context);
           },
-          child: Text('Default'),
+          child: const Text('Default'),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Close'),
+          child: const Text('Close'),
         ),
       ],
-      title: Text(arabic ? appLocale.arabic_font_size : appLocale.other_font_size),
-      content: Container(
+      title:
+          Text(arabic ? appLocale.arabic_font_size : appLocale.other_font_size),
+      content: SizedBox(
         height: context.height * 0.4,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              arabic
-                  ? Text(
-                      'معاينة حجم الخط العربي',
-                      style: TextStyle(
-                          fontFamily: 'Lateef',
-                          fontSize: duaDependency.arabicFontSize),
-                    )
-                  : Text(
-                      'Preview Of Other Font sizes',
-                      style: TextStyle(fontSize: duaDependency.otherFontSize),
-                    ),
-              SizedBox(
+              if (arabic)
+                Text(
+                  'معاينة حجم الخط العربي',
+                  style: TextStyle(
+                    fontFamily: 'Lateef',
+                    fontSize: duaDependency.arabicFontSize,
+                  ),
+                )
+              else
+                Text(
+                  'Preview Of Other Font sizes',
+                  style: TextStyle(fontSize: duaDependency.otherFontSize),
+                ),
+              const SizedBox(
                 height: 16,
               ),
               Slider(
@@ -55,7 +56,10 @@ class FontSizeSelector extends StatelessWidget {
                 value: arabic
                     ? duaDependency.arabicFontSize
                     : duaDependency.otherFontSize,
-                onChanged: (val) => duaDependency.changeFontSize(arabic, val),
+                onChanged: (val) => duaDependency.changeFontSize(
+                  isArabic: arabic,
+                  newSize: val,
+                ),
               ),
             ],
           ),

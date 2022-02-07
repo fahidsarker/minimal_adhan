@@ -1,24 +1,19 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/models/LocationInfo.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/HomeContent.dart';
 import 'package:minimal_adhan/screens/Home/widgets/menu.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:minimal_adhan/widgets/AnimatedDrawer/views/animated_drawer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  final AdhanDependencyProvider adhanDependencyProvider;
+  final LocationProvider _locationProvider;
 
-  Home(this.adhanDependencyProvider);
+  const Home(this._locationProvider);
 
   @override
   State<Home> createState() => _HomeState();
@@ -27,10 +22,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool _isOpen = false;
 
-  void _disableBatteryOptimization() async {
+  Future _disableBatteryOptimization() async {
     if (Platform.isAndroid) {
       SchedulerBinding.instance?.addPostFrameCallback((_) {
-        final appLocale = AppLocalizations.of(context) ?? AppLocalizationsEn();
+        final appLocale = context.appLocale;
         final globalDep = context.read<GlobalDependencyProvider>();
 
         if (globalDep.needToShowDiableBatteryOptimizeDialog) {
@@ -41,25 +36,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               content: Text(appLocale.disable_battery_optimization_desc),
               actions: [
                 TextButton(
-                    onPressed: () {
-                      context.pop();
-                      globalDep.disableBatteryOptimization();
-                    },
-                    child: Text(appLocale.bttn_okay)),
+                  onPressed: () {
+                    context.pop();
+                    globalDep.disableBatteryOptimization();
+                  },
+                  child: Text(appLocale.bttn_okay),
+                ),
                 TextButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    child: Text(appLocale.bttn_remind_me_later)),
+                  onPressed: () {
+                    context.pop();
+                  },
+                  child: Text(appLocale.bttn_remind_me_later),
+                ),
                 TextButton(
-                    onPressed: () {
-                      context.pop();
-                      globalDep.setNeverAskDisableBatteryOptimize();
-                    },
-                    child: Text(
-                      appLocale.bttn_never_ask_again,
-                      style: TextStyle(color: Colors.redAccent),
-                    )),
+                  onPressed: () {
+                    context.pop();
+                    globalDep.setNeverAskDisableBatteryOptimize();
+                  },
+                  child: Text(
+                    appLocale.bttn_never_ask_again,
+                    style: const TextStyle(color: Colors.redAccent),
+                  ),
+                ),
               ],
             ),
           );
@@ -70,18 +68,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   late final AnimationController _animationController;
 
-
   @override
   void initState() {
-    _disableBatteryOptimization();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-    widget.adhanDependencyProvider.updateLocationWithGPS(background: true);
+    _disableBatteryOptimization().then((_) {});
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 450),
+    );
+    widget._locationProvider.updateLocationWithGPS(background: true);
     super.initState();
   }
 
-  void _toggleDrawer([bool? open]){
-    if(open != null || open != _isOpen){
+  void _toggleDrawer([bool? open]) {
+    if (open != null || open != _isOpen) {
       setState(() {
         _isOpen = open ?? !_isOpen;
       });
@@ -111,9 +110,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: Stack(
               children: [
                 HomeContent(_toggleDrawer, _animationController),
-                if (_isOpen) GestureDetector(
-                  onTap: ()=> _toggleDrawer(),
-                ),
+                if (_isOpen)
+                  GestureDetector(
+                    onTap: () => _toggleDrawer(),
+                  ),
               ],
             ),
           ),

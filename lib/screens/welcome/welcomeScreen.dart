@@ -2,27 +2,26 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
-import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
-import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/AppLanguagePicker.dart';
 import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
 import 'package:minimal_adhan/screens/welcome/widgets/pageViewModel.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-const pageAnimateDUration = const Duration(milliseconds: 400);
+const pageAnimateDUration = Duration(milliseconds: 400);
 
 class WelcomeScreen extends StatefulWidget {
   final bool showWarning;
   final String build;
 
-  WelcomeScreen(this.showWarning, this.build);
+  const WelcomeScreen({required this.showWarning, required this.build});
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -36,9 +35,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final globalProvider = context.watch<GlobalDependencyProvider>();
     final adhanDependency = context.watch<AdhanDependencyProvider>();
-    final appLocale = AppLocalizations.of(context)!;
-    final locationState = adhanDependency.locationState;
-    final defaultBodyTextStyle = const TextStyle(
+    final locationProvider = context.watch<LocationProvider>();
+    final appLocale = context.appLocale;
+    final locationState = locationProvider.locationState;
+    const defaultBodyTextStyle = TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.normal,
     );
@@ -51,13 +51,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           style: defaultBodyTextStyle,
           textAlign: TextAlign.center,
         ),
-        image: Center(
+        image: const Center(
           child: Icon(Icons.warning, size: 175, color: Colors.yellow,),
         ),
       ),
       PageViewModel(
         title: "As-salamu alaykum",
-        bodyWidget: Text(
+        bodyWidget: const Text(
           "Minimal Adhan\nOpen Source | Free | Privacy Focused",
           style: defaultBodyTextStyle,
           textAlign: TextAlign.center,
@@ -72,7 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
       PageViewModel(
         title: "Your Adhan Companion",
-        bodyWidget: Text(
+        bodyWidget: const Text(
           "Adhan Timing, Qibla Compass and Selection of duas in a single app.",
           style: defaultBodyTextStyle,
           textAlign: TextAlign.center,
@@ -85,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Icon(
           Icons.language,
           size: 175,
-        )),
+        ),),
         bodyWidget: Column(
           children: [
             Text(
@@ -96,8 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 buildBottomSheet(AppLanguagePicker(), context);
               },
-              child: Text(getSupportedLangInfo(context.appLocale.locale, 'lang')
-                  as String),
+              child: Text(getAppLocaleOf(context.appLocale.locale).lang),
             ),
           ],
         ),
@@ -108,7 +107,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Icon(
           Icons.my_location,
           size: 175,
-        )),
+        ),),
         bodyWidget: Column(
           children: [
             Text(
@@ -116,7 +115,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               style: context.textTheme.headline6,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             Text(
@@ -124,12 +123,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               style: context.textTheme.bodyText1,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             if (locationState is LocationNotAvailable)
               if (locationState.cause ==
-                  LOCATION_NA_CAUSE_PERMISSION_DENIED_FOREVER)
+                  locationNACausePermissionDeniedForever)
                 Text(
                   appLocale.permission_denied,
                   style:
@@ -138,21 +137,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               else
                 ElevatedButton(
                   onPressed: () {
-                    adhanDependency.updateLocationWithGPS(background: false);
+                    locationProvider.updateLocationWithGPS(background: false);
                   },
                   child: Text(appLocale.location_required),
                 )
             else if (locationState is LocationFinding)
-              Loading()
+              const Loading()
             else if (locationState is LocationAvailable) ...[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check,
                     color: Colors.greenAccent,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 4.0,
                   ),
                   Text(
@@ -183,7 +182,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8.0,
             ),
             Expanded(
@@ -218,27 +217,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       if (locationState is LocationAvailable)
         PageViewModel(
           title: "Setup Complete",
-          bodyWidget: Text(
+          bodyWidget: const Text(
             "Click done to start your amazing experience!",
             style: defaultBodyTextStyle,
             textAlign: TextAlign.center,
           ),
           image: Center(
             child: Lottie.asset('assets/check_anim.json',
-                width: 175, fit: BoxFit.contain, height: 175, reverse: true),
+                width: 175, fit: BoxFit.contain, height: 175, reverse: true,),
           ),
         )
       else
         PageViewModel(
           title: "Location is not available",
-          bodyWidget: Text(
+          bodyWidget: const Text(
             "Are you sure you want to proceed without location?",
             style: defaultBodyTextStyle,
             textAlign: TextAlign.center,
           ),
           image: Center(
             child: Lottie.asset('assets/worning_anim.json',
-                width: 175, fit: BoxFit.contain, height: 175, reverse: true),
+                width: 175, fit: BoxFit.contain, height: 175, reverse: true,),
           ),
         )
     ];
@@ -258,7 +257,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Expanded(
               child: PageView(
                 controller: pageController,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: pages,
                 onPageChanged: (val) => setState(() {
                   currentPage = val;
@@ -276,13 +275,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         if (currentPage < pages.length - 1) {
                           pageController.animateToPage(pages.length - 1,
                               duration: const Duration(milliseconds: 450),
-                              curve: Curves.linear);
+                              curve: Curves.linear,);
                         }
                       },
-                      child: Text('Skip'),
+                      child: const Text('Skip'),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Wrap(
                     children: [
                       for (int i = 0; i < pages.length; i++)
@@ -297,34 +296,34 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     : null,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                    color: getColoredContainerColor(context))),
+                                    color: getColoredContainerColor(context),),),
                           ),
                         )
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (currentPage >= pages.length - 1)
                     TextButton(
                       onPressed: () {
                         globalProvider.welcomeComplete();
                       },
-                      child: Text('Done'),
+                      child: const Text('Done'),
                     )
                   else
                     TextButton(
                       onPressed: () {
                         pageController.animateToPage(currentPage + 1,
                             duration: const Duration(milliseconds: 250),
-                            curve: Curves.linear);
+                            curve: Curves.linear,);
                       },
-                      child: Text('Next'),
+                      child: const Text('Next'),
                     ),
                 ],
               ),
             )
           ],
         ),
-      )),
+      ),),
     );
   }
 }

@@ -14,8 +14,8 @@ class CalcMethodChooser extends StatelessWidget {
     return choosingContainer(
       context: context,
       title: appLocale.calc_method,
-      titles: CALCULATION_METHOD_NAMES,
-      subtitles: CALCULATION_METHOD_DESCS,
+      titles: adhanCalculationMethodNames,
+      subtitles: adhanCalculationMethodDescs,
       selected: (i) => adhanDependency.calMethodIndex == i,
       onChoosen: adhanDependency.changeCalMethod,
       percentageUpto: 0.9

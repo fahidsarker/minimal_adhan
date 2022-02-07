@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
-
-import '../metadata.dart';
+import 'package:minimal_adhan/metadata.dart';
 
 String? getFont(String locale) {
-  if (locale == 'en')
+  if (locale == 'en') {
     return null;
-  else if (locale == 'bn')
+  } else if (locale == 'bn') {
     return 'BalooDa2';
-  else if (locale == 'ar')
+  } else if (locale == 'ar') {
     return 'Lateef';
-  else
+  } else {
     throw Exception('Locale Not Supported');
+  }
 }
 
 TextTheme getTextTheme(BuildContext context, String locale) {
@@ -43,16 +43,13 @@ TextTheme getTextTheme(BuildContext context, String locale) {
   }
 }
 
-void assertLang() {
-  supportedAppLangs.forEach((element) {
-    assert((element.containsKey('code') && element.containsKey('lang')),
-        'Locale not supported');
-    getFont(element['code'] as String);
-  });
+AppLocale getAppLocaleOf (String code){
+  return supportedAppLangs.firstWhere((element) => element.languageCode == code);
 }
 
+/*
 Object getSupportedLangInfo(String locale, String key) {
   final langs =
-      supportedAppLangs.firstWhere((element) => element['code'] == locale);
+      supportedAppLangs.firstWhere((element) => element.code == locale);
   return langs[key] as Object;
-}
+}*/

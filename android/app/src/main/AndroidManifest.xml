@@ -12,7 +12,7 @@
     <uses-permission  android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
 
    <application
-       android:name = "io.flutter.app.FlutterApplication"
+       android:name = "Azan"
         android:label="Azan"
         android:icon="@mipmap/launcher_icon">
 

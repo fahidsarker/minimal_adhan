@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/qibla/qiblaAvailableScreen.dart';
 import 'package:provider/provider.dart';
-
 import '../locationFindingScreen.dart';
 import '../locationNotAvailableScreen.dart';
 import '../unknownErrorScreen.dart';
@@ -19,7 +16,7 @@ class QiblaScreen extends StatelessWidget {
     final appLocale = context.appLocale;
 
     final locationState =
-        context.watch<AdhanDependencyProvider>().locationState;
+        context.watch<LocationProvider>().locationState;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

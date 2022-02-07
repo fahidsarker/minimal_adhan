@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/helpers/duaHelper.dart';
+import 'package:minimal_adhan/helpers/dua_helper.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
 import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';

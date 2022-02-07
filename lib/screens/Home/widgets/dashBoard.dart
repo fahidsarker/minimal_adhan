@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/adhanInfoDialog.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/iconedTextButton.dart';
@@ -18,7 +19,7 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locationState =
-        context.watch<AdhanDependencyProvider>().locationState;
+        context.watch<LocationProvider>().locationState;
     final adhanDependency = context.watch<AdhanDependencyProvider>();
 
     final appLocale = context.appLocale;

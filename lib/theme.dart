@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/localization/supportedLangs.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
-import 'extensions.dart';
-import 'localization/supportedLangs.dart';
 
 
 
@@ -11,17 +11,17 @@ LinearGradient getOnBackgroundGradient(BuildContext context) {
       ? const LinearGradient(colors: [
     Color.fromRGBO(99, 33, 189, 1),
     Color.fromRGBO(152, 86, 234, 1.0)
-  ])
+  ],)
       : const LinearGradient(colors: [
     Color(0xFF134E5E),
     Color(0xFF71B280),
-  ]);
+  ],);
 }
 
 Color getDrawerShadowColor(BuildContext context) {
   return context.theme.brightness == Brightness.light
       ? Colors.teal
-      : Color.fromRGBO(90, 15, 186, 1.0);
+      : const Color.fromRGBO(90, 15, 186, 1.0);
 }
 
 ThemeData getLightTheme(
@@ -32,19 +32,19 @@ ThemeData getLightTheme(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             iconTheme: context.theme.iconTheme.copyWith(color: Colors.black),
-            systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent)),
+            systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),),
         cardColor: Colors.white,
         brightness: Brightness.light,
         fontFamily: getFont(globalDependency.locale),
         textTheme: getTextTheme(context, globalDependency.locale),
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Colors.teal,
           secondary: Colors.blueGrey,
-        ));
+        ),);
 
 ThemeData getDarkTheme(
-    BuildContext context, GlobalDependencyProvider globalDependency) {
-  final darkBack = Color.fromRGBO(0, 18, 64, 1);
+    BuildContext context, GlobalDependencyProvider globalDependency,) {
+  const darkBack = Color.fromRGBO(0, 18, 64, 1);
 
   return ThemeData(
       bottomSheetTheme:
@@ -67,8 +67,7 @@ ThemeData getDarkTheme(
       backgroundColor: darkBack,
       snackBarTheme: context.theme.snackBarTheme
           .copyWith(backgroundColor: Colors.white.withOpacity(0.8)),
-      colorScheme: ColorScheme.dark(
+      colorScheme: const ColorScheme.dark(
         secondary: Colors.white,
-        brightness: Brightness.dark,
-      ));
+      ),);
 }

@@ -22,7 +22,7 @@ class IconedTextButton extends StatelessWidget {
                 iconData,
                 color: color,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8.0,
               ),
               Text(

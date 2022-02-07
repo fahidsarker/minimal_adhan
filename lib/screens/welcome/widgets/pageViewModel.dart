@@ -7,8 +7,9 @@ class PageViewModel extends StatelessWidget {
   final Widget bodyWidget;
   final Widget image;
 
-  PageViewModel(
-      {required this.title, required this.bodyWidget, required this.image});
+  // ignore: require_trailing_commas
+  const PageViewModel(
+      {required this.title, required this.bodyWidget, required this.image,});
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +17,21 @@ class PageViewModel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: image,
             ),
-            SizedBox(
+            const SizedBox(
               height: 64,
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16.0, bottom: 24.0),
+              padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
               child: AutoSizeText(
                 title,
                 maxLines: 1,
@@ -40,7 +41,7 @@ class PageViewModel extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             bodyWidget

@@ -2,21 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:minimal_adhan/localization/supportedLangs.dart';
 
-String getformatDuration(Duration _left, intl.NumberFormat formatter,
-    {bool showSeconds = true,
-    String hour = ':',
-    String minute = ':',
-    String second: ''}) {
+String getformatDuration(
+  Duration _left,
+  intl.NumberFormat formatter, {
+  bool showSeconds = true,
+  String hour = ':',
+  String minute = ':',
+  String second = '',
+}) {
   String twoDigits(int n) => n.toString().padLeft(2, "0");
-  String twoDigitMinutes = formatter.format(int.parse(twoDigits(_left.inMinutes.remainder(60))));
-  String twoDigitSeconds = showSeconds ? formatter.format(int.parse(twoDigits(_left.inSeconds.remainder(60)))) : '';
+
+  final String twoDigitMinutes =
+      formatter.format(int.parse(twoDigits(_left.inMinutes.remainder(60))));
+  final String twoDigitSeconds = showSeconds
+      ? formatter.format(int.parse(twoDigits(_left.inSeconds.remainder(60))))
+      : '';
 
   return "${formatter.format(int.parse(twoDigits(_left.inHours)))}$hour$twoDigitMinutes$minute$twoDigitSeconds$second";
 }
-
-
 
 class Countdown extends StatefulWidget {
   final DateTime to;
@@ -29,14 +33,15 @@ class Countdown extends StatefulWidget {
   final bool rtl;
   final intl.NumberFormat formatter;
 
-  Countdown(this.to,
-      {this.countDownComplete,
-      this.style,
-      this.prefix = '',
-      this.suffix = '',
-      required this.locale,
-      required this.rtl})
-      : this.from = DateTime.now(),
+  Countdown(
+    this.to, {
+    this.countDownComplete,
+    this.style,
+    this.prefix = '',
+    this.suffix = '',
+    required this.locale,
+    required this.rtl,
+  })  : from = DateTime.now(),
         formatter = intl.NumberFormat('00', locale);
 
   @override

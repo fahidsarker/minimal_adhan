@@ -1,0 +1,34 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:minimal_adhan/helpers/SQLHelper.dart';
+import 'package:minimal_adhan/helpers/notification/notifiers.dart';
+import 'package:minimal_adhan/models/preference.dart';
+import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
+import 'package:provider/provider.dart';
+
+Future<Widget> initializeAppWith ({required Widget child}) async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await scheduleNotification(showNowIfPersistent: true);
+  await initDatabase();
+  await initPreferences();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  final _globalDependency = GlobalDependencyProvider();
+  await _globalDependency.init();
+  final _locationProvider = LocationProvider(_globalDependency.preference);
+  await _locationProvider.init();
+
+  return MultiProvider(
+    providers: [
+      ChangeNotifierProvider.value(value: _globalDependency), //required for entire app
+      ChangeNotifierProvider.value(value: _locationProvider), //required in entire app
+      ChangeNotifierProvider(create: (_)=> AdhanDependencyProvider(_globalDependency.preference)) //required for homescreen
+    ],
+    child: child,
+  );
+}

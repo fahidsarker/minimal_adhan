@@ -1,23 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/dragger.dart';
 import 'package:minimal_adhan/extensions.dart';
 
-import '../../../dragger.dart';
-
-Widget choosingContainer(
-    {required BuildContext context,
-    required double percentageUpto,
-    required String title,
-    required List<String> titles,
-    required List<String> subtitles,
-    required bool Function(int) selected,
-    required void Function(int) onChoosen}) {
+Widget choosingContainer({
+  required BuildContext context,
+  required double percentageUpto,
+  required String title,
+  required List<String> titles,
+  required List<String> subtitles,
+  required bool Function(int) selected,
+  required void Function(int) onChoosen,
+}) {
   final list = [
-    SizedBox(
+    const SizedBox(
       height: 8.0,
     ),
     Dragger(),
-    SizedBox(
+    const SizedBox(
       height: 8.0,
     ),
     Text(
@@ -28,22 +27,24 @@ Widget choosingContainer(
   ];
 
   for (int i = 0; i < titles.length; i++) {
-    list.add(ListTile(
-      title: Text(
-        titles[i],
-        textDirection: TextDirection.ltr,
+    list.add(
+      ListTile(
+        title: Text(
+          titles[i],
+          textDirection: TextDirection.ltr,
+        ),
+        subtitle: subtitles.isNotEmpty
+            ? Text(
+                subtitles[i],
+                textDirection: TextDirection.ltr,
+              )
+            : null,
+        selected: selected(i),
+        onTap: () {
+          onChoosen(i);
+        },
       ),
-      subtitle: subtitles.isNotEmpty
-          ? Text(
-              subtitles[i],
-              textDirection: TextDirection.ltr,
-            )
-          : null,
-      selected: selected(i),
-      onTap: () {
-        onChoosen(i);
-      },
-    ));
+    );
   }
 
   if (subtitles.isNotEmpty) {
@@ -55,14 +56,15 @@ Widget choosingContainer(
     behavior: HitTestBehavior.opaque,
     onTap: () => Navigator.of(context).pop(),
     child: GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: DraggableScrollableSheet(
         minChildSize: 0.4,
         builder: (_, controller) => Container(
-          margin: EdgeInsets.only(top: 32),
+          margin: const EdgeInsets.only(top: 32),
           decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
           child: SingleChildScrollView(
             controller: controller,
             child: Column(

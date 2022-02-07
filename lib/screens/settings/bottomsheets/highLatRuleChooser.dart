@@ -16,8 +16,8 @@ class HighLatRuleChooser extends StatelessWidget {
     return choosingContainer(
         context: context,
         title: appLocale.high_lat_rule,
-        titles: HIGHE_LAT_RULES_NAMES,
-        subtitles: HIGHE_LAT_RULES_DESCS,
+        titles: highLatRulesNames,
+        subtitles: highLatRulesDescs,
         selected: (i) => adhanDependency.highLatRuleIndex == i,
         onChoosen: adhanDependency.changeHighLatRuleIndex,
         percentageUpto: 0.5

@@ -20,12 +20,14 @@ class NumberSpinner extends StatelessWidget {
   final int end;
   final void Function(int) onChanged;
 
-  NumberSpinner(
+
+
+  const NumberSpinner(
       {required this.title,
         required this.initialIndex,
         required this.start,
         required this.end,
-        required this.onChanged});
+        required this.onChanged,});
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +39,18 @@ class NumberSpinner extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(
               appLocale.close,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           )
         ],
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(title),
-        content: Container(
+        content: SizedBox(
           height: context.height * 0.5,
           width: context.width * 0.5,
           child: ScrollablePositionedList.builder(
-            physics: BouncingScrollPhysics(),
-            initialScrollIndex: (59 + initialIndex),
+            physics: const BouncingScrollPhysics(),
+            initialScrollIndex: 59 + initialIndex,
             itemCount: minuteList.length,
             itemBuilder: (ctx, j) => ListTile(
                 title: Text(
@@ -59,8 +61,8 @@ class NumberSpinner extends StatelessWidget {
                 onTap: () {
                   onChanged(j - 59);
                   Navigator.pop(context);
-                }),
+                },),
           ),
-        ));
+        ),);
   }
 }

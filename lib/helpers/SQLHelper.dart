@@ -1,41 +1,46 @@
-import 'package:flutter/services.dart';
-import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
-import 'package:minimal_adhan/models/Inspiration.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
+import 'package:minimal_adhan/metadata.dart';
+import 'package:minimal_adhan/models/Inspiration.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
-import '../metadata.dart';
+late final Database _globalAppDatabase;
 
+Database get globalAppDatabase => _globalAppDatabase;
 
+Future<void> initDatabase() async {
+  _globalAppDatabase = await _getDatabase();
+}
 
-Future<Database> getDatabase() async {
-  var databasesPath = await getDatabasesPath();
-  var path = join(databasesPath, "database.db");
+Future<Database> _getDatabase() async {
+  final databasesPath = await getDatabasesPath();
+  final path = join(databasesPath, "database.db");
 
-  var exists = await databaseExists(path);
-  final version = await getIntFromSharedPref(KEY_DATABASE_VERSION);
+  final exists = await databaseExists(path);
+  final version = sharedPrefDatabaseVersion.value;
 
-  List<int>? favIds;
+  List<Object?>? favIds;
 
   if (version == null || version != DB_VERSION || !exists) {
-    if(exists){
+    if (exists) {
       final _oldDB = await openDatabase(path);
-      final res = await _oldDB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
-      favIds = res.map((e) => e['id'] as int).toList();
+      final res =
+          await _oldDB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
+      favIds = res.map((e) => e['id']).toList();
     }
 
     try {
       await Directory(dirname(path)).create(recursive: true);
     } catch (_) {}
 
-    ByteData data = await rootBundle.load(join("assets", "database.db"));
-    List<int> bytes =
+    final ByteData data = await rootBundle.load(join("assets", "database.db"));
+    final List<int> bytes =
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
     await File(path).writeAsBytes(bytes, flush: true);
-    await setIntToSharedPref(KEY_DATABASE_VERSION, DB_VERSION);
+    sharedPrefDatabaseVersion.value = DB_VERSION;
   }
 
   final _newDB = await openDatabase(
@@ -45,25 +50,55 @@ Future<Database> getDatabase() async {
 
   await _newDB.transaction((txn) async {
     final values = favIds;
-    if(values != null && values.isNotEmpty){
-      try{
-        values.forEach((element) {
+    txn.execute(
+      '''
+    CREATE TABLE "pref" (
+	    "pref_key"	TEXT,
+	    "pref_value"	BLOB,
+	    PRIMARY KEY("pref_key")
+    );
+    ''',
+    );
+    if (values != null && values.isNotEmpty) {
+      try {
+        for (final element in values) {
           txn.execute('UPDATE dua SET favourite = 1 WHERE id = $element');
-        });
-      }catch(e){}
+        }
+      } catch (_) {}
     }
   });
 
   return _newDB;
 }
 
-Future<Inspiration> getInspiration(String lang, int id) async{
-  final _db = await getDatabase();
-  final res = await _db.rawQuery('SELECT inspirations.ins_$lang, inspiration_source.ins_src_$lang from inspirations '
-      'INNER JOIN inspiration_source ON inspirations.inspirations_source_id = inspiration_source.id '
-      'WHERE inspirations.id = $id');
+Future<Map<String, Object?>> get allPreferences async {
+  final res = await _globalAppDatabase.rawQuery('SELECT * FROM prefs');
+  final Map<String, Object?> ret = {};
+  for (final element in res) {
+    ret.addAll(element);
+  }
+  return ret;
+}
 
-  if(res.length == 0){
+Future updatePreferenceValue(String key, Object? value) async {
+  await _globalAppDatabase.execute(
+    '''
+  INSERT INTO pref (pref_key, pref_value)
+  VALUES ($key, $value)
+  ON CONFLICT (pref_key) DO
+  UPDATE SET pref_value = excluded.pref_value;
+  ''',
+  );
+}
+
+Future<Inspiration> getInspiration(String lang, int id) async {
+  final res = await _globalAppDatabase.rawQuery(
+    'SELECT inspirations.ins_$lang, inspiration_source.ins_src_$lang from inspirations '
+    'INNER JOIN inspiration_source ON inspirations.inspirations_source_id = inspiration_source.id '
+    'WHERE inspirations.id = $id',
+  );
+
+  if (res.isEmpty) {
     return Inspiration('', '');
   }
 

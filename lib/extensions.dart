@@ -1,9 +1,51 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-extension contextHelper on BuildContext {
+AppLocalizationsEn get engAppLocale {
+  return AppLocalizationsEn();
+}
+
+const inline = pragma('@vm:prefer-inline');
+
+
+const Iterable<LocalizationsDelegate> appLocaleDelegates =  [
+  AppLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+];
+
+
+extension ObjHelper<T extends Object> on T{
+  @inline
+  Future let (void Function(T) clbk) async{
+    clbk(this);
+  }
+}
+
+extension LstHelper <T extends Object> on List<T?>{
+
+  Future let (void Function(List<T>) clbk) async{
+    bool okay = false;
+    final List<T> trf = [];
+    for(final element in this) {
+      if(element == null){
+        okay = false;
+        break;
+      }else{
+        trf.add(element);
+      }
+    }
+    if(okay){
+      clbk(trf);
+    }
+  }
+}
+
+extension ContextHelper on BuildContext {
   void push(Widget child) {
     Navigator.push(this, MaterialPageRoute(builder: (_) => child));
   }
@@ -15,11 +57,11 @@ extension contextHelper on BuildContext {
   void showSnackBar(String txt) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
       content: Text(txt),
-    ));
+    ),);
   }
 }
 
-extension intHelper<T extends num> on double{
+extension IntHelper<T extends num> on double{
   T closestTo (List<T> values){
     T lastMin = values[0];
     double lastDif = (lastMin - this).abs();
@@ -36,28 +78,27 @@ extension intHelper<T extends num> on double{
       }
     }
 
-    print("Closest to $lastMin");
     return lastMin;
 
   }
 }
 
 extension LocalizeHelper on AppLocalizations {
-  String getAdhanName(int i, [bool isJummah = false]) {
+  String getAdhanName(int i, {bool isJummah = false}) {
     return [
-      this.adhan_fajr,
-      this.adhan_sunrise,
-      if (isJummah) '${this.adhan_jummah} - $adhan_dhuhr' else this.adhan_dhuhr,
-      this.adhan_asr,
-      this.adhan_magrib,
-      this.adhan_isha,
-      this.adhan_midnight,
-      this.adhan_third_night
+      adhan_fajr,
+      adhan_sunrise,
+      if (isJummah) '$adhan_jummah - $adhan_dhuhr' else adhan_dhuhr,
+      adhan_asr,
+      adhan_magrib,
+      adhan_isha,
+      adhan_midnight,
+      adhan_third_night
     ][i];
   }
 
   List<String> get themeModes {
-    return [this.follow_system, this.always_light, this.always_dark];
+    return [follow_system, always_light, always_dark];
   }
 }
 
@@ -91,7 +132,7 @@ extension Helper on BuildContext {
   }
 
   double get smallerBetweenHeightAndWidth {
-    return min(this.width, this.height);
+    return min(width, height);
   }
 
   AppLocalizations get appLocale {
@@ -99,26 +140,28 @@ extension Helper on BuildContext {
   }
 }
 
+
 extension BoolParsing on String {
   bool toBool() {
-    return this.toLowerCase() == 'true';
+    return toLowerCase() == 'true';
   }
+  int toInt() => int.parse(this);
 }
 
 extension DateHelper on DateTime {
 
   int daysFrom(DateTime to) {
     final from = DateTime(year, month, day);
-    to = DateTime(to.year, to.month, to.day);
-    return (to.difference(from).inHours / 24).round();
+    final nto = DateTime(to.year, to.month, to.day);
+    return (nto.difference(from).inHours / 24).round();
   }
 
   bool get isToday {
-    var today = DateTime.now();
+    final today = DateTime.now();
 
-    return (this.year == today.year &&
-        this.month == today.month &&
-        this.day == today.day);
+    return year == today.year &&
+        month == today.month &&
+        day == today.day;
   }
 
   bool get isJummahToday {

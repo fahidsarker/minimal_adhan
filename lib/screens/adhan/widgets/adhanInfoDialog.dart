@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
 import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/widgets/iconedTextButton.dart';
@@ -16,6 +17,7 @@ class AdhanInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final _adhanProvider = context.read<AdhanDependencyProvider>();
     final appLocale = AppLocalizations.of(context)!;
+    final locationProvider = context.read<LocationProvider>();
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: Row(
@@ -33,7 +35,7 @@ class AdhanInfoDialog extends StatelessWidget {
       content: RichText(
         text: TextSpan(
             text:
-                '${appLocale.using_location} ${(_adhanProvider.locationState as LocationAvailable).locationInfo.address}\n',
+                '${appLocale.using_location} ${(locationProvider.locationState as LocationAvailable).locationInfo.address}\n',
             style: DefaultTextStyle.of(context).style,
             children: [
               TextSpan(
@@ -54,7 +56,7 @@ class AdhanInfoDialog extends StatelessWidget {
         ),
         IconedTextButton(
           onPressed: () {
-            _adhanProvider.updateLocationWithGPS(background: false);
+            locationProvider.updateLocationWithGPS(background: false);
             Navigator.pop(context);
           },
           text: appLocale.update_location,
@@ -62,7 +64,8 @@ class AdhanInfoDialog extends StatelessWidget {
         ),
         IconedTextButton(
           onPressed: () {
-            context.push(FeedbackTaker("Report Adhan Error", getAdhanReportForm()));
+            context.push(
+                FeedbackTaker("Report Adhan Error", getAdhanReportForm()));
           },
           iconData: Icons.error,
           text: appLocale.report_an_error,

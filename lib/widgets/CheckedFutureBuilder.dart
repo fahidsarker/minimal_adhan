@@ -7,11 +7,12 @@ class CheckedFutureBuilder<T> extends StatelessWidget {
   final Widget onLoading;
   final Widget onFailed;
 
-  CheckedFutureBuilder(
-      {required this.future,
-      required this.builder,
-      this.onLoading = const Loading(),
-      this.onFailed = const Text("Failed")});
+  const CheckedFutureBuilder({
+    required this.future,
+    required this.builder,
+    this.onLoading = const Loading(),
+    this.onFailed = const Text("Failed"),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,6 @@ class CheckedFutureBuilder<T> extends StatelessWidget {
         }
 
         return builder(data);
-
       },
     );
   }

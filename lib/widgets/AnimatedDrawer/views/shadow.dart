@@ -22,13 +22,13 @@ class ShadowState extends State<Shadow> {
     shadowState = this;
     return AnimatedContainer(
         transform: widget.dependency.changeValues(
-            widget.dependency.shadowXOffSet, widget.dependency.shadowYOffSet, widget.dependency.shadowAngle),
+            widget.dependency.shadowXOffSet, widget.dependency.shadowYOffSet, widget.dependency.shadowAngle,),
         duration: widget.dependency.setDuration(
-            RuntimeVariables.shadowSpeedUserInput ?? Constants.SHADOW_DURATION),
+            RuntimeVariables.shadowSpeedUserInput ?? Constants.SHADOW_DURATION,),
         decoration:
         widget.dependency.getDecoration(widget.bgColor ?? Constants.SHADOW_COLOR),
         child: SafeArea(
             child:
-            Container(width: Constants.width, height: Constants.height)));
+            Container(width: Constants.width, height: Constants.height),),);
   }
 }

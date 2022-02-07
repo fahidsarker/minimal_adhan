@@ -1,21 +1,20 @@
+import 'package:adhan/adhan.dart' as AdhanLib;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
-import 'package:minimal_adhan/extensions.dart';
-import 'package:adhan/adhan.dart' as AdhanLib;
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:minimal_adhan/screens/adhan/widgets/AdhanItem.dart';
 
-const ADHAN_TYPE_ANY = -1;
-const ADHAN_TYPE_FAJR = 0;
-const ADHAN_TYPE_SUNRISE = 1;
-const ADHAN_TYPE_DHUHR = 2;
-const ADHAN_TYPE_ASR = 3;
-const ADHAN_TYPE_MAGRIB = 4;
-const ADHAN_TYPE_ISHA = 5;
-const ADHAN_TYPE_MIDNIGHT = 6;
-const ADHAN_TYPE_THIRD_NIGHT = 7;
+const adhanTypeAny = -1;
+const adhanTypeFajr = 0;
+const adhanTypeSunrise = 1;
+const adhanTypeDhuhr = 2;
+const adhanTypeAsr = 3;
+const adhanTypeMagrib = 4;
+const adhanTypeIsha = 5;
+const adhanTypeMidnight = 6;
+const adhanTypeThirdNight = 7;
 
 class AdhanProvider with ChangeNotifier {
   DateTime _viewingDate;
@@ -25,16 +24,17 @@ class AdhanProvider with ChangeNotifier {
   AppLocalizations appLocalization;
 
   AdhanProvider(
-      this.adhanDependencyProvider, this.locationInfo, this.appLocalization)
+      this.adhanDependencyProvider, this.locationInfo, this.appLocalization,)
       : _viewingDate = DateTime.now();
 
   int? get currentAdhanIndex {
     int? current;
-    if(_viewingDate.isToday){
+    if (_viewingDate.isToday) {
       final adhans = getAdhanData(_viewingDate);
-      for(int i=0; i<adhans.length; i++){
-        if(adhans[i].isCurrent)
+      for (int i = 0; i < adhans.length; i++) {
+        if (adhans[i].isCurrent) {
           current = i;
+        }
       }
     }
     return current;
@@ -42,8 +42,9 @@ class AdhanProvider with ChangeNotifier {
 
   Adhan? get currentAdhan {
     final index = currentAdhanIndex;
-    if(index != null)
+    if (index != null) {
       return getAdhanData(_viewingDate)[index];
+    }
 
     return null;
   }
@@ -79,78 +80,89 @@ class AdhanProvider with ChangeNotifier {
       required DateTime startTime,
       required DateTime endTime,
       required DateTime startingPrayerTime,
-      required bool shouldCorrect}) {
+      required bool shouldCorrect,}) {
     return Adhan(
-        type: type,
-        title: appLocalization.getAdhanName(type, startTime.isJummahToday),
-        startTime: startTime,
-        endTime: endTime,
-        notifyBefore: adhanDependencyProvider.getNotifyBefore(type),
-        manualCorrection: adhanDependencyProvider.getManualCorrection(type),
-        localCode: appLocalization.locale,
-        startingPrayerTime: startingPrayerTime,
-        shouldCorrect: shouldCorrect);
+      type: type,
+      title:
+          appLocalization.getAdhanName(type, isJummah: startTime.isJummahToday),
+      startTime: startTime,
+      endTime: endTime,
+      notifyBefore: adhanDependencyProvider.getNotifyBefore(type),
+      manualCorrection: adhanDependencyProvider.getManualCorrection(type),
+      localCode: appLocalization.locale,
+      startingPrayerTime: startingPrayerTime,
+      shouldCorrect: shouldCorrect,
+    );
   }
 
   List<Adhan> getAdhanData(DateTime date) {
     final _prayerTimes = AdhanLib.PrayerTimes(
-        AdhanLib.Coordinates(locationInfo.latitude, locationInfo.longitude),
-        AdhanLib.DateComponents.from(date),
-        adhanDependencyProvider.params);
+      AdhanLib.Coordinates(locationInfo.latitude, locationInfo.longitude),
+      AdhanLib.DateComponents.from(date),
+      adhanDependencyProvider.params,
+    );
     final sunnahTimes = AdhanLib.SunnahTimes(_prayerTimes);
 
     return [
       createAdhan(
-          type: ADHAN_TYPE_FAJR,
-          startTime: _prayerTimes.fajr,
-          endTime: _prayerTimes.sunrise,
-          startingPrayerTime: _prayerTimes.fajr,
-          shouldCorrect: date.isToday),
-      if (adhanDependencyProvider.getVisibility(ADHAN_TYPE_SUNRISE))
+        type: adhanTypeFajr,
+        startTime: _prayerTimes.fajr,
+        endTime: _prayerTimes.sunrise,
+        startingPrayerTime: _prayerTimes.fajr,
+        shouldCorrect: date.isToday,
+      ),
+      if (adhanDependencyProvider.getVisibility(adhanTypeSunrise))
         createAdhan(
-            type: ADHAN_TYPE_SUNRISE,
-            startTime: _prayerTimes.sunrise,
-            endTime: _prayerTimes.sunrise.add(const Duration(minutes: 15)),
-            startingPrayerTime: _prayerTimes.fajr,
-            shouldCorrect: date.isToday),
-      createAdhan(
-          type: ADHAN_TYPE_DHUHR,
-          startTime: _prayerTimes.dhuhr,
-          endTime: _prayerTimes.asr,
+          type: adhanTypeSunrise,
+          startTime: _prayerTimes.sunrise,
+          endTime: _prayerTimes.sunrise.add(const Duration(minutes: 15)),
           startingPrayerTime: _prayerTimes.fajr,
-          shouldCorrect: date.isToday),
+          shouldCorrect: date.isToday,
+        ),
       createAdhan(
-          type: ADHAN_TYPE_ASR,
-          startTime: _prayerTimes.asr,
-          endTime: _prayerTimes.maghrib,
+        type: adhanTypeDhuhr,
+        startTime: _prayerTimes.dhuhr,
+        endTime: _prayerTimes.asr,
+        startingPrayerTime: _prayerTimes.fajr,
+        shouldCorrect: date.isToday,
+      ),
+      createAdhan(
+        type: adhanTypeAsr,
+        startTime: _prayerTimes.asr,
+        endTime: _prayerTimes.maghrib,
+        startingPrayerTime: _prayerTimes.fajr,
+        shouldCorrect: date.isToday,
+      ),
+      createAdhan(
+        type: adhanTypeMagrib,
+        startTime: _prayerTimes.maghrib,
+        endTime: _prayerTimes.isha,
+        startingPrayerTime: _prayerTimes.fajr,
+        shouldCorrect: date.isToday,
+      ),
+      createAdhan(
+        type: adhanTypeIsha,
+        startTime: _prayerTimes.isha,
+        endTime: _prayerTimes.fajr.add(const Duration(days: 1)),
+        startingPrayerTime: _prayerTimes.fajr,
+        shouldCorrect: date.isToday,
+      ),
+      if (adhanDependencyProvider.getVisibility(adhanTypeMidnight))
+        createAdhan(
+          type: adhanTypeMidnight,
+          startTime: sunnahTimes.middleOfTheNight,
+          endTime: sunnahTimes.lastThirdOfTheNight,
           startingPrayerTime: _prayerTimes.fajr,
-          shouldCorrect: date.isToday),
-      createAdhan(
-          type: ADHAN_TYPE_MAGRIB,
-          startTime: _prayerTimes.maghrib,
-          endTime: _prayerTimes.isha,
-          startingPrayerTime: _prayerTimes.fajr,
-          shouldCorrect: date.isToday),
-      createAdhan(
-          type: ADHAN_TYPE_ISHA,
-          startTime: _prayerTimes.isha,
+          shouldCorrect: date.isToday,
+        ),
+      if (adhanDependencyProvider.getVisibility(adhanTypeThirdNight))
+        createAdhan(
+          type: adhanTypeThirdNight,
+          startTime: sunnahTimes.lastThirdOfTheNight,
           endTime: _prayerTimes.fajr.add(const Duration(days: 1)),
           startingPrayerTime: _prayerTimes.fajr,
-          shouldCorrect: date.isToday),
-      if (adhanDependencyProvider.getVisibility(ADHAN_TYPE_MIDNIGHT))
-        createAdhan(
-            type: ADHAN_TYPE_MIDNIGHT,
-            startTime: sunnahTimes.middleOfTheNight,
-            endTime: sunnahTimes.lastThirdOfTheNight,
-            startingPrayerTime: _prayerTimes.fajr,
-            shouldCorrect: date.isToday),
-      if (adhanDependencyProvider.getVisibility(ADHAN_TYPE_THIRD_NIGHT))
-        createAdhan(
-            type: ADHAN_TYPE_THIRD_NIGHT,
-            startTime: sunnahTimes.lastThirdOfTheNight,
-            endTime: _prayerTimes.fajr.add(const Duration(days: 1)),
-            startingPrayerTime: _prayerTimes.fajr,
-            shouldCorrect: date.isToday),
+          shouldCorrect: date.isToday,
+        ),
     ];
   }
 }

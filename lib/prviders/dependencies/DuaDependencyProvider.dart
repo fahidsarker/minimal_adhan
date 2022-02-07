@@ -1,79 +1,49 @@
-import 'package:flutter/cupertino.dart';
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
+import 'package:minimal_adhan/prviders/dependencies/dependency_provider.dart';
 
-class DuaDependencyProvider with ChangeNotifier{
+class DuaDependencyProvider extends DependencyProvider {
+  String get translationLang => sharedPrefDuaTranslationLang.value;
 
-  late String translationLang;
-  late bool showTranslation;
-  late bool showTransliteration;
-  late double arabicFontSize;
-  late double otherFontSize;
-  late bool sameAsPrimaryLang;
+  bool get showTranslation => sharedPrefDuaShowTranslation.value;
 
-  Future<void> init() async{
-    final preference = await SharedPreferences.getInstance();
+  bool get showTransliteration => sharedPrefDuaShowTransliteration.value;
 
-    translationLang = preference.getString(KEY_DUA_TRANSLATION_LANG) ??
-        DEFAULT_DUA_TRANSLATION_LANG;
-    showTranslation = preference.getBool(KEY_DUA_SHOW_TRANSLATION) ??
-        DEFAULT_DUA_SHOW_TRANSLATION;
-    showTransliteration =
-        preference.getBool(KEY_DUA_SHOW_TRANSLITERATION) ??
-            DEFAULT_DUA_SHOW_TRANSLITERATION;
-    arabicFontSize = preference.getDouble(KEY_DUA_ARABIC_FONT_SIZE) ?? DEFAULT_DUA_ARABIC_FONT_SIZE;
-    otherFontSize = preference.getDouble(KEY_DUA_OTHER_FONT_SIZE) ?? DEFAULT_DUA_OTHER_FONT_SIZE;
-    sameAsPrimaryLang = preference.getBool(KEY_DUA_SAME_AS_PRIMARY) ?? DEFAULT_DUA_SAME_AS_PRIMARY;
+  double get arabicFontSize => sharedPrefDuaArabicFontSize.value;
+
+  double get otherFontSize => sharedPrefDuaOtherFontSize.value;
+
+  bool get sameAsPrimaryLang => sharedPrefDuaSameAsPrimary.value;
+
+  void changeFontSize({required bool isArabic, required double newSize}) =>
+      updateDataWithPreference(
+        isArabic ? sharedPrefDuaArabicFontSize : sharedPrefDuaOtherFontSize,
+        newSize,
+      );
+
+  void changeFontToDefault({required bool isArabic}) {
+    final newSize = isArabic
+        ? sharedPrefDuaArabicFontSize.defaultValue
+        : sharedPrefDuaOtherFontSize.defaultValue;
+    changeFontSize(isArabic: isArabic, newSize: newSize);
   }
 
-  void changeFontSize(bool arabic, double newSize) async{
-    final preference = await SharedPreferences.getInstance();
-    final success = await preference.setDouble(arabic ? KEY_DUA_ARABIC_FONT_SIZE : KEY_DUA_OTHER_FONT_SIZE, newSize);
-    if(success){
-      arabic ? arabicFontSize = newSize : otherFontSize = newSize;
-      notifyListeners();
-    }
+  void changeShowTransliteration({required bool newValue}) =>
+      updateDataWithPreference(sharedPrefDuaShowTransliteration, newValue);
+
+  void changeShowTranslation({required bool newValue}) =>
+      updateDataWithPreference(sharedPrefDuaShowTranslation, newValue);
+
+  void setDuaLangToPrimary() {
+    final primaryLang = sharedPrefAdhanCurrentLocalization.value;
+    changeTranslationLang(primaryLang, usePrimary: true);
   }
 
-  void changeFontToDefault(bool arabic){
-    final newSize = arabic ? DEFAULT_DUA_ARABIC_FONT_SIZE : DEFAULT_DUA_OTHER_FONT_SIZE;
-    changeFontSize(arabic, newSize);
+  void changeTranslationLang(String newValue, {bool usePrimary = false}) {
+    updateDataByRunning(
+      () {
+        sharedPrefDuaSameAsPrimary.value = usePrimary;
+        sharedPrefDuaTranslationLang.value = newValue;
+      },
+    );
   }
-
-  void changeShowTransliteration(bool newValue) async{
-    final preference = await SharedPreferences.getInstance();
-    final success = await preference.setBool(KEY_DUA_SHOW_TRANSLITERATION, newValue);
-    if(success){
-      showTransliteration = newValue;
-      notifyListeners();
-    }
-  }
-
-  void changeShowTranslation(bool newValue) async{
-    final preference = await SharedPreferences.getInstance();
-    final success = await preference.setBool(KEY_DUA_SHOW_TRANSLATION, newValue);
-    if(success){
-      showTranslation = newValue;
-      notifyListeners();
-    }
-  }
-
-  void setDuaLangToPrimary() async{
-    final preference = await SharedPreferences.getInstance();
-    await preference.setBool(KEY_DUA_SAME_AS_PRIMARY, true);
-    final primaryLang = preference.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ?? DEFAULT_ADHAN_CURRENT_LOCALIZATION;
-    changeTranslationLang(primaryLang, true);
-  }
-
-  void changeTranslationLang(String newValue, [bool usePrimary = false]) async{
-    final preference = await SharedPreferences.getInstance();
-    await preference.setBool(KEY_DUA_SAME_AS_PRIMARY, usePrimary);
-    sameAsPrimaryLang = usePrimary;
-    final success = await preference.setString(KEY_DUA_TRANSLATION_LANG, newValue);
-    if(success){
-      translationLang = newValue;
-      notifyListeners();
-    }
-  }
-
 }

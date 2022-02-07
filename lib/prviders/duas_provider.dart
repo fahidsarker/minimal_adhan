@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/models/Inspiration.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
@@ -25,6 +26,7 @@ class DuaProvider with ChangeNotifier {
             e['id'] as int, e['category_${_appLocale.locale}'] as String)));
     return list;
   }
+
   Future<List<Dua>> searchDuas(String search) async {
     String query =
     '''SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
@@ -60,7 +62,7 @@ class DuaProvider with ChangeNotifier {
     String query =
     '''SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
         INNER JOIN dua_titles on dua_titles.dua_id = dua.id 
-        WHERE ${catID == 0 ? 'dua.favourite = 1':'dua.category = $catID'}
+        WHERE ${catID == 0 ? 'dua.favourite = 1' : 'dua.category = $catID'}
         
         ''';
 
@@ -83,7 +85,9 @@ class DuaProvider with ChangeNotifier {
     String querey = '''
     
     SELECT dua.id, dua_titles.title_$lang, dua.dua, dua.favourite,
-    ${(showTranslation && transLang != 'ar') ? 'dua_translations.translation_$transLang,' : ''} 
+    ${(showTranslation && transLang != 'ar')
+        ? 'dua_translations.translation_$transLang,'
+        : ''} 
     ${(showTransliteration && transLang != 'ar')
         ? 'dua_transliterations.transliteration_$transLang,'
         : ''}
@@ -108,6 +112,16 @@ class DuaProvider with ChangeNotifier {
     ''';
 
     final map = (await _db.rawQuery(querey))[0];
+/*    final id = map['id'] as int?;
+    final title = map['title_$lang'] as String?;
+    final arabic = map['dua'] as String?;
+    final isFavourite = (map['favourite'] as int?) == 1;
+    final translation = map['translation_$transLang'] as String?;
+    final transliteration = map['transliteration_$transLang'] as String?;
+    final reference = map['reference_$transLang'] as String?;
+    final notes = map['notes_$transLang'] as String?;*/
+
+
     return DuaDetails(id: map['id'] as int,
         title: map['title_$lang'] as String,
         arabic: (map['dua'] as String),
@@ -119,14 +133,13 @@ class DuaProvider with ChangeNotifier {
   }
 
 
-
-
-  void toggleFavourite(bool old, int duaID)async{
-    String query = 'UPDATE dua SET favourite = ${old ? 0 : 1} WHERE id = $duaID';
+  void toggleFavourite(bool old, int duaID) async {
+    String query = 'UPDATE dua SET favourite = ${old
+        ? 0
+        : 1} WHERE id = $duaID';
     await _db.rawUpdate(query);
     notifyListeners();
   }
-
 
 
 }

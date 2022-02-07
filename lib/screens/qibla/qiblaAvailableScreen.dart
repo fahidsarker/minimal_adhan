@@ -51,7 +51,7 @@ class QiblaAvailableScreen extends StatelessWidget {
               final match = (heading - qibla.direction).abs() <= 2;
 
               return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,7 +79,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Container(
@@ -129,10 +129,10 @@ class QiblaAvailableScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return SensorNotSupported();
+              return const SensorNotSupported();
             }
           } else {
-            return Loading();
+            return const Loading();
           }
         },
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/helpers/GPS_location_helper.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:provider/provider.dart';
 
 class LocationNotAvailableScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class LocationNotAvailableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final adhanProvider = context.read<AdhanDependencyProvider>();
+    final locationProvider = context.read<LocationProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,7 +31,7 @@ class LocationNotAvailableScreen extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () =>
-                      adhanProvider.updateLocationWithGPS(background: false),
+                      locationProvider.updateLocationWithGPS(background: false),
                   child: Text('Try Again'))
             ],
           ),

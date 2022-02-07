@@ -1,79 +1,64 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/helpers/sharedPrefHelper.dart';
-import 'package:minimal_adhan/helpers/sharedprefKeys.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/dependencies/dependency_provider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class GlobalDependencyProvider with ChangeNotifier {
-  late ThemeMode _themeMode;
-  late int themeModeIndex;
-  late String locale;
-  late String appName;
-  late String version;
-  late String buildNumber;
-  late bool _welcomeScreenShown;
-  late bool neverAskToDisableBatteryOptimizer;
-  late bool batteryOptimizeDisabled;
-
+class GlobalDependencyProvider extends DependencyProvider {
   GlobalDependencyProvider();
 
+  static late SharedPreferences _preferences;
+  late PackageInfo packageInfo;
+  late bool batteryOptimizeDisabled;
+
+  SharedPreferences get preference => _preferences;
+
+  int get themeModeIndex => sharedPrefAdhanThemeMode.value;
+
+  String get locale => sharedPrefAdhanCurrentLocalization.value;
+
+  ThemeMode get themeMode => getThemeMode(themeModeIndex);
+
+  bool get welcomeScreenShown => sharedPrefWelcomeShown.value;
+
+  String get appName => packageInfo.appName;
+
+  String get version => packageInfo.version;
+
+  String get buildNumber => packageInfo.buildNumber;
+
+  bool get neverAskToDisableBatteryOptimizer =>
+      sharedPrefAdhanNeverAskAgainForBatteryOptimization.value;
+
   Future<void> init() async {
-    final preference = await SharedPreferences.getInstance();
-    locale = preference.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ??
-        DEFAULT_ADHAN_CURRENT_LOCALIZATION;
-
-    _themeMode = getThemeMode(
-        preference.getInt(KEY_ADHAN_THEME_MODE) ?? DEFAULT_ADHAN_THEME_MODE);
-    _welcomeScreenShown = preference.getBool(KEY_WELCOME_SCREEN_SHOWN) ?? false;
-
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-    appName = packageInfo.appName;
-    version = packageInfo.version;
-    buildNumber = packageInfo.buildNumber;
-
-    batteryOptimizeDisabled = await OptimizeBattery.isIgnoringBatteryOptimizations();
-    neverAskToDisableBatteryOptimizer = (await getBoolFromSharedPref(
-        KEY_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION)) ??
-        DEFAULT_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION;
+    _preferences = await SharedPreferences.getInstance();
+    packageInfo = await PackageInfo.fromPlatform();
+    batteryOptimizeDisabled =
+        await OptimizeBattery.isIgnoringBatteryOptimizations();
   }
 
-  bool get needToShowDiableBatteryOptimizeDialog{
+  bool get needToShowDiableBatteryOptimizeDialog {
     return !neverAskToDisableBatteryOptimizer && !batteryOptimizeDisabled;
   }
 
-  bool get welcomeScreenShown {
-    return _welcomeScreenShown;
-  }
-
-  void disableBatteryOptimization() async{
+  Future disableBatteryOptimization() async {
     await OptimizeBattery.stopOptimizingBatteryUsage();
-    batteryOptimizeDisabled = await OptimizeBattery.isIgnoringBatteryOptimizations();
+    batteryOptimizeDisabled =
+        await OptimizeBattery.isIgnoringBatteryOptimizations();
     notifyListeners();
   }
 
-  void setNeverAskDisableBatteryOptimize() {
-    setBoolToSharedPref(KEY_NEVER_ASK_AGAIN_FOR_BATTERY_OPTIMIZATION, true);
-    neverAskToDisableBatteryOptimizer = true;
-    notifyListeners();
-  }
+  void setNeverAskDisableBatteryOptimize() => updateDataWithPreference(
+      sharedPrefAdhanNeverAskAgainForBatteryOptimization, true);
 
-  void welcomeComplete() async {
-    final preference = await SharedPreferences.getInstance();
-    final success = await preference.setBool(KEY_WELCOME_SCREEN_SHOWN, true);
-    if (success) {
-      _welcomeScreenShown = true;
-      notifyListeners();
-    }
-  }
+  void welcomeComplete() =>
+      updateDataWithPreference(sharedPrefWelcomeShown, true);
 
   ThemeMode getThemeMode(int theme) {
-    themeModeIndex = theme;
     if (theme == ADHAN_THEME_MODE_LIGHT) {
       return ThemeMode.light;
     } else if (theme == ADHAN_THEME_MODE_DARK) {
@@ -84,9 +69,9 @@ class GlobalDependencyProvider with ChangeNotifier {
   }
 
   String getThemeModeText(AppLocalizations appLocale) {
-    if (_themeMode == ThemeMode.light) {
+    if (themeMode == ThemeMode.light) {
       return appLocale.always_light;
-    } else if (_themeMode == ThemeMode.dark) {
+    } else if (themeMode == ThemeMode.dark) {
       return appLocale.always_dark;
     } else {
       return appLocale.follow_system;
@@ -94,42 +79,26 @@ class GlobalDependencyProvider with ChangeNotifier {
   }
 
   void changeGlobalLocale(
-      String newLocale,
-      DuaDependencyProvider dependencyProvider,
-      AdhanDependencyProvider adhanDependencyProvider) async {
-    final pref = await SharedPreferences.getInstance();
-    final lastLocale = pref.getString(KEY_ADHAN_CURRENT_LOCALIZATION) ??
-        DEFAULT_ADHAN_CURRENT_LOCALIZATION;
-    final duaSameAsPrimary =
-        pref.getBool(KEY_DUA_SAME_AS_PRIMARY) ?? DEFAULT_DUA_SAME_AS_PRIMARY;
+    String newLocale,
+    DuaDependencyProvider dependencyProvider,
+    LocationProvider locationProvider,
+  ) {
+    final lastLocale = sharedPrefAdhanCurrentLocalization.value;
+    final duaSameAsPrimary = sharedPrefDuaSameAsPrimary.value;
 
     if (lastLocale != newLocale) {
-      final result =
-          await pref.setString(KEY_ADHAN_CURRENT_LOCALIZATION, newLocale);
+      updateDataWithPreference(sharedPrefAdhanCurrentLocalization, newLocale);
       if (duaSameAsPrimary) {
         dependencyProvider.setDuaLangToPrimary();
       }
-      if (result) {
-        locale = newLocale;
-        if (welcomeScreenShown) {
-          adhanDependencyProvider.updateLocationWithGPS(background: true);
-        }
 
-        notifyListeners();
+      if (welcomeScreenShown) {
+        locationProvider.updateLocationWithGPS(background: true);
       }
-    }
-  }
-
-  void updateThemeMode(int newMode) async {
-    final pref = await SharedPreferences.getInstance();
-    final success = await pref.setInt(KEY_ADHAN_THEME_MODE, newMode);
-    if (success) {
-      _themeMode = getThemeMode(newMode);
       notifyListeners();
     }
   }
 
-  ThemeMode get themeMode {
-    return _themeMode;
-  }
+  void updateThemeMode(int newMode) =>
+      updateDataWithPreference(sharedPrefAdhanThemeMode, newMode);
 }

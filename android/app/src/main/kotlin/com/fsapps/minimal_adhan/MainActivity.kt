@@ -54,7 +54,7 @@ class MainActivity : FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
-            "com.fsapps.minimaladhan"
+            "azan_method_call"
         ).setMethodCallHandler { call, result ->
             if (call.method == "play") {
                 val notifyID = call.arguments as Int

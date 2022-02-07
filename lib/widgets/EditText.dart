@@ -6,8 +6,7 @@ class EditText extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? inputType;
 
-
-  EditText({this.value,this.hint, this.onChanged, this.inputType});
+  const EditText({this.value, this.hint, this.onChanged, this.inputType});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +16,10 @@ class EditText extends StatelessWidget {
         controller: TextEditingController(text: value),
         onChanged: onChanged,
         keyboardType: inputType,
+        // ignore: require_trailing_commas
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: hint
+          border: const OutlineInputBorder(),
+          hintText: hint,
         ),
       ),
     );

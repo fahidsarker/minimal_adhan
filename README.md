@@ -3,18 +3,23 @@
 <a href='https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan'> <img src="screenshots/get_play.svg" width="248"> </a>
 
 </br>
+
 <img src="logos/logo.png" width="248">
+
 <br/>
 An Open-Sourced Adhan app for the ummah.<br/>
+
 <b> Built With FLutter </b>
 
 ![95%](https://progress-bar.dev/95/?title=Completed:&width=120&color=babaca&suffix=%)
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+
+
 <table>
   <tr>
-    <td><img src = "screenshots/light/1.png" width = 320/></td>
+    <td><img src = "screenshots/scrnsht.gif" width = 320/></td>
     <td><img src = "screenshots/light/2.png" width = 320/></td>
     <td><img src = "screenshots/light/3.png" width = 320/></td>
     <td><img src = "screenshots/light/4.png" width = 320/></td>

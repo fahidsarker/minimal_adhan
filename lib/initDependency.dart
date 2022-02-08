@@ -10,10 +10,8 @@ import 'package:provider/provider.dart';
 
 Future<Widget> initializeAppWith ({required Widget child}) async{
   WidgetsFlutterBinding.ensureInitialized();
-  await initDatabase();
   await initPreferences();
   await scheduleNotification(showNowIfPersistent: true);
-
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -21,14 +19,14 @@ Future<Widget> initializeAppWith ({required Widget child}) async{
   ]);
   final _globalDependency = GlobalDependencyProvider();
   await _globalDependency.init();
-  final _locationProvider = LocationProvider(_globalDependency.preference);
+  final _locationProvider = LocationProvider();
   await _locationProvider.init();
 
   return MultiProvider(
     providers: [
       ChangeNotifierProvider.value(value: _globalDependency), //required for entire app
       ChangeNotifierProvider.value(value: _locationProvider), //required in entire app
-      ChangeNotifierProvider(create: (_)=> AdhanDependencyProvider(_globalDependency.preference)) //required for homescreen
+      ChangeNotifierProvider(create: (_)=> AdhanDependencyProvider()) //required for homescreen
     ],
     child: child,
   );

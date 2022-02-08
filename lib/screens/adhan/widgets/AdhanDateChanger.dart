@@ -1,24 +1,22 @@
-import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
-import 'package:minimal_adhan/prviders/adhanProvider.dart';
-import 'package:provider/provider.dart';
-import '../../../theme.dart';
-import 'AdhanList.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/prviders/adhanProvider.dart';
+import 'package:minimal_adhan/screens/adhan/widgets/AdhanList.dart';
+import 'package:minimal_adhan/theme.dart';
+import 'package:provider/provider.dart';
 
 const _PADDING = 16.0;
-const _MARGIN = 16;
 
 class AdhanDateChanger extends StatelessWidget {
   final PageController _adhanListPageController;
 
   const AdhanDateChanger(this._adhanListPageController);
 
-  void moveToDate(BuildContext context, DateTime currentDate) async {
+  Future moveToDate(BuildContext context, DateTime currentDate) async {
     final date = await showDatePicker(
         context: context,
         initialDate: currentDate,
@@ -42,7 +40,6 @@ class AdhanDateChanger extends StatelessWidget {
       ),
       child: Center(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
@@ -74,11 +71,11 @@ class AdhanDateChanger extends StatelessWidget {
                       style: context.textTheme.headline6
                           ?.copyWith(color: Colors.white),
                     ),
-                    _CustomDivider(),
+                    const _CustomDivider(),
                     Text(
                       DateFormat(getArabicDate(adhanProvider.currentDate))
                           .format(adhanProvider.currentDate),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     )
                   ],
                 ),
@@ -117,7 +114,7 @@ class _CustomDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
           width: context.width * 0.5,
           height: 2,

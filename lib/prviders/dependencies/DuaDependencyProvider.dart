@@ -40,9 +40,9 @@ class DuaDependencyProvider extends DependencyProvider {
 
   void changeTranslationLang(String newValue, {bool usePrimary = false}) {
     updateDataByRunning(
-      () {
-        sharedPrefDuaSameAsPrimary.value = usePrimary;
-        sharedPrefDuaTranslationLang.value = newValue;
+      () async {
+        await sharedPrefDuaSameAsPrimary.updateValue(usePrimary);
+        await sharedPrefDuaTranslationLang.updateValue(newValue);
       },
     );
   }

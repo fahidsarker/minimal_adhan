@@ -26,15 +26,18 @@ extension ObjHelper<T extends Object> on T{
   }
 }
 
-extension funcHelper on Function {
-  void tryIt (){
+
+
+extension FuncHelper<T,R> on T Function(R) {
+  void tryCatch (R v, {required void Function(T ret) tryTo}){
     try{
-      this();
+      tryTo(this(v));
     }catch(_){
 
     }
   }
 }
+
 
 extension LstHelper <T extends Object> on List<T?>{
 

@@ -6,15 +6,8 @@ import 'package:minimal_adhan/models/Inspiration.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-late final Database _globalAppDatabase;
 
-Database get globalAppDatabase => _globalAppDatabase;
-
-Future<void> initDatabase() async {
-  _globalAppDatabase = await _getDatabase();
-}
-
-Future<Database> _getDatabase() async {
+Future<Database> getDatabase() async {
   final databasesPath = await getDatabasesPath();
   final path = join(databasesPath, "database.db");
 
@@ -22,25 +15,14 @@ Future<Database> _getDatabase() async {
   //final version = sharedPrefDatabaseVersion.value;
 
   List<Object?>? favIds;
-  int? oldVersion;
+  final oldVersion = sharedPrefDatabaseVersion.value;
 
-  var _DB = await openDatabase(path);
+  var DB = await openDatabase(path);
 
-  if (exists) {
-    try {
-      final vs = await _DB.rawQuery(
-          "SELECT pref_value from prefs where pref_key = '${sharedPrefDatabaseVersion.key}'",);
-      oldVersion = vs.first['pref_value'] as int?;
-      print(oldVersion);
-    } catch (e) {
-      print(e);
-    }
-
-    if (oldVersion != null && oldVersion < DB_VERSION) {
+  if (exists && oldVersion != null && oldVersion < DB_VERSION) {
       final res =
-          await _DB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
+          await DB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
       favIds = res.map((e) => e['id']).toList();
-    }
   }
 
   if (oldVersion == null || oldVersion < DB_VERSION) {
@@ -56,12 +38,12 @@ Future<Database> _getDatabase() async {
     await File(path).writeAsBytes(bytes, flush: true);
 
 
-    _DB = await openDatabase(
+    DB = await openDatabase(
       path,
       version: 1,
     );
 
-    await _DB.transaction((txn) async {
+    await DB.transaction((txn) async {
       await txn.execute(
         '''
            CREATE TABLE IF NOT EXISTS "prefs" (
@@ -92,37 +74,11 @@ Future<Database> _getDatabase() async {
   }
 
 
-  return _DB;
-}
-
-Future<Map<String?, Object?>> get allPreferences async {
-  final res = await _globalAppDatabase.rawQuery('SELECT * FROM prefs');
-  print('FOUND --------- $res');
-  final Map<String?, Object?> ret = {};
-
-  for(final element in res){
-    ret.addAll({
-      element['pref_key'] as String?:element['pref_value']
-    });
-  }
-
-  print('RETURNING: ------ $ret');
-  return ret;
-}
-
-Future updatePreferenceValue(String key, Object? value) async {
-  await _globalAppDatabase.execute(
-    '''
-  INSERT INTO prefs (pref_key, pref_value)
-  VALUES ('$key', $value)
-  ON CONFLICT (pref_key) DO
-  UPDATE SET pref_value = excluded.pref_value;
-  ''',
-  );
+  return DB;
 }
 
 Future<Inspiration> getInspiration(String lang, int id) async {
-  final res = await _globalAppDatabase.rawQuery(
+  final res = await (await getDatabase()).rawQuery(
     'SELECT inspirations.ins_$lang, inspiration_source.ins_src_$lang from inspirations '
     'INNER JOIN inspiration_source ON inspirations.inspirations_source_id = inspiration_source.id '
     'WHERE inspirations.id = $id',

@@ -16,7 +16,7 @@ class AdhanList extends StatelessWidget {
   final PageController _pageController;
 
 
-  AdhanList(this._pageController);
+  const AdhanList(this._pageController);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class AdhanList extends StatelessWidget {
 
     return PageView.builder(
       itemCount: centerPage * 2 + 1,
-      pageSnapping: true,
       controller: _pageController,
       onPageChanged: (newPage) {
         adhanProvider.changeDayOfDate(newPage - centerPage);
@@ -33,13 +32,11 @@ class AdhanList extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            /*color: Theme.of(context).brightness == Brightness.light
-                  ? onLightCardColor
-                  : onDarkCardColor,*/
+
           ),
           margin: const EdgeInsets.symmetric(horizontal: 8),
           child: _AdhanListView(
-            dateTime: DateTime.now().add(Duration(days: (index - centerPage))),
+            dateTime: DateTime.now().add(Duration(days: index - centerPage)),
             key: Key(index.toString()),
           ),
         );
@@ -51,7 +48,7 @@ class AdhanList extends StatelessWidget {
 class _AdhanListView extends StatelessWidget {
   final DateTime dateTime;
 
-  _AdhanListView({required this.dateTime, Key? key,})
+  const _AdhanListView({required this.dateTime, Key? key,})
       : super(key: key);
 
 
@@ -64,7 +61,7 @@ class _AdhanListView extends StatelessWidget {
     final List<Adhan> _adhans = adhanProvider.getAdhanData(dateTime);
 
     return ListView.builder(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       itemCount: _adhans.length,
       itemBuilder: (_, i) {
         return Padding(

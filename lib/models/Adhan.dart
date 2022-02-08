@@ -22,6 +22,7 @@ class Adhan {
       required this.localCode,
       required this.startingPrayerTime,
       required bool shouldCorrect}) {
+
     startTime = startTime.add(Duration(minutes: manualCorrection));
 
     if (shouldCorrect) {
@@ -33,8 +34,8 @@ class Adhan {
         endTime = endTime.subtract(const Duration(days: 1));
       }
 
-      isCurrent = (DateTime.now().isAfter(startTime) &&
-          DateTime.now().isBefore(endTime));
+      isCurrent = DateTime.now().isAfter(startTime) &&
+          DateTime.now().isBefore(endTime);
     }
   }
 

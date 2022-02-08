@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/SQLHelper.dart';
 import 'package:minimal_adhan/models/Inspiration.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
@@ -9,11 +10,10 @@ import 'package:minimal_adhan/models/dua/category.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuaProvider with ChangeNotifier {
-  final Database _db;
   final AppLocalizations _appLocale;
-  final DuaDependencyProvider _duaDependency;
-
-  DuaProvider(this._db, this._appLocale, this._duaDependency);
+  final DuaDependencyProvider dependency;
+  final Database _database;
+  DuaProvider(this._database, this._appLocale, this.dependency);
 
   Future<List<DuaCategory>> get duaCategories async {
     String query =
@@ -21,33 +21,34 @@ class DuaProvider with ChangeNotifier {
 
 
     final list = [DuaCategory(0, _appLocale.favs)];
-    list.addAll((await _db.rawQuery(query)).map((e) =>
+    list.addAll((await _database.rawQuery(query)).map((e) =>
         DuaCategory(
             e['id'] as int, e['category_${_appLocale.locale}'] as String)));
     return list;
   }
 
   Future<List<Dua>> searchDuas(String search) async {
-    String query =
-    '''SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
+    final String query =
+    '''
+      SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
 
         INNER JOIN dua_titles on dua_titles.dua_id = dua.id 
         INNER JOIN dua_translations on dua_translations.dua_id= dua.id 
         INNER JOIN dua_transliterations on dua_transliterations.dua_id = dua.id 
         
-        WHERE (
-        	dua.dua like '%Allah%'
-        	OR dua_translations.translation_en like '%$search%'
-        	OR dua_translations.translation_bn like '%$search%'
-        	OR dua_transliterations.transliteration_en like '%$search%'
-        	OR dua_transliterations.transliteration_bn like '%$search%'
-        	OR dua_titles.title_en LIKE '%$search%'
-        	OR dua_titles.title_bn LIKE '%$search%'
-        	OR dua_titles.title_ar LIKE '%$search%'
-        )
-        ''';
+          WHERE (
+          	dua.dua like '%$search%'
+          	OR dua_translations.translation_en like '%$search%'
+          	OR dua_translations.translation_bn like '%$search%'
+          	OR dua_transliterations.transliteration_en like '%$search%'
+          	OR dua_transliterations.transliteration_bn like '%$search%'
+          	OR dua_titles.title_en LIKE '%$search%'
+          	OR dua_titles.title_bn LIKE '%$search%'
+          	OR dua_titles.title_ar LIKE '%$search%'
+          )
+    ''';
 
-    return (await _db.rawQuery(query))
+    return (await _database.rawQuery(query))
         .map((e) =>
         Dua(
             e['id'] as int,
@@ -59,14 +60,14 @@ class DuaProvider with ChangeNotifier {
 
 
   Future<List<Dua>> getDuasOfCategory(int catID) async {
-    String query =
-    '''SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
+    final query =
+    '''
+        SELECT dua.id, dua_titles.title_${_appLocale.locale}, dua.dua, dua.favourite from dua 
         INNER JOIN dua_titles on dua_titles.dua_id = dua.id 
         WHERE ${catID == 0 ? 'dua.favourite = 1' : 'dua.category = $catID'}
-        
-        ''';
+    ''';
 
-    return (await _db.rawQuery(query))
+    return (await _database.rawQuery(query))
         .map((e) =>
         Dua(
             e['id'] as int,
@@ -77,13 +78,13 @@ class DuaProvider with ChangeNotifier {
   }
 
   Future <DuaDetails> getDuaDetails(int duaID) async {
-    String lang = _appLocale.locale;
-    String transLang = _duaDependency.translationLang;
-    bool showTranslation = _duaDependency.showTranslation;
-    bool showTransliteration = _duaDependency.showTransliteration;
+    final String lang = _appLocale.locale;
+    final String transLang = dependency.translationLang;
+    final bool showTranslation = dependency.showTranslation;
+    final bool showTransliteration = dependency.showTransliteration;
 
-    String querey = '''
-    
+    final String querey =
+    '''
     SELECT dua.id, dua_titles.title_$lang, dua.dua, dua.favourite,
     ${(showTranslation && transLang != 'ar')
         ? 'dua_translations.translation_$transLang,'
@@ -111,7 +112,7 @@ class DuaProvider with ChangeNotifier {
     
     ''';
 
-    final map = (await _db.rawQuery(querey))[0];
+    final map = (await _database.rawQuery(querey))[0];
 /*    final id = map['id'] as int?;
     final title = map['title_$lang'] as String?;
     final arabic = map['dua'] as String?;
@@ -137,7 +138,7 @@ class DuaProvider with ChangeNotifier {
     String query = 'UPDATE dua SET favourite = ${old
         ? 0
         : 1} WHERE id = $duaID';
-    await _db.rawUpdate(query);
+    await _database.rawUpdate(query);
     notifyListeners();
   }
 

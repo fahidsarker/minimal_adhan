@@ -17,9 +17,7 @@ class DuaRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final duaDependency = context.watch<DuaDependencyProvider>();
     final duaProvider = context.read<DuaProvider>();
-
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),

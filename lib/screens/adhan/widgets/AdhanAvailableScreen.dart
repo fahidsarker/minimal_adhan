@@ -36,7 +36,10 @@ class AdhanAvailableScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            AdhanDateChanger(_adhanListPageController),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,),
+              child: AdhanDateChanger(_adhanListPageController),
+            ),
             Expanded(child: AdhanList(_adhanListPageController)),
           ],
         ));

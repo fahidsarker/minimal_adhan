@@ -9,14 +9,16 @@ import 'package:minimal_adhan/widgets/CheckedFutureBuilder.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class CategoryList extends StatelessWidget {
-  final Database db;
+import '../../prviders/dependencies/DuaDependencyProvider.dart';
 
-  const CategoryList(this.db);
+class CategoryList extends StatelessWidget {
+
+  const CategoryList();
 
   @override
   Widget build(BuildContext context) {
     final duaProvider = context.read<DuaProvider>();
+
     return CheckedFutureBuilder<List<DuaCategory>>(
       future: duaProvider.duaCategories,
       builder: (data) => ListView.builder(
@@ -43,6 +45,7 @@ class _CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final duaProvider = context.read<DuaProvider>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: InkWell(

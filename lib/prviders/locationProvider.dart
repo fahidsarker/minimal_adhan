@@ -3,12 +3,10 @@ import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/helpers/notification/notifiers.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationProvider with ChangeNotifier {
-  final SharedPreferences _preferences;
 
-  LocationProvider(this._preferences) : _locationHelper = LocationHelper();
+  LocationProvider() : _locationHelper = const LocationHelper();
 
   final LocationHelper _locationHelper;
   static LocationState _locationState =

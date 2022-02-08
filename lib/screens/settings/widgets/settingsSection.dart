@@ -14,7 +14,7 @@ class SettingsSection extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       decoration: BoxDecoration(
-        color: getColoredContainerColor(context),
+        //color: getColoredContainerColor(context),
         borderRadius: BorderRadius.circular(12)
       ),
       child: Column(

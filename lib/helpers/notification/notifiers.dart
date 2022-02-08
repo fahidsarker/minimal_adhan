@@ -1,17 +1,16 @@
 import 'dart:io';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
+import 'package:minimal_adhan/models/preference.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
 import 'package:minimal_adhan/prviders/ahdanNotificationProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const notifyAdhanIdSilent = 0;
 const notifyIDAdhanNormal = 1;
@@ -53,8 +52,8 @@ Future<void> backupURIs() async {
     final alarmURI = await getToneURI(notifyIDAdhanAlarm);
     final ringtoneURI = await getToneURI(notifyIDAdhanRingtone);
 
-    await alarmURI?.let((it) async => sharedPrefAdhanAlarmUri.value = it);
-    await ringtoneURI?.let((it) async => sharedPrefAdhanAlarmUri.value = it);
+    await alarmURI?.let((it) async => sharedPrefAdhanAlarmUri.updateValue(it));
+    await ringtoneURI?.let((it) async => sharedPrefAdhanAlarmUri.updateValue(it));
   } catch (_) {}
 }
 
@@ -69,10 +68,9 @@ Future<void> scheduleNotification({
     return;
   }
 
-  final pref = await SharedPreferences.getInstance();
-  final adhanDependency = AdhanDependencyProvider(pref);
-
-  final locationProvider = LocationProvider(pref);
+  await initPreferences();
+  final adhanDependency = AdhanDependencyProvider();
+  final locationProvider = LocationProvider();
   await locationProvider.init();
 
   final locationState = locationProvider.locationState;
@@ -118,10 +116,10 @@ Future createNotification({
   bool reschedule = true,
 }) async {
   await initializeDateFormatting('en');
-  final pref = await SharedPreferences.getInstance();
-  final adhanDependency = AdhanDependencyProvider(pref);
+  await initPreferences();
+  final adhanDependency = AdhanDependencyProvider();
 
-  final locationProvider = LocationProvider(pref);
+  final locationProvider = LocationProvider();
   await locationProvider.init();
 
   final locationState = locationProvider.locationState;
@@ -234,15 +232,6 @@ Future<NotificationDetails> _getNotifyDetails(int id, bool isPersistant) async {
   }
 }
 
-Future testNotification() async {
-  final notifier = await _initializeNotifiers();
-  await notifier.show(
-    1,
-    "Test Notification",
-    "Testing",
-    await _getNotifyDetails(1, false),
-  );
-}
 
 Future _notify(
   String title,

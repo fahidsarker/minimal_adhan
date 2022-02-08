@@ -6,16 +6,12 @@ import 'package:minimal_adhan/prviders/dependencies/dependency_provider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalDependencyProvider extends DependencyProvider {
   GlobalDependencyProvider();
 
-  static late SharedPreferences _preferences;
   late PackageInfo packageInfo;
   late bool batteryOptimizeDisabled;
-
-  SharedPreferences get preference => _preferences;
 
   int get themeModeIndex => sharedPrefAdhanThemeMode.value;
 
@@ -35,7 +31,6 @@ class GlobalDependencyProvider extends DependencyProvider {
       sharedPrefAdhanNeverAskAgainForBatteryOptimization.value;
 
   Future<void> init() async {
-    _preferences = await SharedPreferences.getInstance();
     packageInfo = await PackageInfo.fromPlatform();
     batteryOptimizeDisabled =
         await OptimizeBattery.isIgnoringBatteryOptimizations();
@@ -53,7 +48,9 @@ class GlobalDependencyProvider extends DependencyProvider {
   }
 
   void setNeverAskDisableBatteryOptimize() => updateDataWithPreference(
-      sharedPrefAdhanNeverAskAgainForBatteryOptimization, true);
+        sharedPrefAdhanNeverAskAgainForBatteryOptimization,
+        true,
+      );
 
   void welcomeComplete() =>
       updateDataWithPreference(sharedPrefWelcomeShown, true);

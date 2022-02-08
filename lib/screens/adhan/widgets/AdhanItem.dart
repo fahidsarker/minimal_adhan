@@ -25,11 +25,13 @@ class AdhanItem extends StatelessWidget {
 
     final adhanTitleStyle = context.textTheme.headline5
         ?.copyWith(color: context.textTheme.headline6?.color);
-    final iconSize = 40.0;
+    const iconSize = 40.0;
     final adhanDependency = context.watch<AdhanDependencyProvider>();
     final notifyID = adhanDependency.notifyID(_adhan.type);
+
+
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         border:
             _adhan.isCurrent ? Border.all(color: context.secondaryColor) : null,
@@ -47,7 +49,7 @@ class AdhanItem extends StatelessWidget {
               create: (_) => AdhanPlayBackProvider(),
               child: NotifySelectBottomSheet(_adhan),
             ),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20),
                 topLeft: Radius.circular(20),
@@ -61,11 +63,11 @@ class AdhanItem extends StatelessWidget {
             children: [
               _adhanIcon,
               /*,*/
-              SizedBox(
+              const SizedBox(
                 width: 8.0,
               ),
-              _VerticalDivider(iconSize),
-              SizedBox(
+              const _VerticalDivider(iconSize),
+              const SizedBox(
                 width: 8.0,
               ),
               Expanded(

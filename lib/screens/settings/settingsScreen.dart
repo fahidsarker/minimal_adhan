@@ -48,7 +48,6 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         title: Text(
           appLocale.settings,
         ),
@@ -69,7 +68,11 @@ class SettingsScreen extends StatelessWidget {
                   leading: const Icon(Icons.warning),
                 ),
               SettingsClickable(
-                onClick: () => buildBottomSheet(AppLanguagePicker(), context),
+                onClick: () => buildBottomSheet(
+                  ChangeNotifierProvider.value(
+                      value: duaDependency, child: AppLanguagePicker()),
+                  context,
+                ),
                 title: appLocale.language,
                 subtitle: appLocale.current_lang,
                 leading: Icon(
@@ -313,7 +316,7 @@ class SettingsScreen extends StatelessWidget {
                   context: context,
                   applicationName: appLocale.minimal_adhan,
                   applicationIcon: Image.asset(
-                    'assets/logo_256.png',
+                    'assets/logo.png',
                     width: 55,
                   ),
                   applicationVersion: globalProvider.version,
@@ -328,7 +331,7 @@ class SettingsScreen extends StatelessWidget {
                 subtitle:
                     'Version: ${globalProvider.version}, build: ${globalProvider.buildNumber}',
                 leading: Image.asset(
-                  'assets/logo_256.png',
+                  'assets/logo.png',
                   width: 55,
                 ),
               ),

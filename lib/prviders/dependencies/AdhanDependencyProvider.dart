@@ -6,9 +6,8 @@ import 'package:minimal_adhan/prviders/dependencies/dependency_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdhanDependencyProvider extends DependencyProvider {
-  final SharedPreferences preference;
 
-  AdhanDependencyProvider(this.preference);
+  AdhanDependencyProvider();
 
   int get madhabIndex => sharedPrefAdhanMadhabIndex.value;
 
@@ -31,7 +30,7 @@ class AdhanDependencyProvider extends DependencyProvider {
   bool get showPersistant => sharedPrefAdhanShowPersistentNotify.value;
 
   Future changePersistantNotifyStatus({required bool newVal}) async {
-    sharedPrefAdhanShowPersistentNotify.value = newVal;
+    sharedPrefAdhanShowPersistentNotify.updateValue(newVal);
     if (!newVal) {
       await cancelAllNotifications();
     } else {
@@ -79,9 +78,9 @@ class AdhanDependencyProvider extends DependencyProvider {
     return _notifyIDs[adhanType];
   }
 
-  void silentAll() => updateDataByRunning(() {
+  void silentAll() => updateDataByRunning(() async {
         for (final element in sharedPrefAdhanNotifyID) {
-          element.value = 0;
+          element.updateValue(0);
         }
       });
 

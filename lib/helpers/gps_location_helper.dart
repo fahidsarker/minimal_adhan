@@ -13,6 +13,8 @@ const locationNACauseGPSNotEnabled =
 const locationNACauseFinding = 'Finding Your Location! Please wait.';
 
 class LocationHelper {
+  const LocationHelper();
+
   Future<LocationState> getLocationFromGPS({required bool background}) async {
 
     bool serviceEnabled;
@@ -60,9 +62,9 @@ class LocationHelper {
       }
     } catch (_) {}
 
-    sharedPrefLocationLatitude.value = lat;
-    sharedPrefLocationLongitude.value = long;
-    sharedPrefLocationAddress.value = address;
+    await sharedPrefLocationLatitude.updateValue(lat);
+    await sharedPrefLocationLongitude.updateValue(long);
+    await sharedPrefLocationAddress.updateValue(address);
 
 
     return LocationAvailable(

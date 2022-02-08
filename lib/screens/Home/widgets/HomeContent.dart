@@ -56,7 +56,9 @@ class _HomeContentState extends State<HomeContent> {
     final appLocale = context.appLocale;
 
     final iconSize = min(
-        156.0, (context.width - 50) / DASHBOARD_NAVIGATION_ELEMENT_PER_ROW,);
+      156.0,
+      (context.width - 50) / DASHBOARD_NAVIGATION_ELEMENT_PER_ROW,
+    );
 
     return GestureDetector(
       onPanUpdate: (details) {
@@ -94,32 +96,40 @@ class _HomeContentState extends State<HomeContent> {
                 size: iconSize,
                 label: appLocale.dua,
                 child: _getNavImage('ic_hadith', iconSize * 0.6),
-                onPressed: () => context.push(ChangeNotifierProvider(
+                onPressed: () => context.push(
+                  ChangeNotifierProvider(
                     create: (_) => DuaDependencyProvider(),
-                    child: DuaScreen(),),),
+                    child: DuaScreen(),
+                  ),
+                ),
               ),
               NavigationCard(
                 size: iconSize,
                 label: 'Tasbih',
                 child: _getNavImage('ic_tasbih', iconSize * 0.6),
-                onPressed: () => context.push(ChangeNotifierProvider(
-                  create: (_) => TasbihProvider(),
-                  child: const TasbihScreen(),
-                ),),
+                onPressed: () => context.push(
+                  ChangeNotifierProvider(
+                    create: (_) => TasbihProvider(),
+                    child: const TasbihScreen(),
+                  ),
+                ),
               ),
               NavigationCard(
                 label: 'More',
                 size: iconSize,
                 child: _getNavImage('application', iconSize * 0.6),
                 onPressed: () => launch(
-                    'https://www.google.com/maps/search/mosque+near+me/@22.4136245,114.1142983',), //todo make dynamic
+                  'https://www.google.com/maps/search/mosque+near+me/@22.4136245,114.1142983',
+                ), //todo make dynamic
               ),
               NavigationCard(
                 label: appLocale.settings,
                 size: iconSize,
                 child: _getNavImage('ic_settings', iconSize * 0.6),
                 onPressed: () => context.push(
-                  const SettingsScreen(),
+                   ChangeNotifierProvider(
+                      create: (_) => DuaDependencyProvider(),
+                      child: const SettingsScreen()),
                 ),
               ),
             ],

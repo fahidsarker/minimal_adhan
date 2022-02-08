@@ -26,6 +26,8 @@ class Azan extends StatelessWidget {
     final globalDependency = context.watch<GlobalDependencyProvider>();
     final locationProvider = context.read<LocationProvider>();
 
+    print('Rebeuild with ${globalDependency.welcomeScreenShown}');
+
     return MaterialApp(
       localizationsDelegates: appLocaleDelegates,
       supportedLocales: supportedAppLangs,

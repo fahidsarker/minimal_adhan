@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 const TOTAL_INSPIRATIONS = 3;
 
 class AppLocale extends Locale {

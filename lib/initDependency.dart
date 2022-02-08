@@ -10,9 +10,10 @@ import 'package:provider/provider.dart';
 
 Future<Widget> initializeAppWith ({required Widget child}) async{
   WidgetsFlutterBinding.ensureInitialized();
-  await scheduleNotification(showNowIfPersistent: true);
   await initDatabase();
   await initPreferences();
+  await scheduleNotification(showNowIfPersistent: true);
+
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -19,17 +19,31 @@ Future<Database> _getDatabase() async {
   final path = join(databasesPath, "database.db");
 
   final exists = await databaseExists(path);
-  final version = sharedPrefDatabaseVersion.value;
+  //final version = sharedPrefDatabaseVersion.value;
 
   List<Object?>? favIds;
+  int? oldVersion;
 
-  if (version == null || version != DB_VERSION || !exists) {
-    if (exists) {
-      final _oldDB = await openDatabase(path);
+  var _DB = await openDatabase(path);
+
+  if (exists) {
+    try {
+      final vs = await _DB.rawQuery(
+          "SELECT pref_value from prefs where pref_key = '${sharedPrefDatabaseVersion.key}'",);
+      oldVersion = vs.first['pref_value'] as int?;
+      print(oldVersion);
+    } catch (e) {
+      print(e);
+    }
+
+    if (oldVersion != null && oldVersion < DB_VERSION) {
       final res =
-          await _oldDB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
+          await _DB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
       favIds = res.map((e) => e['id']).toList();
     }
+  }
+
+  if (oldVersion == null || oldVersion < DB_VERSION) {
 
     try {
       await Directory(dirname(path)).create(recursive: true);
@@ -37,54 +51,70 @@ Future<Database> _getDatabase() async {
 
     final ByteData data = await rootBundle.load(join("assets", "database.db"));
     final List<int> bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
     await File(path).writeAsBytes(bytes, flush: true);
-    sharedPrefDatabaseVersion.value = DB_VERSION;
+
+
+    _DB = await openDatabase(
+      path,
+      version: 1,
+    );
+
+    await _DB.transaction((txn) async {
+      await txn.execute(
+        '''
+           CREATE TABLE IF NOT EXISTS "prefs" (
+	           "pref_key"	TEXT,
+	           "pref_value"	BLOB,
+	           PRIMARY KEY("pref_key")
+           );
+      ''',
+      );
+      if (favIds != null && favIds.isNotEmpty) {
+        try {
+          for (final element in favIds) {
+            txn.execute('UPDATE dua SET favourite = 1 WHERE id = $element');
+          }
+        } catch (_) {}
+      }
+
+      await txn.execute(
+        '''
+          INSERT INTO prefs (pref_key, pref_value)
+          VALUES ('${sharedPrefDatabaseVersion.key}', $DB_VERSION)
+          ON CONFLICT (pref_key) DO
+          UPDATE SET pref_value = excluded.pref_value;
+        ''',
+      );
+    });
+
   }
 
-  final _newDB = await openDatabase(
-    path,
-    version: 1,
-  );
 
-  await _newDB.transaction((txn) async {
-    final values = favIds;
-    txn.execute(
-      '''
-    CREATE TABLE "pref" (
-	    "pref_key"	TEXT,
-	    "pref_value"	BLOB,
-	    PRIMARY KEY("pref_key")
-    );
-    ''',
-    );
-    if (values != null && values.isNotEmpty) {
-      try {
-        for (final element in values) {
-          txn.execute('UPDATE dua SET favourite = 1 WHERE id = $element');
-        }
-      } catch (_) {}
-    }
-  });
-
-  return _newDB;
+  return _DB;
 }
 
-Future<Map<String, Object?>> get allPreferences async {
+Future<Map<String?, Object?>> get allPreferences async {
   final res = await _globalAppDatabase.rawQuery('SELECT * FROM prefs');
-  final Map<String, Object?> ret = {};
-  for (final element in res) {
-    ret.addAll(element);
+  print('FOUND --------- $res');
+  final Map<String?, Object?> ret = {};
+
+  for(final element in res){
+    ret.addAll({
+      element['pref_key'] as String?:element['pref_value']
+    });
   }
+
+  print('RETURNING: ------ $ret');
   return ret;
 }
 
 Future updatePreferenceValue(String key, Object? value) async {
   await _globalAppDatabase.execute(
     '''
-  INSERT INTO pref (pref_key, pref_value)
-  VALUES ($key, $value)
+  INSERT INTO prefs (pref_key, pref_value)
+  VALUES ('$key', $value)
   ON CONFLICT (pref_key) DO
   UPDATE SET pref_value = excluded.pref_value;
   ''',

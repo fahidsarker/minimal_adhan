@@ -26,6 +26,16 @@ extension ObjHelper<T extends Object> on T{
   }
 }
 
+extension funcHelper on Function {
+  void tryIt (){
+    try{
+      this();
+    }catch(_){
+
+    }
+  }
+}
+
 extension LstHelper <T extends Object> on List<T?>{
 
   Future let (void Function(List<T>) clbk) async{

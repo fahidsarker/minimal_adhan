@@ -3,15 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
-import 'package:minimal_adhan/models/LocationInfo.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
-import 'package:minimal_adhan/screens/adhan/widgets/adhanInfoDialog.dart';
-import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
-import 'package:minimal_adhan/widgets/iconedTextButton.dart';
-import 'package:minimal_adhan/widgets/timer.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 const DASHBOARD_TOP_HEIGHT = 236.0;
 

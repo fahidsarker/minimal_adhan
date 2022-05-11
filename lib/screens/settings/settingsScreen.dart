@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/metadata.dart';
+import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/AppLanguagePicker.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/CalcMehtodChooser.dart';
@@ -45,6 +47,7 @@ class SettingsScreen extends StatelessWidget {
     final appLocale = context.appLocale;
     final adhanDependency = context.watch<AdhanDependencyProvider>();
     final duaDependency = context.watch<DuaDependencyProvider>();
+    final locationProvider = context.watch<LocationProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -88,6 +91,15 @@ class SettingsScreen extends StatelessWidget {
                   Icons.style,
                   color: context.primaryColor,
                 ),
+              ),
+              SettingsClickable(
+                onClick: () => locationProvider.updateLocationWithGPS(background: false),
+                title: 'Location', // todo change to applocale
+                leading: Icon(
+                  Icons.my_location,
+                  color: context.primaryColor,
+                ),
+                subtitle: (locationProvider.addressAsString + '\nTap to update'), //todo change to app locale
               ),
             ],
           ),
@@ -249,7 +261,7 @@ class SettingsScreen extends StatelessWidget {
             title: appLocale.support_dev,
             tiles: [
               SettingsClickable(
-                onClick: () {},
+                onClick: () => PlatformCall.openAppStore(),
                 title: appLocale.rate_on_play_store,
                 subtitle: appLocale.rate_on_play_store_desc,
                 leading: Icon(

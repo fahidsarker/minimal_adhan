@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/prviders/TasbihProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
+import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationCards.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationPanel.dart';
 import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
@@ -54,7 +56,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     final appLocale = context.appLocale;
-
+    final locationProvider = context.read<LocationProvider>();
     final iconSize = min(
       156.0,
       (context.width - 50) / DASHBOARD_NAVIGATION_ELEMENT_PER_ROW,
@@ -118,9 +120,9 @@ class _HomeContentState extends State<HomeContent> {
                 label: 'Nearby',
                 size: iconSize,
                 child: _getNavImage('nearby', iconSize * 0.6),
-                onPressed: () => launch(
-                  'https://www.google.com/maps/search/mosque+near+me/@2.4136245,114.1142983',
-                ), //todo make dynamic
+                onPressed: () => locationProvider.locationState is LocationAvailable ? launch(
+                  'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
+                ) : context.showSnackBar('No Location Available!'), //todo Use Applocale
               ),
               NavigationCard(
                 label: appLocale.settings,

@@ -143,4 +143,9 @@ class DuaProvider with ChangeNotifier {
   }
 
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 }

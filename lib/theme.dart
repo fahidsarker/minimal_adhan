@@ -6,15 +6,15 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 
 
 
-LinearGradient getOnBackgroundGradient(BuildContext context) {
+LinearGradient getOnBackgroundGradient(BuildContext context, {double opacity = 1}) {
   return context.theme.brightness == Brightness.dark
-      ? const LinearGradient(colors: [
-    Color.fromRGBO(88, 7, 199, 1.0),
-    Color.fromRGBO(169, 108, 238, 1.0)
+      ?  LinearGradient(colors: [
+    const Color.fromRGBO(88, 7, 199, 1.0).withOpacity(opacity),
+    const Color.fromRGBO(169, 108, 238, 1.0).withOpacity(opacity)
   ],)
-      : const LinearGradient(colors: [
-    Color(0xFF134E5E),
-    Color(0xFF71B280),
+      :  LinearGradient(colors: [
+    const Color(0xFF134E5E).withOpacity(opacity),
+    const Color(0xFF71B280).withOpacity(opacity),
   ],);
 }
 

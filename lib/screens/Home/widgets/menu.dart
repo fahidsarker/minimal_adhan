@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../platform_dependents/method_channel_helper.dart';
 import '../../../prviders/dependencies/DuaDependencyProvider.dart';
 
 class Menu extends StatelessWidget {
@@ -38,9 +39,7 @@ class Menu extends StatelessWidget {
           buildMenuButton(
             name: 'Rate this app', //todo app locale
             icon: Icons.rate_review,
-            action: () {
-              launch('');
-            },
+            action: () => PlatformCall.openAppStore(),
           ),
           const Divider(color: Colors.white54),
           buildMenuButton(

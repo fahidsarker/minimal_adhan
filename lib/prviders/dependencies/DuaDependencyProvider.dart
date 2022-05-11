@@ -46,4 +46,5 @@ class DuaDependencyProvider extends DependencyProvider {
       },
     );
   }
+
 }

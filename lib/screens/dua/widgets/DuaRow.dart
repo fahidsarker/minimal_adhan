@@ -26,11 +26,15 @@ class DuaRow extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => ChangeNotifierProvider.value(
-                value: duaProvider,
-                child: DuaDetailsScreen(dua),
-              ),
-            ),
+                builder: (_) => MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider.value(
+                          value: duaProvider.dependency,
+                        ),
+                        ChangeNotifierProvider.value(value: duaProvider)
+                      ],
+                      child: DuaDetailsScreen(dua),
+                    )),
           );
         },
         onLongPress: () => showDialog(

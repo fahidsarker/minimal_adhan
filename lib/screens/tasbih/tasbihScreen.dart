@@ -7,7 +7,6 @@ import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:flutter/services.dart';
 
-
 class TasbihScreen extends StatefulWidget {
   const TasbihScreen({Key? key}) : super(key: key);
 
@@ -16,7 +15,6 @@ class TasbihScreen extends StatefulWidget {
 }
 
 class _TasbihScreenState extends State<TasbihScreen> {
-
   int count = tasbihCount.value;
   bool? hasVibrate;
   bool? hasAmplitudeControl;
@@ -26,56 +24,67 @@ class _TasbihScreenState extends State<TasbihScreen> {
     super.initState();
   }
 
-  void changeCounter(int value){
+  void changeCounter(int value) {
     tasbihCount.updateValue(value);
     setState(() {
       count = value;
     });
 
     HapticFeedback.heavyImpact();
-
   }
+
+
 
   @override
   Widget build(BuildContext context) {
+    final txtTheme = count < 9999
+        ? context.textTheme.headline1
+        : count < 99999
+            ? context.textTheme.headline2
+            : count < 999999
+                ? context.textTheme.headline3
+                : count < 9999999
+                    ? context.textTheme.headline4
+                    : context.textTheme.headline6;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Tasbih"),
-        actions: [
-          IconButton(onPressed: ()=> changeCounter(0), icon: const Icon(Icons.refresh), tooltip: 'Reset',)
-        ],
-      ), //todo add applocale
+        appBar: AppBar(
+          elevation: 0,
+          title: Text("Tasbih"),
+          actions: [
+            IconButton(
+              onPressed: () => changeCounter(0),
+              icon: const Icon(Icons.refresh),
+              tooltip: 'Reset',
+            )
+          ],
+        ), //todo add applocale
 
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: context.width - 50,
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.symmetric(vertical: 16),
-              decoration: BoxDecoration(
-                //gradient: getOnBackgroundGradient(context),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () => changeCounter(count + 1),
+            borderRadius: BorderRadius.circular(20),
+            child: Center(
+              child: Container(
+                height: context.smallerBetweenHeightAndWidth * 0.9,
+                width: context.smallerBetweenHeightAndWidth * 0.9,
+                decoration: BoxDecoration(
+                  color: (context.isDarkMode ? Colors.white : Colors.black)
+                      .withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: AnimatedFlipCounter(
-                 value: count,
+                  value: count,
                   duration: const Duration(milliseconds: 250),
-                  textStyle: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      ?.copyWith(color: context.theme.colorScheme.onBackground),
+                  textStyle: txtTheme?.copyWith(
+                      color: context.theme.colorScheme.onBackground,
+                      fontWeight: FontWeight.w300),
                 ),
               ),
             ),
-            const SizedBox(height: 128,),
-            _TasbihPlusIcon(onPressed: () => changeCounter(count+1)),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 

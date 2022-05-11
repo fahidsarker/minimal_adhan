@@ -12,21 +12,21 @@ Future<Database> getDatabase() async {
   final path = join(databasesPath, "database.db");
 
   final exists = await databaseExists(path);
-  //final version = sharedPrefDatabaseVersion.value;
 
   List<Object?>? favIds;
   final oldVersion = sharedPrefDatabaseVersion.value;
 
-  var DB = await openDatabase(path);
 
-  if (exists && oldVersion != null && oldVersion < DB_VERSION) {
+
+ /* if (exists && oldVersion != null && oldVersion < DB_VERSION) {
       final res =
           await DB.rawQuery('SELECT id FROM dua WHERE favourite = 1');
       favIds = res.map((e) => e['id']).toList();
   }
+*/
+  if (!exists || oldVersion == null || oldVersion < DB_VERSION) {
 
-  if (oldVersion == null || oldVersion < DB_VERSION) {
-
+    sharedPrefDatabaseVersion.updateValue(DB_VERSION);
     try {
       await Directory(dirname(path)).create(recursive: true);
     } catch (_) {}
@@ -37,44 +37,12 @@ Future<Database> getDatabase() async {
 
     await File(path).writeAsBytes(bytes, flush: true);
 
-
-    DB = await openDatabase(
+    return openDatabase(
       path,
       version: 1,
     );
-
-    await DB.transaction((txn) async {
-      await txn.execute(
-        '''
-           CREATE TABLE IF NOT EXISTS "prefs" (
-	           "pref_key"	TEXT,
-	           "pref_value"	BLOB,
-	           PRIMARY KEY("pref_key")
-           );
-      ''',
-      );
-      if (favIds != null && favIds.isNotEmpty) {
-        try {
-          for (final element in favIds) {
-            txn.execute('UPDATE dua SET favourite = 1 WHERE id = $element');
-          }
-        } catch (_) {}
-      }
-
-      await txn.execute(
-        '''
-          INSERT INTO prefs (pref_key, pref_value)
-          VALUES ('${sharedPrefDatabaseVersion.key}', $DB_VERSION)
-          ON CONFLICT (pref_key) DO
-          UPDATE SET pref_value = excluded.pref_value;
-        ''',
-      );
-    });
-
   }
-
-
-  return DB;
+  return openDatabase(path);
 }
 
 Future<Inspiration> getInspiration(String lang, int id) async {

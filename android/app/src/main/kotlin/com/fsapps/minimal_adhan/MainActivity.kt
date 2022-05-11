@@ -68,7 +68,7 @@ class MainActivity : FlutterActivity() {
             }else if (call.method == "getToneURI"){
                 result.success(getToneURI(call.arguments as Int).toString())
             } else if (call.method == "openPlayStore"){
-                launchPlayStore(call.arguments as String);
+                launchPlayStore(call.arguments as String?);
                 result.success(null)
             }
         }

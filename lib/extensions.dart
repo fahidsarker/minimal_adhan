@@ -74,8 +74,7 @@ extension ContextHelper on BuildContext {
   }
 
   bool get isDarkMode{
-    final brightness = MediaQuery.of(this).platformBrightness;
-    return brightness == Brightness.dark;
+    return theme.scaffoldBackgroundColor != Colors.white;
   }
 
 }

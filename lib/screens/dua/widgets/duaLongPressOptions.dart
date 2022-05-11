@@ -13,7 +13,7 @@ import 'package:minimal_adhan/extensions.dart';
 
 class DuaLongPressOptions extends StatelessWidget {
   final int duaID;
-  DuaLongPressOptions(this.duaID);
+  const DuaLongPressOptions(this.duaID);
 
   void action(BuildContext context, String message, void Function() act) {
     act();
@@ -41,7 +41,7 @@ class DuaLongPressOptions extends StatelessWidget {
             IconedTextButton(
               iconData: Icons.copy,
               text: appLocale.copy,
-              color: Colors.black,
+              color: context.secondaryColor,
               onPressed: () => action(context, 'Copied to clipboard!',
                   () => copyDuaToClipBoard(data)),
             ),
@@ -52,7 +52,7 @@ class DuaLongPressOptions extends StatelessWidget {
               text: data.isFavourite
                   ? appLocale.remove_from_fav
                   : appLocale.add_to_fav,
-              color: Colors.black,
+              color: context.secondaryColor,
               onPressed: () => action(
                   context,
                   data.isFavourite

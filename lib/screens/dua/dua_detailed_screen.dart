@@ -26,6 +26,8 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
   Widget build(BuildContext context) {
     final duaProvider = context.watch<DuaProvider>();
     final appLocale = context.appLocale;
+    final duaDepend = context.watch<DuaDependencyProvider>();
+
     return FutureBuilder<DuaDetails>(
       future: duaProvider.getDuaDetails(widget.dua.id),
       builder: (_, snapshot) {
@@ -62,8 +64,11 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                         val == appLocale.other_font_size) {
                       showDialog(
                         context: context,
-                        builder: (_) => FontSizeSelector(
-                          arabic: val == appLocale.arabic_font_size,
+                        builder: (_) => ChangeNotifierProvider.value(
+                          value: duaDepend,
+                          child: FontSizeSelector(
+                            arabic: val == appLocale.arabic_font_size,
+                          ),
                         ),
                       );
                     }

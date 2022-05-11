@@ -146,6 +146,7 @@ An Open-Sourced Adhan app for the ummah.<br/>
 - <a href="https://www.flaticon.com/free-icons/maghrib" title="maghrib icons">Maghrib icons created by Freepik - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/isha" title="isha icons">Isha icons created by Freepik - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/sunrise" title="sunrise icons">Sunrise icons created by Slidicon - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/nearby" title="nearby icons">Nearby icons created by Fuzzee - Flaticon</a>
 
 <hr></hr>
 

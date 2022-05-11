@@ -56,6 +56,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       decoration: BoxDecoration(
                           gradient: getOnBackgroundGradient(context),
                           borderRadius: BorderRadius.circular(16)),
@@ -80,7 +81,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 32,
                     ),
                     Container(
                       padding: const EdgeInsets.all(8.0),

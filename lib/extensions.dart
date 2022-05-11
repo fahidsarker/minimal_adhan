@@ -72,6 +72,12 @@ extension ContextHelper on BuildContext {
       content: Text(txt),
     ),);
   }
+
+  bool get isDarkMode{
+    final brightness = MediaQuery.of(this).platformBrightness;
+    return brightness == Brightness.dark;
+  }
+
 }
 
 extension IntHelper<T extends num> on double{

@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/screens/feedback/form_links.dart';
 import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../prviders/dependencies/DuaDependencyProvider.dart';
 
 class Menu extends StatelessWidget {
   final menuButtonTextStyle = const TextStyle(color: Colors.white);
@@ -44,7 +47,9 @@ class Menu extends StatelessWidget {
             name: 'Settings',
             icon: Icons.settings,
             action: () => context.push(
-              SettingsScreen(),
+              ChangeNotifierProvider(
+                  create: (_) => DuaDependencyProvider(),
+                  child: const SettingsScreen()),
             ),
           ),
         ],

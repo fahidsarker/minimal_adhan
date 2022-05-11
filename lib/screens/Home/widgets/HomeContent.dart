@@ -115,11 +115,11 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               NavigationCard(
-                label: 'More',
+                label: 'Nearby',
                 size: iconSize,
-                child: _getNavImage('application', iconSize * 0.6),
+                child: _getNavImage('nearby', iconSize * 0.6),
                 onPressed: () => launch(
-                  'https://www.google.com/maps/search/mosque+near+me/@22.4136245,114.1142983',
+                  'https://www.google.com/maps/search/mosque+near+me/@2.4136245,114.1142983',
                 ), //todo make dynamic
               ),
               NavigationCard(
@@ -127,9 +127,10 @@ class _HomeContentState extends State<HomeContent> {
                 size: iconSize,
                 child: _getNavImage('ic_settings', iconSize * 0.6),
                 onPressed: () => context.push(
-                   ChangeNotifierProvider(
-                      create: (_) => DuaDependencyProvider(),
-                      child: const SettingsScreen()),
+                  ChangeNotifierProvider(
+                    create: (_) => DuaDependencyProvider(),
+                    child: const SettingsScreen(),
+                  ),
                 ),
               ),
             ],

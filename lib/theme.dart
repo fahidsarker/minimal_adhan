@@ -9,8 +9,8 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 LinearGradient getOnBackgroundGradient(BuildContext context) {
   return context.theme.brightness == Brightness.dark
       ? const LinearGradient(colors: [
-    Color.fromRGBO(99, 33, 189, 1),
-    Color.fromRGBO(152, 86, 234, 1.0)
+    Color.fromRGBO(88, 7, 199, 1.0),
+    Color.fromRGBO(169, 108, 238, 1.0)
   ],)
       : const LinearGradient(colors: [
     Color(0xFF134E5E),

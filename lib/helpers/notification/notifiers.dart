@@ -19,14 +19,6 @@ const notifyIDAdhanRingtone = 3;
 const notifyIDAdhanMecca = 4;
 const notifyIDAdhanMedina = 5;
 
-void _validateNotifyPlatform() {
-  //change as needed
-  if (!Platform.isAndroid) {
-    throw Exception(
-      'Notification has not been set-up for ${Platform.operatingSystem}',
-    );
-  }
-}
 
 Future<FlutterLocalNotificationsPlugin> _initializeNotifiers() async {
   //todo change progaurd rules for release builds (local_notifications)
@@ -239,7 +231,6 @@ Future _notify(
   required bool isPersistent,
   required int notifyID,
 }) async {
-  _validateNotifyPlatform();
   await (await _initializeNotifiers())
       .show(0, title, body, await _getNotifyDetails(notifyID, isPersistent));
 }

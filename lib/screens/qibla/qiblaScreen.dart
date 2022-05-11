@@ -26,10 +26,10 @@ class QiblaScreen extends StatelessWidget {
         child: (locationState is LocationAvailable)
             ? QiblaAvailableScreen(locationState.locationInfo)
             : (locationState is LocationFinding)
-                ? LocationFindingScreen()
+                ? const LocationFindingScreen()
                 : (locationState is LocationNotAvailable)
                     ? LocationNotAvailableScreen(locationState)
-                    : UnknownErrorScreen(),
+                    : const UnknownErrorScreen(),
       ),
     );
   }

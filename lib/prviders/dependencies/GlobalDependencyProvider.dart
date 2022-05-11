@@ -7,6 +7,8 @@ import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../platform_dependents/preferences.dart';
+
 class GlobalDependencyProvider extends DependencyProvider {
   GlobalDependencyProvider();
 
@@ -32,8 +34,7 @@ class GlobalDependencyProvider extends DependencyProvider {
 
   Future<void> init() async {
     packageInfo = await PackageInfo.fromPlatform();
-    batteryOptimizeDisabled =
-        await OptimizeBattery.isIgnoringBatteryOptimizations();
+    batteryOptimizeDisabled = await PlatformPreferences.isIgnoringBatteryOptimizations;
   }
 
   bool get needToShowDiableBatteryOptimizeDialog {
@@ -42,8 +43,7 @@ class GlobalDependencyProvider extends DependencyProvider {
 
   Future disableBatteryOptimization() async {
     await OptimizeBattery.stopOptimizingBatteryUsage();
-    batteryOptimizeDisabled =
-        await OptimizeBattery.isIgnoringBatteryOptimizations();
+    batteryOptimizeDisabled = await PlatformPreferences.isIgnoringBatteryOptimizations;
     notifyListeners();
   }
 

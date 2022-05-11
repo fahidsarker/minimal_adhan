@@ -26,6 +26,10 @@ class NavigationCard extends StatelessWidget {
         child: Container(
           width: size,
           height: size,
+          decoration: BoxDecoration(
+            color: getColoredContainerColor(context),
+            borderRadius: radius
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
@@ -33,15 +37,11 @@ class NavigationCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   child,
-                  SizedBox(height: 8,),
+                  const SizedBox(height: 8,),
                   Text(label, style: context.textTheme.headline6,)
                 ],
               ),
             ),
-          ),
-          decoration: BoxDecoration(
-            color: getColoredContainerColor(context),
-            borderRadius: radius
           ),
         ),
       ),

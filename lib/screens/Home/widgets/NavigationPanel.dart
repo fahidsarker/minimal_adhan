@@ -9,7 +9,7 @@ class NavigationPanel extends StatelessWidget {
   final int totalRows;
   final ScrollController controller;
 
-  NavigationPanel._(this._children, this.totalRows, this.controller);
+  const NavigationPanel._(this._children, this.totalRows, this.controller);
 
   factory NavigationPanel.build ({required ScrollController controller, required List<Widget> children}){
     if(children.length % DASHBOARD_NAVIGATION_ELEMENT_PER_ROW != 0){
@@ -22,7 +22,7 @@ class NavigationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       controller: controller,
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       children: [
         Container(
           height: DASHBOARD_TOP_HEIGHT,
@@ -35,7 +35,7 @@ class NavigationPanel extends StatelessWidget {
               _children[2*i+1],
             ],
           ),
-        SizedBox(height: 128,)
+        const SizedBox(height: 128,)
       ],
     );
   }

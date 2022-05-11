@@ -50,6 +50,7 @@ dependencies:
   optimize_battery: ^0.0.2
   share_plus: ^3.0.4
   matrix4_transform: ^2.0.1
+  animated_flip_counter: ^0.2.0
   flutter_localizations:
     sdk: flutter
 

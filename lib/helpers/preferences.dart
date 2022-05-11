@@ -99,6 +99,8 @@ IntPreference get sharedPrefDatabaseVersion =>
 BoolPreference get sharedPrefAdhanNeverAskAgainForBatteryOptimization =>
     const BoolPreference('nev_ask_bat_opt', false);
 
+IntPreference<int> get tasbihCount => const IntPreference('tasbih_count_hh', 0);
+
 const KEY_TASBIH_LIST = 'tasbih_list';
 const ADHAN_THEME_MODE_SYSTEM = 0;
 const ADHAN_THEME_MODE_LIGHT = 1;

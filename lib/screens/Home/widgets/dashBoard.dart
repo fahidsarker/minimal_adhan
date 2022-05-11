@@ -18,8 +18,7 @@ const DASHBOARD_TOP_HEIGHT = 236.0;
 class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final locationState =
-        context.watch<LocationProvider>().locationState;
+    final locationState = context.watch<LocationProvider>().locationState;
     final adhanDependency = context.watch<AdhanDependencyProvider>();
 
     final appLocale = context.appLocale;
@@ -39,9 +38,8 @@ class DashBoard extends StatelessWidget {
     const padding = const EdgeInsets.all(16.0);
     final radius = BorderRadius.circular(15);
 
-    return Container(
+    return SizedBox(
       height: DASHBOARD_TOP_HEIGHT,
-
       child: Padding(
         padding: const EdgeInsets.only(left: 32, bottom: 32, right: 32),
         child: Column(
@@ -70,17 +68,23 @@ class DashBoard extends StatelessWidget {
     return [
       if (currentAdhan != null)
         Row(
-            children: [
-              Image.asset(currentAdhan.imageLocation, width: 72,),
-              const SizedBox(width: 8,),
-              Expanded(
-                child: AutoSizeText(
-                  currentAdhan.title,
-                  style: context.textTheme.headline2?.copyWith(color: context.theme.colorScheme.onBackground),
-                  maxLines: 2,
-                ),
-              )
-            ],
+          children: [
+            Image.asset(
+              currentAdhan.imageLocation,
+              width: 72,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                currentAdhan.title,
+                style: context.textTheme.headline2
+                    ?.copyWith(color: context.theme.colorScheme.onBackground),
+                maxLines: 2,
+              ),
+            )
+          ],
         )
       else
         Text(
@@ -92,19 +96,27 @@ class DashBoard extends StatelessWidget {
           '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime})',
           style: context.textTheme.bodyText1,
         ),
-
-      if(locationState is LocationAvailable)
-        _buildLocationRow(context, Icons.my_location, locationState.locationAddressOfLength(25))
-
+      if (locationState is LocationAvailable)
+        _buildLocationRow(context, Icons.my_location,
+            locationState.locationAddressOfLength(25))
     ];
   }
 
-  Widget _buildLocationRow(BuildContext context, IconData iconData, String text){
+  Widget _buildLocationRow(
+      BuildContext context, IconData iconData, String text) {
     return Row(
       children: [
-        Icon(iconData, color: context.primaryColor,),
-        const SizedBox(width: 8,),
-        Text(text, style: TextStyle(color: context.primaryColor),)
+        Icon(
+          iconData,
+          color: context.primaryColor,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          text,
+          style: TextStyle(color: context.primaryColor),
+        )
       ],
     );
   }

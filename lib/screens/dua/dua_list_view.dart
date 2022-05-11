@@ -29,7 +29,10 @@ class DuaListScreen extends StatelessWidget {
             if (snapshot.data!.isNotEmpty){
               return ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (_, i) => DuaRow(snapshot.data![i]),
+                itemBuilder: (_, i) => Padding(
+                  padding:  EdgeInsets.only(top: i == 0 ? 16 : 0),
+                  child: DuaRow(snapshot.data![i]),
+                ),
                 itemCount: snapshot.data!.length,
               );
             } else{

@@ -122,7 +122,7 @@ class _HomeContentState extends State<HomeContent> {
                 child: _getNavImage('nearby', iconSize * 0.6),
                 onPressed: () => locationProvider.locationState is LocationAvailable ? launch(
                   'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
-                ) : context.showSnackBar('No Location Available!'), //todo Use Applocale
+                ) : context.showSnackBar(appLocale.no_location_available),
               ),
               NavigationCard(
                 label: appLocale.settings,

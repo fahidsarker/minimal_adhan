@@ -111,7 +111,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         bodyWidget: Column(
           children: [
             Text(
-              appLocale.location_permison_request_short,
+              appLocale.location_permission_request_short,
               style: context.textTheme.headline6,
               textAlign: TextAlign.center,
             ),

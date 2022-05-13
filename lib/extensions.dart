@@ -10,49 +10,41 @@ AppLocalizationsEn get engAppLocale {
 
 const inline = pragma('@vm:prefer-inline');
 
-
-const Iterable<LocalizationsDelegate> appLocaleDelegates =  [
+const Iterable<LocalizationsDelegate> appLocaleDelegates = [
   AppLocalizations.delegate,
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,
   GlobalCupertinoLocalizations.delegate,
 ];
 
-
-extension ObjHelper<T extends Object> on T{
+extension ObjHelper<T extends Object> on T {
   @inline
-  Future let (void Function(T) clbk) async{
+  Future let(void Function(T) clbk) async {
     clbk(this);
   }
 }
 
-
-
-extension FuncHelper<T,R> on T Function(R) {
-  void tryCatch (R v, {required void Function(T ret) tryTo}){
-    try{
+extension FuncHelper<T, R> on T Function(R) {
+  void tryCatch(R v, {required void Function(T ret) tryTo}) {
+    try {
       tryTo(this(v));
-    }catch(_){
-
-    }
+    } catch (_) {}
   }
 }
 
-
-extension LstHelper <T extends Object> on List<T?>{
-
-  Future let (void Function(List<T>) clbk) async{
+extension LstHelper<T extends Object> on List<T?> {
+  Future let(void Function(List<T>) clbk) async {
     bool okay = false;
     final List<T> trf = [];
-    for(final element in this) {
-      if(element == null){
+    for (final element in this) {
+      if (element == null) {
         okay = false;
         break;
-      }else{
+      } else {
         trf.add(element);
       }
     }
-    if(okay){
+    if (okay) {
       clbk(trf);
     }
   }
@@ -68,36 +60,36 @@ extension ContextHelper on BuildContext {
   }
 
   void showSnackBar(String txt) {
-    ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-      content: Text(txt),
-    ),);
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(txt),
+      ),
+    );
   }
 
-  bool get isDarkMode{
+  bool get isDarkMode {
     return theme.scaffoldBackgroundColor != Colors.white;
   }
-
 }
 
-extension IntHelper<T extends num> on double{
-  T closestTo (List<T> values){
+extension IntHelper<T extends num> on double {
+  T closestTo(List<T> values) {
     T lastMin = values[0];
     double lastDif = (lastMin - this).abs();
 
-    if(values.length == 1){
+    if (values.length == 1) {
       return lastMin;
     }
 
-    for(int i= 1; i<values.length; i++){
+    for (int i = 1; i < values.length; i++) {
       final tempDiff = (values[i] - this).abs();
-      if(tempDiff < lastDif){
+      if (tempDiff < lastDif) {
         lastDif = tempDiff;
         lastMin = values[1];
       }
     }
 
     return lastMin;
-
   }
 }
 
@@ -117,6 +109,26 @@ extension LocalizeHelper on AppLocalizations {
 
   List<String> get themeModes {
     return [follow_system, always_light, always_dark];
+  }
+
+  String getHeadingName(double heading) {
+    return (heading >= 0 && heading < 45)
+        ? compass_heading_north
+        : (heading >= 45 && heading < 90)
+            ? compass_heading_north_east
+            : (heading >= 90 && heading < 135)
+                ? compass_heading_east
+                : (heading >= 135 && heading < 180)
+                    ? compass_heading_south_east
+                    : (heading >= 180 && heading < 225)
+                        ? compass_heading_south
+                        : (heading >= 225 && heading < 270)
+                            ? compass_heading_south_west
+                            : (heading >= 270 && heading < 315)
+                                ? compass_heading_west
+                                : (heading >= 315 && heading < 360)
+                                    ? compass_heading_north_west
+                                    : compass_heading_north;
   }
 }
 
@@ -158,16 +170,15 @@ extension Helper on BuildContext {
   }
 }
 
-
 extension BoolParsing on String {
   bool toBool() {
     return toLowerCase() == 'true';
   }
+
   int toInt() => int.parse(this);
 }
 
 extension DateHelper on DateTime {
-
   int daysFrom(DateTime to) {
     final from = DateTime(year, month, day);
     final nto = DateTime(to.year, to.month, to.day);
@@ -177,14 +188,10 @@ extension DateHelper on DateTime {
   bool get isToday {
     final today = DateTime.now();
 
-    return year == today.year &&
-        month == today.month &&
-        day == today.day;
+    return year == today.year && month == today.month && day == today.day;
   }
 
   bool get isJummahToday {
     return weekday == 5;
   }
-
-
 }

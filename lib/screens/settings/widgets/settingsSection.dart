@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/screens/settings/widgets/SettingsTile.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
+import 'package:minimal_adhan/screens/settings/widgets/SettingsTile.dart';
 
 class SettingsSection extends StatelessWidget {
   final String title;
   final List<SettingsTile> tiles;
-  SettingsSection({required this.title, required this.tiles});
+  const SettingsSection({required this.title, required this.tiles});
 
   @override
   Widget build(BuildContext context) {

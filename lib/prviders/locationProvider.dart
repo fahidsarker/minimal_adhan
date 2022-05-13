@@ -69,13 +69,5 @@ class LocationProvider with ChangeNotifier {
     super.notifyListeners();
   }
 
-  String get addressAsString{
-    if(locationState is LocationAvailable){
-      return  (locationState as LocationAvailable).locationInfo.address;
-    }else if (locationState is LocationFinding){
-      return 'Finding...'; //todo change to app locale
-    }else {
-      return 'UNKNOWN ERROR'; // todo change to app locale
-    }
-  }
+
 }

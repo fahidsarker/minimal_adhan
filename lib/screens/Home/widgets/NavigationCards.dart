@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
@@ -13,7 +10,7 @@ class NavigationCard extends StatelessWidget {
   final double size;
 
 
-  NavigationCard({required this.label, required this.size, required this.child,  required this.onPressed});
+  const NavigationCard({required this.label, required this.size, required this.child,  required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

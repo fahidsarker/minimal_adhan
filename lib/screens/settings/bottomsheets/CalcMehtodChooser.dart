@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
-import 'package:minimal_adhan/helpers/adhan_dependencies.dart';
-import 'package:provider/provider.dart';
 import 'package:minimal_adhan/extensions.dart';
-
+import 'package:minimal_adhan/helpers/adhan_dependencies.dart';
+import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
+import 'package:provider/provider.dart';
 import 'Chooser.dart';
+
 class CalcMethodChooser extends StatelessWidget {
 
   @override

@@ -1,4 +1,3 @@
-import 'package:minimal_adhan/models/dua/Dua.dart';
 
 String getDuaErrorReportForm(String title){
   return 'https://docs.google.com/forms/d/e/1FAIpQLSfBJKNXf-OLCpi5_G6ykpHqEuRmBGQy-j4IYY0etZOb-44FSA/viewform?usp=pp_url&entry.43825494=$title';

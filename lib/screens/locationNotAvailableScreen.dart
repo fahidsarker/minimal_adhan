@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class LocationNotAvailableScreen extends StatelessWidget {
   final LocationNotAvailable _locationNotAvailable;
 
-  LocationNotAvailableScreen(this._locationNotAvailable);
+  const LocationNotAvailableScreen(this._locationNotAvailable);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LocationNotAvailableScreen extends StatelessWidget {
                 'assets/location_na.png',
                 width: 128,
               ),
-              Text('Location Not available!'),
+               Text(context.appLocale.no_location_available),
               Text(
                 '${_locationNotAvailable.cause}',
                 style: context.textTheme.headline6,
@@ -32,7 +32,7 @@ class LocationNotAvailableScreen extends StatelessWidget {
               TextButton(
                   onPressed: () =>
                       locationProvider.updateLocationWithGPS(background: false),
-                  child: Text('Try Again'))
+                  child:  Text(context.appLocale.try_again),)
             ],
           ),
         ),

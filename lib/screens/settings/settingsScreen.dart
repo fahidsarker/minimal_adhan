@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
@@ -40,6 +41,8 @@ void buildBottomSheet(Widget content, BuildContext context) {
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +96,20 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               SettingsClickable(
-                onClick: () => locationProvider.updateLocationWithGPS(background: false),
-                title: 'Location', // todo change to applocale
+                onClick: () =>
+                    locationProvider.updateLocationWithGPS(background: false),
+                title: appLocale.location,
                 leading: Icon(
                   Icons.my_location,
                   color: context.primaryColor,
                 ),
-                subtitle: (locationProvider.addressAsString + '\nTap to update'), //todo change to app locale
+                subtitle: '${locationProvider.locationState is LocationAvailable
+                        ? (locationProvider.locationState as LocationAvailable)
+                            .locationInfo
+                            .address
+                        : locationProvider.locationState is LocationFinding
+                            ? appLocale.finding
+                            : appLocale.error_occured}\n${appLocale.tap_to_update}',
               ),
             ],
           ),
@@ -157,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ManualCorrectionScreen(),
+                      builder: (_) => const ManualCorrectionScreen(),
                     ),
                   );
                 },
@@ -172,8 +182,8 @@ class SettingsScreen extends StatelessWidget {
                 onToggle: (val) async {
                   adhanDependency.changePersistantNotifyStatus(newVal: val);
                 },
-                subtitle: appLocale.persistant_notify_desc,
-                title: appLocale.persistant_notify,
+                subtitle: appLocale.persistent_notify_desc,
+                title: appLocale.persistent_notify,
                 value: adhanDependency.showPersistant,
                 leading: Icon(
                   Icons.notifications_rounded,
@@ -228,7 +238,7 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => showDialog(
                   context: context,
-                  builder: (_) => FontSizeSelector(
+                  builder: (_) => const FontSizeSelector(
                     arabic: true,
                   ),
                 ),
@@ -243,7 +253,7 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => showDialog(
                   context: context,
-                  builder: (_) => FontSizeSelector(
+                  builder: (_) => const FontSizeSelector(
                     arabic: false,
                   ),
                 ),
@@ -276,7 +286,7 @@ class SettingsScreen extends StatelessWidget {
                 leading: Icon(Icons.translate),
               ),*/
               SettingsClickable(
-                onClick: () => launch(githubRepoLink),
+                onClick: () => launchUrl(Uri.parse(githubRepoLink), mode: LaunchMode.externalApplication),
                 title: appLocale.github_ripo,
                 subtitle: appLocale.github_ripo_desc,
                 leading: Icon(
@@ -285,7 +295,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               SettingsClickable(
-                onClick: () => launch(getBugReportForm()),
+                onClick: () => launchUrl(Uri.parse(getBugReportForm())),
                 title: appLocale.report_bug,
                 subtitle: appLocale.report_bug_desc,
                 leading: Icon(
@@ -294,7 +304,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               SettingsClickable(
-                onClick: () => launch(getFeatureRequestForm()),
+                onClick: () => launchUrl(Uri.parse(getFeatureRequestForm())),
                 title: appLocale.request_a_feature,
                 subtitle: appLocale.request_a_feature_desc,
                 leading: Icon(
@@ -304,7 +314,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               SettingsClickable(
                 onClick: () => context.showSnackBar(
-                  "May Allah reward you with something good :-)",
+                  appLocale.make_dua_action,
                 ),
                 title: appLocale.make_dua,
                 subtitle: appLocale.make_dua_desc,
@@ -316,7 +326,7 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: 'About',
+            title: appLocale.about,
             tiles: [
               /*SettingsClickable(
                   onClick: () async {
@@ -326,7 +336,7 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => showAboutDialog(
                   context: context,
-                  applicationName: appLocale.minimal_adhan,
+                  applicationName: appLocale.app_name,
                   applicationIcon: Image.asset(
                     'assets/logo.png',
                     width: 55,
@@ -339,7 +349,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                title: 'Minimal Adhan',
+                title: 'Azan',
                 subtitle:
                     'Version: ${globalProvider.version}, build: ${globalProvider.buildNumber}',
                 leading: Image.asset(

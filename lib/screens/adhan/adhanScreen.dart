@@ -24,10 +24,10 @@ class AdhanScreen extends StatelessWidget {
                     adhanDep, locationState.locationInfo, context.appLocale),
                 child: AdhanAvailableScreen(locationState.locationInfo))
             : (locationState is LocationFinding)
-                ? LocationFindingScreen()
+                ? const LocationFindingScreen()
                 : (locationState is LocationNotAvailable)
                     ? LocationNotAvailableScreen(locationState)
-                    : UnknownErrorScreen(),
+                    : const UnknownErrorScreen(),
       ),
     );
   }

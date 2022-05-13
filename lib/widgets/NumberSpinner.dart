@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 List<String> listFromRange(int start, int end, NumberFormat formatter, {String suffix = '', String prefix = ''}){
   assert (start < end);
@@ -31,7 +30,7 @@ class NumberSpinner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocale = AppLocalizations.of(context)!;
+    final appLocale = context.appLocale;
     final List<String> minuteList = listFromRange(start, end, NumberFormat('00', appLocale.locale), suffix: appLocale.minute);
     return AlertDialog(
         actions: [

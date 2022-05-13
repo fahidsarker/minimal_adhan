@@ -1,19 +1,16 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
-import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/duas_provider.dart';
 import 'package:minimal_adhan/screens/dua/dua_detailed_screen.dart';
 import 'package:minimal_adhan/screens/dua/widgets/duaLongPressOptions.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
-
 import 'package:provider/provider.dart';
-import 'package:minimal_adhan/extensions.dart';
 
 class DuaRow extends StatelessWidget {
   final Dua dua;
 
-  DuaRow(this.dua);
+  const DuaRow(this.dua);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class DuaRow extends StatelessWidget {
                         ChangeNotifierProvider.value(value: duaProvider)
                       ],
                       child: DuaDetailsScreen(dua),
-                    )),
+                    ),),
           );
         },
         onLongPress: () => showDialog(
@@ -42,16 +39,16 @@ class DuaRow extends StatelessWidget {
             builder: (_) => ChangeNotifierProvider.value(
                   value: duaProvider,
                   child: DuaLongPressOptions(dua.id),
-                )),
+                ),),
         borderRadius: BorderRadius.circular(8.0),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           decoration: BoxDecoration(
               color: getColoredContainerColor(context),
-              borderRadius: BorderRadius.circular(8.0)),
+              borderRadius: BorderRadius.circular(8.0),),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               Text(
@@ -60,12 +57,12 @@ class DuaRow extends StatelessWidget {
                 style: context.textTheme.headline1?.copyWith(
                     fontSize: context.textTheme.headline5?.fontSize,
                     color: context.textTheme.headline6?.color,
-                    fontWeight: FontWeight.normal),
+                    fontWeight: FontWeight.normal,),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
-              Divider(
+              const Divider(
                 thickness: 3.0,
               ),
               Text(

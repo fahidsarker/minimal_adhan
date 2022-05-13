@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
@@ -84,3 +85,4 @@ class AdhanInfoDialog extends StatelessWidget {
     );
   }
 }
+*/

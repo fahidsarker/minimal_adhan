@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/prviders/adhanPlayBackProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/screens/notificationChooser/notifySelectBottomSheet.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/timer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class AdhanItem extends StatelessWidget {
   static const _radius = 10.0;
   static const _padding = 8.0;
-  static const _margin = 8.0;
   final Adhan _adhan;
   final NumberFormat formatter;
 
@@ -21,7 +19,7 @@ class AdhanItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocale = AppLocalizations.of(context)!;
+    final appLocale = context.appLocale;
 
     final adhanTitleStyle = context.textTheme.headline5
         ?.copyWith(color: context.textTheme.headline6?.color);

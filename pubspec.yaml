@@ -21,11 +21,13 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
   flutter:
     sdk: flutter
   adhan: ^2.0.0-nullsafety.1
   geolocator: ^7.0.3
-  intl: ^0.17.0
   auto_size_text: ^3.0.0-nullsafety.0
   webview_flutter: ^2.0.12
   provider: ^6.0.2
@@ -50,9 +52,6 @@ dependencies:
   optimize_battery: ^0.0.2
   share_plus: ^3.0.4
   matrix4_transform: ^2.0.1
-  animated_flip_counter: ^0.2.0
-  flutter_localizations:
-    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.

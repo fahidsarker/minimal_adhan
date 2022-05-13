@@ -20,11 +20,11 @@ class FontSizeSelector extends StatelessWidget {
             duaDependency.changeFontToDefault(isArabic: arabic);
             Navigator.pop(context);
           },
-          child: const Text('Default'),
+          child:  Text(appLocale.default_mode),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Close'),
+          child:  Text(appLocale.close),
         ),
       ],
       title:
@@ -44,7 +44,7 @@ class FontSizeSelector extends StatelessWidget {
                 )
               else
                 Text(
-                  'Preview Of Other Font sizes',
+                  appLocale.preview_of_font,
                   style: TextStyle(fontSize: duaDependency.otherFontSize),
                 ),
               const SizedBox(

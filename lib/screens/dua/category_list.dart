@@ -7,9 +7,7 @@ import 'package:minimal_adhan/prviders/duas_provider.dart';
 import 'package:minimal_adhan/screens/dua/dua_list_view.dart';
 import 'package:minimal_adhan/widgets/CheckedFutureBuilder.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
 
-import '../../prviders/dependencies/DuaDependencyProvider.dart';
 
 class CategoryList extends StatelessWidget {
 

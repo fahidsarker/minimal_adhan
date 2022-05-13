@@ -12,7 +12,7 @@ class AppLocale extends Locale {
 
 const supportedAppLangs =  [
   AppLocale('en', 'English'),
-  AppLocale('ar', '(Beta) عربى'),
-  AppLocale('bn', 'বাংলা (Beta)')
+  //AppLocale('ar', '(Beta) عربى'),
+  //AppLocale('bn', 'বাংলা (Beta)')
 ];
 

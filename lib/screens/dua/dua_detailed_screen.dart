@@ -46,7 +46,7 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                 ),
                 PopupMenuButton<String>(
                   onSelected: (val) {
-                    if (val == appLocale.copy) {
+                    if (val == appLocale.copy_dua) {
                       copyDuaToClipBoard(data);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -77,7 +77,7 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                     return {
                       appLocale.arabic_font_size,
                       appLocale.other_font_size,
-                      appLocale.copy,
+                      appLocale.copy_dua,
                       appLocale.report_an_error
                     }.map((String choice) {
                       return PopupMenuItem<String>(

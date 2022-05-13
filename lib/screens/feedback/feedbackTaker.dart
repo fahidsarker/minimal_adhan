@@ -5,7 +5,7 @@ class FeedbackTaker extends StatelessWidget {
   final String url;
   final String title;
 
-  FeedbackTaker(this.title, this.url);
+  const FeedbackTaker(this.title, this.url);
 
   @override
   Widget build(BuildContext context) {

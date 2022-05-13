@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:minimal_adhan/extensions.dart';
 
 class LocationFindingScreen extends StatelessWidget {
@@ -18,7 +16,7 @@ class LocationFindingScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text("Finding Location...", style: context.textTheme.headline6,),
             ),
-            LinearProgressIndicator()
+            const LinearProgressIndicator()
           ],
         ),
       ),

@@ -11,7 +11,7 @@ class CheckedFutureBuilder<T> extends StatelessWidget {
     required this.future,
     required this.builder,
     this.onLoading = const Loading(),
-    this.onFailed = const Text("Failed"),
+    this.onFailed = const Text("Failed"), //todo app locale
   });
 
   @override

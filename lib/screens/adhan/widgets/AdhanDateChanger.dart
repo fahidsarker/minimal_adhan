@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
@@ -9,7 +8,7 @@ import 'package:minimal_adhan/screens/adhan/widgets/AdhanList.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:provider/provider.dart';
 
-const _PADDING = 16.0;
+const _padding = 16.0;
 
 class AdhanDateChanger extends StatelessWidget {
   final PageController _adhanListPageController;
@@ -21,7 +20,7 @@ class AdhanDateChanger extends StatelessWidget {
         context: context,
         initialDate: currentDate,
         firstDate: DateTime(2000),
-        lastDate: DateTime(2070));
+        lastDate: DateTime(2070),);
 
     if (date != null) {
       final days = DateTime.now().daysFrom(date);
@@ -33,10 +32,10 @@ class AdhanDateChanger extends StatelessWidget {
   Widget build(BuildContext context) {
     final adhanProvider = context.watch<AdhanProvider>();
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: _PADDING),
+      padding: const EdgeInsets.symmetric(vertical: _padding),
       decoration: BoxDecoration(
         gradient: getOnBackgroundGradient(context),
-        borderRadius: BorderRadius.circular(16)
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
         child: Row(
@@ -54,8 +53,8 @@ class AdhanDateChanger extends StatelessWidget {
                 onPressed: () {
                   _adhanListPageController.previousPage(
                       duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
-                }),
+                      curve: Curves.easeIn,);
+                },),
             InkWell(
               borderRadius: BorderRadius.circular(10),
               onTap: () => moveToDate(context, adhanProvider.currentDate),
@@ -66,7 +65,7 @@ class AdhanDateChanger extends StatelessWidget {
                   children: [
                     AutoSizeText(
                       DateFormat("EEEE, dd MMM yyyy",
-                              adhanProvider.appLocalization.locale)
+                              adhanProvider.appLocalization.locale,)
                           .format(adhanProvider.currentDate),
                       style: context.textTheme.headline6
                           ?.copyWith(color: Colors.white),
@@ -93,8 +92,8 @@ class AdhanDateChanger extends StatelessWidget {
                 onPressed: () {
                   _adhanListPageController.nextPage(
                       duration: const Duration(milliseconds: 150),
-                      curve: Curves.easeIn);
-                })
+                      curve: Curves.easeIn,);
+                },)
           ],
         ),
       ),
@@ -103,7 +102,7 @@ class AdhanDateChanger extends StatelessWidget {
 
   String getArabicDate(DateTime date) {
     HijriCalendar.setLocal('ar');
-    var hDate = HijriCalendar.fromDate(date);
+    final hDate = HijriCalendar.fromDate(date);
     return '${hDate.hDay}-${hDate.getShortMonthName()}-${hDate.hYear}';
   }
 }
@@ -122,7 +121,7 @@ class _CustomDivider extends StatelessWidget {
             color: Colors.white,
             border: Border.all(width: 4.0),
             borderRadius: BorderRadius.circular(4.0),
-          )),
+          ),),
     );
   }
 }

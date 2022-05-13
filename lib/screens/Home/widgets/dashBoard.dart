@@ -28,11 +28,6 @@ class DashBoard extends StatelessWidget {
     final headingStyle = context.textTheme.headline1
         ?.copyWith(color: context.textTheme.headline6?.color);
 
-    final lowerTextStyle =
-        context.textTheme.headline6?.copyWith(color: context.secondaryColor);
-    const padding = const EdgeInsets.all(16.0);
-    final radius = BorderRadius.circular(15);
-
     return SizedBox(
       height: DASHBOARD_TOP_HEIGHT,
       child: Padding(
@@ -41,24 +36,26 @@ class DashBoard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: _buildLayout(
-              context: context,
-              adhanDependencyProvider: adhanDependency,
-              locationState: locationState,
-              currentAdhan: currentAdhan,
-              nextAdhan: nextAdhan,
-              headingStyle: headingStyle),
+            context: context,
+            adhanDependencyProvider: adhanDependency,
+            locationState: locationState,
+            currentAdhan: currentAdhan,
+            nextAdhan: nextAdhan,
+            headingStyle: headingStyle,
+          ),
         ),
       ),
     );
   }
 
-  List<Widget> _buildLayout(
-      {required BuildContext context,
-      required AdhanDependencyProvider adhanDependencyProvider,
-      required LocationState locationState,
-      required Adhan? currentAdhan,
-      required Adhan? nextAdhan,
-      TextStyle? headingStyle}) {
+  List<Widget> _buildLayout({
+    required BuildContext context,
+    required AdhanDependencyProvider adhanDependencyProvider,
+    required LocationState locationState,
+    required Adhan? currentAdhan,
+    required Adhan? nextAdhan,
+    TextStyle? headingStyle,
+  }) {
     final appLocale = context.appLocale;
     return [
       if (currentAdhan != null)
@@ -92,13 +89,19 @@ class DashBoard extends StatelessWidget {
           style: context.textTheme.bodyText1,
         ),
       if (locationState is LocationAvailable)
-        _buildLocationRow(context, Icons.my_location,
-            locationState.locationAddressOfLength(25))
+        _buildLocationRow(
+          context,
+          Icons.my_location,
+          locationState.locationAddressOfLength(25),
+        )
     ];
   }
 
   Widget _buildLocationRow(
-      BuildContext context, IconData iconData, String text) {
+    BuildContext context,
+    IconData iconData,
+    String text,
+  ) {
     return Row(
       children: [
         Icon(

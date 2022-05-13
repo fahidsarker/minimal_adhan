@@ -4,11 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
-import 'package:minimal_adhan/screens/adhan/widgets/AdhanDateChanger.dart';
 import 'package:minimal_adhan/screens/adhan/widgets/AdhanItem.dart';
-import 'package:minimal_adhan/screens/adhan/widgets/CurrentAdhanDisplay.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const centerPage = 20000;
 

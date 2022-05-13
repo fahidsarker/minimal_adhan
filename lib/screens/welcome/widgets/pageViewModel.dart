@@ -1,13 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/extensions.dart';
 
 class PageViewModel extends StatelessWidget {
   final String title;
   final Widget bodyWidget;
   final Widget image;
 
-  // ignore: require_trailing_commas
   const PageViewModel(
       {required this.title, required this.bodyWidget, required this.image,});
 

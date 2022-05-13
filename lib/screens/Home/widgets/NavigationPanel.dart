@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
 
 const DASHBOARD_NAVIGATION_ELEMENT_PER_ROW = 2;

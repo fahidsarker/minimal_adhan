@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class SettingsTile extends StatelessWidget {
@@ -6,7 +5,7 @@ abstract class SettingsTile extends StatelessWidget {
   final String? subtitle;
   final Widget? leading;
 
-  SettingsTile(
+  const SettingsTile(
     this.title,
     this.subtitle,
     this.leading,
@@ -46,7 +45,7 @@ class SettingsToggle extends SettingsTile {
   final bool value;
   final String? subtitle;
 
-  SettingsToggle(
+  const SettingsToggle(
       {required this.onToggle,
       required String title,
       required this.value,

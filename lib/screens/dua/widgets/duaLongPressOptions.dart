@@ -20,7 +20,7 @@ class DuaLongPressOptions extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       duration: const Duration(milliseconds: 500),
-    ));
+    ),);
     Navigator.pop(context);
   }
 
@@ -40,10 +40,10 @@ class DuaLongPressOptions extends StatelessWidget {
           actions: [
             IconedTextButton(
               iconData: Icons.copy,
-              text: appLocale.copy,
+              text: appLocale.copy_dua,
               color: context.secondaryColor,
-              onPressed: () => action(context, 'Copied to clipboard!',
-                  () => copyDuaToClipBoard(data)),
+              onPressed: () => action(context, appLocale.copy_dua_action,
+                  () => copyDuaToClipBoard(data),),
             ),
             IconedTextButton(
               iconData: data.isFavourite
@@ -56,9 +56,9 @@ class DuaLongPressOptions extends StatelessWidget {
               onPressed: () => action(
                   context,
                   data.isFavourite
-                      ? 'Removed From Favourite'
-                      : 'Added to favourite',
-                  () => duaProvider.toggleFavourite(data.isFavourite, duaID)),
+                      ? appLocale.remove_from_fav_action
+                      : appLocale.add_to_fav_action,
+                  () => duaProvider.toggleFavourite(data.isFavourite, duaID),),
             ),
             IconedTextButton(
               iconData: Icons.report,

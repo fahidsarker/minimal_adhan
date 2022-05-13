@@ -1,16 +1,13 @@
 import 'dart:math';
-
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/models/LocationInfo.dart';
 import 'package:minimal_adhan/screens/qibla/SensorNotAvailableScreen.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 
 class QiblaAvailableScreen extends StatelessWidget {
@@ -20,12 +17,10 @@ class QiblaAvailableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qibla =
-        Qibla(Coordinates(_locationInfo.latitude, _locationInfo.longitude));
+    final qibla = Qibla(Coordinates(_locationInfo.latitude, _locationInfo.longitude));
     final qiblaDirection = 2 * pi * (qibla.direction / 360);
     double _lastAngle = 0;
-    final appLocale = AppLocalizations.of(context)!;
-    final NumberFormat _numberFormat = NumberFormat('##.#', appLocale.locale);
+    final appLocale =context.appLocale;
 
     final compassHeight = context.smallerBetweenHeightAndWidth * 0.6;
 
@@ -65,14 +60,14 @@ class QiblaAvailableScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'You are facing',
+                              appLocale.you_are_facing,
                               style: context.textTheme.headline6
                                   ?.copyWith(color: Colors.white),
                             ),
                             Text(
                               match
-                                  ? '${context.appLocale.qibla}'
-                                  : '${getHeadingName(heading)}',
+                                  ? appLocale.qibla
+                                  : appLocale.getHeadingName(heading),
                               style: context.textTheme.headline4
                                   ?.copyWith(color: Colors.white),
                             ),
@@ -81,7 +76,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 32,
+                      height: 64,
                     ),
                     Container(
                       padding: const EdgeInsets.all(8.0),
@@ -125,7 +120,6 @@ class QiblaAvailableScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
                   ],
                 ),
               );
@@ -140,26 +134,10 @@ class QiblaAvailableScreen extends StatelessWidget {
     );
   }
 
-  @Deprecated("USe app locale")
-  String getHeadingName(double degree) {
-    const heading = {
-      0: 'North',
-      45: 'North-East',
-      90: 'East',
-      135: 'South-East',
-      180: 'South',
-      225: 'South-West',
-      270: 'West',
-      315: 'North-West',
-      360: 'North'
-    };
 
-    return heading[
-            degree.closestTo([0, 45, 90, 135, 180, 225, 270, 315, 360])] ??
-        'Unknown';
-  }
 
   @Deprecated('Use App locale')
+  //todo change to app locale
   String getAccuracyString(int accuracy) {
     return accuracy <= 15
         ? 'High'

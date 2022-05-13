@@ -9,7 +9,7 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 LinearGradient getOnBackgroundGradient(BuildContext context, {double opacity = 1}) {
   return context.theme.brightness == Brightness.dark
       ?  LinearGradient(colors: [
-    const Color.fromRGBO(88, 7, 199, 1.0).withOpacity(opacity),
+    const Color.fromRGBO(81, 9, 177, 1.0).withOpacity(opacity),
     const Color.fromRGBO(169, 108, 238, 1.0).withOpacity(opacity)
   ],)
       :  LinearGradient(colors: [
@@ -44,7 +44,7 @@ ThemeData getLightTheme(
 
 ThemeData getDarkTheme(
     BuildContext context, GlobalDependencyProvider globalDependency,) {
-  const darkBack = Color.fromRGBO(0, 18, 64, 1);
+  const darkBack = Colors.black;
 
   return ThemeData(
       bottomSheetTheme:

@@ -7,7 +7,8 @@ import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationCards.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationPanel.dart';
-import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
+import 'package:minimal_adhan/widgets/dashBoard.dart';
 import 'package:minimal_adhan/screens/adhan/adhanScreen.dart';
 import 'package:minimal_adhan/screens/dua/duaScreen.dart';
 import 'package:minimal_adhan/screens/qibla/qiblaScreen.dart';
@@ -19,20 +20,15 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeContent extends StatefulWidget {
   final void Function([bool?]) toggleDrawer;
   final AnimationController drawerController;
+  final void Function(Widget, int)? onNavigate;
 
-  const HomeContent(this.toggleDrawer, this.drawerController);
+  const HomeContent(this.toggleDrawer, this.drawerController, {required this.onNavigate});
 
   @override
   State<HomeContent> createState() => _HomeContentState();
 }
 
 class _HomeContentState extends State<HomeContent> {
-  Widget _getNavImage(String name, double size) => Image.asset(
-        'assets/screen_icons/$name.png',
-        width: size,
-        fit: BoxFit.fitWidth,
-      );
-
   ScrollController controller = ScrollController();
 
   @override
@@ -51,27 +47,33 @@ class _HomeContentState extends State<HomeContent> {
     super.initState();
   }
 
+  void navigate(BuildContext context, Widget child, int index){
+    if(widget.onNavigate == null){
+      context.push(child);
+    }else{
+      widget.onNavigate?.call(child, index);
+    }
+  }
+
   bool closeTopContainer = false;
 
   @override
   Widget build(BuildContext context) {
     final appLocale = context.appLocale;
     final locationProvider = context.read<LocationProvider>();
-    final iconSize = min(
-      156.0,
-      (context.width - 50) / DASHBOARD_NAVIGATION_ELEMENT_PER_ROW,
-    );
 
     return GestureDetector(
-      onPanUpdate: (details) {
-        if (details.delta.dx > 0) {
-          widget.toggleDrawer(true);
-        }
+      onPanUpdate: context.isLargeScreen
+          ? null
+          : (details) {
+              if (details.delta.dx > 0) {
+                widget.toggleDrawer(true);
+              }
 
-        if (details.delta.dx < 0) {
-          widget.toggleDrawer(false);
-        }
-      },
+              if (details.delta.dx < 0) {
+                widget.toggleDrawer(false);
+              }
+            },
       child: Stack(
         children: [
           AnimatedOpacity(
@@ -83,73 +85,73 @@ class _HomeContentState extends State<HomeContent> {
             controller: controller,
             children: [
               NavigationCard(
-                size: iconSize,
                 label: appLocale.adhan,
-                child: _getNavImage('ic_azan', iconSize * 0.6),
-                onPressed: () => context.push(const AdhanScreen()),
+                imageURI: 'ic_azan',
+                onPressed: () => navigate(context, const AdhanScreen(), 0),
               ),
               NavigationCard(
-                size: iconSize,
                 label: appLocale.qibla,
-                child: _getNavImage('ic_qibla', iconSize * 0.6),
-                onPressed: () => context.push(const QiblaScreen()),
+                imageURI: 'ic_qibla',
+                onPressed: () => navigate(context, const QiblaScreen(), 1),
               ),
               NavigationCard(
-                size: iconSize,
                 label: appLocale.dua,
-                child: _getNavImage('ic_hadith', iconSize * 0.6),
-                onPressed: () => context.push(
+                imageURI: 'ic_hadith',
+                onPressed: () => navigate(context,
                   ChangeNotifierProvider(
                     create: (_) => DuaDependencyProvider(),
                     child: DuaScreen(),
                   ),
+                  2,
                 ),
               ),
               NavigationCard(
-                size: iconSize,
                 label: 'Tasbih',
-                child: _getNavImage('ic_tasbih', iconSize * 0.6),
-                onPressed: () => context.push(
+                imageURI: 'ic_tasbih',
+                onPressed: () => navigate(context,
                   ChangeNotifierProvider(
                     create: (_) => TasbihProvider(),
                     child: const TasbihScreen(),
                   ),
+                  3,
                 ),
               ),
               NavigationCard(
                 label: 'Nearby',
-                size: iconSize,
-                child: _getNavImage('nearby', iconSize * 0.6),
-                onPressed: () => locationProvider.locationState is LocationAvailable ? launch(
-                  'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
-                ) : context.showSnackBar(appLocale.no_location_available),
+                imageURI: 'nearby',
+                onPressed: () =>
+                    locationProvider.locationState is LocationAvailable
+                        ? navigate(context, FeedbackTaker('Nearby Mosque',                             'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
+                    ), 4)
+                        : context.showSnackBar(appLocale.no_location_available),
               ),
               NavigationCard(
                 label: appLocale.settings,
-                size: iconSize,
-                child: _getNavImage('ic_settings', iconSize * 0.6),
-                onPressed: () => context.push(
+                imageURI: 'ic_settings',
+                onPressed: () => navigate(context,
                   ChangeNotifierProvider(
                     create: (_) => DuaDependencyProvider(),
                     child: const SettingsScreen(),
                   ),
+                  5,
                 ),
               ),
             ],
           ),
-          AnimatedOpacity(
-            opacity: closeTopContainer ? 0 : 1,
-            duration: const Duration(milliseconds: 200),
-            child: closeTopContainer
-                ? null
-                : IconButton(
-                    onPressed: () => widget.toggleDrawer(),
-                    icon: AnimatedIcon(
-                      icon: AnimatedIcons.menu_arrow,
-                      progress: widget.drawerController,
+          if (!context.isLargeScreen)
+            AnimatedOpacity(
+              opacity: closeTopContainer ? 0 : 1,
+              duration: const Duration(milliseconds: 200),
+              child: closeTopContainer
+                  ? null
+                  : IconButton(
+                      onPressed: () => widget.toggleDrawer(),
+                      icon: AnimatedIcon(
+                        icon: AnimatedIcons.menu_arrow,
+                        progress: widget.drawerController,
+                      ),
                     ),
-                  ),
-          ),
+            ),
         ],
       ),
     );

@@ -6,6 +6,7 @@ import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/Home.dart';
+import 'package:minimal_adhan/screens/dynamic_display/dynamic_display.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:minimal_adhan/theme.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,7 @@ class Azan extends StatelessWidget {
       darkTheme: getDarkTheme(context, globalDependency),
       home: UpgradeAlert(
         child: globalDependency.welcomeScreenShown
-            ? Home(locationProvider)
+            ? DynamicDisplay(locationProvider)
             : const WelcomeScreen(showWarning: true, build: 'Beta'),
         onUpdate: () {
           PlatformCall.openAppStore();

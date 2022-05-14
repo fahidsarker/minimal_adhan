@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   final LocationProvider _locationProvider;
-
-  const Home(this._locationProvider);
+  final void Function(Widget, int)? onNavigate;
+  const Home(this._locationProvider, {this.onNavigate});
 
   @override
   State<Home> createState() => _HomeState();
@@ -109,7 +109,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             color: Theme.of(context).scaffoldBackgroundColor,
             child: Stack(
               children: [
-                HomeContent(_toggleDrawer, _animationController),
+                HomeContent(_toggleDrawer, _animationController, onNavigate: widget.onNavigate,),
                 if (_isOpen)
                   GestureDetector(
                     onTap: () => _toggleDrawer(),

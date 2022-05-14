@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/screens/Home/widgets/dashBoard.dart';
-
+import 'package:minimal_adhan/widgets/dashBoard.dart';
+import 'package:minimal_adhan/extensions.dart';
 const DASHBOARD_NAVIGATION_ELEMENT_PER_ROW = 2;
 class NavigationPanel extends StatelessWidget {
 
@@ -22,7 +22,12 @@ class NavigationPanel extends StatelessWidget {
     return ListView(
       controller: controller,
       physics: const BouncingScrollPhysics(),
-      children: [
+      children: context.isLargeScreen ? [
+        Container(
+          height: DASHBOARD_TOP_HEIGHT,
+        ),
+        ..._children
+      ] : [
         Container(
           height: DASHBOARD_TOP_HEIGHT,
         ),

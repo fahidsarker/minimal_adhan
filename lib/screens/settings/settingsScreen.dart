@@ -54,6 +54,7 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           appLocale.settings,
         ),

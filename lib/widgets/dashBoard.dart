@@ -81,7 +81,7 @@ class DashBoard extends StatelessWidget {
       else
         Text(
           appLocale.adhan,
-          style: context.textTheme.headline2,
+          style: context.textTheme.headline2?.copyWith(color: context.theme.colorScheme.onBackground),
         ),
       if (nextAdhan != null)
         Text(

@@ -70,7 +70,7 @@ class AdhanDateChanger extends StatelessWidget {
                       style: context.textTheme.headline6
                           ?.copyWith(color: Colors.white),
                     ),
-                    const _CustomDivider(),
+                     _CustomDivider(width: context.width * (context.isLargeScreen ? 0.3 : 0.5),),
                     Text(
                       DateFormat(getArabicDate(adhanProvider.currentDate))
                           .format(adhanProvider.currentDate),
@@ -108,14 +108,16 @@ class AdhanDateChanger extends StatelessWidget {
 }
 
 class _CustomDivider extends StatelessWidget {
-  const _CustomDivider({Key? key}) : super(key: key);
+  final double width;
+
+  const _CustomDivider({required this.width});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
-          width: context.width * 0.5,
+          width: width,
           height: 2,
           decoration: BoxDecoration(
             color: Colors.white,

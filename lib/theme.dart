@@ -9,8 +9,8 @@ import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dar
 LinearGradient getOnBackgroundGradient(BuildContext context, {double opacity = 1}) {
   return context.theme.brightness == Brightness.dark
       ?  LinearGradient(colors: [
-    const Color.fromRGBO(81, 9, 177, 1.0).withOpacity(opacity),
-    const Color.fromRGBO(169, 108, 238, 1.0).withOpacity(opacity)
+    const Color(0xFF134E5E).withOpacity(opacity),
+    const Color(0xFF71B280).withOpacity(opacity),
   ],)
       :  LinearGradient(colors: [
     const Color(0xFF134E5E).withOpacity(opacity),
@@ -21,7 +21,7 @@ LinearGradient getOnBackgroundGradient(BuildContext context, {double opacity = 1
 Color getDrawerShadowColor(BuildContext context) {
   return context.theme.brightness == Brightness.light
       ? Colors.teal
-      : const Color.fromRGBO(90, 15, 186, 1.0);
+      : Colors.teal;
 }
 
 ThemeData getLightTheme(
@@ -65,9 +65,9 @@ ThemeData getDarkTheme(
       dialogBackgroundColor: darkBack,
       scaffoldBackgroundColor: darkBack,
       backgroundColor: darkBack,
-      snackBarTheme: context.theme.snackBarTheme
-          .copyWith(backgroundColor: Colors.white.withOpacity(0.8)),
+
       colorScheme: const ColorScheme.dark(
+        primary: Color(0xFF71B280),
         secondary: Colors.white,
       ),);
 }

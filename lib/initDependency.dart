@@ -13,10 +13,10 @@ Future<Widget> initializeAppWith ({required Widget child}) async{
   await initPreferences();
   await scheduleNotification(showNowIfPersistent: true);
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
   final _globalDependency = GlobalDependencyProvider();
   await _globalDependency.init();
   final _locationProvider = LocationProvider();

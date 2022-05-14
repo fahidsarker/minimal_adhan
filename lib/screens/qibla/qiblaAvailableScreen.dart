@@ -15,6 +15,9 @@ class QiblaAvailableScreen extends StatelessWidget {
 
   const QiblaAvailableScreen(this._locationInfo);
 
+
+
+
   @override
   Widget build(BuildContext context) {
     final qibla = Qibla(Coordinates(_locationInfo.latitude, _locationInfo.longitude));
@@ -88,8 +91,6 @@ class QiblaAvailableScreen extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/needle.svg',
-                            width: compassHeight,
-                            height: compassHeight,
                             color: match
                                 ? context.primaryColor
                                 : context.secondaryColor,
@@ -101,7 +102,6 @@ class QiblaAvailableScreen extends StatelessWidget {
                                 SvgPicture.asset(
                                   'assets/compass.svg',
                                   fit: BoxFit.fitWidth,
-                                  width: context.width,
                                   color: match
                                       ? context.primaryColor
                                       : context.textTheme.headline6!.color,
@@ -111,7 +111,6 @@ class QiblaAvailableScreen extends StatelessWidget {
                                   child: SvgPicture.asset(
                                     'assets/qibla.svg',
                                     fit: BoxFit.fitWidth,
-                                    width: context.width,
                                   ),
                                 )
                               ],

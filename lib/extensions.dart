@@ -168,6 +168,14 @@ extension Helper on BuildContext {
   AppLocalizations get appLocale {
     return AppLocalizations.of(this)!;
   }
+
+  bool get isLargeScreen{
+    return width >= 600;
+  }
+
+  double get panelWidth {
+    return isLargeScreen ? 400 : width;
+  }
 }
 
 extension BoolParsing on String {

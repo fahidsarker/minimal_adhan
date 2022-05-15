@@ -69,12 +69,22 @@ class DashBoard extends StatelessWidget {
               width: 8,
             ),
             Expanded(
-              child: AutoSizeText(
-                currentAdhan.title,
-                style: context.textTheme.headline2
-                    ?.copyWith(color: context.theme.colorScheme.onBackground),
-                maxLines: 2,
-              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    currentAdhan.title,
+                    style: context.textTheme.headline2
+                        ?.copyWith(color: context.theme.colorScheme.onBackground),
+                    maxLines: 2,
+                  ),
+                  Text(
+                    '${currentAdhan.formattedStartTime} - ${currentAdhan.formattedEndTime}',
+                    style: context.textTheme.headline6
+                        ?.copyWith(color: context.theme.colorScheme.onBackground),
+                  ),
+                ],
+              )
             )
           ],
         )
@@ -83,6 +93,7 @@ class DashBoard extends StatelessWidget {
           appLocale.adhan,
           style: context.textTheme.headline2?.copyWith(color: context.theme.colorScheme.onBackground),
         ),
+      SizedBox(height: 16,),
       if (nextAdhan != null)
         Text(
           '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime})',

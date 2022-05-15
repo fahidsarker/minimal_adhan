@@ -87,7 +87,7 @@ flutter:
     - assets/
     - assets/screen_icons/
     - assets/adhan_times/
-    - lib/localization/langs/
+    - locals/langs/
 
 
 

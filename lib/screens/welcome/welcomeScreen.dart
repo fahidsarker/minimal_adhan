@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
+import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
@@ -96,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 buildBottomSheet(AppLanguagePicker(), context);
               },
-              child: Text(getAppLocaleOf(context.appLocale.locale).lang),
+              child: Text(AppLocale.of(context.appLocale.locale).lang),
             ),
           ],
         ),

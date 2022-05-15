@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hijri/hijri_calendar.dart';
 
 AppLocalizationsEn get engAppLocale {
   return AppLocalizationsEn();
@@ -72,7 +73,7 @@ extension ContextHelper on BuildContext {
   }
 }
 
-extension IntHelper<T extends num> on double {
+extension DoubleHelper<T extends num> on double {
   T closestTo(List<T> values) {
     T lastMin = values[0];
     double lastDif = (lastMin - this).abs();
@@ -129,6 +130,13 @@ extension LocalizeHelper on AppLocalizations {
                                 : (heading >= 315 && heading < 360)
                                     ? compass_heading_north_west
                                     : compass_heading_north;
+  }
+
+  String getDigitFor(int i){
+    assert(i >= 0 && i <= 9, "the digit must be between 0 and 9");
+    return [
+      zero, one,two, three, four, five, six, seven, eight, nine
+    ][i];
   }
 }
 
@@ -201,5 +209,42 @@ extension DateHelper on DateTime {
 
   bool get isJummahToday {
     return weekday == 5;
+  }
+
+  String getHizriDateForLocale(AppLocalizations locale, {String separator = '-'}){
+    final months = [
+      locale.arabic_month_muharram,
+      locale.arabic_month_safar,
+      locale.arabic_month_rabi_al_awwal,
+      locale.arabic_month_rabi_al_thani,
+      locale.arabic_month_jumada_al_awwal,
+      locale.arabic_month_jumada_al_thani,
+      locale.arabic_month_rajab,
+      locale.arabic_month_shaban,
+      locale.arabic_month_ramadan,
+      locale.arabic_month_shawwal,
+      locale.arabic_month_dhu_al_qadha,
+      locale.arabic_month_dhu_al_hijjah];
+
+    final hDate = HijriCalendar.fromDate(this);
+    return '${hDate.hDay.localizeTo(locale)}$separator${months[hDate.hMonth]}$separator${hDate.hYear.localizeTo(locale)}';
+  }
+}
+
+extension IntHelper on int{
+  String localizeTo(AppLocalizations locale){
+    final strNum = toString();
+    var localized = '';
+    for(int i = 0; i < strNum.length; i++){
+      final digit = strNum[i];
+      final localizedDigit = locale.getDigitFor(digit.toInt());
+      localized += localizedDigit;
+    }
+
+    if(locale.direction == 'rlt'){
+      localized = localized.split('').reversed.join('');
+    }
+
+    return localized;
   }
 }

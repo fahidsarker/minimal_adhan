@@ -72,8 +72,7 @@ class AdhanDateChanger extends StatelessWidget {
                     ),
                      _CustomDivider(width: context.width * (context.isLargeScreen ? 0.3 : 0.5),),
                     Text(
-                      DateFormat(getArabicDate(adhanProvider.currentDate))
-                          .format(adhanProvider.currentDate),
+                      adhanProvider.currentDate.getHizriDateForLocale(context.appLocale),
                       style: const TextStyle(color: Colors.white),
                     )
                   ],
@@ -100,11 +99,6 @@ class AdhanDateChanger extends StatelessWidget {
     );
   }
 
-  String getArabicDate(DateTime date) {
-    HijriCalendar.setLocal('ar');
-    final hDate = HijriCalendar.fromDate(date);
-    return '${hDate.hDay}-${hDate.getShortMonthName()}-${hDate.hYear}';
-  }
 }
 
 class _CustomDivider extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/localization/supportedLangs.dart';
+import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 
 
@@ -35,7 +36,7 @@ ThemeData getLightTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),),
         cardColor: Colors.white,
         brightness: Brightness.light,
-        fontFamily: getFont(globalDependency.locale),
+        fontFamily: AppLocale.of(globalDependency.locale).fontFamily,
         textTheme: getTextTheme(context, globalDependency.locale),
         colorScheme: const ColorScheme.light(
           primary: Colors.teal,
@@ -55,7 +56,7 @@ ThemeData getDarkTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light
             .copyWith(statusBarColor: Colors.transparent),
       ),
-      fontFamily: getFont(globalDependency.locale),
+      fontFamily: AppLocale.of(globalDependency.locale).fontFamily,
       textTheme: getTextTheme(context, globalDependency.locale).apply(
         bodyColor: Colors.white,
         displayColor: Colors.white70,

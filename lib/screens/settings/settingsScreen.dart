@@ -220,17 +220,17 @@ class SettingsScreen extends StatelessWidget {
               if (duaDependency.showTranslation)
                 SettingsClickable(
                   onClick: () =>
-                      buildBottomSheet(DuaTranslationLangPicker(), context),
+                      buildBottomSheet(ChangeNotifierProvider.value(value: duaDependency, child: DuaTranslationLangPicker(),), context),
                   title: appLocale.translation_lang,
                   subtitle: duaDependency.sameAsPrimaryLang
-                      ? appLocale.language
+                      ? appLocale.primary_language
                       : supportedAppLangs
                           .firstWhere(
                             (element) =>
                                 element.languageCode ==
                                 duaDependency.translationLang,
                           )
-                          .languageCode,
+                          .lang,
                   leading: Icon(
                     Icons.language,
                     color: context.primaryColor,

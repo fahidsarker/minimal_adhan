@@ -1,0 +1,667 @@
+{
+  "@__________________________________________Global_Page": {
+  },
+  "locale": "",
+  "@locale": {
+    "description": "Name of Locale.",
+    "eg_english": "en"
+  },
+  "direction": "",
+  "@direction": {
+    "description": "Language direction - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr"
+  },
+  "current_lang": "",
+  "@current_lang": {
+    "description": "Name of this language in its language",
+    "eg_english": "English"
+  },
+  "one": "",
+  "@one": {
+    "description": "Translation of the digit 1",
+    "eg_english": "1"
+  },
+  "two": "",
+  "@two": {
+    "description": "Translation of the digit 2",
+    "eg_english": "2"
+  },
+  "three": "",
+  "@three": {
+    "description": "Translation of the digit 3",
+    "eg_english": "3"
+  },
+  "four": "",
+  "@four": {
+    "description": "Translation of the digit 4",
+    "eg_english": "4"
+  },
+  "five": "",
+  "@five": {
+    "description": "Translation of the digit 5",
+    "eg_english": "5"
+  },
+  "six": "",
+  "@six": {
+    "description": "Translation of the digit 6",
+    "eg_english": "6"
+  },
+  "seven": "",
+  "@seven": {
+    "description": "Translation of the digit 7",
+    "eg_english": "7"
+  },
+  "eight": "",
+  "@eight": {
+    "description": "Translation of the digit 8",
+    "eg_english": "8"
+  },
+  "nine": "",
+  "@nine": {
+    "description": "Translation of the digit 9",
+    "eg_english": "9"
+  },
+  "zero": "",
+  "@zero": {
+    "description": "Translation of the digit 0",
+    "eg_english": "0"
+  },
+  "arabic_month_muharram": "",
+  "@arabic_month_muharram": {
+    "description": "Transliteration of the arabic month Muharram",
+    "eg_english": "Muharram"
+  },
+  "arabic_month_safar": "",
+  "@arabic_month_safar": {
+    "description": "Transliteration of the arabic month Safar",
+    "eg_english": "Safar"
+  },
+  "arabic_month_rabi_al_awwal": "",
+  "@arabic_month_rabi_al_awwal": {
+    "description": "Transliteration of the arabic month Rabi al-Awwal",
+    "eg_english": "Rabi al-Awwal"
+  },
+  "arabic_month_rabi_al_thani": "",
+  "@arabic_month_rabi_al_thani": {
+    "description": "Transliteration of the arabic month Rabi al-Thani",
+    "eg_english": "Rabi al-Thani"
+  },
+  "arabic_month_jumada_al_awwal": "",
+  "@arabic_month_jumada_al_awwal": {
+    "description": "Transliteration of the arabic month Jumada al-Awwal",
+    "eg_english": "Jumada al-Awwal"
+  },
+  "arabic_month_jumada_al_thani": "",
+  "@arabic_month_jumada_al_thani": {
+    "description": "Transliteration of the arabic month Jumada al-Thani",
+    "eg_english": "Jumada al-Thani"
+  },
+  "arabic_month_rajab": "",
+  "@arabic_month_rajab": {
+    "description": "Transliteration of the arabic month Rajab",
+    "eg_english": "Rajab"
+  },
+  "arabic_month_shaban": "",
+  "@arabic_month_shaban": {
+    "description": "Transliteration of the arabic month Shaban",
+    "eg_english": "Shaban"
+  },
+  "arabic_month_ramadan": "",
+  "@arabic_month_ramadan": {
+    "description": "Transliteration of the arabic month Ramadan",
+    "eg_english": "Ramadan"
+  },
+  "arabic_month_shawwal": "",
+  "@arabic_month_shawwal": {
+    "description": "Transliteration of the arabic month Shawwal",
+    "eg_english": "Shawwal"
+  },
+  "arabic_month_dhu_al_qadha": "",
+  "@arabic_month_dhu_al_qadha": {
+    "description": "Transliteration of the arabic month Dhu al-Qadah",
+    "eg_english": "Dhu al-Qadah"
+  },
+  "arabic_month_dhu_al_hijjah": "",
+  "@arabic_month_dhu_al_hijjah": {
+    "description": "Transliteration of the arabic month Dhu al-Hijjah",
+    "eg_english": "Dhu al-Hijjah"
+  },
+  "hour": "",
+  "@hour": {
+    "description": "The word hour (short form if possible) - e.g. for English: 'hr' ",
+    "eg_english": "hr"
+  },
+  "minute": "",
+  "@minute": {
+    "description": "The word form minute (short form if possible) - e.g. for English: 'min' ",
+    "eg_english": "min"
+  },
+  "close": "",
+  "@close": {
+    "description": "The word Close - e.g. for English: 'Close' ",
+    "eg_english": "CLose"
+  },
+  "notification": "",
+  "@notification": {
+    "description": "Describes a notification - e.g. for English: 'Notification' ",
+    "eg_english": "Notification"
+  },
+  "adhan": "",
+  "@adhan": {
+    "description": "Describes a button called Adhan/Azan - e.g. for English: 'Azan' ",
+    "eg_english": "Azan"
+  },
+  "qibla": "",
+  "@qibla": {
+    "description": "Describes a button called Qibla - e.g. for English: 'Qibla' ",
+    "eg_english": "Qibla"
+  },
+  "dua": "",
+  "@dua": {
+    "description": "Describes a button called Dua - e.g. for English: 'Dua' ",
+    "eg_english": "Dua"
+  },
+  "tasbih": "",
+  "@tasbih": {
+    "description": "Describes a button called tasbih - e.g. for English: 'Tasbih' ",
+    "eg_english": "Tasbih"
+  },
+  "settings": "",
+  "@settings": {
+    "description": "Describes a button called Settings  ",
+    "eg_english": "Settings"
+  },
+  "search": "",
+  "@search": {
+    "description": "Describes a button called Search ",
+    "eg_english": "Search"
+  },
+  "language": "",
+  "@language": {
+    "description": "A word for Language Selection  ",
+    "eg_english": "Language"
+  },
+  "app_name": "",
+  "@app_name": {
+    "description": "The transliteration for Azan ",
+    "eg_english": "Azan"
+  },
+  "location": "",
+  "@location": {
+    "description": "The translation of the word location  ",
+    "eg_english": "Location"
+  },
+  "next": "",
+  "@next": {
+    "description": "The translation of the word 'Next'  ",
+    "eg_english": "Next"
+  },
+  "reset": "",
+  "@reset": {
+    "description": "The translation of the word 'Reset'  ",
+    "eg_english": "Reset"
+  },
+  "type": "",
+  "@type": {
+    "description": "The translation for the word 'Type' - e.g. for English: ",
+    "eg_english": "'Type' - 'Type of Azan Notification'"
+  },
+  "timing": "",
+  "@timing": {
+    "description": "The translation for the word 'Timing' - e.g. for English:  ",
+    "eg_english": "'Timing', 'Timing for the Azan Notification'"
+  },
+  "bttn_open_settings": "",
+  "@bttn_open_settings": {
+    "description": "The translation for the sentence 'Open Settings'  ",
+    "eg_english": "Open Settings"
+  },
+  "bttn_okay": "",
+  "@bttn_okay": {
+    "description": "The translation for the word 'okay'  ",
+    "eg_english": "Okay"
+  },
+  "bttn_remind_me_later": "",
+  "@bttn_remind_me_later": {
+    "description": "The translation for the sentence 'Remind me later' ",
+    "eg_english": "Remind Me Later"
+  },
+  "bttn_never_ask_again": "",
+  "@bttn_never_ask_again": {
+    "description": "The translation for the sentence 'Never Ask me Again'  ",
+    "eg_english": "Never Ask Again"
+  },
+  "finding": "",
+  "@finding": {
+    "description": "An indicator to indication the app is finding the location  ",
+    "eg_english": "Finding..."
+  },
+  "error_occured": "",
+  "@error_occured": {
+    "description": "An indicator to indicate an error has occurred  ",
+    "eg_english": "Error Occured"
+  },
+  "no_location_available": "",
+  "@no_location_available": {
+    "description": "An Indicator to indicate no location is currently available  ",
+    "eg_english": "No Location Available"
+  },
+  "tap_to_update": "",
+  "@tap_to_update": {
+    "description": "A button to which updates content on tap  ",
+    "eg_english": "Tap to update"
+  },
+  "default_mode": "",
+  "@default_mode": {
+    "description": "A Button to change the setting to factory mode  ",
+    "eg_english": "Default"
+  },
+  "preview_of_font": "",
+  "@preview_of_font": {
+    "description": "Preview of the font size - e.g. for English ''",
+    "eg_english": "Preview Of Other Font sizes"
+  },
+  "share_app": "",
+  "@share_app": {
+    "description": "Share the app  ",
+    "eg_english": "Share with friends"
+  },
+  "about": "",
+  "@about": {
+    "description": "About panel - e.g. for English: 'About'",
+    "eg_english": "About"
+  },
+  "try_again": "",
+  "@try_again": {
+    "description": "A button to try again  ",
+    "eg_english": "Try Again"
+  },
+  "@__________________________________________Welcome_page": {
+  },
+  "location_privacy_short": "",
+  "@location_privacy_short": {
+    "description": "A short description of the location privacy policy  ",
+    "eg_english": "Azan is privacy focused. Your location is stored on your device locally."
+  },
+  "location_required": "",
+  "@location_required": {
+    "description": "A translation for the word 'Location Required' -  ",
+    "eg_english": "Location Required"
+  },
+  "location_found": "",
+  "@location_found": {
+    "description": "A translation for the word 'Location Found' ",
+    "eg_english": "Location Found"
+  },
+  "permission_denied": "",
+  "@permission_denied": {
+    "description": "A translation for the word 'Permission Denied' ",
+    "eg_english": "Permission Denied"
+  },
+  "location_permission_request_short": "",
+  "@location_permission_request_short": {
+    "description": "A short description explaining why the location is required   ",
+    "eg_english": "Your location is needed to calculate the time of azan, display the Qibla Compass and Show Nearby Mosques"
+  },
+  "@__________________________________________Adhan_Page": {
+  },
+  "adhan_fajr": "",
+  "@adhan_fajr": {
+    "description": "A word for 'Fajr' in its language ",
+    "eg_english": "Fajr"
+  },
+  "adhan_sunrise": "",
+  "@adhan_sunrise": {
+    "description": "A word for sunrise in its language  ",
+    "eg_english": "Sunrise"
+  },
+  "adhan_dhuhr": "",
+  "@adhan_dhuhr": {
+    "description": "A word for Dhuhr in its language  ",
+    "eg_english": "Dhuhr"
+  },
+  "adhan_jummah": "",
+  "@adhan_jummah": {
+    "description": "A word for 'Jummah' in its language  ",
+    "eg_english": "Jummah"
+  },
+  "adhan_asr": "",
+  "@adhan_asr": {
+    "description": "A word for 'Asr' in its language  ",
+    "eg_english": "Asr"
+  },
+  "adhan_magrib": "",
+  "@adhan_magrib": {
+    "description": "A word for 'Magrib' in its language  ",
+    "eg_english": "Magrib"
+  },
+  "adhan_isha": "",
+  "@adhan_isha": {
+    "description": "A word for 'Isha' in its language  ",
+    "eg_english": "Isha"
+  },
+  "adhan_midnight": "",
+  "@adhan_midnight": {
+    "description": "A word for 'Midnight' in its language  ",
+    "eg_english": "Midnight"
+  },
+  "adhan_third_night": "",
+  "@adhan_third_night": {
+    "description": "A word for 'Last Third Night' in its language  ",
+    "eg_english": "Last Third Night"
+  },
+  "inexact_notify": "",
+  "@inexact_notify": {
+    "description": "A sentence for weather the notification be exact or delayed or early ",
+    "eg_english": "Early/Delayed Notification"
+  },
+  "notify_me_before": "",
+  "@notify_me_before": {
+    "description": "Describes when the notification should be sent early ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes before azan time"
+  },
+  "notify_me_after": "",
+  "@notify_me_after": {
+    "description": "Describes when the notification should be sent later ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes after azan time"
+  },
+  "silent_adhan": "",
+  "@silent_adhan": {
+    "description": "No notification should be sent - e.g. for English:  '' ",
+    "eg_english": "Silent"
+  },
+  "notification_only": "",
+  "@notification_only": {
+    "description": "Only send the notification with default sound ",
+    "eg_english": "Notification Only"
+  },
+  "ringtone": "",
+  "@ringtone": {
+    "description": "Play the ringtone during notification '",
+    "eg_english": "Ringtone"
+  },
+  "adhan_mecca": "",
+  "@adhan_mecca": {
+    "description": "Play the Azan of Mecca during notification ",
+    "eg_english": "Azan Mecca"
+  },
+  "adhan_medina": "",
+  "@adhan_medina": {
+    "description": "Play the azan of medina during notification ",
+    "eg_english": "Azan Medina"
+  },
+  "alarm": "",
+  "@alarm": {
+    "description": "Play the alarm during notification ",
+    "eg_english": "Alarm"
+  },
+  "@__________________________________________Settings_Page": {
+  },
+  "global": "",
+  "@global": {
+    "description": "The category global settings i.e. that applies to the entire app ",
+    "eg_english": "Global"
+  },
+  "click_to_change": "",
+  "@click_to_change": {
+    "description": "The user can change a settings by tapping a Button  ",
+    "eg_english": "Click to change"
+  },
+  "madhab": "",
+  "@madhab": {
+    "description": "Select a madhab for asr time  ",
+    "eg_english": "Madhab"
+  },
+  "hanafi_madhab": "",
+  "@hanafi_madhab": {
+    "description": "The transliteration of Hanafi madhab  ",
+    "eg_english": "Hanafi Madhab"
+  },
+  "shafi_madhab": "",
+  "@shafi_madhab": {
+    "description": "The transliteration of the Shafii Madhab  ",
+    "eg_english": "Shafi madhab"
+  },
+  "hanafi_asr_desc": "",
+  "@hanafi_asr_desc": {
+    "description": "The descrion of the change of selecting hanafi madhab ",
+    "eg_english": "Later Asr Time"
+  },
+  "shafi_asr_desc": "",
+  "@shafi_asr_desc": {
+    "description": "The description of the change of selecting the shafi madhab  ",
+    "eg_english": "Early Asr Time"
+  },
+  "persistent_notify": "",
+  "@persistent_notify": {
+    "description": "will the notification be persistent? ",
+    "eg_english": "Persistent Notification"
+  },
+  "persistent_notify_desc": "",
+  "@persistent_notify_desc": {
+    "description": "Description for the notification be persistent ",
+    "eg_english": "Show the Azan notification all the time"
+  },
+  "theme": "",
+  "@theme": {
+    "description": "Settings for the theme  ",
+    "eg_english": "Theme"
+  },
+  "always_dark": "",
+  "@always_dark": {
+    "description": "Always show the dark-mode irrespective of the device theme ",
+    "eg_english": "Always Dark"
+  },
+  "always_light": "",
+  "@always_light": {
+    "description": "Always show the light-mode irrespective of the device theme ",
+    "eg_english": "Always Light"
+  },
+  "follow_system": "",
+  "@follow_system": {
+    "description": "Follow the system for theme  ",
+    "eg_english": "Follow System"
+  },
+  "calc_method": "",
+  "@calc_method": {
+    "description": "Calculation method of the Azan times  ",
+    "eg_english": "Calculation Method"
+  },
+  "high_lat_rule": "",
+  "@high_lat_rule": {
+    "description": "Rules for high latitude for azan time calculation  ",
+    "eg_english": "High Lat Rules"
+  },
+  "adhan_visibility": "",
+  "@adhan_visibility": {
+    "description": "Visibility of some azan times  ",
+    "eg_english": "Azan Visibility"
+  },
+  "adhan_manual_correction": "",
+  "@adhan_manual_correction": {
+    "description": "Manual Correction for some azan times ",
+    "eg_english": "Manual Corrections"
+  },
+  "support_dev": "",
+  "@support_dev": {
+    "description": "Category of supporting development ",
+    "eg_english": "Support Development"
+  },
+  "rate_on_play_store": "",
+  "@rate_on_play_store": {
+    "description": "Button to rate on play store  ",
+    "eg_english": "Rate on Play Store"
+  },
+  "rate_on_play_store_desc": "",
+  "@rate_on_play_store_desc": {
+    "description": "Description of the rate button ",
+    "eg_english": "That would motivate us a lot."
+  },
+  "help_us_translate": "",
+  "@help_us_translate": {
+    "description": "A button for user to translate the app ",
+    "eg_english": "Help us translate"
+  },
+  "help_us_translate_desc": "",
+  "@help_us_translate_desc": {
+    "description": "Description for the help_us_translate button ",
+    "eg_english": "Don't see your language? Help us translate the app features and dua for a particular language."
+  },
+  "github_ripo": "",
+  "@github_ripo": {
+    "description": "A button to go to the github repo  ",
+    "eg_english": "Github Repository"
+  },
+  "github_ripo_desc": "",
+  "@github_ripo_desc": {
+    "description": "Description for the github repo ",
+    "eg_english": "Knows Flutter Development?, join us in this journey of Fi-Sabilillah or give us a star to motivate us."
+  },
+  "report_bug": "",
+  "@report_bug": {
+    "description": "A button to report a bug to the development team ",
+    "eg_english": "Report a bug"
+  },
+  "report_bug_desc": "",
+  "@report_bug_desc": {
+    "description": "Description of the report_bug button ",
+    "eg_english": "Sorry, you had to face it. You can either report a problem in github or through email. Zajakallah for the information."
+  },
+  "make_dua": "",
+  "@make_dua": {
+    "description": "A button asking for dua  ",
+    "eg_english": "Make dua for us"
+  },
+  "make_dua_desc": "",
+  "@make_dua_desc": {
+    "description": " Description of the dua button - Simply translate the english dua   ",
+    "eg_english": "Abu Darda reported: The Messenger of Allah, peace and blessings be upon him, said, “No Muslim servant supplicates for his brother behind his back but that the angel says: And for you the same.”"
+  },
+  "make_dua_action": "",
+  "@make_dua_action": {
+    "description": "Action for make dua ",
+    "eg_english": "May Allah reward you with something good :-)"
+  },
+  "request_a_feature": "",
+  "@request_a_feature": {
+    "description": "Button for requesting a new feature ",
+    "eg_english": "Request a feature"
+  },
+  "request_a_feature_desc": "",
+  "@request_a_feature_desc": {
+    "description": "Description for the request button ",
+    "eg_english": "Need additional feature or dua? Suggest it to us"
+  },
+  "show_translation": "",
+  "@show_translation": {
+    "description": "Show translation of the duas  ",
+    "eg_english": "Show Translation"
+  },
+  "show_transliteration": "",
+  "@show_transliteration": {
+    "description": "Show transliteration of the duas  ",
+    "eg_english": "Show Transliteration"
+  },
+  "translation_lang": "",
+  "@translation_lang": {
+    "description": "Option to choose a translation language  ",
+    "eg_english": "Translation Language"
+  },
+  "disable_battery_optimization": "",
+  "@disable_battery_optimization": {
+    "description": "Disable battery optimization for better notification  ",
+    "eg_english": "Disable Battery Optimization"
+  },
+  "disable_battery_optimization_desc": "",
+  "@disable_battery_optimization_desc": {
+    "description": "Description for battery_optimization_disable  ",
+    "eg_english": "Please disable the battery optimization feature so that you don't miss any notifications!"
+  },
+  "arabic_font_size": "",
+  "@arabic_font_size": {
+    "description": "Arabic font size selector - e.g for English: ''",
+    "eg_english": "Arabic Font Selector"
+  },
+  "other_font_size": "",
+  "@other_font_size": {
+    "description": "Other (translation/transliteration) font size selector - e.g for English: ''",
+    "eg_english": "Other Font Selector"
+  },
+  "primary_language": "",
+  "@primary_language": {
+    "description": "Primary language of the dua",
+    "eg_english": "Primary Language"
+  },
+
+  "@__________________________________________Dua_Page": {
+  },
+  "favs": "",
+  "@favs": {
+    "description": "Favourites button '' ",
+    "eg_english": "Favourites"
+  },
+  "add_to_fav": "",
+  "@add_to_fav": {
+    "description": "A button to add duas to favourites  ",
+    "eg_english": "Add to Favourite"
+  },
+  "add_to_fav_action": "",
+  "@add_to_fav_action": {
+    "description": "An action when add duas to favourites  ",
+    "eg_english": "Added to Favourite"
+  },
+  "remove_from_fav": "",
+  "@remove_from_fav": {
+    "description": "A button to remove dua from favourites  ",
+    "eg_english": "Remove from Favourites"
+  },
+  "remove_from_fav_action": "",
+  "@remove_from_fav_action": {
+    "description": "An action when remove dua from favourites  ",
+    "eg_english": "Removed from Favourites"
+  },
+  "report_an_error": "",
+  "@report_an_error": {
+    "description": "Report an error in the dua  ",
+    "eg_english": "Report an error"
+  },
+  "copy_dua": "",
+  "@copy_dua": {
+    "description": "A button to copy the entire dua  ",
+    "eg_english": "Copy Dua"
+  },
+  "copy_dua_action": "",
+  "@copy_dua_action": {
+    "description": "Action for copying dua '' ",
+    "eg_english": "Copied to clipboard!"
+  },
+  "@__________________________________________Qibla_page": {},
+  "you_are_facing": "",
+  "@you_are_facing": {
+    "description": "A translation of the sentence",
+    "eg_english": "You are facing"
+  },
+  "compass_heading_north": "",
+  "compass_heading_north_east": "",
+  "compass_heading_east": "",
+  "compass_heading_south_east": "",
+  "compass_heading_south": "",
+  "compass_heading_south_west": "",
+  "compass_heading_west": "",
+  "compass_heading_north_west": "",
+  "@compass_headings": {
+    "description": "headings of compass - Translation"
+  }
+}

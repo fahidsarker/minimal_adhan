@@ -20,7 +20,7 @@ class AppLanguagePicker extends StatelessWidget {
       subtitles: [],
       selected: (i) => globalConfig.locale == supportedAppLangs[i].languageCode,
       onChoosen: (i) => globalConfig.changeGlobalLocale(
-        supportedAppLangs[i].lang,
+        supportedAppLangs[i].languageCode,
         duaDependency,
         locationProvider,
       ),

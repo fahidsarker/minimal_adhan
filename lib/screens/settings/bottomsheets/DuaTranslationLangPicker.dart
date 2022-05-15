@@ -15,8 +15,8 @@ class DuaTranslationLangPicker extends StatelessWidget {
         context: context,
         title: appLocale.translation_lang,
         titles: [
-          appLocale.language,
-          ...supportedAppLangs.map((e) => e.lang).toList()
+          appLocale.primary_language,
+          ...supportedAppLangs.where((element) => element.duaAvailable).map((e) => e.lang).toList()
         ],
         subtitles: [],
         selected: (i) => i > 0

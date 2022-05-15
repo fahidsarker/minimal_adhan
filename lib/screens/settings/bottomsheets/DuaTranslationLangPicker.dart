@@ -16,19 +16,19 @@ class DuaTranslationLangPicker extends StatelessWidget {
         title: appLocale.translation_lang,
         titles: [
           appLocale.primary_language,
-          ...supportedAppLangs.where((element) => element.duaAvailable).map((e) => e.lang).toList()
+          ...supportedLocales.where((element) => element.duaAvailable).map((e) => e.lang).toList()
         ],
         subtitles: [],
         selected: (i) => i > 0
             ? (duaDependency.sameAsPrimaryLang
                 ? !duaDependency.sameAsPrimaryLang
                 : duaDependency.translationLang ==
-                    supportedAppLangs[i - 1].languageCode)
+                    supportedLocales[i - 1].languageCode)
             : duaDependency.sameAsPrimaryLang,
         onChoosen: (i) => i == 0
             ? duaDependency.setDuaLangToPrimary()
             : duaDependency
-                .changeTranslationLang(supportedAppLangs[i - 1].languageCode),
+                .changeTranslationLang(supportedLocales[i - 1].languageCode),
         percentageUpto: 0.6);
   }
 }

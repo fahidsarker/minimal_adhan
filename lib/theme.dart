@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/localization/supportedLangs.dart';
-import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
+import 'models/app_local.dart';
 
+TextTheme getTextTheme(BuildContext context, String locale) {
+  return AppLocale.of(locale).getTextTheme(context);
+}
 
-
-LinearGradient getOnBackgroundGradient(BuildContext context, {double opacity = 1}) {
-  return context.theme.brightness == Brightness.dark
-      ?  LinearGradient(colors: [
-    const Color(0xFF134E5E).withOpacity(opacity),
-    const Color(0xFF71B280).withOpacity(opacity),
-  ],)
-      :  LinearGradient(colors: [
+LinearGradient getOnBackgroundGradient({double opacity = 1}) {
+  return LinearGradient(colors: [
     const Color(0xFF134E5E).withOpacity(opacity),
     const Color(0xFF71B280).withOpacity(opacity),
   ],);
 }
 
-Color getDrawerShadowColor(BuildContext context) {
-  return context.theme.brightness == Brightness.light
-      ? Colors.teal
-      : Colors.teal;
+Color getDrawerShadowColor() {
+  return Colors.teal;
 }
 
 ThemeData getLightTheme(

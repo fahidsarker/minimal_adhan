@@ -34,7 +34,7 @@ class AdhanDateChanger extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: _padding),
       decoration: BoxDecoration(
-        gradient: getOnBackgroundGradient(context),
+        gradient: getOnBackgroundGradient(),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(

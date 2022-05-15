@@ -30,7 +30,7 @@ class Azan extends StatelessWidget {
 
     return MaterialApp(
       localizationsDelegates: appLocaleDelegates,
-      supportedLocales: supportedAppLangs,
+      supportedLocales: supportedLocales,
       localeResolutionCallback: (locale, supportedLocales) {
         if (locale != null) {
           for (final supportedLocale in supportedLocales) {

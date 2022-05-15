@@ -224,7 +224,7 @@ class SettingsScreen extends StatelessWidget {
                   title: appLocale.translation_lang,
                   subtitle: duaDependency.sameAsPrimaryLang
                       ? appLocale.primary_language
-                      : supportedAppLangs
+                      : supportedLocales
                           .firstWhere(
                             (element) =>
                                 element.languageCode ==

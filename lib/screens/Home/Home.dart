@@ -100,8 +100,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           homePageXValue: 60,
           shadowXValue: 10,
           isOpen: _isOpen,
-          backgroundGradient: getOnBackgroundGradient(context),
-          shadowColor: getDrawerShadowColor(context),
+          backgroundGradient: getOnBackgroundGradient(),
+          shadowColor: getDrawerShadowColor(),
           menuPageContent: Menu(),
           homePageContent: Container(
             height: context.height,

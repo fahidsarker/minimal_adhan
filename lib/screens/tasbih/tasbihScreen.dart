@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:minimal_adhan/helpers/preferences.dart';
-import 'package:minimal_adhan/extensions.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
+import 'package:minimal_adhan/screens/tasbih/widgets/tasbih_bud_list.dart';
 import 'package:minimal_adhan/theme.dart';
-
 import 'flip_counter.dart';
 
 class TasbihScreen extends StatefulWidget {
@@ -23,6 +23,13 @@ class _TasbihScreenState extends State<TasbihScreen> {
   void initState() {
     super.initState();
   }
+  final PageController _controller = PageController(viewportFraction: 0.1, initialPage: 5);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void changeCounter(int value) {
     tasbihCount.updateValue(value);
@@ -31,6 +38,13 @@ class _TasbihScreenState extends State<TasbihScreen> {
     });
 
     HapticFeedback.heavyImpact();
+    if(value == 0){
+      _controller.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+    }else{
+      final int nextPage = (_controller.page?.round() ?? 0) + 1;
+      _controller.animateToPage(nextPage,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+    }
   }
 
 
@@ -73,15 +87,24 @@ class _TasbihScreenState extends State<TasbihScreen> {
 
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: AnimatedFlipCounter(
-                  value: count,
-                  formatDigit: (digit, position) => NumberFormat('',context.appLocale.locale).format(digit),
-                  duration: const Duration(milliseconds: 250),
-                  textStyle: txtTheme?.copyWith(
-                      fontWeight: FontWeight.w300,
-                    foreground: Paint()..shader = getOnBackgroundGradient(context).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
-                  ),
-                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: AnimatedFlipCounter(
+                          value: count,
+                          formatDigit: (digit, position) => NumberFormat('',context.appLocale.locale).format(digit),
+                          duration: const Duration(milliseconds: 250),
+                          textStyle: txtTheme?.copyWith(
+                            fontWeight: FontWeight.w300,
+                            foreground: Paint()..shader = getOnBackgroundGradient().createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(child: TasbihView(_controller))
+                  ],
+                )
               ),
             ),
           ),

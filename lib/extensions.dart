@@ -184,6 +184,14 @@ extension Helper on BuildContext {
   double get panelWidth {
     return isLargeScreen ? 400 : width;
   }
+
+  double get contentPanelRatio{
+    return isLargeScreen ? 0.6 : 1.0;
+  }
+
+  double get contentPanelWidth{
+    return isLargeScreen ? width * contentPanelRatio : width;
+  }
 }
 
 extension BoolParsing on String {

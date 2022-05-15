@@ -16,11 +16,11 @@ class AppLanguagePicker extends StatelessWidget {
     return choosingContainer(
       context: context,
       title: context.appLocale.language,
-      titles: supportedAppLangs.map((e) => e.lang).toList(),
+      titles: supportedLocales.map((e) => e.lang).toList(),
       subtitles: [],
-      selected: (i) => globalConfig.locale == supportedAppLangs[i].languageCode,
+      selected: (i) => globalConfig.locale == supportedLocales[i].languageCode,
       onChoosen: (i) => globalConfig.changeGlobalLocale(
-        supportedAppLangs[i].languageCode,
+        supportedLocales[i].languageCode,
         duaDependency,
         locationProvider,
       ),

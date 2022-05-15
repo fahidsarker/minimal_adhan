@@ -11,6 +11,6 @@ class DynamicDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.isLargeScreen ? LargeDisplayContent(locationProvider) : Home(locationProvider);
+    return context.isLargeScreen ? LargeDisplayView(locationProvider) : Home(locationProvider);
   }
 }

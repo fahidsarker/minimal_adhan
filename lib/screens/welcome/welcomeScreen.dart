@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
-import 'package:minimal_adhan/localization/supportedLangs.dart';
-import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
@@ -15,6 +13,8 @@ import 'package:minimal_adhan/screens/welcome/widgets/pageViewModel.dart';
 import 'package:minimal_adhan/widgets/coloredCOntainer.dart';
 import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
+
+import '../../models/app_local.dart';
 
 const pageAnimateDUration = Duration(milliseconds: 400);
 

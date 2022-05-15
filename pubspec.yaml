@@ -43,7 +43,6 @@ dependencies:
   lottie: ^1.0.1
   sqflite: ^2.0.0+3
   percent_indicator: ^4.0.0
-  carousel_slider: ^4.0.0
   scrollable_positioned_list: ^0.2.0-nullsafety.0
   package_info_plus: ^1.0.3
   android_alarm_manager_plus: ^2.0.3

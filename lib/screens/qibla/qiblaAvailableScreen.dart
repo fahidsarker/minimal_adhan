@@ -56,7 +56,7 @@ class QiblaAvailableScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       decoration: BoxDecoration(
-                          gradient: getOnBackgroundGradient(context),
+                          gradient: getOnBackgroundGradient(),
                           borderRadius: BorderRadius.circular(16)),
                       child: Center(
                         child: Column(

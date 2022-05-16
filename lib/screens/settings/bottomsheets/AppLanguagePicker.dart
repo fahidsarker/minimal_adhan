@@ -5,6 +5,7 @@ import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../helpers/locale_helper.dart';
 import 'Chooser.dart';
 
 class AppLanguagePicker extends StatelessWidget {

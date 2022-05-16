@@ -5,6 +5,8 @@ import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/Chooser.dart';
 import 'package:provider/provider.dart';
 
+import '../../../helpers/locale_helper.dart';
+
 class DuaTranslationLangPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -66,296 +66,307 @@
     "description": "Translation of the digit 0",
     "eg_english": "0"
   },
-  "arabic_month_muharram": "",
+  "arabic_month_muharram": "মুহররম",
   "@arabic_month_muharram": {
     "description": "Transliteration of the arabic month Muharram",
     "eg_english": "Muharram"
   },
-  "arabic_month_safar": "",
+  "arabic_month_safar": "সফর",
   "@arabic_month_safar": {
     "description": "Transliteration of the arabic month Safar",
     "eg_english": "Safar"
   },
-  "arabic_month_rabi_al_awwal": "",
+  "arabic_month_rabi_al_awwal": "রবিউল আউয়াল",
   "@arabic_month_rabi_al_awwal": {
     "description": "Transliteration of the arabic month Rabi al-Awwal",
     "eg_english": "Rabi al-Awwal"
   },
-  "arabic_month_rabi_al_thani": "",
+  "arabic_month_rabi_al_thani": "রবিউছ ছানি",
   "@arabic_month_rabi_al_thani": {
     "description": "Transliteration of the arabic month Rabi al-Thani",
     "eg_english": "Rabi al-Thani"
   },
-  "arabic_month_jumada_al_awwal": "",
+  "arabic_month_jumada_al_awwal": "জামাদিউল আউয়াল",
   "@arabic_month_jumada_al_awwal": {
     "description": "Transliteration of the arabic month Jumada al-Awwal",
     "eg_english": "Jumada al-Awwal"
   },
-  "arabic_month_jumada_al_thani": "",
+  "arabic_month_jumada_al_thani": "জামাদিউছ ছানি",
   "@arabic_month_jumada_al_thani": {
     "description": "Transliteration of the arabic month Jumada al-Thani",
     "eg_english": "Jumada al-Thani"
   },
-  "arabic_month_rajab": "",
+  "arabic_month_rajab": "রজব",
   "@arabic_month_rajab": {
     "description": "Transliteration of the arabic month Rajab",
     "eg_english": "Rajab"
   },
-  "arabic_month_shaban": "",
+  "arabic_month_shaban": "শা’বান",
   "@arabic_month_shaban": {
     "description": "Transliteration of the arabic month Shaban",
     "eg_english": "Shaban"
   },
-  "arabic_month_ramadan": "",
+  "arabic_month_ramadan": "রামাজান",
   "@arabic_month_ramadan": {
     "description": "Transliteration of the arabic month Ramadan",
     "eg_english": "Ramadan"
   },
-  "arabic_month_shawwal": "",
+  "arabic_month_shawwal": "শাওয়াল",
   "@arabic_month_shawwal": {
     "description": "Transliteration of the arabic month Shawwal",
     "eg_english": "Shawwal"
   },
-  "arabic_month_dhu_al_qadha": "",
+  "arabic_month_dhu_al_qadha": "জুল  কাইদাহ",
   "@arabic_month_dhu_al_qadha": {
     "description": "Transliteration of the arabic month Dhu al-Qadah",
     "eg_english": "Dhu al-Qadah"
   },
-  "arabic_month_dhu_al_hijjah": "",
+  "arabic_month_dhu_al_hijjah": "জুল হিজ্জাহ",
   "@arabic_month_dhu_al_hijjah": {
     "description": "Transliteration of the arabic month Dhu al-Hijjah",
     "eg_english": "Dhu al-Hijjah"
   },
-  "hour": "",
+  "hour": "ঘণ্টা",
   "@hour": {
     "description": "The word hour (short form if possible) - e.g. for English: 'hr' ",
     "eg_english": "hr"
   },
-  "minute": "",
+  "minute": "মিনিট",
   "@minute": {
     "description": "The word form minute (short form if possible) - e.g. for English: 'min' ",
     "eg_english": "min"
   },
-  "close": "",
+  "close": "বন্ধ",
   "@close": {
     "description": "The word Close - e.g. for English: 'Close' ",
     "eg_english": "CLose"
   },
-  "notification": "",
+  "notification": "নোটিফিকেশান",
   "@notification": {
     "description": "Describes a notification - e.g. for English: 'Notification' ",
     "eg_english": "Notification"
   },
-  "adhan": "",
+  "adhan": "আযান",
+
   "@adhan": {
     "description": "Describes a button called Adhan/Azan - e.g. for English: 'Azan' ",
     "eg_english": "Azan"
   },
-  "qibla": "",
+  "qibla": "কিবলা",
+
   "@qibla": {
     "description": "Describes a button called Qibla - e.g. for English: 'Qibla' ",
     "eg_english": "Qibla"
   },
-  "dua": "",
+  "dua": "দুয়া",
+
   "@dua": {
     "description": "Describes a button called Dua - e.g. for English: 'Dua' ",
     "eg_english": "Dua"
   },
-  "tasbih": "",
+  "tasbih": "তসবিহ",
+
   "@tasbih": {
     "description": "Describes a button called tasbih - e.g. for English: 'Tasbih' ",
     "eg_english": "Tasbih"
   },
-  "settings": "",
+  "settings": "সেটিংস্‌",
+
   "@settings": {
     "description": "Describes a button called Settings  ",
     "eg_english": "Settings"
   },
-  "search": "",
+  "search": "অনুসন্ধান",
   "@search": {
     "description": "Describes a button called Search ",
     "eg_english": "Search"
   },
-  "language": "",
+  "language": "ভাষা",
   "@language": {
     "description": "A word for Language Selection  ",
     "eg_english": "Language"
   },
-  "app_name": "",
+  "app_name": "আযান",
   "@app_name": {
     "description": "The transliteration for Azan ",
     "eg_english": "Azan"
   },
-  "location": "",
+  "location": "লোকেশান",
+
   "@location": {
     "description": "The translation of the word location  ",
     "eg_english": "Location"
   },
-  "next": "",
+  "next": "পরবর্তী",
   "@next": {
     "description": "The translation of the word 'Next'  ",
     "eg_english": "Next"
   },
-  "reset": "",
+  "reset": "রিসেট",
   "@reset": {
     "description": "The translation of the word 'Reset'  ",
     "eg_english": "Reset"
   },
-  "type": "",
+  "type": "আজানের ধরন",
   "@type": {
     "description": "The translation for the word 'Type' - e.g. for English: ",
     "eg_english": "'Type' - 'Type of Azan Notification'"
   },
-  "timing": "",
+  "timing": "টাইমিং",
   "@timing": {
     "description": "The translation for the word 'Timing' - e.g. for English:  ",
     "eg_english": "'Timing', 'Timing for the Azan Notification'"
   },
-  "bttn_open_settings": "",
+  "bttn_open_settings": "ওপেন সেটিংস",
   "@bttn_open_settings": {
     "description": "The translation for the sentence 'Open Settings'  ",
     "eg_english": "Open Settings"
   },
-  "bttn_okay": "",
+  "bttn_okay": "ওকে",
+
   "@bttn_okay": {
     "description": "The translation for the word 'okay'  ",
     "eg_english": "Okay"
   },
-  "bttn_remind_me_later": "",
+  "bttn_remind_me_later": "পরে মনে করিয়ে দিবেন",
   "@bttn_remind_me_later": {
     "description": "The translation for the sentence 'Remind me later' ",
     "eg_english": "Remind Me Later"
   },
-  "bttn_never_ask_again": "",
+  "bttn_never_ask_again": "আর কখনও জিজ্ঞাসা করবেন না",
   "@bttn_never_ask_again": {
     "description": "The translation for the sentence 'Never Ask me Again'  ",
     "eg_english": "Never Ask Again"
   },
-  "finding": "",
+  "finding": "খুঁজছি...",
+
   "@finding": {
     "description": "An indicator to indication the app is finding the location  ",
     "eg_english": "Finding..."
   },
-  "error_occured": "",
+  "error_occured": "ত্রুটি ঘটেছে",
   "@error_occured": {
     "description": "An indicator to indicate an error has occurred  ",
     "eg_english": "Error Occured"
   },
-  "no_location_available": "",
+  "no_location_available": "কোন অবস্থান উপলব্ধ নেই",
   "@no_location_available": {
     "description": "An Indicator to indicate no location is currently available  ",
     "eg_english": "No Location Available"
   },
-  "tap_to_update": "",
+  "tap_to_update": "আপডেট করতে ক্লিক করুন",
   "@tap_to_update": {
     "description": "A button to which updates content on tap  ",
     "eg_english": "Tap to update"
   },
-  "default_mode": "",
+  "default_mode": "ডিফল্ট",
   "@default_mode": {
     "description": "A Button to change the setting to factory mode  ",
     "eg_english": "Default"
   },
-  "preview_of_font": "",
+  "preview_of_font": "অন্যান্য ফন্টের পূর্বরূপ",
   "@preview_of_font": {
     "description": "Preview of the font size - e.g. for English ''",
     "eg_english": "Preview Of Other Font sizes"
   },
-  "share_app": "",
+  "share_app": "অ্যাপটি শেয়ার করুন",
   "@share_app": {
     "description": "Share the app  ",
     "eg_english": "Share with friends"
   },
-  "about": "",
+  "about": "অ্যাপ সম্পর্কে",
   "@about": {
     "description": "About panel - e.g. for English: 'About'",
     "eg_english": "About"
   },
-  "try_again": "",
+  "try_again": "আবার চেষ্টা করুন",
+
   "@try_again": {
     "description": "A button to try again  ",
     "eg_english": "Try Again"
   },
   "@__________________________________________Welcome_page": {
   },
-  "location_privacy_short": "",
+  "location_privacy_short": "আযান হল প্রাইভেসি ফোকাসড। আপনার অবস্থান স্থানীয়ভাবে আপনার ডিভাইসে সংরক্ষণ করা হয়.",
   "@location_privacy_short": {
     "description": "A short description of the location privacy policy  ",
     "eg_english": "Azan is privacy focused. Your location is stored on your device locally."
   },
-  "location_required": "",
+  "location_required": "অবস্থান প্রয়োজন",
   "@location_required": {
     "description": "A translation for the word 'Location Required' -  ",
     "eg_english": "Location Required"
   },
-  "location_found": "",
+  "location_found": "অবস্থান পাওয়া গেছে",
   "@location_found": {
     "description": "A translation for the word 'Location Found' ",
     "eg_english": "Location Found"
   },
-  "permission_denied": "",
+  "permission_denied": "অনুমতি অস্বীকার করা হয়েছে",
   "@permission_denied": {
     "description": "A translation for the word 'Permission Denied' ",
     "eg_english": "Permission Denied"
   },
-  "location_permission_request_short": "",
+  "location_permission_request_short": "আজানের সময় গণনা করতে, কিবলা কম্পাস প্রদর্শন এবং কাছাকাছি মসজিদগুলি দেখাতে আপনার অবস্থান প্রয়োজন",
   "@location_permission_request_short": {
     "description": "A short description explaining why the location is required   ",
     "eg_english": "Your location is needed to calculate the time of azan, display the Qibla Compass and Show Nearby Mosques"
   },
   "@__________________________________________Adhan_Page": {
   },
-  "adhan_fajr": "",
+  "adhan_fajr": "ফজর",
   "@adhan_fajr": {
     "description": "A word for 'Fajr' in its language ",
     "eg_english": "Fajr"
   },
-  "adhan_sunrise": "",
+  "adhan_sunrise": "সূর্যোদয়",
   "@adhan_sunrise": {
     "description": "A word for sunrise in its language  ",
     "eg_english": "Sunrise"
   },
-  "adhan_dhuhr": "",
+  "adhan_dhuhr": "জুহর",
   "@adhan_dhuhr": {
     "description": "A word for Dhuhr in its language  ",
     "eg_english": "Dhuhr"
   },
-  "adhan_jummah": "",
+  "adhan_jummah": "জুম্মাহ",
   "@adhan_jummah": {
     "description": "A word for 'Jummah' in its language  ",
     "eg_english": "Jummah"
   },
-  "adhan_asr": "",
+  "adhan_asr": "আসর",
   "@adhan_asr": {
     "description": "A word for 'Asr' in its language  ",
     "eg_english": "Asr"
   },
-  "adhan_magrib": "",
+  "adhan_magrib": "মাগরিব",
   "@adhan_magrib": {
     "description": "A word for 'Magrib' in its language  ",
     "eg_english": "Magrib"
   },
-  "adhan_isha": "",
+  "adhan_isha": "ইশা",
   "@adhan_isha": {
     "description": "A word for 'Isha' in its language  ",
     "eg_english": "Isha"
   },
-  "adhan_midnight": "",
+  "adhan_midnight": "মধ্যরাত",
   "@adhan_midnight": {
     "description": "A word for 'Midnight' in its language  ",
     "eg_english": "Midnight"
   },
-  "adhan_third_night": "",
+  "adhan_third_night": "রাতের শেষ তৃতীয়",
   "@adhan_third_night": {
     "description": "A word for 'Last Third Night' in its language  ",
     "eg_english": "Last Third Night"
   },
-  "inexact_notify": "",
+  "inexact_notify": "প্রারম্ভিক/বিলম্বিত নোটিফিকেশান",
+
   "@inexact_notify": {
     "description": "A sentence for weather the notification be exact or delayed or early ",
     "eg_english": "Early/Delayed Notification"
   },
-  "notify_me_before": "",
+  "notify_me_before": "আজানের সময়ের {min} আগে আমাকে অবহিত করুন",
+
   "@notify_me_before": {
     "description": "Describes when the notification should be sent early ",
     "placeholders": {
@@ -366,7 +377,8 @@
     },
     "eg_english": "Notify me {min} minutes before azan time"
   },
-  "notify_me_after": "",
+  "notify_me_after": "আজানের সময়ের {min} মিনিট পরে আমাকে অবহিত করুন",
+
   "@notify_me_after": {
     "description": "Describes when the notification should be sent later ",
     "placeholders": {
@@ -377,32 +389,37 @@
     },
     "eg_english": "Notify me {min} minutes after azan time"
   },
-  "silent_adhan": "",
+  "silent_adhan": "নীরব",
   "@silent_adhan": {
     "description": "No notification should be sent - e.g. for English:  '' ",
     "eg_english": "Silent"
   },
-  "notification_only": "",
+  "notification_only": "শুধু নোটিফিকেশান",
+
   "@notification_only": {
     "description": "Only send the notification with default sound ",
     "eg_english": "Notification Only"
   },
-  "ringtone": "",
+  "ringtone": "রিংটোন",
+
   "@ringtone": {
     "description": "Play the ringtone during notification '",
     "eg_english": "Ringtone"
   },
-  "adhan_mecca": "",
+  "adhan_mecca": "মক্কার আযান",
+
   "@adhan_mecca": {
     "description": "Play the Azan of Mecca during notification ",
     "eg_english": "Azan Mecca"
   },
-  "adhan_medina": "",
+  "adhan_medina": "মদিনার আযান",
+
   "@adhan_medina": {
     "description": "Play the azan of medina during notification ",
     "eg_english": "Azan Medina"
   },
-  "alarm": "",
+  "alarm": "অ্যালার্ম",
+
   "@alarm": {
     "description": "Play the alarm during notification ",
     "eg_english": "Alarm"

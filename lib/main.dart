@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/locale_helper.dart';
 import 'package:minimal_adhan/initDependency.dart';
-import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
-import 'package:minimal_adhan/screens/Home/Home.dart';
 import 'package:minimal_adhan/screens/dynamic_display/dynamic_display.dart';
 import 'package:minimal_adhan/screens/welcome/welcomeScreen.dart';
 import 'package:minimal_adhan/theme.dart';

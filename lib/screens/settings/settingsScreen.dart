@@ -22,6 +22,8 @@ import 'package:minimal_adhan/screens/settings/widgets/settingsSection.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../helpers/locale_helper.dart';
+
 const bottomSheetShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
     topRight: Radius.circular(20),

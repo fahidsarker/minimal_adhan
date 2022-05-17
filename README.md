@@ -15,8 +15,6 @@ An Open-Sourced Adhan app for the ummah.<br/>
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-
-
 <table>
   <tr>
     <td><img src = "screenshots/scrnsht.gif" width = 320/></td>
@@ -113,11 +111,104 @@ An Open-Sourced Adhan app for the ummah.<br/>
 
 ## Contribute to this project?
 
-> Will be updated soon InshaAllah
-
 <hr></hr>
 
 ## Contributions
+## Contribute to this project?
+### Translating the app
+1. Create an` app_<lang_code>.arb` (e.g. app_ar.arb) file in `minimal_adhan/locales/langs`
+2. Copy contents of `minimal_adhan/locales/langs/app_lang_template.arb` to the newly created file.
+3. Fill up the translations. You can find both description and english keyword/sentence in the description param of the keys. e.g:
+   From:
+```
+{
+  "@__________________________________________Global_Page": {
+  },
+  "locale": "",
+  "@locale": {
+    "description": "Name of Locale.",
+    "eg_english": "en"
+  },
+  "direction": "",
+  "@direction": {
+    "description": "Language direction - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr"
+  },
+  "current_lang": "",
+  "@current_lang": {
+    "description": "Name of this language in its language",
+    "eg_english": "English"
+  },
+```
+To:
+```arb
+{
+  "@__________________________________________Global_Page": {
+  },
+  "locale": "ar",
+  "@locale": {
+    "description": "Name of Locale.",
+    "eg_english": "en"
+  },
+  "direction": "rlt",
+  "@direction": {
+    "description": "Language direction - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr"
+  },
+  "current_lang": "العربية",
+  "@current_lang": {
+    "description": "Name of this language in its language",
+    "eg_english": "English"
+  },
+  "one": "١",
+  "@one": {
+    "description": "Translation of the digit 1",
+    "eg_english": "1"
+  },
+```
+4. Create an  `app_<lang_code>.dart` (keep the name same as the .arb file).
+5. `import 'package:minimal_adhan/models/app_local.dart';`
+6. Create a new class here named `Locale<LanguageName>` (e.g.  LocaleArabic) and extend the `AppLocale` class:
+```dart
+class LocaleArabic extends AppLocale{
+}
+```
+7. Create a **const constructor** and pass the language code to the super block: `const LocaleArabic(): super('ar');`
+8. Ovveride getter **languageName** :
+```
+  @override
+  String get languageName => '(Beta) عربى';
+```
+9. Ovveride getter **duaElementsAvailable** (This tells the app if there is dua translations/transliterations available for this language):
+```
+  @override
+  bool get duaElementsAvailable => false;
+```
+10. Ovveride the getter **fontFamily** (This is nullable and only return value if font is added to this app (see 'Add Custom Fonts' section ). otherwise, return null):
+```
+  @override
+  String? get fontFamily => 'lateef';
+```
+11. Ovveride the function `TextTheme getTextTheme(BuildContext context)` and return a textTheme(it can be a default one i.e. `Theme.of(context).textTheme` or a modified one.):
+```
+@override
+  TextTheme getTextTheme(BuildContext context){
+    return context.textTheme
+        .copyWith(
+      headline1: context.textTheme.headline1?.copyWith(height: 1.0),
+      headline5: context.textTheme.headline5?.copyWith(
+        height: 1.0,
+      ),
+      headline6: context.textTheme.headline6?.copyWith(
+        height: 1.5,
+      ),
+    )
+        .apply(
+      fontFamily: fontFamily,
+    );
+  }
+```
+
 
 ### Translations
 

@@ -120,7 +120,7 @@ An Open-Sourced Adhan app for the ummah.<br/>
 2. Copy contents of `minimal_adhan/locales/langs/app_lang_template.arb` to the newly created file.
 3. Fill up the translations. You can find both description and english keyword/sentence in the description param of the keys. e.g:
    From:
-```
+```arb
 {
   "@__________________________________________Global_Page": {
   },
@@ -175,22 +175,22 @@ class LocaleArabic extends AppLocale{
 ```
 7. Create a **const constructor** and pass the language code to the super block: `const LocaleArabic(): super('ar');`
 8. Ovveride getter **languageName** :
-```
+```dart
   @override
   String get languageName => '(Beta) عربى';
 ```
 9. Ovveride getter **duaElementsAvailable** (This tells the app if there is dua translations/transliterations available for this language):
-```
+```dart
   @override
   bool get duaElementsAvailable => false;
 ```
 10. Ovveride the getter **fontFamily** (This is nullable and only return value if font is added to this app (see 'Add Custom Fonts' section ). otherwise, return null):
-```
+```dart
   @override
   String? get fontFamily => 'lateef';
 ```
 11. Ovveride the function `TextTheme getTextTheme(BuildContext context)` and return a textTheme(it can be a default one i.e. `Theme.of(context).textTheme` or a modified one.):
-```
+```dart
 @override
   TextTheme getTextTheme(BuildContext context){
     return context.textTheme

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
-import 'package:minimal_adhan/metadata.dart';
+import 'package:minimal_adhan/localizations/locales.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/AdhanDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
@@ -22,8 +22,6 @@ import 'package:minimal_adhan/screens/settings/widgets/settingsSection.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../helpers/locale_helper.dart';
-
 const bottomSheetShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
     topRight: Radius.circular(20),
@@ -43,8 +41,6 @@ void buildBottomSheet(Widget content, BuildContext context) {
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +75,9 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => buildBottomSheet(
                   ChangeNotifierProvider.value(
-                      value: duaDependency, child: AppLanguagePicker()),
+                    value: duaDependency,
+                    child: AppLanguagePicker(),
+                  ),
                   context,
                 ),
                 title: appLocale.language,
@@ -106,13 +104,8 @@ class SettingsScreen extends StatelessWidget {
                   Icons.my_location,
                   color: context.primaryColor,
                 ),
-                subtitle: '${locationProvider.locationState is LocationAvailable
-                        ? (locationProvider.locationState as LocationAvailable)
-                            .locationInfo
-                            .address
-                        : locationProvider.locationState is LocationFinding
-                            ? appLocale.finding
-                            : appLocale.error_occured}\n${appLocale.tap_to_update}',
+                subtitle:
+                    '${locationProvider.locationState is LocationAvailable ? (locationProvider.locationState as LocationAvailable).locationInfo.address : locationProvider.locationState is LocationFinding ? appLocale.finding : appLocale.error_occured}\n${appLocale.tap_to_update}',
               ),
             ],
           ),
@@ -221,8 +214,13 @@ class SettingsScreen extends StatelessWidget {
               ),
               if (duaDependency.showTranslation)
                 SettingsClickable(
-                  onClick: () =>
-                      buildBottomSheet(ChangeNotifierProvider.value(value: duaDependency, child: DuaTranslationLangPicker(),), context),
+                  onClick: () => buildBottomSheet(
+                    ChangeNotifierProvider.value(
+                      value: duaDependency,
+                      child: DuaTranslationLangPicker(),
+                    ),
+                    context,
+                  ),
                   title: appLocale.translation_lang,
                   subtitle: duaDependency.sameAsPrimaryLang
                       ? appLocale.primary_language
@@ -232,7 +230,7 @@ class SettingsScreen extends StatelessWidget {
                                 element.languageCode ==
                                 duaDependency.translationLang,
                           )
-                          .lang,
+                          .languageName,
                   leading: Icon(
                     Icons.language,
                     color: context.primaryColor,
@@ -289,7 +287,10 @@ class SettingsScreen extends StatelessWidget {
                 leading: Icon(Icons.translate),
               ),*/
               SettingsClickable(
-                onClick: () => launchUrl(Uri.parse(githubRepoLink), mode: LaunchMode.externalApplication),
+                onClick: () => launchUrl(
+                  Uri.parse(githubRepoLink),
+                  mode: LaunchMode.externalApplication,
+                ),
                 title: appLocale.github_ripo,
                 subtitle: appLocale.github_ripo_desc,
                 leading: Icon(

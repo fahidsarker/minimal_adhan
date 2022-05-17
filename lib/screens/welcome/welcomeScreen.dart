@@ -97,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 buildBottomSheet(AppLanguagePicker(), context);
               },
-              child: Text(AppLocale.of(context.appLocale.locale).lang),
+              child: Text(AppLocale.of(context.appLocale.locale).languageName),
             ),
           ],
         ),

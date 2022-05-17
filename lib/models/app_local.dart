@@ -1,24 +1,17 @@
-import 'package:minimal_adhan/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:minimal_adhan/metadata.dart';
+import 'package:minimal_adhan/localizations/locales.dart';
 
-import '../helpers/locale_helper.dart';
-
-class AppLocale extends Locale {
-  final String lang;
-  final bool duaAvailable;
-  final String? fontFamily;
+abstract class AppLocale extends Locale {
+  abstract final String languageName;
+  abstract final bool duaElementsAvailable;
+  abstract final String? fontFamily;
 
   static AppLocale of(String code) {
     return supportedLocales
         .firstWhere((element) => element.languageCode == code);
   }
 
-  TextTheme getTextTheme(BuildContext context) {
-    return getCustomTextTheme(context, this);
-  }
+  TextTheme getTextTheme(BuildContext context);
 
-  const AppLocale(String code, this.lang,
-      {required this.duaAvailable,
-      this.fontFamily}) : super(code);
+  const AppLocale(String code) : super(code);
 }

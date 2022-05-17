@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/localizations/locales.dart';
 import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
@@ -17,7 +18,7 @@ class AppLanguagePicker extends StatelessWidget {
     return choosingContainer(
       context: context,
       title: context.appLocale.language,
-      titles: supportedLocales.map((e) => e.lang).toList(),
+      titles: supportedLocales.map((e) => e.languageName).toList(),
       subtitles: [],
       selected: (i) => globalConfig.locale == supportedLocales[i].languageCode,
       onChoosen: (i) => globalConfig.changeGlobalLocale(

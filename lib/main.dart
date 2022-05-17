@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/helpers/locale_helper.dart';
 import 'package:minimal_adhan/initDependency.dart';
+import 'package:minimal_adhan/localizations/locales.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';

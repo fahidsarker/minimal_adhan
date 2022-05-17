@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/localizations/locales.dart';
 import 'package:minimal_adhan/metadata.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/screens/settings/bottomsheets/Chooser.dart';
@@ -18,7 +19,7 @@ class DuaTranslationLangPicker extends StatelessWidget {
         title: appLocale.translation_lang,
         titles: [
           appLocale.primary_language,
-          ...supportedLocales.where((element) => element.duaAvailable).map((e) => e.lang).toList()
+          ...supportedLocales.where((element) => element.duaElementsAvailable).map((e) => e.languageName).toList()
         ],
         subtitles: [],
         selected: (i) => i > 0

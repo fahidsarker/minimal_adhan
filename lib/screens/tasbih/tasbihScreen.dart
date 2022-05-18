@@ -23,7 +23,9 @@ class _TasbihScreenState extends State<TasbihScreen> {
   void initState() {
     super.initState();
   }
-  final PageController _controller = PageController(viewportFraction: 0.1, initialPage: 5);
+
+  final PageController _controller =
+      PageController(viewportFraction: 0.1, initialPage: 5);
 
   @override
   void dispose() {
@@ -38,16 +40,15 @@ class _TasbihScreenState extends State<TasbihScreen> {
     });
 
     HapticFeedback.heavyImpact();
-    if(value == 0){
-      _controller.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
-    }else{
+    if (value == 0) {
+      _controller.animateToPage(0,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+    } else {
       final int nextPage = (_controller.page?.round() ?? 0) + 1;
       _controller.animateToPage(nextPage,
           duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,52 +63,50 @@ class _TasbihScreenState extends State<TasbihScreen> {
                     : context.textTheme.headline6;
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(context.appLocale.tasbih),
-          actions: [
-            IconButton(
-              onPressed: () => changeCounter(0),
-              icon: const Icon(Icons.refresh),
-              tooltip: context.appLocale.reset,
-            )
-          ],
-        ),
-
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: InkWell(
-            onTap: () => changeCounter(count + 1),
-            borderRadius: BorderRadius.circular(20),
-            child: Center(
-              child: Container(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(context.appLocale.tasbih),
+        actions: [
+          IconButton(
+            onPressed: () => changeCounter(0),
+            icon: const Icon(Icons.refresh),
+            tooltip: context.appLocale.reset,
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: InkWell(
+          onTap: () => changeCounter(count + 1),
+          borderRadius: BorderRadius.circular(20),
+          child: Center(
+            child: Container(
                 height: context.smallerBetweenHeightAndWidth * 0.9,
                 width: context.smallerBetweenHeightAndWidth * 0.9,
                 decoration: BoxDecoration(
-
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
                   children: [
-                    Expanded(
-                      child: Center(
-                        child: AnimatedFlipCounter(
-                          value: count,
-                          formatDigit: (digit, position) => NumberFormat('',context.appLocale.locale).format(digit),
-                          duration: const Duration(milliseconds: 250),
-                          textStyle: txtTheme?.copyWith(
-                            fontWeight: FontWeight.w300,
-                            foreground: Paint()..shader = getOnBackgroundGradient().createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
-                          ),
-                        ),
+                    AnimatedFlipCounter(
+                      value: count,
+                      formatDigit: (digit, position) =>
+                          '$digit',
+                      duration: const Duration(milliseconds: 250),
+                      textStyle: txtTheme?.copyWith(
+                        fontWeight: FontWeight.w300,
+                        foreground: Paint()
+                          ..shader = getOnBackgroundGradient().createShader(
+                              const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
                       ),
                     ),
-                    Expanded(child: TasbihView(_controller))
+                    Spacer(),
+                    TasbihView(_controller)
                   ],
-                )
-              ),
-            ),
+                )),
           ),
-        ),);
+        ),
+      ),
+    );
   }
 }

@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:minimal_adhan/extensions.dart';
-import 'package:minimal_adhan/helpers/SQLHelper.dart';
-import 'package:minimal_adhan/models/Inspiration.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:minimal_adhan/models/dua/Dua.dart';
 import 'package:minimal_adhan/models/dua/DuaDetials.dart';
+import 'package:minimal_adhan/models/dua/category.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:minimal_adhan/models/dua/category.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuaProvider with ChangeNotifier {
   final AppLocalizations _appLocale;

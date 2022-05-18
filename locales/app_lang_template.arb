@@ -166,6 +166,11 @@
     "description": "Describes a button called tasbih - e.g. for English: 'Tasbih' ",
     "eg_english": "Tasbih"
   },
+  "nearby": "",
+  "@nearby": {
+    "description": "Describes a button called Nearby - e.g. for English: 'Nearby' used for nearby mosque",
+    "eg_english": "Nearby"
+  },
   "settings": "",
   "@settings": {
     "description": "Describes a button called Settings  ",

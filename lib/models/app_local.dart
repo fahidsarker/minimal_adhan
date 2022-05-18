@@ -11,7 +11,13 @@ abstract class AppLocale extends Locale {
         .firstWhere((element) => element.languageCode == code);
   }
 
+  static AppLocale byName(String name) {
+    return supportedLocales
+        .firstWhere((element) => element.languageName == name);
+  }
+
   TextTheme getTextTheme(BuildContext context);
+
 
   const AppLocale(String code) : super(code);
 }

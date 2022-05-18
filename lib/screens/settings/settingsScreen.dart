@@ -239,8 +239,11 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => showDialog(
                   context: context,
-                  builder: (_) => const FontSizeSelector(
-                    arabic: true,
+                  builder: (_) => ChangeNotifierProvider.value(
+                    value: duaDependency,
+                    child: const FontSizeSelector(
+                      arabic: true,
+                    ),
                   ),
                 ),
                 title: appLocale.arabic_font_size,
@@ -254,8 +257,11 @@ class SettingsScreen extends StatelessWidget {
               SettingsClickable(
                 onClick: () => showDialog(
                   context: context,
-                  builder: (_) => const FontSizeSelector(
-                    arabic: false,
+                  builder: (_) => ChangeNotifierProvider.value(
+                    value: duaDependency,
+                    child: const FontSizeSelector(
+                      arabic: false,
+                    ),
                   ),
                 ),
                 title: appLocale.other_font_size,

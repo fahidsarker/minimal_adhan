@@ -171,6 +171,11 @@
     "description": "Describes a button called Settings  ",
     "eg_english": "Settings"
   },
+  "nearby": "مسجد",
+  "@nearby": {
+    "description": "Describes a button called Nearby - e.g. for English: 'Nearby' used for nearby mosque",
+    "eg_english": "Nearby"
+  },
   "search": "بحث",
   "@search": {
     "description": "Describes a button called Search ",

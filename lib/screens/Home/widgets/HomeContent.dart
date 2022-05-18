@@ -106,7 +106,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               NavigationCard(
-                label: 'Tasbih',
+                label: context.appLocale.tasbih,
                 imageURI: 'ic_tasbih',
                 onPressed: () => navigate(context,
                   ChangeNotifierProvider(
@@ -117,7 +117,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               NavigationCard(
-                label: 'Nearby',
+                label: appLocale.nearby,
                 imageURI: 'nearby',
                 onPressed: () =>
                     locationProvider.locationState is LocationAvailable

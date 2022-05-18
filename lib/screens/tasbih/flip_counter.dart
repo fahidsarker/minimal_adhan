@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'dart:math' as math;
 
+@Deprecated('Use the IntFlipCounter class instead')
 class AnimatedFlipCounter extends StatelessWidget {
   /// The value of this counter.
   ///
@@ -58,6 +59,7 @@ class AnimatedFlipCounter extends StatelessWidget {
 
   final String Function(int, int)? formatDigit;
 
+  @Deprecated('Use the IntFlipCounter class instead')
   const AnimatedFlipCounter({
     Key? key,
     required this.value,
@@ -81,14 +83,14 @@ class AnimatedFlipCounter extends StatelessWidget {
     final style = DefaultTextStyle.of(context).style.merge(textStyle);
     // Layout number "8" (probably the widest digit) to see its size
     final prototypeDigit = TextPainter(
-      text: TextSpan(text: "8", style: style),
+      text: TextSpan(text: formatDigit?.call(8, 0) ?? '8', style: style),
       textDirection: TextDirection.ltr,
       textScaleFactor: MediaQuery.of(context).textScaleFactor,
     )..layout();
 
     // Find the text color (or red as warning). This is so we can avoid using
     // `Opacity` and `AnimatedOpacity` widget, for better performance.
-    final Color color = style.color ?? Color(0xffff0000);
+    final Color color = style.color ?? const Color(0xffff0000);
 
     // Convert the decimal value to int. For example, if we want 2 decimal
     // places, we will convert 5.21 into 521.

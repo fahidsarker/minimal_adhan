@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
@@ -30,6 +31,20 @@ extension FuncHelper<T, R> on T Function(R) {
     try {
       tryTo(this(v));
     } catch (_) {}
+  }
+}
+
+extension WidgetHelper on Widget {
+  Widget showBoundaries([Color color = Colors.red]){
+    return ClipRect(
+      child: BackdropFilter(
+        filter:  ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          color: color,
+          child: this,
+        ),
+      ),
+    );
   }
 }
 

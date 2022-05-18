@@ -6,20 +6,20 @@ class TasbihView extends StatelessWidget {
   final PageController _controller;
 
 
-  TasbihView(this._controller);
+  const TasbihView(this._controller);
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-        reverse: true,
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _controller,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, __) {
-          return const TasbihBud();
-        },
-        itemCount: null,
-
+    return Container(
+      height: 50,
+      child: PageView.builder(
+          reverse: true,
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _controller,
+          itemBuilder: (_, __) {
+            return const TasbihBud();
+          },
+      ),
     );
   }
 }

@@ -1,19 +1,22 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 
+const _duration =  Duration(milliseconds: 300);
+
 class IntFlipCounter extends StatelessWidget {
-
   final int value;
+  final TextStyle? textStyle;
 
-  const IntFlipCounter(this.value);
+  const IntFlipCounter(this.value, {this.textStyle});
 
   @override
   Widget build(BuildContext context) {
-    final style = DefaultTextStyle.of(context).style;
+    final style = DefaultTextStyle.of(context).style.merge(textStyle);
     final prototypeDigit = TextPainter(
       text: TextSpan(text: context.appLocale.eight, style: style),
-      textDirection: context.appLocale.direction == 'rtl' ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: context.appLocale.direction == 'rtl'
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       textScaleFactor: MediaQuery.of(context).textScaleFactor,
     )..layout();
 
@@ -32,13 +35,35 @@ class IntFlipCounter extends StatelessWidget {
         key: ValueKey(digits.length - i),
         value: digits[i].toDouble(),
         size: prototypeDigit.size,
-        color: color,
-        position: i,
       );
       integerWidgets.add(digit);
     }
 
-    return Container();
+    return DefaultTextStyle.merge(
+      style: style,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRect(
+              child: TweenAnimationBuilder(
+                // Animate the negative sign (-) appear and disappearing
+                duration: _duration,
+                tween: Tween(end: value < 0 ? 1.0 : 0.0),
+                builder: (_, double v, __) => Center(
+                  widthFactor: v,
+                  child: Opacity(opacity: v, child: const Text("-")),
+                ),
+              ),
+            ),
+            // Draw digits before the decimal point
+            ...integerWidgets,
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -56,7 +81,7 @@ class _SingleDigitFlipCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
       tween: Tween(end: value),
-      duration: const Duration(milliseconds: 300),
+      duration: _duration,
       curve: Curves.easeIn,
       builder: (_, double value, __) {
         final whole = value ~/ 1;
@@ -69,19 +94,17 @@ class _SingleDigitFlipCounter extends StatelessWidget {
           height: h,
           child: Stack(
             children: <Widget>[
-              _buildSingleDigit(
-                digit: whole % 10,
-                offset: h * decimal,
-                opacity: 1 - decimal,
-                position: position,
-                formatDigit: formatDigit,
+              Positioned(
+                bottom: h * decimal,
+                child: Text(
+                  (whole % 10).localizeTo(context.appLocale),
+                ),
               ),
-              _buildSingleDigit(
-                digit: (whole + 1) % 10,
-                offset: h * decimal - h,
-                opacity: decimal,
-                position: position,
-                formatDigit: formatDigit,
+              Positioned(
+                bottom: h * decimal - h,
+                child: Text(
+                  ((whole + 1) % 10).localizeTo(context.appLocale),
+                ),
               ),
             ],
           ),
@@ -89,19 +112,4 @@ class _SingleDigitFlipCounter extends StatelessWidget {
       },
     );
   }
-
-  Widget _buildSingleDigit({
-    required int digit,
-    required double offset,
-    required double opacity,
-  }) {
-    // Try to avoid using the `Opacity` widget when possible, for performance.
-    return Positioned(
-      bottom: offset,
-      child: Text(
-        digit.localizeTo(context.),
-        style: TextStyle(color: color.withOpacity(opacity.clamp(0, 1))),
-      );,
-    );
-  }
-}*/
+}

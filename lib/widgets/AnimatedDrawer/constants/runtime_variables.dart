@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
+enum DrawerDirection {
+  left,
+  right,
+}
+
 class RuntimeVariables {
+
+  static DrawerDirection drawerDirection = DrawerDirection.left;
+
   /// X-Axis offset value of HomePage defined at runtime by user. This will be used if the user has passed it in the constructor.
   /// If user has not passed it in the constructor, than value from the constants is used.
   static double? homePageXUserInput;
@@ -55,6 +63,7 @@ class RuntimeVariables {
     int? homePageSpeed,
     int? shadowSpeed,
     Widget? openIcon,
+    DrawerDirection? direction,
     Widget? closeIcon,
   }) {
     homePageXUserInput = homeX;
@@ -69,6 +78,7 @@ class RuntimeVariables {
     shadowSpeedUserInput = shadowSpeed;
 
     backgroundGradientUserInput = backgroundGradient;
+    drawerDirection = direction ?? DrawerDirection.left;
 
     openIconUserInput = openIcon;
     closeIconUserInput = closeIcon;

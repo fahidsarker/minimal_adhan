@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:minimal_adhan/widgets/AnimatedDrawer/bloc/AnimatedDrawerDependency.dart';
 import 'package:minimal_adhan/widgets/AnimatedDrawer/constants/runtime_variables.dart';
 import 'package:minimal_adhan/widgets/AnimatedDrawer/views/third_layer.dart';
@@ -79,6 +80,7 @@ class AnimatedDrawer extends StatefulWidget {
   final bool isOpen;
   final AnimatedDrawerDependency dependency;
 
+  final DrawerDirection? direction;
 
   AnimatedDrawer._({
     required this.backgroundGradient,
@@ -95,6 +97,7 @@ class AnimatedDrawer extends StatefulWidget {
     this.shadowXValue,
     this.shadowYValue,
     this.shadowAngle,
+    this.direction,
     this.homePageSpeed,
     this.shadowSpeed,
   });
@@ -112,6 +115,7 @@ class AnimatedDrawer extends StatefulWidget {
       double? shadowAngle,
       int? homePageSpeed,
       int? shadowSpeed,
+        DrawerDirection? direction,
       Widget? openIcon,
       Widget? closeIcon,
       bool isOpen = false}) {
@@ -136,6 +140,7 @@ class AnimatedDrawer extends StatefulWidget {
       shadowAngle: shadowAngle,
       shadowSpeed: shadowSpeed,
       shadowYValue: shadowYValue,
+      direction: direction,
     );
   }
 
@@ -158,6 +163,7 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
         shadowAngle: widget.shadowAngle,
         shadowSpeed: widget.shadowSpeed,
         closeIcon: widget.closeIcon,
+        direction: widget.direction,
         openIcon: widget.openIcon);
 
     return Scaffold(body: _body());

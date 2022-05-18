@@ -16,12 +16,13 @@ class AnimatedDrawerDependency {
 
   bool isDrawerOpen = false;
   void openDrawer() {
-    shadowXOffSet = RuntimeVariables.shadowXUserInput ?? Constants.SHADOW_X_OFFSET_END;
-    shadowYOffSet = RuntimeVariables.shadowYUserInput ?? Constants.SHADOW_Y_OFFSET_END;
-    shadowAngle = RuntimeVariables.shadowAngleUserInput ?? Constants.SHADOW_ANGLE_END;
-    homeXOffSet = RuntimeVariables.homePageXUserInput ?? Constants.HOME_SCREEN_X_OFFSET_END;
-    homeYOffSet = RuntimeVariables.homePageYUserInput ?? Constants.HOME_SCREEN_Y_OFFSET_END;
-    homeAngle = RuntimeVariables.homePageAngleUserInput ?? Constants.HOME_SCREEN_ANGLE_END;
+    bool openLeft = RuntimeVariables.drawerDirection == DrawerDirection.left;
+    shadowXOffSet = RuntimeVariables.shadowXUserInput ?? (openLeft ? Constants.SHADOW_X_OFFSET_END : 10);
+    shadowYOffSet = RuntimeVariables.shadowYUserInput ?? (openLeft ? Constants.SHADOW_Y_OFFSET_END : 0);
+    shadowAngle = RuntimeVariables.shadowAngleUserInput ?? (openLeft ? Constants.SHADOW_ANGLE_END : -Constants.SHADOW_ANGLE_END) ;
+    homeXOffSet = RuntimeVariables.homePageXUserInput ?? (openLeft ? Constants.HOME_SCREEN_X_OFFSET_END : 0) ;
+    homeYOffSet = RuntimeVariables.homePageYUserInput ?? (openLeft ? Constants.HOME_SCREEN_Y_OFFSET_END : 0) ;
+    homeAngle = RuntimeVariables.homePageAngleUserInput ?? (openLeft ? Constants.HOME_SCREEN_ANGLE_END : Constants.HOME_SCREEN_ANGLE_END) ;
     isDrawerOpen = true;
   }
 

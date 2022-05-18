@@ -5,6 +5,7 @@ import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/screens/tasbih/widgets/tasbih_bud_list.dart';
 import 'package:minimal_adhan/theme.dart';
+import 'package:minimal_adhan/widgets/flip_counter/int_flip_counter.dart';
 import 'flip_counter.dart';
 
 class TasbihScreen extends StatefulWidget {
@@ -41,12 +42,18 @@ class _TasbihScreenState extends State<TasbihScreen> {
 
     HapticFeedback.heavyImpact();
     if (value == 0) {
-      _controller.animateToPage(0,
-          duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+      _controller.animateToPage(
+        0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      );
     } else {
       final int nextPage = (_controller.page?.round() ?? 0) + 1;
-      _controller.animateToPage(nextPage,
-          duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+      _controller.animateToPage(
+        nextPage,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      );
     }
   }
 
@@ -81,29 +88,28 @@ class _TasbihScreenState extends State<TasbihScreen> {
           borderRadius: BorderRadius.circular(20),
           child: Center(
             child: Container(
-                height: context.smallerBetweenHeightAndWidth * 0.9,
-                width: context.smallerBetweenHeightAndWidth * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  children: [
-                    AnimatedFlipCounter(
-                      value: count,
-                      formatDigit: (digit, position) =>
-                          '$digit',
-                      duration: const Duration(milliseconds: 250),
-                      textStyle: txtTheme?.copyWith(
-                        fontWeight: FontWeight.w300,
-                        foreground: Paint()
-                          ..shader = getOnBackgroundGradient().createShader(
-                              const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
-                      ),
+              height: context.smallerBetweenHeightAndWidth * 0.9,
+              width: context.smallerBetweenHeightAndWidth * 0.9,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  IntFlipCounter(
+                    count,
+                    textStyle: txtTheme?.copyWith(
+                      fontWeight: FontWeight.w300,
+                      foreground: Paint()
+                        ..shader = getOnBackgroundGradient().createShader(
+                          const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                        ),
                     ),
-                    Spacer(),
-                    TasbihView(_controller)
-                  ],
-                )),
+                  ),
+                  const Spacer(),
+                  TasbihView(_controller)
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/HomeContent.dart';
 import 'package:minimal_adhan/screens/Home/widgets/menu.dart';
 import 'package:minimal_adhan/theme.dart';
+import 'package:minimal_adhan/widgets/AnimatedDrawer/constants/runtime_variables.dart';
 import 'package:minimal_adhan/widgets/AnimatedDrawer/views/animated_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -103,6 +104,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           backgroundGradient: getOnBackgroundGradient(),
           shadowColor: getDrawerShadowColor(),
           menuPageContent: Menu(),
+          direction: DrawerDirection.left,
           homePageContent: Container(
             height: context.height,
             width: context.width,

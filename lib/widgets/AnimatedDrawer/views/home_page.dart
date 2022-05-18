@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
   final Widget? body;
   final AnimatedDrawerDependency dependency;
 
-  HomePage({required this.body, required this.dependency});
+  const HomePage({required this.body, required this.dependency});
 
   @override
   _HomePageState createState() => new _HomePageState();
@@ -25,19 +25,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-        transform: widget.dependency.changeValues(
-            widget.dependency.homeXOffSet, widget.dependency.homeYOffSet, widget.dependency.homeAngle,),
-        duration: widget.dependency.setDuration(
-            RuntimeVariables.homePageSpeedUserInput ??
-                Constants.HOME_SCREEN_DURATION,),
-        child: ClipRRect(
-          borderRadius: widget.dependency.getBorderRadius(),
-          child: widget.body ?? const SizedBox(),
-        ),);
+      transform: widget.dependency.changeValues(
+        widget.dependency.homeXOffSet,
+        widget.dependency.homeYOffSet,
+        widget.dependency.homeAngle,
+      ),
+      duration: widget.dependency.setDuration(
+        RuntimeVariables.homePageSpeedUserInput ??
+            Constants.HOME_SCREEN_DURATION,
+      ),
+      child: ClipRRect(
+        borderRadius: widget.dependency.getBorderRadius(),
+        child: widget.body ?? const SizedBox(),
+      ),
+    );
   }
-
 }

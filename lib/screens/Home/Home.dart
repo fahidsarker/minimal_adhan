@@ -115,7 +115,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 HomeContent(_toggleDrawer, _animationController, onNavigate: widget.onNavigate,),
                 if (_isOpen)
                   GestureDetector(
-                    onTap: () => _toggleDrawer(context.appLocale.direction),
+                    onTap: () => _toggleDrawer(context.appLocale.text_direction),
                   ),
               ],
             ),

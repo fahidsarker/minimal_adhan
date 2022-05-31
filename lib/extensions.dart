@@ -266,8 +266,8 @@ extension IntHelper on int{
       localized += localizedDigit;
     }
 
-    if(locale.direction == 'rlt'){
-      localized = localized.split('').reversed.join('');
+    if(locale.numeric_direction == 'rlt'){
+      localized = localized.split('').reversed.join();
     }
 
     return localized;

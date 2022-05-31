@@ -66,11 +66,11 @@ class _HomeContentState extends State<HomeContent> {
           ? null
           : (details) {
               if (details.delta.dx > 0) {
-                widget.toggleDrawer(context.appLocale.direction, true);
+                widget.toggleDrawer(context.appLocale.text_direction, true);
               }
 
               if (details.delta.dx < 0) {
-                widget.toggleDrawer(context.appLocale.direction, false);
+                widget.toggleDrawer(context.appLocale.text_direction, false);
               }
             },
       child: Stack(
@@ -145,7 +145,7 @@ class _HomeContentState extends State<HomeContent> {
               ),
             ],
           ),
-          if (!context.isLargeScreen && context.appLocale.direction == 'ltr')
+          if (!context.isLargeScreen && context.appLocale.text_direction == 'ltr')
             AnimatedOpacity(
               opacity: closeTopContainer ? 0 : 1,
               duration: const Duration(milliseconds: 200),
@@ -153,7 +153,7 @@ class _HomeContentState extends State<HomeContent> {
                   ? null
                   : IconButton(
                       onPressed: () =>
-                          widget.toggleDrawer(context.appLocale.direction),
+                          widget.toggleDrawer(context.appLocale.text_direction),
                       icon: AnimatedIcon(
                         icon: AnimatedIcons.menu_arrow,
                         progress: widget.drawerController,

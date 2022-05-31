@@ -6,10 +6,17 @@
     "description": "Name of Locale.",
     "eg_english": "en"
   },
-  "direction": "rtl",
-  "@direction": {
-    "description": "Language direction - Either Left-To-Right (ltr) or Right-To-left(rtl).",
-    "eg_english": "ltr"
+  "text_direction": "rtl",
+  "@text_direction": {
+    "description": "Direction of the main language - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr",
+    "eg_arabic": "rtl"
+  },
+  "numeric_direction": "ltr",
+  "@numeric_direction": {
+    "description": "Direction of the numeric system (Numbers like 1253) - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr",
+    "eg_arabic": "ltr"
   },
   "current_lang": "العربية",
   "@current_lang": {

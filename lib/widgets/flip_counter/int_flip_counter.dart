@@ -14,7 +14,7 @@ class IntFlipCounter extends StatelessWidget {
     final style = DefaultTextStyle.of(context).style.merge(textStyle);
     final prototypeDigit = TextPainter(
       text: TextSpan(text: context.appLocale.eight, style: style),
-      textDirection: context.appLocale.direction == 'rtl'
+      textDirection: context.appLocale.text_direction == 'rtl'
           ? TextDirection.rtl
           : TextDirection.ltr,
       textScaleFactor: MediaQuery.of(context).textScaleFactor,

@@ -176,7 +176,7 @@
     "description": "Describes a button called Nearby - e.g. for English: 'Nearby' used for nearby mosque",
     "eg_english": "Nearby"
   },
-  "search": "بحث",
+  "search": "البحث",
   "@search": {
     "description": "Describes a button called Search ",
     "eg_english": "Search"
@@ -191,7 +191,7 @@
     "description": "The transliteration for Azan ",
     "eg_english": "Azan"
   },
-  "location": "موقعك",
+  "location": "الموقع",
   "@location": {
     "description": "The translation of the word location  ",
     "eg_english": "Location"
@@ -211,17 +211,17 @@
     "description": "The translation for the word 'Type' - e.g. for English: ",
     "eg_english": "'Type' - 'Type of Azan Notification'"
   },
-  "timing": "توقيت",
+  "timing": "التوقيت",
   "@timing": {
     "description": "The translation for the word 'Timing' - e.g. for English:  ",
     "eg_english": "'Timing', 'Timing for the Azan Notification'"
   },
-  "bttn_open_settings": "أفتح الإعدادات",
+  "bttn_open_settings": "فتح الإعدادات",
   "@bttn_open_settings": {
     "description": "The translation for the sentence 'Open Settings'  ",
     "eg_english": "Open Settings"
   },
-  "bttn_okay": "حسنا",
+  "bttn_okay": "نعم",
   "@bttn_okay": {
     "description": "The translation for the word 'okay'  ",
     "eg_english": "Okay"
@@ -231,7 +231,7 @@
     "description": "The translation for the sentence 'Remind me later' ",
     "eg_english": "Remind Me Later"
   },
-  "bttn_never_ask_again": "لم نطلب مرة أخرى",
+  "bttn_never_ask_again": "لا تسألني مجددا",
   "@bttn_never_ask_again": {
     "description": "The translation for the sentence 'Never Ask me Again'  ",
     "eg_english": "Never Ask Again"
@@ -325,7 +325,7 @@
     "description": "A word for Dhuhr in its language  ",
     "eg_english": "Dhuhr"
   },
-  "adhan_jummah": "جمعة",
+  "adhan_jummah": "الجمعة",
   "@adhan_jummah": {
     "description": "A word for 'Jummah' in its language  ",
     "eg_english": "Jummah"
@@ -345,12 +345,12 @@
     "description": "A word for 'Isha' in its language  ",
     "eg_english": "Isha"
   },
-  "adhan_midnight": "منتصف الليل",
+  "adhan_midnight": "منتصف اليل",
   "@adhan_midnight": {
     "description": "A word for 'Midnight' in its language  ",
     "eg_english": "Midnight"
   },
-  "adhan_third_night": "الثلث الأخير من الليل",
+  "adhan_third_night": "الثلث الأخير من اليل",
   "@adhan_third_night": {
     "description": "A word for 'Last Third Night' in its language  ",
     "eg_english": "Last Third Night"
@@ -360,7 +360,7 @@
     "description": "A sentence for weather the notification be exact or delayed or early ",
     "eg_english": "Early/Delayed Notification"
   },
-  "notify_me_before": "يخطر لي قبل {min} دقائق من وقت الأذان",
+  "notify_me_before": "نبهني {min} دقائق/دقيقة قبل الأذان",
   "@notify_me_before": {
     "description": "Describes when the notification should be sent early ",
     "placeholders": {
@@ -371,7 +371,7 @@
     },
     "eg_english": "Notify me {min} minutes before azan time"
   },
-  "notify_me_after": "أعلمني بعد {min} دقائق من وقت الأذان",
+  "notify_me_after": "نبهني {min} دقائق/دقيقة بعد الأذان",
   "@notify_me_after": {
     "description": "Describes when the notification should be sent later ",
     "placeholders": {
@@ -382,44 +382,44 @@
     },
     "eg_english": "Notify me {min} minutes after azan time"
   },
-  "silent_adhan": "صامتة",
+  "silent_adhan": "الصامت",
   "@silent_adhan": {
     "description": "No notification should be sent",
     "eg_english": "Silent"
   },
-  "notification_only": "الإخطار فقط",
+  "notification_only": "التنبيه بدون أذان",
   "@notification_only": {
     "description": "Only send the notification with default sound ",
     "eg_english": "Notification Only"
   },
-  "ringtone": "نغمة",
+  "ringtone": "التنبيه بصوت رنة الهاتف",
   "@ringtone": {
     "description": "Play the ringtone during notification '",
     "eg_english": "Ringtone"
   },
-  "adhan_mecca": "أذان مكة",
+  "adhan_mecca": "أذان - مكة",
   "@adhan_mecca": {
     "description": "Play the Azan of Mecca during notification ",
     "eg_english": "Azan Mecca"
   },
-  "adhan_medina": "اذان المدينة المنورة",
+  "adhan_medina": "أذان - المدينة",
   "@adhan_medina": {
     "description": "Play the azan of medina during notification ",
     "eg_english": "Azan Medina"
   },
-  "alarm": "نغمة التنبيه",
+  "alarm": "التنبيه بصوت المنبه",
   "@alarm": {
     "description": "Play the alarm during notification ",
     "eg_english": "Alarm"
   },
   "@__________________________________________Settings_Page": {
   },
-  "global": "الاعدادات العامة",
+  "global": "العالمية",
   "@global": {
     "description": "The category global settings i.e. that applies to the entire app ",
     "eg_english": "Global"
   },
-  "click_to_change": "انقر للتغيير",
+  "click_to_change": "اضغط للتغيير",
   "@click_to_change": {
     "description": "The user can change a settings by tapping a Button  ",
     "eg_english": "Click to change"
@@ -439,37 +439,37 @@
     "description": "The transliteration of the Shafii Madhab  ",
     "eg_english": "Shafi madhab"
   },
-  "hanafi_asr_desc": "وقت متأخر العصر",
+  "hanafi_asr_desc": "توقيت العصر المتأخر",
   "@hanafi_asr_desc": {
     "description": "The descrion of the change of selecting hanafi madhab ",
     "eg_english": "Later Asr Time"
   },
-  "shafi_asr_desc": "وقت العصر المبكر",
+  "shafi_asr_desc": "توقيت العصر المبكر",
   "@shafi_asr_desc": {
     "description": "The description of the change of selecting the shafi madhab  ",
     "eg_english": "Early Asr Time"
   },
-  "persistent_notify": "الإخطارات المستمرة",
+  "persistent_notify": "التنبيه دوما",
   "@persistent_notify": {
     "description": "will the notification be persistent? ",
     "eg_english": "Persistent Notification"
   },
-  "persistent_notify_desc": "إظهار إشعار الأذان طوال الوقت",
+  "persistent_notify_desc": "أظهر الأذان في التنبيه دوما",
   "@persistent_notify_desc": {
     "description": "Description for the notification be persistent ",
     "eg_english": "Show the Azan notification all the time"
   },
-  "theme": "موضوع التطبيق",
+  "theme": "المظهر",
   "@theme": {
     "description": "Settings for the theme  ",
     "eg_english": "Theme"
   },
-  "always_dark": "موضوع التطبيق",
+  "always_dark": "الوضع الليلي",
   "@always_dark": {
     "description": "Always show the dark-mode irrespective of the device theme ",
     "eg_english": "Always Dark"
   },
-  "always_light": "موضوع خفيف",
+  "always_light": "الوضع الصباحي",
   "@always_light": {
     "description": "Always show the light-mode irrespective of the device theme ",
     "eg_english": "Always Light"
@@ -479,7 +479,7 @@
     "description": "Follow the system for theme  ",
     "eg_english": "Follow System"
   },
-  "calc_method": "طريقة حساب الاذان",
+  "calc_method": "طريقة الحساب",
   "@calc_method": {
     "description": "Calculation method of the Azan times  ",
     "eg_english": "Calculation Method"
@@ -489,17 +489,17 @@
     "description": "Rules for high latitude for azan time calculation  ",
     "eg_english": "High Lat Rules"
   },
-  "adhan_visibility": "رؤية بعض الأذان",
+  "adhan_visibility": "ظهور الأذان",
   "@adhan_visibility": {
     "description": "Visibility of some azan times  ",
     "eg_english": "Azan Visibility"
   },
-  "adhan_manual_correction": "تصحيح أوقات الاذان يدويا",
+  "adhan_manual_correction": "التصحيحات اليدوية",
   "@adhan_manual_correction": {
     "description": "Manual Correction for some azan times ",
     "eg_english": "Manual Corrections"
   },
-  "support_dev": "دعم تطوير التطبيق",
+  "support_dev": "دعم مطوري التطبيق",
   "@support_dev": {
     "description": "Category of supporting development ",
     "eg_english": "Support Development"
@@ -509,12 +509,12 @@
     "description": "Button to rate on play store  ",
     "eg_english": "Rate on Play Store"
   },
-  "rate_on_play_store_desc": "هذا من شأنه أن يحفزنا كثيرا",
+  "rate_on_play_store_desc": "سيشجعنا هذا كثيرا",
   "@rate_on_play_store_desc": {
     "description": "Description of the rate button ",
     "eg_english": "That would motivate us a lot."
   },
-  "help_us_translate": "ساعدنا في الترجمة",
+  "help_us_translate": "ساعدنا على الترجمة",
   "@help_us_translate": {
     "description": "A button for user to translate the app ",
     "eg_english": "Help us translate"
@@ -529,10 +529,10 @@
     "description": "A button to go to the github repo  ",
     "eg_english": "Github Repository"
   },
-  "github_ripo_desc": "",
+  "github_ripo_desc": "تعرف Flutter تنمية؟ انضم إلينا في رحلة السبيله هذه أو امنحنا نجمة لتحفيزنا.",
   "@github_ripo_desc": {
     "description": "Description for the github repo ",
-    "eg_english": "تعرف Flutter تنمية؟ انضم إلينا في رحلة السبيله هذه أو امنحنا نجمة لتحفيزنا."
+    "eg_english": ""
   },
   "report_bug": "تقرير Bug",
   "@report_bug": {
@@ -559,7 +559,7 @@
     "description": "Action for make dua ",
     "eg_english": "May Allah reward you with something good :-)"
   },
-  "request_a_feature": "طلب ميزة التطبيق",
+  "request_a_feature": "طلب خاصية",
   "@request_a_feature": {
     "description": "Button for requesting a new feature ",
     "eg_english": "Request a feature"
@@ -574,7 +574,7 @@
     "description": "Show translation of the duas  ",
     "eg_english": "Show Translation"
   },
-  "show_transliteration": "إظهار التحويل الصوتي",
+  "show_transliteration": "إظهار الترجمة الحرفية",
   "@show_transliteration": {
     "description": "Show transliteration of the duas  ",
     "eg_english": "Show Transliteration"
@@ -594,12 +594,12 @@
     "description": "Description for battery_optimization_disable  ",
     "eg_english": "Please disable the battery optimization feature so that you don't miss any notifications!"
   },
-  "arabic_font_size": "محدد الخط العربي",
+  "arabic_font_size": "حجم الخط العربي",
   "@arabic_font_size": {
     "description": "Arabic font size selector - e.g for English: ''",
     "eg_english": "Arabic Font Selector"
   },
-  "other_font_size": "محدد الخط الآخر",
+  "other_font_size": "حجم الخط",
   "@other_font_size": {
     "description": "Other (translation/transliteration) font size selector - e.g for English: ''",
     "eg_english": "Other Font Selector"

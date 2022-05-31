@@ -1,4 +1,6 @@
-# Minimal Adhan
+# Azan
+
+'Minimal Adhan' is now 'Azan'
 
 <a href='https://play.google.com/store/apps/details?id=com.muhammadfahid.minimaladhan'> <img src="screenshots/get_play.svg" width="248"> </a>
 
@@ -17,17 +19,23 @@ An Open-Sourced Adhan app for the ummah.<br/>
 
 <table>
   <tr>
-    <td><img src = "screenshots/scrnsht.gif" width = 320/></td>
-    <td><img src = "screenshots/light/2.png" width = 320/></td>
-    <td><img src = "screenshots/light/3.png" width = 320/></td>
-    <td><img src = "screenshots/light/4.png" width = 320/></td>
+    <td><img src = "screenshots/light/1.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/2.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/3.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/4.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/5.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/6.jpg" width = 320/></td>
+    <td><img src = "screenshots/light/7.jpg" width = 320/></td>
   </tr>
   
   <tr>
-    <td><img src = "screenshots/dark/2.png" width = 320/></td>
-    <td><img src = "screenshots/dark/3.png" width = 320/></td>
-    <td><img src = "screenshots/dark/4.png" width = 320/></td>
-    <td><img src = "screenshots/dark/1.png" width = 320/></td>
+    <td><img src = "screenshots/dark/1.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/2.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/3.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/4.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/5.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/6.jpg" width = 320/></td>
+    <td><img src = "screenshots/dark/7.jpg" width = 320/></td>
   </tr>
 </table>
 
@@ -114,12 +122,16 @@ An Open-Sourced Adhan app for the ummah.<br/>
 <hr></hr>
 
 ## Contributions
+
 ## Contribute to this project?
+
 ### Translating the app
+
 1. Create an` app_<lang_code>.arb` (e.g. app_ar.arb) file in `minimal_adhan/locales/langs`
 2. Copy contents of `minimal_adhan/locales/langs/app_lang_template.arb` to the newly created file.
 3. Fill up the translations. You can find both description and english keyword/sentence in the description param of the keys. e.g:
    From:
+
 ```arb
 {
   "@__________________________________________Global_Page": {
@@ -140,7 +152,9 @@ An Open-Sourced Adhan app for the ummah.<br/>
     "eg_english": "English"
   },
 ```
+
 To:
+
 ```arb
 {
   "@__________________________________________Global_Page": {
@@ -166,30 +180,40 @@ To:
     "eg_english": "1"
   },
 ```
-4. Create an  `app_<lang_code>.dart` (keep the name same as the .arb file).
+
+4. Create an `app_<lang_code>.dart` (keep the name same as the .arb file).
 5. `import 'package:minimal_adhan/models/app_local.dart';`
-6. Create a new class here named `Locale<LanguageName>` (e.g.  LocaleArabic) and extend the `AppLocale` class:
+6. Create a new class here named `Locale<LanguageName>` (e.g. LocaleArabic) and extend the `AppLocale` class:
+
 ```dart
 class LocaleArabic extends AppLocale{
 }
 ```
+
 7. Create a **const constructor** and pass the language code to the super block: `const LocaleArabic(): super('ar');`
 8. Ovveride getter **languageName** :
+
 ```dart
   @override
   String get languageName => '(Beta) عربى';
 ```
+
 9. Ovveride getter **duaElementsAvailable** (This tells the app if there is dua translations/transliterations available for this language):
+
 ```dart
   @override
   bool get duaElementsAvailable => false;
 ```
+
 10. Ovveride the getter **fontFamily** (This is nullable and only return value if font is added to this app (see 'Add Custom Fonts' section ). otherwise, return null):
+
 ```dart
   @override
   String? get fontFamily => 'lateef';
 ```
+
 11. Ovveride the function `TextTheme getTextTheme(BuildContext context)` and return a textTheme(it can be a default one i.e. `Theme.of(context).textTheme` or a modified one.):
+
 ```dart
 @override
   TextTheme getTextTheme(BuildContext context){
@@ -209,7 +233,6 @@ class LocaleArabic extends AppLocale{
   }
 ```
 
-
 ### Translations
 
 <ul>
@@ -218,6 +241,8 @@ class LocaleArabic extends AppLocale{
 </ul>
 
 ### Icons
+
+<a href="https://www.flaticon.com/free-icons/mosque" title="mosque icons">Mosque icons created by Freepik - Flaticon</a>
 
 - <a href="https://www.flaticon.com/free-icons/islam" title="islam icons">Islam icons created by Freepik - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/mosque" title="mosque icons">Mosque icons created by Freepik - Flaticon</a>

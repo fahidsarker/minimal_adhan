@@ -25,7 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   Future _disableBatteryOptimization() async {
     if (Platform.isAndroid) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         final appLocale = context.appLocale;
         final globalDep = context.read<GlobalDependencyProvider>();
 

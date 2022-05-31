@@ -114,16 +114,18 @@ class AnimatedDrawer extends StatefulWidget {
       double? shadowYValue,
       double? shadowAngle,
       int? homePageSpeed,
-      int? shadowSpeed,
-        DrawerDirection? direction,
+      int? shadowSpeed, DrawerDirection? direction,
       Widget? openIcon,
       Widget? closeIcon,
       bool isOpen = false}) {
+
     final dep = AnimatedDrawerDependency();
-    if(isOpen){
-      dep.openDrawer();
-    }else{
-      dep.closeDrawer();
+    if(direction != DrawerDirection.none){
+      if(isOpen){
+        dep.openDrawer();
+      }else{
+        dep.closeDrawer();
+      }
     }
     return AnimatedDrawer._(
       backgroundGradient: backgroundGradient,

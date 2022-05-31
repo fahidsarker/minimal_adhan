@@ -80,7 +80,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
-  void _toggleDrawer([bool? open]) {
+  void _toggleDrawer(String direction, [bool? open]) {
+    if(direction == 'rtl'){
+      return;
+    }
     if (open != null || open != _isOpen) {
       setState(() {
         _isOpen = open ?? !_isOpen;
@@ -98,8 +101,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: SafeArea(
         child: AnimatedDrawer(
-          homePageXValue: 60,
-          shadowXValue: 10,
           isOpen: _isOpen,
           backgroundGradient: getOnBackgroundGradient(),
           shadowColor: getDrawerShadowColor(),
@@ -114,7 +115,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 HomeContent(_toggleDrawer, _animationController, onNavigate: widget.onNavigate,),
                 if (_isOpen)
                   GestureDetector(
-                    onTap: () => _toggleDrawer(),
+                    onTap: () => _toggleDrawer(context.appLocale.direction),
                   ),
               ],
             ),

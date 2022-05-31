@@ -12,6 +12,8 @@ AppLocalizationsEn get engAppLocale {
 
 const inline = pragma('@vm:prefer-inline');
 
+
+
 const Iterable<LocalizationsDelegate> appLocaleDelegates = [
   AppLocalizations.delegate,
   GlobalMaterialLocalizations.delegate,

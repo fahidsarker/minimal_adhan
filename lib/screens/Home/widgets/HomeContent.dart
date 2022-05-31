@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
@@ -7,22 +6,22 @@ import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationCards.dart';
 import 'package:minimal_adhan/screens/Home/widgets/NavigationPanel.dart';
-import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
-import 'package:minimal_adhan/widgets/dashBoard.dart';
 import 'package:minimal_adhan/screens/adhan/adhanScreen.dart';
 import 'package:minimal_adhan/screens/dua/duaScreen.dart';
+import 'package:minimal_adhan/screens/feedback/feedbackTaker.dart';
 import 'package:minimal_adhan/screens/qibla/qiblaScreen.dart';
 import 'package:minimal_adhan/screens/settings/settingsScreen.dart';
 import 'package:minimal_adhan/screens/tasbih/tasbihScreen.dart';
+import 'package:minimal_adhan/widgets/dashBoard.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeContent extends StatefulWidget {
-  final void Function([bool?]) toggleDrawer;
+  final void Function(String, [bool?]) toggleDrawer;
   final AnimationController drawerController;
   final void Function(Widget, int)? onNavigate;
 
-  const HomeContent(this.toggleDrawer, this.drawerController, {required this.onNavigate});
+  const HomeContent(this.toggleDrawer, this.drawerController,
+      {required this.onNavigate});
 
   @override
   State<HomeContent> createState() => _HomeContentState();
@@ -47,10 +46,10 @@ class _HomeContentState extends State<HomeContent> {
     super.initState();
   }
 
-  void navigate(BuildContext context, Widget child, int index){
-    if(widget.onNavigate == null){
+  void navigate(BuildContext context, Widget child, int index) {
+    if (widget.onNavigate == null) {
       context.push(child);
-    }else{
+    } else {
       widget.onNavigate?.call(child, index);
     }
   }
@@ -67,11 +66,11 @@ class _HomeContentState extends State<HomeContent> {
           ? null
           : (details) {
               if (details.delta.dx > 0) {
-                widget.toggleDrawer(true);
+                widget.toggleDrawer(context.appLocale.direction, true);
               }
 
               if (details.delta.dx < 0) {
-                widget.toggleDrawer(false);
+                widget.toggleDrawer(context.appLocale.direction, false);
               }
             },
       child: Stack(
@@ -97,7 +96,8 @@ class _HomeContentState extends State<HomeContent> {
               NavigationCard(
                 label: appLocale.dua,
                 imageURI: 'ic_hadith',
-                onPressed: () => navigate(context,
+                onPressed: () => navigate(
+                  context,
                   ChangeNotifierProvider(
                     create: (_) => DuaDependencyProvider(),
                     child: DuaScreen(),
@@ -108,7 +108,8 @@ class _HomeContentState extends State<HomeContent> {
               NavigationCard(
                 label: context.appLocale.tasbih,
                 imageURI: 'ic_tasbih',
-                onPressed: () => navigate(context,
+                onPressed: () => navigate(
+                  context,
                   ChangeNotifierProvider(
                     create: (_) => TasbihProvider(),
                     child: const TasbihScreen(),
@@ -121,14 +122,20 @@ class _HomeContentState extends State<HomeContent> {
                 imageURI: 'nearby',
                 onPressed: () =>
                     locationProvider.locationState is LocationAvailable
-                        ? navigate(context, FeedbackTaker('Nearby Mosque',                             'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
-                    ), 4)
+                        ? navigate(
+                            context,
+                            FeedbackTaker(
+                              'Nearby Mosque',
+                              'https://www.google.com/maps/search/mosque+near+me/@${(locationProvider.locationState as LocationAvailable).locationInfo.latitude},${(locationProvider.locationState as LocationAvailable).locationInfo.longitude}',
+                            ),
+                            4)
                         : context.showSnackBar(appLocale.no_location_available),
               ),
               NavigationCard(
                 label: appLocale.settings,
                 imageURI: 'ic_settings',
-                onPressed: () => navigate(context,
+                onPressed: () => navigate(
+                  context,
                   ChangeNotifierProvider(
                     create: (_) => DuaDependencyProvider(),
                     child: const SettingsScreen(),
@@ -138,14 +145,15 @@ class _HomeContentState extends State<HomeContent> {
               ),
             ],
           ),
-          if (!context.isLargeScreen)
+          if (!context.isLargeScreen && context.appLocale.direction == 'ltr')
             AnimatedOpacity(
               opacity: closeTopContainer ? 0 : 1,
               duration: const Duration(milliseconds: 200),
               child: closeTopContainer
                   ? null
                   : IconButton(
-                      onPressed: () => widget.toggleDrawer(),
+                      onPressed: () =>
+                          widget.toggleDrawer(context.appLocale.direction),
                       icon: AnimatedIcon(
                         icon: AnimatedIcons.menu_arrow,
                         progress: widget.drawerController,

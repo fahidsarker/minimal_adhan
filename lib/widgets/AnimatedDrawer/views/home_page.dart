@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
   const HomePage({required this.body, required this.dependency});
 
   @override
-  _HomePageState createState() => new _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {

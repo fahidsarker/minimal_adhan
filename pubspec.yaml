@@ -24,8 +24,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
-  flutter:
-    sdk: flutter
   adhan: ^2.0.0-nullsafety.1
   geolocator: ^7.0.3
   auto_size_text: ^3.0.0-nullsafety.0
@@ -35,10 +33,6 @@ dependencies:
   geocoding: ^2.0.0
   url_launcher: ^6.0.17
   shared_preferences: ^2.0.6
-  flutter_compass:
-    git:
-      url: https://github.com/hemanthrajv/flutter_compass.git
-      ref: 48e155bc647593e588fdeb5b22ed066afc1275ef
   flutter_svg: ^1.0.0
   lottie: ^1.0.1
   sqflite: ^2.0.0+3
@@ -49,8 +43,14 @@ dependencies:
   flutter_local_notifications: ^9.2.0
   upgrader: ^3.11.1
   optimize_battery: ^0.0.2
-  share_plus: ^3.0.4
+  share_plus: ^4.0.4
   matrix4_transform: ^2.0.1
+  flutter_compass:
+    git:
+      url: https://github.com/hemanthrajv/flutter_compass.git
+      ref: 48e155bc647593e588fdeb5b22ed066afc1275ef
+  flutter:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.

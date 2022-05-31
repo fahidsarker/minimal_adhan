@@ -107,7 +107,12 @@ Future createNotification({
   bool forcedSilent = false,
   bool reschedule = true,
 }) async {
-  await initializeDateFormatting('en');
+
+  //todo error point here
+  try{
+    await initializeDateFormatting('en');
+  }catch(_){}
+
   await initPreferences();
   final adhanDependency = AdhanDependencyProvider();
 

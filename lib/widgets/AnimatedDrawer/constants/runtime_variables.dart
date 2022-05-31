@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum DrawerDirection {
   left,
   right,
+  none
 }
 
 class RuntimeVariables {

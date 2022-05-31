@@ -26,7 +26,6 @@ class Azan extends StatelessWidget {
     final globalDependency = context.watch<GlobalDependencyProvider>();
     final locationProvider = context.read<LocationProvider>();
 
-
     return MaterialApp(
       localizationsDelegates: appLocaleDelegates,
       supportedLocales: supportedLocales,

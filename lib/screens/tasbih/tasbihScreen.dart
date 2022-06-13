@@ -81,34 +81,30 @@ class _TasbihScreenState extends State<TasbihScreen> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () => changeCounter(count + 1),
-          borderRadius: BorderRadius.circular(20),
-          child: Center(
-            child: Container(
-              height: context.smallerBetweenHeightAndWidth * 0.9,
-              width: context.smallerBetweenHeightAndWidth * 0.9,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                children: [
-                  IntFlipCounter(
-                    count,
-                    textStyle: txtTheme?.copyWith(
-                      fontWeight: FontWeight.w300,
-                      foreground: Paint()
-                        ..shader = getOnBackgroundGradient().createShader(
-                          const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                        ),
-                    ),
+      body: InkWell(
+        onTap: () => changeCounter(count + 1),
+        borderRadius: BorderRadius.circular(20),
+        child: Center(
+          child: Container(
+            height: context.smallerBetweenHeightAndWidth * 0.9,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                IntFlipCounter(
+                  count,
+                  textStyle: txtTheme?.copyWith(
+                    fontWeight: FontWeight.w300,
+                    foreground: Paint()
+                      ..shader = getOnBackgroundGradient().createShader(
+                        const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                      ),
                   ),
-                  const Spacer(),
-                  TasbihView(_controller)
-                ],
-              ),
+                ),
+                const Spacer(),
+                TasbihView(_controller)
+              ],
             ),
           ),
         ),

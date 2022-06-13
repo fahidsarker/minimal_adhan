@@ -42,8 +42,8 @@ class Azan extends StatelessWidget {
       theme: getLightTheme(context, globalDependency),
       darkTheme: getDarkTheme(context, globalDependency),
       home: globalDependency.welcomeScreenShown
-            ? DynamicDisplay(locationProvider)
-            : const WelcomeScreen(showWarning: true, build: 'Beta'),
+          ? DynamicDisplay(locationProvider)
+          : const WelcomeScreen(showWarning: false, build: 'Stable'),
     );
   }
 }

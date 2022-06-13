@@ -15,6 +15,7 @@ import 'package:minimal_adhan/widgets/loading.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/app_local.dart';
+import '../../prviders/dependencies/DuaDependencyProvider.dart';
 
 const pageAnimateDUration = Duration(milliseconds: 400);
 
@@ -45,17 +46,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
 
     final pages = [
-      PageViewModel(
-        title: "Warning - ${widget.build} build",
-        bodyWidget: Text(
-          "Thank you for trying out the ${widget.build} build. There might be bugs and the app might be un-stable. We appreciate any feedback you provide.",
-          style: defaultBodyTextStyle,
-          textAlign: TextAlign.center,
+      if (widget.showWarning)
+        PageViewModel(
+          title: "Warning - ${widget.build} build",
+          bodyWidget: Text(
+            "Thank you for trying out the ${widget.build} build. There might be bugs and the app might be un-stable. We appreciate any feedback you provide.",
+            style: defaultBodyTextStyle,
+            textAlign: TextAlign.center,
+          ),
+          image: const Center(
+            child: Icon(
+              Icons.warning,
+              size: 175,
+              color: Colors.yellow,
+            ),
+          ),
         ),
-        image: const Center(
-          child: Icon(Icons.warning, size: 175, color: Colors.yellow,),
-        ),
-      ),
       PageViewModel(
         title: "As-salamu alaykum",
         bodyWidget: const Text(
@@ -65,7 +71,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         image: Center(
           child: Image.asset(
-            'assets/logo_256.png',
+            'assets/logo.png',
             height: 175,
             fit: BoxFit.fitHeight,
           ),
@@ -74,7 +80,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       PageViewModel(
         title: "Your Adhan Companion",
         bodyWidget: const Text(
-          "Adhan Timing, Qibla Compass and Selection of duas in a single app.",
+          "Adhan Timing, Qibla Compass, Tashbih, Nearby Mosque and Selection of duas in a single app.",
           style: defaultBodyTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -83,10 +89,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       PageViewModel(
         title: "Language",
         image: const Center(
-            child: Icon(
-          Icons.language,
-          size: 175,
-        ),),
+          child: Icon(
+            Icons.language,
+            size: 175,
+          ),
+        ),
         bodyWidget: Column(
           children: [
             Text(
@@ -95,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                buildBottomSheet(AppLanguagePicker(), context);
+                buildBottomSheet(ChangeNotifierProvider(create: (_) => DuaDependencyProvider(), child: AppLanguagePicker()), context);
               },
               child: Text(AppLocale.of(context.appLocale.locale).languageName),
             ),
@@ -105,10 +112,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       PageViewModel(
         title: appLocale.location,
         image: const Center(
-            child: Icon(
-          Icons.my_location,
-          size: 175,
-        ),),
+          child: Icon(
+            Icons.my_location,
+            size: 175,
+          ),
+        ),
         bodyWidget: Column(
           children: [
             Text(
@@ -128,8 +136,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               height: 8.0,
             ),
             if (locationState is LocationNotAvailable)
-              if (locationState.cause ==
-                  locationNACausePermissionDeniedForever)
+              if (locationState.cause == locationNACausePermissionDeniedForever)
                 Text(
                   appLocale.permission_denied,
                   style:
@@ -224,8 +231,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             textAlign: TextAlign.center,
           ),
           image: Center(
-            child: Lottie.asset('assets/check_anim.json',
-                width: 175, fit: BoxFit.contain, height: 175, reverse: true,),
+            child: Lottie.asset(
+              'assets/check_anim.json',
+              width: 175,
+              fit: BoxFit.contain,
+              height: 175,
+              reverse: true,
+            ),
           ),
         )
       else
@@ -237,8 +249,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             textAlign: TextAlign.center,
           ),
           image: Center(
-            child: Lottie.asset('assets/worning_anim.json',
-                width: 175, fit: BoxFit.contain, height: 175, reverse: true,),
+            child: Lottie.asset(
+              'assets/worning_anim.json',
+              width: 175,
+              fit: BoxFit.contain,
+              height: 175,
+              reverse: true,
+            ),
           ),
         )
     ];
@@ -252,79 +269,87 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         statusBarColor: Colors.transparent,
       ),
       child: Scaffold(
-          body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: pageController,
-                physics: const BouncingScrollPhysics(),
-                children: pages,
-                onPageChanged: (val) => setState(() {
-                  currentPage = val;
-                }),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  physics: const BouncingScrollPhysics(),
+                  children: pages,
+                  onPageChanged: (val) => setState(() {
+                    currentPage = val;
+                  }),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Opacity(
-                    opacity: currentPage < pages.length - 1 ? 1 : 0,
-                    child: TextButton(
-                      onPressed: () {
-                        if (currentPage < pages.length - 1) {
-                          pageController.animateToPage(pages.length - 1,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Opacity(
+                      opacity: currentPage < pages.length - 1 ? 1 : 0,
+                      child: TextButton(
+                        onPressed: () {
+                          if (currentPage < pages.length - 1) {
+                            pageController.animateToPage(
+                              locationState is LocationAvailable ? pages.length - 1 : pages.length - 3,
                               duration: const Duration(milliseconds: 450),
-                              curve: Curves.linear,);
-                        }
-                      },
-                      child: const Text('Skip'),
+                              curve: Curves.linear,
+                            );
+                          }
+                        },
+                        child: const Text('Skip'),
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  Wrap(
-                    children: [
-                      for (int i = 0; i < pages.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                          child: Container(
-                            width: 12,
-                            height: 12,
-                            decoration: BoxDecoration(
+                    const Spacer(),
+                    Wrap(
+                      children: [
+                        for (int i = 0; i < pages.length; i++)
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 2.0),
+                            child: Container(
+                              width: 12,
+                              height: 12,
+                              decoration: BoxDecoration(
                                 color: i == currentPage
                                     ? Colors.greenAccent
                                     : null,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                    color: getColoredContainerColor(context),),),
-                          ),
-                        )
-                    ],
-                  ),
-                  const Spacer(),
-                  if (currentPage >= pages.length - 1)
-                    TextButton(
-                      onPressed: () {
-                        globalProvider.welcomeComplete();
-                      },
-                      child: const Text('Done'),
-                    )
-                  else
-                    TextButton(
-                      onPressed: () {
-                        pageController.animateToPage(currentPage + 1,
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.linear,);
-                      },
-                      child: const Text('Next'),
+                                  color: getColoredContainerColor(context),
+                                ),
+                              ),
+                            ),
+                          )
+                      ],
                     ),
-                ],
-              ),
-            )
-          ],
+                    const Spacer(),
+                    if (currentPage >= pages.length - 1)
+                      TextButton(
+                        onPressed: () {
+                          globalProvider.welcomeComplete();
+                        },
+                        child: const Text('Done'),
+                      )
+                    else
+                      TextButton(
+                        onPressed: () {
+                          pageController.animateToPage(
+                            currentPage + 1,
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.linear,
+                          );
+                        },
+                        child: const Text('Next'),
+                      ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      ),),
+      ),
     );
   }
 }

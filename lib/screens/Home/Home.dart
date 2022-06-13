@@ -71,7 +71,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _disableBatteryOptimization().then((_) {});
+    //_disableBatteryOptimization().then((_) {});
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 450),

@@ -23,10 +23,9 @@ class AdhanItem extends StatelessWidget {
 
     final adhanTitleStyle = context.textTheme.headline5
         ?.copyWith(color: context.textTheme.headline6?.color);
-    const iconSize = 40.0;
+    const iconSize = 24.0;
     final adhanDependency = context.watch<AdhanDependencyProvider>();
     final notifyID = adhanDependency.notifyID(_adhan.type);
-
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -78,18 +77,18 @@ class AdhanItem extends StatelessWidget {
                       maxLines: 3,
                     ),
                     Text(
-                      '${_adhan.formattedStartTime} - ${_adhan.formattedEndTime}\n${getformatDuration(_adhan.timeOfWaqt, formatter, showSeconds: false, hour: ' ${appLocale.hour} ', minute: ' ${appLocale.minute}')}',
-                      style: context.textTheme.bodyText1,
+                      '${_adhan.startTime.localizeTimeTo(appLocale)} - ${_adhan.endTime.localizeTimeTo(appLocale)}\n${getformatDuration(_adhan.timeOfWaqt, formatter, showSeconds: false, hour: ' ${appLocale.hour} ', minute: ' ${appLocale.minute}')}',
+                      style: context.textTheme.caption,
                     ),
                   ],
                 ),
               ),
               Icon(
                 notifyID == 0
-                    ? Icons.notifications_off
+                    ? Icons.notifications_off_outlined
                     : notifyID == 1
-                    ? Icons.notifications_on_rounded
-                    : Icons.volume_up,
+                        ? Icons.notifications_on_outlined
+                        : Icons.volume_up_outlined,
                 size: iconSize,
               )
             ],
@@ -99,8 +98,11 @@ class AdhanItem extends StatelessWidget {
     );
   }
 
-  Widget get _adhanIcon{
-    return Image.asset(_adhan.imageLocation, width: 56,);
+  Widget get _adhanIcon {
+    return Image.asset(
+      _adhan.imageLocation,
+      width: 36,
+    );
   }
 }
 

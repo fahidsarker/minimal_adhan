@@ -143,6 +143,17 @@
     "description": "The word form minute (short form if possible) - e.g. for English: 'min' ",
     "eg_english": "min"
   },
+  "am": "",
+  "@am": {
+    "description": "The word form am (short form if possible) - e.g. for English: 'am' ",
+    "eg_english": "am"
+  },
+
+  "pm": "",
+  "@pm": {
+    "description": "The word form pm (short form if possible) - e.g. for English: 'pm' ",
+    "eg_english": "pm"
+  },
   "close": "বন্ধ",
   "@close": {
     "description": "The word Close - e.g. for English: 'Close' ",

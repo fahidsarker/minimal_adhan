@@ -105,12 +105,14 @@ class QiblaAvailableScreen extends StatelessWidget {
                                   color: match
                                       ? context.primaryColor
                                       : context.textTheme.headline6!.color,
+                                  width: context.minPanelSize * 0.9,
                                 ),
                                 Transform.rotate(
                                   angle: qiblaDirection,
                                   child: SvgPicture.asset(
                                     'assets/qibla.svg',
                                     fit: BoxFit.fitWidth,
+                                    width: context.minPanelSize * 0.9,
                                   ),
                                 )
                               ],

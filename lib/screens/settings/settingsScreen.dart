@@ -63,7 +63,7 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.global,
             tiles: [
-              if (globalProvider.needToShowDiableBatteryOptimizeDialog)
+              /*if (globalProvider.needToShowDiableBatteryOptimizeDialog)
                 SettingsClickable(
                   onClick: () {
                     globalProvider.disableBatteryOptimization();
@@ -71,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
                   title: appLocale.disable_battery_optimization,
                   subtitle: appLocale.disable_battery_optimization_desc,
                   leading: const Icon(Icons.warning),
-                ),
+                ),*/
               SettingsClickable(
                 onClick: () => buildBottomSheet(
                   ChangeNotifierProvider.value(

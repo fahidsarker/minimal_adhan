@@ -79,7 +79,7 @@ class DashBoard extends StatelessWidget {
                     maxLines: 2,
                   ),
                   Text(
-                    '${currentAdhan.formattedStartTime} - ${currentAdhan.formattedEndTime}',
+                    '${currentAdhan.startTime.localizeTimeTo(appLocale)} - ${currentAdhan.endTime.localizeTimeTo(appLocale)}',
                     style: context.textTheme.headline6
                         ?.copyWith(color: context.theme.colorScheme.onBackground),
                   ),
@@ -96,7 +96,7 @@ class DashBoard extends StatelessWidget {
       SizedBox(height: 16,),
       if (nextAdhan != null)
         Text(
-          '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.formattedStartTime} - ${nextAdhan.formattedEndTime})',
+          '${appLocale.next}: ${nextAdhan.title} (${nextAdhan.startTime.localizeTimeTo(appLocale)} - ${nextAdhan.endTime.localizeTimeTo(appLocale)})',
           style: context.textTheme.bodyText1,
         ),
       if (locationState is LocationAvailable)

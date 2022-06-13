@@ -26,6 +26,7 @@ ThemeData getLightTheme(
         appBarTheme: AppBarTheme(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
+            elevation: 0,
             iconTheme: context.theme.iconTheme.copyWith(color: Colors.black),
             systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),),
         cardColor: Colors.white,
@@ -45,6 +46,7 @@ ThemeData getDarkTheme(
       bottomSheetTheme:
           context.theme.bottomSheetTheme.copyWith(backgroundColor: darkBack),
       appBarTheme: AppBarTheme(
+        elevation: 0,
         foregroundColor: Colors.white,
         backgroundColor: darkBack,
         systemOverlayStyle: SystemUiOverlayStyle.light

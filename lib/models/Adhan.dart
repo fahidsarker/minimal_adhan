@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:minimal_adhan/extensions.dart';
 
 
 class Adhan {
@@ -38,14 +39,18 @@ class Adhan {
           DateTime.now().isBefore(endTime);
     }
   }
+/*
 
+  @Deprecated('use extension localizeTimeTo instead')
   String get formattedStartTime {
-    return DateFormat('hh:mm a', localCode).format(startTime);
+    return startTime.localizeTimeTo(engAppLocale);
   }
 
+  @Deprecated('use extension localizeTimeTo instead')
   String get formattedEndTime {
-    return DateFormat('hh:mm a', localCode).format(endTime);
+    return endTime.localizeTimeTo(engAppLocale);
   }
+*/
 
 
   @override

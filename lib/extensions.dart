@@ -202,6 +202,11 @@ extension Helper on BuildContext {
     return isLargeScreen ? 400 : width;
   }
 
+  double get minPanelSize{
+    final minSize = min(width, height);
+    return minSize - (isLargeScreen ? 100 : 0);
+  }
+
   double get contentPanelRatio{
     return isLargeScreen ? 0.6 : 1.0;
   }
@@ -252,7 +257,46 @@ extension DateHelper on DateTime {
       locale.arabic_month_dhu_al_hijjah];
 
     final hDate = HijriCalendar.fromDate(this);
-    return '${hDate.hDay.localizeTo(locale)}$separator${months[hDate.hMonth]}$separator${hDate.hYear.localizeTo(locale)}';
+    return '${hDate.hDay.localizeTo(locale)}$separator${months[hDate.hMonth-1]}$separator${hDate.hYear.localizeTo(locale)}';
+  }
+
+  String localizeTimeTo (AppLocalizations locale){
+    int hr = hour;
+    bool isPM = false;
+    if(hr > 12){
+      hr -= 12;
+      isPM = true;
+    }
+    final digitHr = hr.toString().length;
+    final digitMin = minute.toString().length;
+
+    return '${digitHr == 1 ? '0' : ''}$hr:${digitMin == 1 ? '0' : ''}$minute ${isPM ? locale.pm : locale.am}'.localizeDigitsOnly(locale);
+
+  }
+
+}
+
+extension StringHelper on String {
+  String localizeDigitsOnly(AppLocalizations locale){
+    var localized = '';
+    for(int i = 0; i < length; i++){
+
+      final char = this[i];
+      final val = int.tryParse(char);
+
+      if(val == null){
+        localized += char;
+      }else{
+        final localizedDigit = locale.getDigitFor(val);
+        localized += localizedDigit;
+      }
+    }
+
+    if(locale.numeric_direction == 'rlt'){
+      localized = localized.split('').reversed.join();
+    }
+
+    return localized;
   }
 }
 

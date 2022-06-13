@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
@@ -18,7 +17,6 @@ const notifyIDAdhanAlarm = 2;
 const notifyIDAdhanRingtone = 3;
 const notifyIDAdhanMecca = 4;
 const notifyIDAdhanMedina = 5;
-
 
 Future<FlutterLocalNotificationsPlugin> _initializeNotifiers() async {
   //todo change progaurd rules for release builds (local_notifications)
@@ -45,7 +43,8 @@ Future<void> backupURIs() async {
     final ringtoneURI = await getToneURI(notifyIDAdhanRingtone);
 
     await alarmURI?.let((it) async => sharedPrefAdhanAlarmUri.updateValue(it));
-    await ringtoneURI?.let((it) async => sharedPrefAdhanAlarmUri.updateValue(it));
+    await ringtoneURI
+        ?.let((it) async => sharedPrefAdhanAlarmUri.updateValue(it));
   } catch (_) {}
 }
 
@@ -107,12 +106,16 @@ Future createNotification({
   bool forcedSilent = false,
   bool reschedule = true,
 }) async {
-
-  //todo error point here
+/*  //todo error point here
   try{
     await initializeDateFormatting('en');
-  }catch(_){}
+  }catch(_){
+    if(kDebugMode){
+      print('Caused by: $_');
+    }
+  }*/
 
+  final appLocale = engAppLocale;
   await initPreferences();
   final adhanDependency = AdhanDependencyProvider();
 
@@ -124,14 +127,14 @@ Future createNotification({
     final notificationProvider = AdhanNotificationProvider(
       adhanDependency,
       locationState.locationInfo,
-      engAppLocale,
+      appLocale,
     );
     final currentAdhan = notificationProvider.currentAdhan;
 
     if (currentAdhan != null) {
       await _notify(
         currentAdhan.title,
-        '${currentAdhan.formattedStartTime} -  ${currentAdhan.formattedEndTime}',
+        '${currentAdhan.startTime.localizeTimeTo(appLocale)} -  ${currentAdhan.endTime.localizeTimeTo(appLocale)}',
         isPersistent: adhanDependency.showPersistant,
         notifyID:
             forcedSilent ? 0 : adhanDependency.notifyID(currentAdhan.type),
@@ -228,7 +231,6 @@ Future<NotificationDetails> _getNotifyDetails(int id, bool isPersistant) async {
       );
   }
 }
-
 
 Future _notify(
   String title,

@@ -299,6 +299,16 @@
     "description": "A button to try again  ",
     "eg_english": "Try Again"
   },
+  "run_in_background": "ব্যাকগ্রাউন্ডে অ্যাপটি চালান",
+  "@run_in_background": {
+    "description": "A switch to toggle running app in background",
+    "eg_english": "Run in background"
+  },
+  "run_in_background_desc": "ব্যাকগ্রাউন্ডে আজান অ্যাপ চালান। সুতরাং, আপনি কোনো বিজ্ঞপ্তি মিস করবেন না। এই অতিরিক্ত সম্পদ ব্যবহার করবে!",
+  "@run_in_background_desc": {
+    "description": "Run Azan in background. So, you wont miss any notification. This would use extra resources!",
+    "eg_english": "Run in background desc"
+  },
   "@__________________________________________Welcome_page": {
   },
   "location_privacy_short": "আযান হল প্রাইভেসি ফোকাসড। আপনার অবস্থান স্থানীয়ভাবে আপনার ডিভাইসে সংরক্ষণ করা হয়.",

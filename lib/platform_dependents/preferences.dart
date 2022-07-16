@@ -1,11 +1,13 @@
 import 'dart:io';
 
-import 'package:optimize_battery/optimize_battery.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+
+/*
 
 class PlatformPreferences {
-  static Future<bool> get isIgnoringBatteryOptimizations async {
+  static Future<bool> get isIgnoringBatteryOptimizations  async{
     if (Platform.isAndroid) {
-      return OptimizeBattery.isIgnoringBatteryOptimizations();
+      return FlutterForegroundTask.isIgnoringBatteryOptimizations;
     } else {
       return true;
     }
@@ -13,3 +15,4 @@ class PlatformPreferences {
 
   PlatformPreferences._();
 }
+*/

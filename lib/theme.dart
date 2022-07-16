@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minimal_adhan/extensions.dart';
+import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/prviders/dependencies/GlobalDependencyProvider.dart';
 import 'models/app_local.dart';
 
@@ -20,7 +21,7 @@ Color getDrawerShadowColor() {
 }
 
 ThemeData getLightTheme(
-        BuildContext context, GlobalDependencyProvider globalDependency) =>
+        BuildContext context) =>
     ThemeData(
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
@@ -31,15 +32,15 @@ ThemeData getLightTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),),
         cardColor: Colors.white,
         brightness: Brightness.light,
-        fontFamily: AppLocale.of(globalDependency.locale).fontFamily,
-        textTheme: getTextTheme(context, globalDependency.locale),
+        fontFamily: AppLocale.of(sharedPrefAdhanCurrentLocalization.value).fontFamily,
+        textTheme: getTextTheme(context, sharedPrefAdhanCurrentLocalization.value),
         colorScheme: const ColorScheme.light(
           primary: Colors.teal,
           secondary: Colors.blueGrey,
         ),);
 
 ThemeData getDarkTheme(
-    BuildContext context, GlobalDependencyProvider globalDependency,) {
+    BuildContext context) {
   const darkBack = Colors.black;
 
   return ThemeData(
@@ -52,8 +53,8 @@ ThemeData getDarkTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light
             .copyWith(statusBarColor: Colors.transparent),
       ),
-      fontFamily: AppLocale.of(globalDependency.locale).fontFamily,
-      textTheme: getTextTheme(context, globalDependency.locale).apply(
+      fontFamily: AppLocale.of(sharedPrefAdhanCurrentLocalization.value).fontFamily,
+      textTheme: getTextTheme(context, sharedPrefAdhanCurrentLocalization.value).apply(
         bodyColor: Colors.white,
         displayColor: Colors.white70,
       ),

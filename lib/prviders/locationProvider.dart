@@ -6,7 +6,15 @@ import 'package:minimal_adhan/models/LocationInfo.dart';
 
 class LocationProvider with ChangeNotifier {
 
-  LocationProvider() : _locationHelper = const LocationHelper();
+  LocationProvider._() : _locationHelper = const LocationHelper();
+
+  static LocationProvider? _instance;
+
+  static LocationProvider getInstance() {
+    _instance ??= LocationProvider._();
+    return _instance!;
+  }
+
 
   final LocationHelper _locationHelper;
   static LocationState _locationState =

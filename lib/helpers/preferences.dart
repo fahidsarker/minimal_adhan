@@ -73,7 +73,9 @@ BoolPreference get sharedPrefDuaShowTransliteration =>
     const BoolPreference('dua_show_transliterate', true);
 
 BoolPreference get sharedPrefAdhanShowPersistentNotify =>
-    const BoolPreference('show_persistant_notify', false);
+    const BoolPreference('show_persistent_notify', false);
+
+BoolPreference get sharedPrefIsIgnoringBatteryOptimizations => const BoolPreference('isIgnoringBatteryOptimizations', false);
 
 DoublePreference<double> get sharedPrefDuaArabicFontSize =>
     const DoublePreference('dua_arabic_size', 35.0);

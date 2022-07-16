@@ -299,6 +299,18 @@
     "description": "A button to try again  ",
     "eg_english": "Try Again"
   },
+  "run_in_background": "Run in background",
+  "@run_in_background": {
+    "description": "A switch to toggle running app in background",
+    "eg_english": "Run in background"
+  },
+  "run_in_background_desc": "Run Azan in background. So, you wont miss any notification. This would use extra resources!",
+  "@run_in_background_desc": {
+    "description": "Run Azan in background. So, you wont miss any notification. This would use extra resources!",
+    "eg_english": "Run in background desc"
+  },
+
+
   "@__________________________________________Welcome_page": {
   },
   "location_privacy_short": "Azan is privacy focused. Your location is stored on your device locally.",

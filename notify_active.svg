@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="496.015" height="539.5" viewBox="0 0 496.015 539.5">
+  <g id="Group_40" data-name="Group 40" transform="translate(-1167.326 -1029.5)">
+    <g id="Group_39" data-name="Group 39" transform="translate(-1373.66 577.5)">
+      <path id="Path_1" data-name="Path 1" d="M2546,984h352V806l-40.5-40.5H2587L2546.5,806Z" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_2" data-name="Path 2" d="M2587,765.5s-16.161-19.681-19.161-39.681c-.761-5.074-1.981-26.359,3.151-37.814,3.738-8.343,11-15.269,19.257-21.358,1.876-1.383,4.823-4.583,7.7-6.652,2.752-1.977,11.06-7.412,13.3-9.453,5.29-4.81,12.876-7.463,17.856-10.5C2640.569,633.035,2647,630,2647,630l77-36,85,43s34.56,17.047,55,41c4.612,5.4,9.742,13.194,12,19a34.328,34.328,0,0,1,0,26c-8,21-17,42.5-17,42.5Z" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_3" data-name="Path 3" d="M2722,594V569.231" transform="translate(0.85)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="10"/>
+      <path id="Path_4" data-name="Path 4" d="M2923,984h108V951H2923Z" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_5" data-name="Path 5" d="M2937,951V652h83v28" fill="none" stroke="#000" stroke-linecap="round" stroke-width="10"/>
+      <path id="Path_6" data-name="Path 6" d="M3020,951V713" fill="none" stroke="#000" stroke-linecap="round" stroke-width="10"/>
+      <path id="Path_7" data-name="Path 7" d="M2937,652h-12V618h107v34h-13" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_8" data-name="Path 8" d="M2937,618V560l40-62,45,62v58Z" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_9" data-name="Path 9" d="M2978.5,498V457" transform="translate(-1)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="10"/>
+      <path id="Path_10" data-name="Path 10" d="M2672.192,984V892.309l49.7-52.663,49.113,49.112V984" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_11" data-name="Path 11" d="M2585.8,878.107h53.254v-44.97L2613.612,814.2,2585.8,833.137Z" fill="none" stroke="#000" stroke-width="10"/>
+      <path id="Path_12" data-name="Path 12" d="M2803.553,878.107h57.4v-41.42l-30.177-21.893-27.219,21.893Z" fill="none" stroke="#000" stroke-width="10"/>
+    </g>
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="80" cy="80" r="80" transform="translate(1481 1409)"/>
+  </g>
+</svg>

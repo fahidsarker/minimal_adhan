@@ -134,6 +134,13 @@ packages:
       url: "https://github.com/hemanthrajv/flutter_compass.git"
     source: git
     version: "0.7.0"
+  flutter_foreground_task:
+    dependency: "direct main"
+    description:
+      path: "../azan_foreground_task"
+      relative: true
+    source: path
+    version: "3.7.3"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -331,13 +338,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  optimize_battery:
-    dependency: "direct main"
-    description:
-      name: optimize_battery
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
   package_info_plus:
     dependency: "direct main"
     description:

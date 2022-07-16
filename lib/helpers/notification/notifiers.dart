@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
+import 'package:minimal_adhan/models/Adhan.dart';
 import 'package:minimal_adhan/models/preference.dart';
+import 'package:minimal_adhan/platform_dependents/android_flutter_background_service.dart';
 import 'package:minimal_adhan/platform_dependents/method_channel_helper.dart';
 import 'package:minimal_adhan/prviders/adhanProvider.dart';
 import 'package:minimal_adhan/prviders/ahdanNotificationProvider.dart';
@@ -61,7 +64,7 @@ Future<void> scheduleNotification({
 
   await initPreferences();
   final adhanDependency = AdhanDependencyProvider();
-  final locationProvider = LocationProvider();
+  final locationProvider = LocationProvider.getInstance();
   await locationProvider.init();
 
   final locationState = locationProvider.locationState;
@@ -106,20 +109,12 @@ Future createNotification({
   bool forcedSilent = false,
   bool reschedule = true,
 }) async {
-/*  //todo error point here
-  try{
-    await initializeDateFormatting('en');
-  }catch(_){
-    if(kDebugMode){
-      print('Caused by: $_');
-    }
-  }*/
 
   final appLocale = engAppLocale;
   await initPreferences();
   final adhanDependency = AdhanDependencyProvider();
 
-  final locationProvider = LocationProvider();
+  final locationProvider = LocationProvider.getInstance();
   await locationProvider.init();
 
   final locationState = locationProvider.locationState;
@@ -130,23 +125,23 @@ Future createNotification({
       appLocale,
     );
     final currentAdhan = notificationProvider.currentAdhan;
+    final nextAdhan = notificationProvider.nextAdhan;
 
     if (currentAdhan != null) {
-      await _notify(
-        currentAdhan.title,
-        '${currentAdhan.startTime.localizeTimeTo(appLocale)} -  ${currentAdhan.endTime.localizeTimeTo(appLocale)}',
-        isPersistent: adhanDependency.showPersistant,
-        notifyID:
-            forcedSilent ? 0 : adhanDependency.notifyID(currentAdhan.type),
-      );
+      await _notifyAdhan(
+          currentAdhan: currentAdhan,
+          nextAdhan: nextAdhan,
+          isPersistent: adhanDependency.showPersistant,
+          notifyID:
+              forcedSilent ? 0 : adhanDependency.notifyID(currentAdhan.type));
 
       if (currentAdhan.type == adhanTypeSunrise) {
         return scheduleNotification(preDefined: currentAdhan.endTime);
       }
     } else if (adhanDependency.showPersistant) {
-      await _notify(
-        'Adhan',
-        'So remember me, I will remember you - Quran',
+      await _notifyAdhan(
+        currentAdhan: null,
+        nextAdhan: nextAdhan,
         isPersistent: true,
         notifyID: 0,
       );
@@ -232,6 +227,8 @@ Future<NotificationDetails> _getNotifyDetails(int id, bool isPersistant) async {
   }
 }
 
+/*
+@Deprecated('Use _notifyUser Function Instead')
 Future _notify(
   String title,
   String body, {
@@ -240,4 +237,58 @@ Future _notify(
 }) async {
   await (await _initializeNotifiers())
       .show(0, title, body, await _getNotifyDetails(notifyID, isPersistent));
+}
+*/
+
+Future<void> _notifyAdhan({
+  required Adhan? currentAdhan,
+  required Adhan? nextAdhan,
+  required bool isPersistent,
+  required int notifyID,
+}) async {
+  try {
+    String title = "Adhan";
+    if (currentAdhan != null) {
+      title =
+          '${currentAdhan.title} (${currentAdhan.startTime.localizeTimeTo(engAppLocale)} -  ${currentAdhan.endTime.localizeTimeTo(engAppLocale)})';
+    }
+
+    String body = "";
+    if (nextAdhan != null) {
+      body =
+          'Next: ${nextAdhan.title} (${nextAdhan.startTime.localizeTimeTo(engAppLocale)} -  ${nextAdhan.endTime.localizeTimeTo(engAppLocale)})';
+    }
+
+    //final success = await FlutterBackground.initialize(androidConfig: androidConfig);
+/*    try {
+      await initFlutterAndroidBackgroundService();
+    } catch (e) {}*/
+
+    final notifier = await _initializeNotifiers();
+    await notifier.show(
+      0,
+      title,
+      body,
+      await _getNotifyDetails(notifyID, isPersistent),
+    );
+
+   /* if (isPersistent) {
+      await notifier.cancelAll();
+      if (await FlutterForegroundTask.isIgnoringBatteryOptimizations) {
+        await FlutterForegroundTask.updateService(
+          notificationTitle: title,
+          notificationText: body,
+        );
+      } else {
+        await FlutterForegroundTask.startService(
+          notificationTitle: title,
+          notificationText: body,
+        );
+      }
+    } else {
+      await FlutterForegroundTask.stopService();
+    }*/
+  } catch (e) {
+    print(e);
+  }
 }

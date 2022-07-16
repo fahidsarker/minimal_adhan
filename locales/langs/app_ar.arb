@@ -299,6 +299,16 @@
     "description": "A button to try again  ",
     "eg_english": "Try Again"
   },
+  "run_in_background": "قم بتشغيل التطبيق في الخلفية",
+  "@run_in_background": {
+    "description": "A switch to toggle running app in background",
+    "eg_english": "Run in background"
+  },
+  "run_in_background_desc": "قم بتشغيل تطبيق الأذان في الخلفية. لذلك ، لن تفوتك أي إخطارات. سيستخدم هذا موارد إضافية!",
+  "@run_in_background_desc": {
+    "description": "Run Azan in background. So, you wont miss any notification. This would use extra resources!",
+    "eg_english": "Run in background desc"
+  },
   "@__________________________________________Welcome_page": {
   },
   "location_privacy_short": "الآذان يركز على الخصوصية. يتم تخزين موقعك على جهازك محليًا.",
@@ -326,6 +336,7 @@
     "description": "A short description explaining why the location is required   ",
     "eg_english": "Your location is needed to calculate the time of azan, display the Qibla Compass and Show Nearby Mosques"
   },
+
   "@__________________________________________Adhan_Page": {
   },
   "adhan_fajr": "الفجر",

@@ -13,12 +13,14 @@ abstract class SettingsTile extends StatelessWidget {
 
 }
 
+
+
 class SettingsClickable extends SettingsTile {
   final void Function() onClick;
   final Widget? trailing;
   final bool selected;
 
-  SettingsClickable(
+  const SettingsClickable(
       {required this.onClick,
       required String title, String? subtitle,
       Widget? leading,
@@ -43,6 +45,7 @@ class SettingsClickable extends SettingsTile {
 class SettingsToggle extends SettingsTile {
   final void Function(bool)? onToggle;
   final bool value;
+  @override
   final String? subtitle;
 
   const SettingsToggle(

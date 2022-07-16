@@ -63,7 +63,8 @@ class SettingsScreen extends StatelessWidget {
           SettingsSection(
             title: appLocale.global,
             tiles: [
-              /*if (globalProvider.needToShowDiableBatteryOptimizeDialog)
+              /*if (globalProvider.needToShowDiableBatteryOptimizeDialog &&
+                  Platform.isAndroid)
                 SettingsClickable(
                   onClick: () {
                     globalProvider.disableBatteryOptimization();
@@ -72,6 +73,7 @@ class SettingsScreen extends StatelessWidget {
                   subtitle: appLocale.disable_battery_optimization_desc,
                   leading: const Icon(Icons.warning),
                 ),*/
+
               SettingsClickable(
                 onClick: () => buildBottomSheet(
                   ChangeNotifierProvider.value(
@@ -107,6 +109,16 @@ class SettingsScreen extends StatelessWidget {
                 subtitle:
                     '${locationProvider.locationState is LocationAvailable ? (locationProvider.locationState as LocationAvailable).locationInfo.address : locationProvider.locationState is LocationFinding ? appLocale.finding : appLocale.error_occured}\n${appLocale.tap_to_update}',
               ),
+              SettingsToggle(
+                onToggle: (v) => globalProvider.ignoreBatteryOptimization(status: v),
+                title: context.appLocale.run_in_background,
+                value: globalProvider.isIgnoringBatteryOptimizations,
+                leading: Icon(
+                  Icons.radio_button_unchecked_outlined,
+                  color: context.primaryColor,
+                ),
+                subtitle: context.appLocale.run_in_background_desc,
+              )
             ],
           ),
           SettingsSection(

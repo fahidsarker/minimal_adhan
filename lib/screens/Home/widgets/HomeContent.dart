@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minimal_adhan/extensions.dart';
 import 'package:minimal_adhan/helpers/gps_location_helper.dart';
+import 'package:minimal_adhan/helpers/notification/notifiers.dart';
 import 'package:minimal_adhan/prviders/TasbihProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
@@ -134,14 +135,19 @@ class _HomeContentState extends State<HomeContent> {
               NavigationCard(
                 label: appLocale.settings,
                 imageURI: 'ic_settings',
-                onPressed: () => navigate(
-                  context,
-                  ChangeNotifierProvider(
-                    create: (_) => DuaDependencyProvider(),
-                    child: const SettingsScreen(),
-                  ),
-                  5,
-                ),
+                onPressed: () {
+                 //createNotification();
+                  //scheduleNotification(preDefined: DateTime.now().add(Duration(seconds: 5)),showNowIfPersistent: true);
+                  //return;
+                  navigate(
+                    context,
+                    ChangeNotifierProvider(
+                      create: (_) => DuaDependencyProvider(),
+                      child: const SettingsScreen(),
+                    ),
+                    5,
+                  );
+                }
               ),
             ],
           ),

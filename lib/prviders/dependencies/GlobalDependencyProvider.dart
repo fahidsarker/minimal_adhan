@@ -1,19 +1,29 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:minimal_adhan/helpers/preferences.dart';
 import 'package:minimal_adhan/prviders/dependencies/DuaDependencyProvider.dart';
 import 'package:minimal_adhan/prviders/dependencies/dependency_provider.dart';
 import 'package:minimal_adhan/prviders/locationProvider.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../platform_dependents/preferences.dart';
 
 class GlobalDependencyProvider extends DependencyProvider {
-  GlobalDependencyProvider();
+  GlobalDependencyProvider._();
+
+  static GlobalDependencyProvider? _instance;
+
+  factory GlobalDependencyProvider.getInstance() {
+    _instance ??= GlobalDependencyProvider._();
+    return _instance!;
+  }
 
   late PackageInfo packageInfo;
-  late bool batteryOptimizeDisabled;
+
+  bool get isIgnoringBatteryOptimizations =>
+      sharedPrefIsIgnoringBatteryOptimizations.value;
 
   int get themeModeIndex => sharedPrefAdhanThemeMode.value;
 
@@ -34,17 +44,49 @@ class GlobalDependencyProvider extends DependencyProvider {
 
   Future<void> init() async {
     packageInfo = await PackageInfo.fromPlatform();
-    batteryOptimizeDisabled = await PlatformPreferences.isIgnoringBatteryOptimizations;
   }
+
+/*  Future disableBatteryOptimization() async {
+    try{
+      await FlutterForegroundTask.startService(notificationTitle: 'Adhan Foreground', notificationText: 'Helps keep adhan alive');
+      batteryOptimizeDisabled = await PlatformPreferences.isIgnoringBatteryOptimizations;
+      notifyListeners();
+    }catch(e){
+      if(kDebugMode){
+        print(e);
+      }
+    }
+  }*/
 
   bool get needToShowDiableBatteryOptimizeDialog {
-    return !neverAskToDisableBatteryOptimizer && !batteryOptimizeDisabled;
+    if (isIgnoringBatteryOptimizations) {
+      return false;
+    }
+    if (neverAskToDisableBatteryOptimizer) {
+      return false;
+    }
+    return true;
   }
 
-  Future disableBatteryOptimization() async {
-    await OptimizeBattery.stopOptimizingBatteryUsage();
-    batteryOptimizeDisabled = await PlatformPreferences.isIgnoringBatteryOptimizations;
-    notifyListeners();
+  Future<void> ignoreBatteryOptimization({required bool status}) async {
+    try {
+      if (status) {
+        await FlutterForegroundTask.startService(
+          notificationTitle: 'Adhan Active',
+          notificationText:
+              'Helps keep adhan alive in background for notifications.',
+        );
+      } else {
+        await FlutterForegroundTask.stopService();
+      }
+
+      sharedPrefIsIgnoringBatteryOptimizations.updateValue(status);
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 
   void setNeverAskDisableBatteryOptimize() => updateDataWithPreference(
@@ -55,7 +97,7 @@ class GlobalDependencyProvider extends DependencyProvider {
   void welcomeComplete() =>
       updateDataWithPreference(sharedPrefWelcomeShown, true);
 
-  ThemeMode getThemeMode(int theme) {
+  static ThemeMode getThemeMode(int theme) {
     if (theme == ADHAN_THEME_MODE_LIGHT) {
       return ThemeMode.light;
     } else if (theme == ADHAN_THEME_MODE_DARK) {

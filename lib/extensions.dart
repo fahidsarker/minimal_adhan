@@ -6,9 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hijri/hijri_calendar.dart';
 
-AppLocalizationsEn get engAppLocale {
-  return AppLocalizationsEn();
-}
+late AppLocalizationsEn  engAppLocale = AppLocalizationsEn();
+
 
 const inline = pragma('@vm:prefer-inline');
 
